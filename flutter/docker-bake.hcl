@@ -218,7 +218,7 @@ variable "VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST" 
 target "flutter-desktop-x-latest-ci" {
   inherits = ["flutter-base-ci"]
   contexts = {
-    debian = "target:local-desktop-x-latest-ci"
+    debian = "target:vegito-desktop-x-latest-ci"
   }
   args = {
     user = "desktopx"
@@ -253,7 +253,7 @@ target "flutter-desktop-x-latest-ci" {
 target "flutter-desktop-x-version-ci" {
   inherits = ["flutter-base-ci"]
   contexts = {
-    debian = "target:local-desktop-x-version-ci"
+    debian = "target:vegito-desktop-x-version-ci"
   }
   args = {
     user = "desktopx"
@@ -281,7 +281,7 @@ target "flutter-desktop-x-version-ci" {
 
 target "flutter-desktop-x" {
   contexts = {
-    debian = "target:local-desktop-x"
+    debian = "target:vegito-desktop-x"
   }
   args = {
     user = "desktopx"

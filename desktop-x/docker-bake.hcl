@@ -3,7 +3,7 @@ variable "VEGITO_DESKTOP_X_VERSION" {
 }
 
 variable "VEGITO_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/local-desktop-x"
+  default = "${VEGITO_CACHE_IMAGES_BASE}/vegito-desktop-x"
 }
 
 variable "VEGITO_DESKTOP_X_DIR" {
@@ -19,22 +19,22 @@ variable "VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
 }
 
 variable "VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
-  description = "local write cache for local-desktop-x version image build"
+  description = "local write cache for vegito-desktop-x version image build"
   default     = "type=local,mode=max,dest=${VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
 }
 
 variable "VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST" {
-  description = "local write cache for local-desktop-x latest image build"
+  description = "local write cache for vegito-desktop-x latest image build"
   default     = "type=local,mode=max,dest=${VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
 variable "VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION" {
-  description = "local read cache for local-desktop-x version image build (cannot be used before first write)"
+  description = "local read cache for vegito-desktop-x version image build (cannot be used before first write)"
   default     = "type=local,src=${VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
 }
 
 variable "VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST" {
-  description = "local read cache for local-desktop-x latest image build (cannot be used before first write)"
+  description = "local read cache for vegito-desktop-x latest image build (cannot be used before first write)"
   default     = "type=local,src=${VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
@@ -46,15 +46,15 @@ variable "VEGITO_DESKTOP_X_IMAGE_VERSION" {
   default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:desktop-x-${VERSION}"
 }
 
-group "local-desktop-x-ci" {
+group "vegito-desktop-x-ci" {
   description = "Build and push Android Emmulator images"
   targets = [
-    "local-desktop-x-version-ci",
-    "local-desktop-x-latest-ci",
+    "vegito-desktop-x-version-ci",
+    "vegito-desktop-x-latest-ci",
   ]
 }
 
-target "local-desktop-x-version-ci" {
+target "vegito-desktop-x-version-ci" {
   context = VEGITO_DESKTOP_X_DIR
   contexts = {
     debian = "target:debian-version-ci"
@@ -81,7 +81,7 @@ target "local-desktop-x-version-ci" {
   platforms = platforms
 }
 
-target "local-desktop-x-latest-ci" {
+target "vegito-desktop-x-latest-ci" {
   context = VEGITO_DESKTOP_X_DIR
   contexts = {
     debian = "target:debian-latest-ci"
@@ -114,7 +114,7 @@ target "local-desktop-x-latest-ci" {
   platforms = platforms
 }
 
-target "local-desktop-x" {
+target "vegito-desktop-x" {
 
   context = VEGITO_DESKTOP_X_DIR
   contexts = {

@@ -9,7 +9,7 @@ on:
     branches: [main]
 
 concurrency:
-  group: docker-release-${{ github.ref }}
+  group: vegito-docker-release-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:

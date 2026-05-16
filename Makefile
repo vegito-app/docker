@@ -19,7 +19,7 @@ export
 
 # Use docker.io as the default registry for local public images, but allow overriding it if needed.
 # Remove after gcr is back in shape and can be used as the default registry for local public images.
-VEGITO_PUBLIC_IMAGES_BASE_NAME ?= docker.io/dbndev/vegito-local-public
+VEGITO_PUBLIC_IMAGES_BASE_NAME ?= docker.io/dbndev/vegito-public
 VEGITO_DOCKER_BUILD_ENABLE_LOCAL_CACHE ?= false
 
 VEGITO_DOCKER_BUILDX_BAKE ?= \
@@ -34,35 +34,35 @@ VEGITO_DOCKER_BUILDX_BAKE ?= \
 
 # Local/dev: build all images without pushing them.
 # Tags are generated for all configured registries.
-images: local-docker-images-multi-registry-release
+images: vegito-docker-images-multi-registry-release
 .PHONY: images
 
 # Local/dev: build images in smaller groups without pushing them.
 # Useful when full parallel builds are too heavy for the workstation.
-images-groups-build: local-docker-images
+images-groups-build: vegito-docker-images
 .PHONY: images-groups-build
 
 # CI: build and push all images in parallel.
 # Fastest path; requires runners with enough CPU, RAM and disk I/O.
 images-ci:  \
-local-docker-login \
-local-docker-images-multi-registry-release-ci
+vegito-docker-login \
+vegito-docker-images-multi-registry-release-ci
 .PHONY: images-ci
 
 # CI: build and push images in smaller groups.
 # Safer on constrained runners; slower than the full parallel path.
 images-groups-build-ci:  \
-local-docker-login \
-local-docker-images-ci
+vegito-docker-login \
+vegito-docker-images-ci
 .PHONY: images-groups-build-ci
 
 images-pull: \
-local-docker-images-pull-parallel
+vegito-docker-images-pull-parallel
 .PHONY: images-pull
 
 images-push: \
-local-docker-login \
-local-docker-images-push
+vegito-docker-login \
+vegito-docker-images-push
 .PHONY: images-push
 
 devcontainer: devcontainer-vscode
@@ -71,8 +71,8 @@ devcontainer: devcontainer-vscode
 devcontainer-codespaces: devcontainer-vscode-codespaces
 .PHONY: devcontainer-codespaces
 
-docker-tags-md-ci: docker-build-tags-list-ci-md
-.PHONY: docker-tags-md-ci
+vegito-docker-tags-md-ci: vegito-docker-build-tags-list-ci-md
+.PHONY: vegito-docker-tags-md-ci
 
-docker-login: local-docker-login
-.PHONY: docker-login
+vegito-docker-login: vegito-docker-login
+.PHONY: vegito-docker-login

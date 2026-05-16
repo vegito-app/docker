@@ -2,7 +2,7 @@ FROM debian:bookworm
 
 ARG TARGETPLATFORM
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 
 USER root
 
@@ -56,8 +56,8 @@ RUN set eu; \
 # Use Bash
 RUN ln -sf /usr/bin/bash /bin/sh
 
-ENV LANG=C.UTF-8
-ENV LC_ALL=C.UTF-8
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
 ARG non_root_user=debian
 ARG uid=1000
