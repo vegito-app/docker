@@ -22,7 +22,7 @@ target "flutter-base" {
     flutter_version = FLUTTER_VERSION
     non_root_user   = "flutter"
   }
-  context = LOCAL_FLUTTER_DEBIAN_DIR
+  context = VEGITO_FLUTTER_DEBIAN_DIR
 }
 
 target "flutter-base-ci" {
@@ -34,51 +34,51 @@ target "flutter-base-ci" {
 # ###################################################################
 # LOCAL FLUTTER DEBIAN
 # ###################################################################
-variable "LOCAL_FLUTTER_DEBIAN_DIR" {
-  default = "${LOCAL_DOCKER_DIR}/flutter"
+variable "VEGITO_FLUTTER_DEBIAN_DIR" {
+  default = "${VEGITO_DOCKER_DIR}/flutter"
 }
 
-variable "LOCAL_FLUTTER_DEBIAN_REGISTRY_CACHE_IMAGE" {
-  default = "${VEGITO_LOCAL_CACHE_IMAGES_BASE}/flutter"
+variable "VEGITO_FLUTTER_DEBIAN_REGISTRY_CACHE_IMAGE" {
+  default = "${VEGITO_CACHE_IMAGES_BASE}/flutter"
 }
 
-variable "LOCAL_FLUTTER_DEBIAN_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_LOCAL_CACHE_IMAGES_BASE}/flutter"
+variable "VEGITO_FLUTTER_DEBIAN_IMAGE_REGISTRY_CACHE" {
+  default = "${VEGITO_CACHE_IMAGES_BASE}/flutter"
 }
-variable "LOCAL_FLUTTER_DEBIAN_VERSION" {
-  default = "${VEGITO_LOCAL_PUBLIC_IMAGES_BASE_NAME}:flutter-${VERSION}"
-}
-
-variable "LOCAL_FLUTTER_DEBIAN_IMAGE_LATEST" {
-  default = "${VEGITO_LOCAL_PUBLIC_IMAGES_BASE_NAME}:flutter-latest"
+variable "VEGITO_FLUTTER_DEBIAN_VERSION" {
+  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:flutter-${VERSION}"
 }
 
-variable "LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
-  default = "${LOCAL_DOCKER_BUILDX_LOCAL_CACHE_DIR}/flutter-version"
+variable "VEGITO_FLUTTER_DEBIAN_IMAGE_LATEST" {
+  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:flutter-latest"
 }
 
-variable "LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
-  default = "${LOCAL_DOCKER_BUILDX_LOCAL_CACHE_DIR}/flutter-latest"
+variable "VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/flutter-version"
 }
 
-variable "LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
+variable "VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/flutter-latest"
+}
+
+variable "VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
   description = "local write cache (version) for flutter image build"
-  default     = "type=local,mode=max,dest=${LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
+  default     = "type=local,mode=max,dest=${VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
 }
 
-variable "LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST" {
+variable "VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST" {
   description = "local write cache (latest) for flutter image build"
-  default     = "type=local,mode=max,dest=${LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
+  default     = "type=local,mode=max,dest=${VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-variable "LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION" {
+variable "VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION" {
   description = "local read cache (version)"
-  default     = "type=local,src=${LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
+  default     = "type=local,src=${VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
 }
 
-variable "LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST" {
+variable "VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST" {
   description = "local read cache (latest)"
-  default     = "type=local,src=${LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
+  default     = "type=local,src=${VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
 target "flutter-latest-ci" {
@@ -87,25 +87,25 @@ target "flutter-latest-ci" {
     debian = "target:debian-latest-ci"
   }
   tags = [
-    LOCAL_FLUTTER_DEBIAN_IMAGE_LATEST,
+    VEGITO_FLUTTER_DEBIAN_IMAGE_LATEST,
   ]
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_FLUTTER_DEBIAN_IMAGE_REGISTRY_CACHE}",
+      "type=registry,ref=${VEGITO_FLUTTER_DEBIAN_IMAGE_REGISTRY_CACHE}",
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
+      VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
-      "type=inline,ref=${LOCAL_FLUTTER_DEBIAN_IMAGE_LATEST}",
+      "type=inline,ref=${VEGITO_FLUTTER_DEBIAN_IMAGE_LATEST}",
     ]
   )
   cache-to = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_FLUTTER_DEBIAN_IMAGE_REGISTRY_CACHE},mode=max"
+      "type=registry,ref=${VEGITO_FLUTTER_DEBIAN_IMAGE_REGISTRY_CACHE},mode=max"
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
+      VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
     ] : [],
     [
       "type=inline"
@@ -120,22 +120,22 @@ target "flutter-version-ci" {
     debian = "target:debian-version-ci"
   }
   tags = [
-    LOCAL_FLUTTER_DEBIAN_VERSION,
+    VEGITO_FLUTTER_DEBIAN_VERSION,
   ]
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_FLUTTER_DEBIAN_IMAGE_REGISTRY_CACHE}",
+      "type=registry,ref=${VEGITO_FLUTTER_DEBIAN_IMAGE_REGISTRY_CACHE}",
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION
+      VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION
     ] : [],
     [
-      "type=inline,ref=${LOCAL_FLUTTER_DEBIAN_IMAGE_LATEST}",
+      "type=inline,ref=${VEGITO_FLUTTER_DEBIAN_IMAGE_LATEST}",
     ]
   )
   cache-to = concat(
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION
+      VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION
     ] : []
   )
 }
@@ -146,23 +146,23 @@ target "flutter-debian" {
     debian = "target:debian"
   }
   tags = [
-    LOCAL_FLUTTER_DEBIAN_IMAGE_LATEST,
-    LOCAL_FLUTTER_DEBIAN_VERSION,
+    VEGITO_FLUTTER_DEBIAN_IMAGE_LATEST,
+    VEGITO_FLUTTER_DEBIAN_VERSION,
   ]
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_FLUTTER_DEBIAN_IMAGE_REGISTRY_CACHE}",
+      "type=registry,ref=${VEGITO_FLUTTER_DEBIAN_IMAGE_REGISTRY_CACHE}",
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
+      VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
-      "type=inline,ref=${LOCAL_FLUTTER_DEBIAN_IMAGE_LATEST}",
+      "type=inline,ref=${VEGITO_FLUTTER_DEBIAN_IMAGE_LATEST}",
     ]
   )
   cache-to = concat(
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
+      VEGITO_FLUTTER_DEBIAN_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
     ] : []
   )
 }
@@ -171,48 +171,48 @@ target "flutter-debian" {
 # ###################################################################
 # Desktop X
 # ###################################################################
-variable "LOCAL_FLUTTER_DESKTOP_X_REGISTRY_CACHE_IMAGE" {
-  default = "${VEGITO_LOCAL_CACHE_IMAGES_BASE}/flutter-desktop-x"
+variable "VEGITO_FLUTTER_DESKTOP_X_REGISTRY_CACHE_IMAGE" {
+  default = "${VEGITO_CACHE_IMAGES_BASE}/flutter-desktop-x"
 }
 
-variable "LOCAL_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_LOCAL_CACHE_IMAGES_BASE}/flutter-desktop-x"
+variable "VEGITO_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
+  default = "${VEGITO_CACHE_IMAGES_BASE}/flutter-desktop-x"
 }
 
-variable "LOCAL_FLUTTER_DESKTOP_X_VERSION" {
-  default = "${VEGITO_LOCAL_PUBLIC_IMAGES_BASE_NAME}:flutter-desktop-x-${VERSION}"
+variable "VEGITO_FLUTTER_DESKTOP_X_VERSION" {
+  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:flutter-desktop-x-${VERSION}"
 }
 
-variable "LOCAL_FLUTTER_DESKTOP_X_IMAGE_LATEST" {
-  default = "${VEGITO_LOCAL_PUBLIC_IMAGES_BASE_NAME}:flutter-desktop-x-latest"
+variable "VEGITO_FLUTTER_DESKTOP_X_IMAGE_LATEST" {
+  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:flutter-desktop-x-latest"
 }
 
-variable "LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
-  default = "${LOCAL_DOCKER_BUILDX_LOCAL_CACHE_DIR}/flutter-desktop-x-version"
+variable "VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/flutter-desktop-x-version"
 }
 
-variable "LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
-  default = "${LOCAL_DOCKER_BUILDX_LOCAL_CACHE_DIR}/flutter-desktop-x-latest"
+variable "VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/flutter-desktop-x-latest"
 }
 
-variable "LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
+variable "VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
   description = "local write cache (version) for flutter image build"
-  default     = "type=local,mode=max,dest=${LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
+  default     = "type=local,mode=max,dest=${VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
 }
 
-variable "LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST" {
+variable "VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST" {
   description = "local write cache (latest) for flutter image build"
-  default     = "type=local,mode=max,dest=${LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
+  default     = "type=local,mode=max,dest=${VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-variable "LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION" {
+variable "VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION" {
   description = "local read cache (version)"
-  default     = "type=local,src=${LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
+  default     = "type=local,src=${VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
 }
 
-variable "LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST" {
+variable "VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST" {
   description = "local read cache (latest)"
-  default     = "type=local,src=${LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
+  default     = "type=local,src=${VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
 target "flutter-desktop-x-latest-ci" {
@@ -224,25 +224,25 @@ target "flutter-desktop-x-latest-ci" {
     user = "desktopx"
   }
   tags = [
-    LOCAL_FLUTTER_DESKTOP_X_IMAGE_LATEST,
+    VEGITO_FLUTTER_DESKTOP_X_IMAGE_LATEST,
   ]
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
+      "type=registry,ref=${VEGITO_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
+      VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
-      "type=inline,ref=${LOCAL_FLUTTER_DESKTOP_X_IMAGE_LATEST}",
+      "type=inline,ref=${VEGITO_FLUTTER_DESKTOP_X_IMAGE_LATEST}",
     ]
   )
   cache-to = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE},mode=max"
+      "type=registry,ref=${VEGITO_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE},mode=max"
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
+      VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
     ] : [],
     [
       "type=inline"
@@ -259,22 +259,22 @@ target "flutter-desktop-x-version-ci" {
     user = "desktopx"
   }
   tags = [
-    LOCAL_FLUTTER_DESKTOP_X_VERSION,
+    VEGITO_FLUTTER_DESKTOP_X_VERSION,
   ]
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
+      "type=registry,ref=${VEGITO_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION
+      VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION
     ] : [],
     [
-      "type=inline,ref=${LOCAL_FLUTTER_DESKTOP_X_IMAGE_LATEST}",
+      "type=inline,ref=${VEGITO_FLUTTER_DESKTOP_X_IMAGE_LATEST}",
     ]
   )
   cache-to = concat(
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION
+      VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION
     ] : []
   )
 }
@@ -287,23 +287,23 @@ target "flutter-desktop-x" {
     user = "desktopx"
   }
   tags = [
-    LOCAL_FLUTTER_DESKTOP_X_IMAGE_LATEST,
-    LOCAL_FLUTTER_DESKTOP_X_VERSION,
+    VEGITO_FLUTTER_DESKTOP_X_IMAGE_LATEST,
+    VEGITO_FLUTTER_DESKTOP_X_VERSION,
   ]
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
+      "type=registry,ref=${VEGITO_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
+      VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
-      "type=inline,ref=${LOCAL_FLUTTER_DESKTOP_X_IMAGE_LATEST}",
+      "type=inline,ref=${VEGITO_FLUTTER_DESKTOP_X_IMAGE_LATEST}",
     ]
   )
   cache-to = concat(
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
+      VEGITO_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
     ] : []
   )
 }

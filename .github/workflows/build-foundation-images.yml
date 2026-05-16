@@ -33,10 +33,6 @@ on:
         required: false
         type: string
         default: "dockerhub runners builders services applications"
-      dockerhub_replica_version:
-        required: false
-        type: string
-        default: "latest"
       docker_registry_mode:
         required: false
         type: string
@@ -138,8 +134,8 @@ jobs:
 
       - name: Build Docker image
         env:
-          LOCAL_DOCKER_BUILDX_CI_BUILD_GROUPS: ${{ inputs.images_ci_build_groups }}
-          DOCKERHUB_REPLICA_VERSION: ${{ inputs.dockerhub_replica_version }}
+          VEGITO_DOCKER_BUILDX_CI_BUILD_GROUPS: ${{ inputs.images_ci_build_groups }}
+          VERSION: ${{ inputs.version }}
         run: |
           set -o pipefail
           make images-ci 2>&1 | tee images-build.log

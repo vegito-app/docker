@@ -1,37 +1,37 @@
-variable "LOCAL_DEBIAN_VERSION" {
-  default = "${VEGITO_LOCAL_PUBLIC_IMAGES_BASE_NAME}:debian-${VERSION}"
+variable "VEGITO_DEBIAN_VERSION" {
+  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:debian-${VERSION}"
 }
 
-variable "LOCAL_DEBIAN_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_LOCAL_CACHE_IMAGES_BASE}/debian"
+variable "VEGITO_DEBIAN_IMAGE_REGISTRY_CACHE" {
+  default = "${VEGITO_CACHE_IMAGES_BASE}/debian"
 }
 
-variable "LOCAL_DEBIAN_DIR" {
-  default = "${LOCAL_DOCKER_DIR}/debian"
+variable "VEGITO_DEBIAN_DIR" {
+  default = "${VEGITO_DOCKER_DIR}/debian"
 }
 
-variable "LOCAL_DEBIAN_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_LOCAL_CACHE_IMAGES_BASE}/debian"
+variable "VEGITO_DEBIAN_IMAGE_REGISTRY_CACHE" {
+  default = "${VEGITO_CACHE_IMAGES_BASE}/debian"
 }
 
-variable "LOCAL_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
-  default = "${LOCAL_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian"
+variable "VEGITO_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian"
 }
 
-variable "LOCAL_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
-  default = "type=local,mode=max,dest=${LOCAL_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
+variable "VEGITO_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
+  default = "type=local,mode=max,dest=${VEGITO_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-variable "LOCAL_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
-  default = "type=local,src=${LOCAL_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
+variable "VEGITO_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
+  default = "type=local,src=${VEGITO_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-variable "LOCAL_DEBIAN_IMAGE_LATEST" {
+variable "VEGITO_DEBIAN_IMAGE_LATEST" {
   default = "${VEGITO_PRIVATE_REPOSITORY}/debian:latest"
 }
 
-variable "LOCAL_DEBIAN_IMAGE_VERSION" {
-  default = "${VEGITO_PRIVATE_REPOSITORY}/debian:${DOCKERHUB_REPLICA_VERSION}"
+variable "VEGITO_DEBIAN_IMAGE_VERSION" {
+  default = "${VEGITO_PRIVATE_REPOSITORY}/debian:${VERSION}"
 }
 
 group "debian-ci" {
@@ -43,23 +43,23 @@ group "debian-ci" {
 
 target "debian-version-ci" {
   tags = [
-    LOCAL_DEBIAN_IMAGE_VERSION,
+    VEGITO_DEBIAN_IMAGE_VERSION,
   ]
-  context = LOCAL_DEBIAN_DIR
+  context = VEGITO_DEBIAN_DIR
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_DEBIAN_IMAGE_REGISTRY_CACHE}"
+      "type=registry,ref=${VEGITO_DEBIAN_IMAGE_REGISTRY_CACHE}"
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
+      VEGITO_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
     ] : [],
     [
-      "type=inline,ref=${LOCAL_DEBIAN_IMAGE_LATEST}"
+      "type=inline,ref=${VEGITO_DEBIAN_IMAGE_LATEST}"
     ]
   )
   cache-to = concat(
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
+      VEGITO_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
     ] : [],
   )
   platforms = platforms
@@ -67,22 +67,22 @@ target "debian-version-ci" {
 
 target "debian-latest-ci" {
   tags = [
-    LOCAL_DEBIAN_IMAGE_LATEST,
+    VEGITO_DEBIAN_IMAGE_LATEST,
   ]
-  context = LOCAL_DEBIAN_DIR
+  context = VEGITO_DEBIAN_DIR
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_DEBIAN_IMAGE_REGISTRY_CACHE}"
+      "type=registry,ref=${VEGITO_DEBIAN_IMAGE_REGISTRY_CACHE}"
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
+      VEGITO_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
     ] : [],
     [
-      "type=inline,ref=${LOCAL_DEBIAN_IMAGE_LATEST}"
+      "type=inline,ref=${VEGITO_DEBIAN_IMAGE_LATEST}"
     ]
   )
   cache-to = [
-    USE_REGISTRY_CACHE ? "type=registry,ref=${LOCAL_DEBIAN_IMAGE_REGISTRY_CACHE},mode=max" : "",
+    USE_REGISTRY_CACHE ? "type=registry,ref=${VEGITO_DEBIAN_IMAGE_REGISTRY_CACHE},mode=max" : "",
     "type=inline"
   ]
   platforms = platforms
@@ -90,23 +90,23 @@ target "debian-latest-ci" {
 
 target "debian" {
   tags = [
-    LOCAL_DEBIAN_IMAGE_LATEST,
+    VEGITO_DEBIAN_IMAGE_LATEST,
   ]
-  context = LOCAL_DEBIAN_DIR
+  context = VEGITO_DEBIAN_DIR
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_DEBIAN_IMAGE_REGISTRY_CACHE}"
+      "type=registry,ref=${VEGITO_DEBIAN_IMAGE_REGISTRY_CACHE}"
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
+      VEGITO_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
     ] : [],
     [
-      "type=inline,ref=${LOCAL_DEBIAN_IMAGE_LATEST}"
+      "type=inline,ref=${VEGITO_DEBIAN_IMAGE_LATEST}"
     ]
   )
   cache-to = concat(
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
+      VEGITO_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
     ] : []
   )
 }

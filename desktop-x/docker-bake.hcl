@@ -1,49 +1,49 @@
-variable "LOCAL_DESKTOP_X_VERSION" {
-  default = "${VEGITO_LOCAL_PUBLIC_IMAGES_BASE_NAME}:desktop-x-${VERSION}"
+variable "VEGITO_DESKTOP_X_VERSION" {
+  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:desktop-x-${VERSION}"
 }
 
-variable "LOCAL_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_LOCAL_CACHE_IMAGES_BASE}/local-desktop-x"
+variable "VEGITO_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
+  default = "${VEGITO_CACHE_IMAGES_BASE}/local-desktop-x"
 }
 
-variable "LOCAL_DESKTOP_X_DIR" {
-  default = "${LOCAL_DOCKER_DIR}/desktop-x"
+variable "VEGITO_DESKTOP_X_DIR" {
+  default = "${VEGITO_DOCKER_DIR}/desktop-x"
 }
 
-variable "LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
-  default = "${LOCAL_DOCKER_BUILDX_LOCAL_CACHE_DIR}/desktop-x-version"
+variable "VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/desktop-x-version"
 }
 
-variable "LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
-  default = "${LOCAL_DOCKER_BUILDX_LOCAL_CACHE_DIR}/desktop-x-latest"
+variable "VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/desktop-x-latest"
 }
 
-variable "LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
+variable "VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
   description = "local write cache for local-desktop-x version image build"
-  default     = "type=local,mode=max,dest=${LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
+  default     = "type=local,mode=max,dest=${VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
 }
 
-variable "LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST" {
+variable "VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST" {
   description = "local write cache for local-desktop-x latest image build"
-  default     = "type=local,mode=max,dest=${LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
+  default     = "type=local,mode=max,dest=${VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-variable "LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION" {
+variable "VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION" {
   description = "local read cache for local-desktop-x version image build (cannot be used before first write)"
-  default     = "type=local,src=${LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
+  default     = "type=local,src=${VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
 }
 
-variable "LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST" {
+variable "VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST" {
   description = "local read cache for local-desktop-x latest image build (cannot be used before first write)"
-  default     = "type=local,src=${LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
+  default     = "type=local,src=${VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-variable "LOCAL_DESKTOP_X_IMAGE_LATEST" {
-  default = "${VEGITO_LOCAL_PUBLIC_IMAGES_BASE_NAME}:desktop-x-latest"
+variable "VEGITO_DESKTOP_X_IMAGE_LATEST" {
+  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:desktop-x-latest"
 }
 
-variable "LOCAL_DESKTOP_X_IMAGE_VERSION" {
-  default = "${VEGITO_LOCAL_PUBLIC_IMAGES_BASE_NAME}:desktop-x-${VERSION}"
+variable "VEGITO_DESKTOP_X_IMAGE_VERSION" {
+  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:desktop-x-${VERSION}"
 }
 
 group "local-desktop-x-ci" {
@@ -55,57 +55,57 @@ group "local-desktop-x-ci" {
 }
 
 target "local-desktop-x-version-ci" {
-  context = LOCAL_DESKTOP_X_DIR
+  context = VEGITO_DESKTOP_X_DIR
   contexts = {
     debian = "target:debian-version-ci"
   }
   tags = [
-    LOCAL_DESKTOP_X_IMAGE_VERSION,
+    VEGITO_DESKTOP_X_IMAGE_VERSION,
   ]
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
+      "type=registry,ref=${VEGITO_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION
+      VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION
     ] : [],
     [
-      "type=inline,ref=${LOCAL_DESKTOP_X_IMAGE_LATEST}"
+      "type=inline,ref=${VEGITO_DESKTOP_X_IMAGE_LATEST}"
     ]
   )
   cache-to = concat(
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION
+      VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION
     ] : []
   )
   platforms = platforms
 }
 
 target "local-desktop-x-latest-ci" {
-  context = LOCAL_DESKTOP_X_DIR
+  context = VEGITO_DESKTOP_X_DIR
   contexts = {
     debian = "target:debian-latest-ci"
   }
   tags = [
-    LOCAL_DESKTOP_X_IMAGE_LATEST,
+    VEGITO_DESKTOP_X_IMAGE_LATEST,
   ]
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
+      "type=registry,ref=${VEGITO_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
+      VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
-      "type=inline,ref=${LOCAL_DESKTOP_X_IMAGE_LATEST}",
+      "type=inline,ref=${VEGITO_DESKTOP_X_IMAGE_LATEST}",
     ]
   )
   cache-to = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_DESKTOP_X_IMAGE_REGISTRY_CACHE},mode=max"
+      "type=registry,ref=${VEGITO_DESKTOP_X_IMAGE_REGISTRY_CACHE},mode=max"
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
+      VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
     ] : [],
     [
       "type=inline"
@@ -116,28 +116,28 @@ target "local-desktop-x-latest-ci" {
 
 target "local-desktop-x" {
 
-  context = LOCAL_DESKTOP_X_DIR
+  context = VEGITO_DESKTOP_X_DIR
   contexts = {
     debian = "target:debian-version-ci"
   }
   tags = [
-    LOCAL_DESKTOP_X_IMAGE_LATEST,
-    LOCAL_DESKTOP_X_IMAGE_VERSION,
+    VEGITO_DESKTOP_X_IMAGE_LATEST,
+    VEGITO_DESKTOP_X_IMAGE_VERSION,
   ]
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${LOCAL_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
+      "type=registry,ref=${VEGITO_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
     ] : [],
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
+      VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
-      "type=inline,ref=${LOCAL_DESKTOP_X_IMAGE_LATEST}",
+      "type=inline,ref=${VEGITO_DESKTOP_X_IMAGE_LATEST}",
     ]
   )
   cache-to = concat(
     ENABLE_LOCAL_CACHE ? [
-      LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
+      VEGITO_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
     ] : []
   )
 }
