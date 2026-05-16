@@ -53,6 +53,9 @@ RUN set eu; \
     done; \
     locale-gen
 
+# Use Bash
+RUN ln -sf /usr/bin/bash /bin/sh
+
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 
