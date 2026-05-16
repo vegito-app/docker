@@ -57,7 +57,7 @@ group "local-desktop-x-ci" {
 target "local-desktop-x-version-ci" {
   context = LOCAL_DESKTOP_X_DIR
   contexts = {
-    debian = "docker-image://${LOCAL_DEBIAN_IMAGE_VERSION}"
+    debian = "target:debian-version-ci"
   }
   tags = [
     LOCAL_DESKTOP_X_IMAGE_VERSION,
@@ -65,13 +65,12 @@ target "local-desktop-x-version-ci" {
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
       "type=registry,ref=${LOCAL_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
-      "type=registry,ref=${LOCAL_DEBIAN_IMAGE_REGISTRY_CACHE}"
     ] : [],
     ENABLE_LOCAL_CACHE ? [
       LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION
     ] : [],
     [
-      "type=inline,ref=${LOCAL_DEBIAN_IMAGE_LATEST}"
+      "type=inline,ref=${LOCAL_DESKTOP_X_IMAGE_LATEST}"
     ]
   )
   cache-to = concat(
@@ -85,7 +84,7 @@ target "local-desktop-x-version-ci" {
 target "local-desktop-x-latest-ci" {
   context = LOCAL_DESKTOP_X_DIR
   contexts = {
-    debian = "docker-image://${LOCAL_DEBIAN_IMAGE_LATEST}"
+    debian = "target:debian-latest-ci"
   }
   tags = [
     LOCAL_DESKTOP_X_IMAGE_LATEST,
@@ -93,14 +92,12 @@ target "local-desktop-x-latest-ci" {
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
       "type=registry,ref=${LOCAL_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
-      "type=registry,ref=${LOCAL_DEBIAN_IMAGE_REGISTRY_CACHE}",
     ] : [],
     ENABLE_LOCAL_CACHE ? [
       LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
       "type=inline,ref=${LOCAL_DESKTOP_X_IMAGE_LATEST}",
-      "type=inline,ref=${LOCAL_DEBIAN_IMAGE_LATEST}"
     ]
   )
   cache-to = concat(
@@ -121,7 +118,7 @@ target "local-desktop-x" {
 
   context = LOCAL_DESKTOP_X_DIR
   contexts = {
-    debian = "docker-image://${LOCAL_DEBIAN_IMAGE_VERSION}"
+    debian = "target:debian-version-ci"
   }
   tags = [
     LOCAL_DESKTOP_X_IMAGE_LATEST,
@@ -130,14 +127,12 @@ target "local-desktop-x" {
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
       "type=registry,ref=${LOCAL_DESKTOP_X_IMAGE_REGISTRY_CACHE}",
-      "type=registry,ref=${LOCAL_DEBIAN_IMAGE_REGISTRY_CACHE}"
     ] : [],
     ENABLE_LOCAL_CACHE ? [
       LOCAL_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
       "type=inline,ref=${LOCAL_DESKTOP_X_IMAGE_LATEST}",
-      "type=inline,ref=${LOCAL_DEBIAN_IMAGE_LATEST}"
     ]
   )
   cache-to = concat(

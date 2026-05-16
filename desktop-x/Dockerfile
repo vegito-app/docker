@@ -109,8 +109,8 @@ RUN --mount=type=cache,id=local-desktopx-${TARGETPLATFORM}-apt-cache,target=/var
     fi
 
 # 👤 Rename non root user
-RUN usermod -l ${non_root_user} debian \
-    && groupmod -n ${non_root_user} debian \
+RUN usermod -l ${non_root_user} ${USER} \
+    && groupmod -n ${non_root_user} ${USER} \
     && \
     echo "${non_root_user}:${non_root_user}" | chpasswd && \
     adduser ${non_root_user} sudo && \
@@ -132,9 +132,10 @@ USER ${non_root_user}
 
 WORKDIR ${HOME}
 
-COPY --chown=desktopx:desktopx display-start-xorg-host.sh /usr/local/bin/
 COPY --chown=desktopx:desktopx display-start.sh           /usr/local/bin/
+COPY --chown=desktopx:desktopx display-start-xorg-host.sh /usr/local/bin/
 COPY --chown=desktopx:desktopx display-start-wayland.sh   /usr/local/bin/
+COPY --chown=desktopx:desktopx xpra-start.sh              /usr/local/bin/
 COPY --chown=desktopx:desktopx enable-nvidia-gl.sh        /usr/local/bin/
 COPY --chown=desktopx:desktopx nvidia-gl-env.sh           /usr/local/bin/
 
@@ -145,6 +146,7 @@ RUN chmod +x \
     /usr/local/bin/display-start-wayland.sh \
     /usr/local/bin/display-start-xorg-host.sh \
     /usr/local/bin/display-start.sh \
+    /usr/local/bin/xpra-start.sh \
     /usr/local/bin/enable-nvidia-gl.sh \
     /usr/local/bin/nvidia-gl-env.sh
 
