@@ -94,7 +94,7 @@ variable "INFRA_ENV" {
 }
 
 variable "VEGITO_CACHE_REPOSITORY" {
-  default = "docker-repository-cache"
+  default = "vegito-docker-repository-cache"
 }
 
 variable "VEGITO_CACHE_IMAGES_BASE" {
@@ -102,11 +102,11 @@ variable "VEGITO_CACHE_IMAGES_BASE" {
 }
 
 variable "VEGITO_PRIVATE_REPOSITORY" {
-  default = "docker-repository-private"
+  default = "vegito-docker-repository-private"
 }
 
 variable "VEGITO_PUBLIC_REPOSITORY" {
-  default = "docker-repository-public"
+  default = "vegito-docker-repository-public"
 }
 
 variable "GOOGLE_CLOUD_PROJECT_ID" {
@@ -134,7 +134,7 @@ variable "VEGITO_RELEASE_BUILD_MAX_PARALLELISM" {
 group "dockerhub" {
   targets = [
     "debian",
-    "docker-dind-rootless",
+    "vegito-docker-dind-rootless",
     "golang-alpine",
     "rust",
   ]
@@ -143,7 +143,7 @@ group "dockerhub" {
 group "dockerhub-ci" {
   targets = [
     "debian-ci",
-    "docker-dind-rootless-ci",
+    "vegito-docker-dind-rootless-ci",
     "golang-alpine-ci",
     "rust-ci",
   ]
@@ -151,13 +151,13 @@ group "dockerhub-ci" {
 
 group "runners" {
   targets = [
-    "desktop-x",
+    "vegito-desktop-x",
   ]
 }
 
 group "runners-ci" {
   targets = [
-    "desktop-x-ci",
+    "vegito-desktop-x-ci",
   ]
 }
 
@@ -218,7 +218,7 @@ variable "VEGITO_RUST_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_CACHE_IMAGES_BASE}/rust"
 }
 
-variable "VEGITO_PYTHON_IMAGE_REGISTRY_CACHE" {
+variable "VEGITO_DEBIAN_PYTHON_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_CACHE_IMAGES_BASE}/python"
 }
 
@@ -238,14 +238,14 @@ variable "VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
   default = "type=local,src=${VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-group "docker-dind-rootless-ci" {
+group "vegito-docker-dind-rootless-ci" {
   targets = [
-    "docker-dind-rootless-version-ci",
-    "docker-dind-rootless-latest-ci",
+    "vegito-docker-dind-rootless-version-ci",
+    "vegito-docker-dind-rootless-latest-ci",
   ]
 }
 
-target "docker-dind-rootless-version-ci" {
+target "vegito-docker-dind-rootless-version-ci" {
   tags = [
     VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_VERSION,
   ]
@@ -270,7 +270,7 @@ target "docker-dind-rootless-version-ci" {
   platforms = platforms
 }
 
-target "docker-dind-rootless-latest-ci" {
+target "vegito-docker-dind-rootless-latest-ci" {
   tags = [
     VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_LATEST,
   ]
@@ -293,7 +293,7 @@ target "docker-dind-rootless-latest-ci" {
   platforms = platforms
 }
 
-target "docker-dind-rootless" {
+target "vegito-docker-dind-rootless" {
   tags = [
     VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_VERSION,
     VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_LATEST,
@@ -515,116 +515,6 @@ target "rust" {
   cache-to = concat(
     ENABLE_LOCAL_CACHE ? [
       VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
-    ] : []
-  )
-}
-
-variable "VEGITO_PYTHON_IMAGE_LATEST" {
-  default = "${VEGITO_PRIVATE_REPOSITORY}/python:latest"
-}
-
-variable "VEGITO_PYTHON_IMAGE_VERSION" {
-  default = "${VEGITO_PRIVATE_REPOSITORY}/python:${VERSION}"
-}
-
-variable "VEGITO_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/python"
-}
-
-variable "VEGITO_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
-  default = "type=local,mode=max,dest=${VEGITO_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
-}
-
-variable "VEGITO_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
-  default = "type=local,src=${VEGITO_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
-}
-
-group "python-ci" {
-  targets = [
-    "python-version-ci",
-    "python-latest-ci",
-  ]
-}
-
-target "python-version-ci" {
-  tags = [
-    VEGITO_PYTHON_IMAGE_VERSION,
-  ]
-  contexts = {
-    debian = "target:debian-version-ci"
-  }
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "python.Dockerfile"
-  cache-from = concat(
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_PYTHON_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_PYTHON_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = concat(
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
-    ] : [],
-  )
-  platforms = platforms
-}
-
-target "python-latest-ci" {
-  tags = [
-    VEGITO_PYTHON_IMAGE_LATEST,
-  ]
-  contexts = {
-    debian = "target:debian-latest-ci"
-  }
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "python.Dockerfile"
-  cache-from = concat(
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_PYTHON_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_PYTHON_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = [
-    USE_REGISTRY_CACHE ? "type=registry,ref=${VEGITO_PYTHON_IMAGE_REGISTRY_CACHE},mode=max" : "",
-    "type=inline"
-  ]
-  platforms = platforms
-}
-
-target "python" {
-  tags = [
-    VEGITO_PYTHON_IMAGE_LATEST,
-    VEGITO_PYTHON_IMAGE_VERSION,
-  ]
-  contexts = {
-    debian = "target:debian"
-  }
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "python.Dockerfile"
-  cache-from = concat(
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_PYTHON_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_PYTHON_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = concat(
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
     ] : []
   )
 }
