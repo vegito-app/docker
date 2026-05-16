@@ -26,9 +26,8 @@ VEGITO_DOCKER_BUILDX_BAKE ?= \
   docker buildx bake \
   -f $(VEGITO_DOCKER_DIR)/docker-bake.hcl \
   -f $(VEGITO_DOCKER_DIR)/debian/docker-bake.hcl \
-  -f $(VEGITO_DOCKER_DIR)/flutter/docker-bake.hcl \
-  -f $(VEGITO_DOCKER_DIR)/docker-bake.hcl \
-  -f $(VEGITO_DOCKER_DIR)/desktop-x/docker-bake.hcl
+  -f $(VEGITO_DOCKER_DIR)/debian/flutter/docker-bake.hcl \
+  -f $(VEGITO_DOCKER_DIR)/debian/desktop-x/docker-bake.hcl
 
 -include docker.mk
 

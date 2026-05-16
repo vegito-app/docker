@@ -34,14 +34,18 @@ variable "VEGITO_DEBIAN_IMAGE_VERSION" {
   default = "${VEGITO_PRIVATE_REPOSITORY}/debian:${VERSION}"
 }
 
-group "debian-ci" {
+group "vegito-debian-ci" {
   targets = [
-    "debian-version-ci",
-    "debian-latest-ci",
+    "vegito-debian-version-ci",
+    "vegito-debian-latest-ci",
+
+    "vegito-debian-desktop-x-ci",
+    "vegito-debian-flutter-ci",
+    "vegito-debian-python-ci",
   ]
 }
 
-target "debian-version-ci" {
+target "vegito-debian-version-ci" {
   tags = [
     VEGITO_DEBIAN_IMAGE_VERSION,
   ]
@@ -65,7 +69,7 @@ target "debian-version-ci" {
   platforms = platforms
 }
 
-target "debian-latest-ci" {
+target "vegito-debian-latest-ci" {
   tags = [
     VEGITO_DEBIAN_IMAGE_LATEST,
   ]
@@ -88,7 +92,7 @@ target "debian-latest-ci" {
   platforms = platforms
 }
 
-target "debian" {
+target "vegito-debian" {
   tags = [
     VEGITO_DEBIAN_IMAGE_LATEST,
   ]
@@ -131,19 +135,19 @@ variable "VEGITO_DEBIAN_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
   default = "type=local,src=${VEGITO_DEBIAN_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-group "python-debian-ci" {
+group "vegito-debian-python-ci" {
   targets = [
-    "python-debian-version-ci",
-    "python-debian-latest-ci",
+    "vegito-debian-python-version-ci",
+    "vegito-debian-python-latest-ci",
   ]
 }
 
-target "python-debian-version-ci" {
+target "vegito-debian-python-version-ci" {
   tags = [
     VEGITO_DEBIAN_PYTHON_IMAGE_VERSION,
   ]
   contexts = {
-    debian = "target:debian-version-ci"
+    debian = "target:vegito-debian-version-ci"
   }
   context    = VEGITO_DEBIAN_DIR
   dockerfile = "python.Dockerfile"
@@ -166,12 +170,12 @@ target "python-debian-version-ci" {
   platforms = platforms
 }
 
-target "python-debian-latest-ci" {
+target "vegito-debian-python-latest-ci" {
   tags = [
     VEGITO_DEBIAN_PYTHON_IMAGE_LATEST,
   ]
   contexts = {
-    debian = "target:debian-latest-ci"
+    debian = "target:vegito-debian-latest-ci"
   }
   context    = VEGITO_DEBIAN_DIR
   dockerfile = "python.Dockerfile"
@@ -193,7 +197,7 @@ target "python-debian-latest-ci" {
   platforms = platforms
 }
 
-target "python" {
+target "vegito-debian-python" {
   tags = [
     VEGITO_DEBIAN_PYTHON_IMAGE_LATEST,
     VEGITO_DEBIAN_PYTHON_IMAGE_VERSION,

@@ -152,16 +152,16 @@ RUN chmod +x \
 
 # 📱 By default, we can pass an APK already mounted in /apk/app.apk
 ARG default_apk_path=/apk/app.apk
-ENV VEGITO_DESKTOP_X_DEBUG_APK_PATH=${default_apk_path}
+ENV VEGITO_DEBIAN_DESKTOP_X_DEBUG_APK_PATH=${default_apk_path}
 
 # 🖥️ Display Variables
 ARG default_display=99
-ENV DISPLAY=:${default_display}
+ENV DISPLAY :${default_display}
 
 # Enable AVD on start by default
-ENV VEGITO_DESKTOP_X_GPU_MODE=swiftshader_indirect
+ENV VEGITO_DEBIAN_DESKTOP_X_GPU_MODE=swiftshader_indirect
 ENV VEGITO_CONTAINER_DISPLAY_START=true
 
-ENTRYPOINT ["tini", "--", "desktop-x-entrypoint.sh"]
+ENTRYPOINT ["tini", "--", "debian-desktop-x-entrypoint.sh"]
 HEALTHCHECK CMD test -f /tmp/.xdisplay-ready || exit 1
 ENV USER ${non_root_user}

@@ -142,7 +142,9 @@ group "dockerhub" {
 
 group "dockerhub-ci" {
   targets = [
-    "debian-ci",
+    "vegito-debian-latest-ci",
+    "vegito-debian-version-ci",
+
     "vegito-docker-dind-rootless-ci",
     "golang-alpine-ci",
     "rust-ci",
@@ -151,27 +153,27 @@ group "dockerhub-ci" {
 
 group "runners" {
   targets = [
-    "vegito-desktop-x",
+    "vegito-debian-desktop-x",
   ]
 }
 
 group "runners-ci" {
   targets = [
-    "vegito-desktop-x-ci",
+    "vegito-debian-desktop-x-ci",
   ]
 }
 
 group "tools-ci" {
   targets = [
-    "flutter-ci",
-    "flutter-desktop-x-ci",
+    "vegito-debian-flutter-ci",
+    "vegito-debian-flutter-desktop-x-ci",
   ]
 }
 
 gtoup "tools" {
   targets = [
-    "flutter",
-    "flutter-desktop-x",
+    "vegito-debian-flutter",
+    "vegito-debian-flutter-desktop-x",
   ]
 }
 
@@ -197,6 +199,7 @@ group "release" {
 group "release-ci" {
   targets = [
     "dockerhub-ci",
+    "vegito-debian-ci",
     "runners-ci",
     "tools-ci",
   ]

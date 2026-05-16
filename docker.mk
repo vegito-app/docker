@@ -16,7 +16,7 @@ VEGITO_PUBLIC_IMAGES_BASE_NAME ?= $(VEGITO_PUBLIC_REPOSITORY)/$(VEGITO_DOCKER_IM
 
 ENABLE_LOCAL_CACHE ?= $(VEGITO_DOCKER_BUILD_ENABLE_LOCAL_CACHE)
 
-vegito-docker-login-gcr: gcloud-auth-docker vegito-docker-login
+vegito-docker-login-gcr: gcloud-auth-docker
 	@echo "Logging into $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)"
 	@docker login $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)
 .PHONY: vegito-docker-login-gcr
@@ -98,9 +98,9 @@ vegito-docker-build-tags-list-ci-md:
 
 VEGITO_DOCKER_IMAGES = \
   debian \
-  desktop-x \
-  flutter \
-  flutter-desktop-x \
+  vegito-debian-desktop-x \
+  vegito-debian-flutter \
+  vegito-debian-flutter-desktop-x \
   vegito-docker-dind-rootless \
   golang-alpine \
   python \
