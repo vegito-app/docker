@@ -103,6 +103,7 @@ VEGITO_DOCKER_IMAGES = \
   flutter-desktop-x \
   docker-dind-rootless \
   golang-alpine \
+  python \
   rust 
 
 docker-hub-images-update:	
