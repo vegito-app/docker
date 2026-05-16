@@ -2,6 +2,8 @@ FROM debian
 
 USER root
 
+ARG TARGETPLATFORM
+
 # Adding Android build tools
 # clang, cmake, ninja-build : for native build (NDK)
 # openjdk-17-jdk : for Android tools (sdkmanager, avdmanager, etc.)

@@ -2,6 +2,8 @@ FROM debian
 
 USER root
 
+ARG TARGETPLATFORM
+
 RUN --mount=type=cache,id=debian-python-${TARGETPLATFORM}-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=debian-python-${TARGETPLATFORM}-apt-lib,target=/var/lib/apt,sharing=locked \
     apt-get -o Acquire::Retries=3 update && apt-get install -y \
