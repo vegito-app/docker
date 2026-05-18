@@ -1,5 +1,5 @@
 VEGITO_DOCKER_DIR ?= $(CURDIR)
-include $(VEGITO_DOCKER_DIR)/dockerhub.mk
+include $(VEGITO_DOCKER_DIR)/docker.io/docker.mk
 
 GOOGLE_CLOUD_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_REGION)-docker.pkg.devs
 GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_DOCKER_REGISTRY)/$(GOOGLE_CLOUD_PROJECT_ID)
@@ -12,7 +12,10 @@ VEGITO_CACHE_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)/docker-reposi
 VEGITO_CACHE_IMAGES_BASE ?= $(VEGITO_CACHE_REPOSITORY)/$(VEGITO_DOCKER_IMAGES_BASE)
 
 VEGITO_PUBLIC_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)/docker-repository-public
-VEGITO_PUBLIC_IMAGES_BASE_NAME ?= $(VEGITO_PUBLIC_REPOSITORY)/$(VEGITO_DOCKER_IMAGES_BASE)
+VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME ?= $(VEGITO_PUBLIC_REPOSITORY)/$(VEGITO_DOCKER_IMAGES_BASE)
+
+VEGITO_PRIVATE_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)/docker-repository-private
+VEGITO_DOCKER_PRIVATE_IMAGES_BASE_NAME ?= $(VEGITO_PRIVATE_REPOSITORY)/$(VEGITO_DOCKER_IMAGES_BASE)
 
 ENABLE_LOCAL_CACHE ?= $(VEGITO_DOCKER_BUILD_ENABLE_LOCAL_CACHE)
 
@@ -98,12 +101,15 @@ vegito-docker-build-tags-list-ci-md:
 
 VEGITO_DOCKER_IMAGES = \
   debian \
-  vegito-debian-desktop-x \
-  vegito-debian-flutter \
-  vegito-debian-flutter-desktop-x \
-  vegito-docker-dind-rootless \
+  debian-desktop-x \
+  debian-flutter \
+  debian-flutter-desktop-x \
+  debian-python \
+  debian-golang \
+  debian-rust \
+  alpine \
+  docker-dind-rootless \
   golang-alpine \
-  python \
   rust 
 
 vegito-docker-hub-images-update:	
@@ -111,10 +117,10 @@ vegito-docker-hub-images-update:
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --push dockerhub-ci
 .PHONY: vegito-docker-hub-images-update
 
-$(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-image-update):
-	@$(VEGITO_DOCKER_BUILDX_BAKE) --print $(@:docker-%-image-update=%-ci)
-	@$(VEGITO_DOCKER_BUILDX_BAKE) --push $(@:docker-%-image-update=%-ci)
-.PHONY: $(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-image-update)
+$(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-images-update):
+	@$(VEGITO_DOCKER_BUILDX_BAKE) --print $(@:vegito-docker-%-images-update=vegito-%-ci)
+	@$(VEGITO_DOCKER_BUILDX_BAKE) --push $(@:vegito-docker-%-images-update=vegito-%-ci)
+.PHONY: $(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-images-update)
 
 vegito-docker-images-release:
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print release
