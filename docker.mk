@@ -6,8 +6,6 @@ GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_DOCKER_REGISTRY)/$(GOOGLE
 
 VEGITO_DOCKER_IMAGES_BASE ?= vegito
 
-VEGITO_PRIVATE_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)/docker-repository-private
-
 VEGITO_CACHE_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)/docker-repository-cache
 VEGITO_CACHE_IMAGES_BASE ?= $(VEGITO_CACHE_REPOSITORY)/$(VEGITO_DOCKER_IMAGES_BASE)
 
@@ -54,6 +52,7 @@ $(VEGITO_DOCKER_BUILDX_BUILD_GROUPS:%=%-docker-images): vegito-docker-buildx-set
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print $(@:%-docker-images=%)
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --load $(@:%-docker-images=%)
 .PHONY: $(VEGITO_DOCKER_BUILDX_BUILD_GROUPS:%=%-docker-images)
+
 DOCKER_REGISTRIES ?= gcr dockerhub
 
 vegito-docker-images-multi-registry-release: $(DOCKER_REGISTRIES:%=vegito-docker-images-%-release)

@@ -190,7 +190,6 @@ group "default" {
 
 group "release" {
   targets = [
-    "dockerhub",
     "runners",
     "tools",
   ]
@@ -198,7 +197,6 @@ group "release" {
 
 group "release-ci" {
   targets = [
-    "dockerhub-ci",
     "vegito-debian-ci",
     "runners-ci",
     "tools-ci",
@@ -438,7 +436,7 @@ variable "VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
 }
 
 variable "VEGITO_RUST_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_LOCAL_CACHE_IMAGES_BASE}/rust"
+  default = "${VEGITO_CACHE_IMAGES_BASE}/rust"
 }
 
 group "rust-ci" {
