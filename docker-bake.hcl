@@ -3,7 +3,7 @@ variable "VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME" {
 }
 
 variable "VEGITO_DOCKER_PRIVATE_IMAGES_BASE" {
-  default = "${VEGITO_PRIVATE_REPOSITORY}/vegito-docker"
+  default = "${VEGITO_PUBLIC_REPOSITORY}/vegito-docker"
 }
 
 variable "USE_REGISTRY_CACHE" {
@@ -31,7 +31,7 @@ variable "VERSION" {
 
 variable "GO_VERSION" {
   description = "current Go version"
-  default     = "1.26.1"
+  default     = "1.26.3"
 }
 
 variable "TRIVY_VERSION" {
@@ -101,7 +101,7 @@ variable "VEGITO_CACHE_IMAGES_BASE" {
   default = "${VEGITO_CACHE_REPOSITORY}/vegito-docker"
 }
 
-variable "VEGITO_PRIVATE_REPOSITORY" {
+variable "VEGITO_PUBLIC_REPOSITORY" {
   default = "vegito-docker-repository-private"
 }
 
@@ -131,51 +131,18 @@ variable "VEGITO_RELEASE_BUILD_MAX_PARALLELISM" {
 # - Builders: used to build the services, applications and the local development environments
 # - Services: the dependencies of the applications, they are used to run the applications
 # - Applications: the end products that we want to run and test
-group "dockerhub" {
-  targets = [
-    "debian",
-    "vegito-docker-dind-rootless",
-    "golang-alpine",
-    "rust",
-  ]
-}
-
-group "dockerhub-ci" {
-  targets = [
-    "vegito-debian-latest-ci",
-    "vegito-debian-version-ci",
-
-    "vegito-docker-dind-rootless-ci",
-    "golang-alpine-ci",
-    "rust-ci",
-  ]
-}
-
 group "runners" {
   targets = [
-    "vegito-debian-desktop-x",
+    "vegito-debian",
   ]
 }
 
 group "runners-ci" {
   targets = [
-    "vegito-debian-desktop-x-ci",
+    "vegito-debian-ci",
   ]
 }
 
-group "tools-ci" {
-  targets = [
-    "vegito-debian-flutter-ci",
-    "vegito-debian-flutter-desktop-x-ci",
-  ]
-}
-
-gtoup "tools" {
-  targets = [
-    "vegito-debian-flutter",
-    "vegito-debian-flutter-desktop-x",
-  ]
-}
 
 group "default" {
 
@@ -190,332 +157,14 @@ group "default" {
 
 group "release" {
   targets = [
+    "dockerhub",
     "runners",
-    "tools",
   ]
 }
 
 group "release-ci" {
   targets = [
-    "vegito-debian-ci",
+    "dockerhub-ci",
     "runners-ci",
-    "tools-ci",
   ]
-}
-
-variable "VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_LATEST" {
-  default = "${VEGITO_PRIVATE_REPOSITORY}/docker-dind-rootless:latest"
-}
-
-variable "VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_VERSION" {
-  default = "${VEGITO_PRIVATE_REPOSITORY}/docker-dind-rootless:${VERSION}"
-}
-
-variable "VEGITO_GOLANG_ALPINE_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/golang-alpine"
-}
-
-variable "VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/python"
-}
-
-variable "VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/docker-dind-rootless"
-}
-
-variable "VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/docker-dind-rootless"
-}
-
-variable "VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
-  default = "type=local,mode=max,dest=${VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
-}
-
-variable "VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
-  default = "type=local,src=${VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
-}
-
-group "vegito-docker-dind-rootless-ci" {
-  targets = [
-    "vegito-docker-dind-rootless-version-ci",
-    "vegito-docker-dind-rootless-latest-ci",
-  ]
-}
-
-target "vegito-docker-dind-rootless-version-ci" {
-  tags = [
-    VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_VERSION,
-  ]
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "docker-dind-rootless.Dockerfile"
-  cache-from = concat(
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = concat(
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
-    ] : [],
-  )
-  platforms = platforms
-}
-
-target "vegito-docker-dind-rootless-latest-ci" {
-  tags = [
-    VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_LATEST,
-  ]
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "docker-dind-rootless.Dockerfile"
-  cache-from = concat(
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = [
-    USE_REGISTRY_CACHE ? "type=registry,ref=${VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_REGISTRY_CACHE},mode=max" : "type=inline"
-  ]
-  platforms = platforms
-}
-
-target "vegito-docker-dind-rootless" {
-  tags = [
-    VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_VERSION,
-    VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_LATEST,
-  ]
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "docker-dind-rootless.Dockerfile"
-  cache-from = concat(
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = concat(
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_DOCKER_DIND_ROOTLESS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
-    ] : [],
-  )
-}
-
-variable "VEGITO_DOCKER_ALPINE_GO_IMAGE_LATEST" {
-  default = "${VEGITO_PRIVATE_REPOSITORY}/golang-alpine:latest"
-}
-
-variable "VEGITO_DOCKER_ALPINE_GO_IMAGE_VERSION" {
-  default = "${VEGITO_PRIVATE_REPOSITORY}/golang-alpine:${VERSION}"
-}
-
-variable "VEGITO_GOLANG_ALPINE_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/golang-alpine"
-}
-
-variable "VEGITO_GOLANG_ALPINE_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
-  default = "type=local,mode=max,dest=${VEGITO_GOLANG_ALPINE_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
-}
-
-variable "VEGITO_GOLANG_ALPINE_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
-  default = "type=local,src=${VEGITO_GOLANG_ALPINE_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
-}
-
-group "golang-alpine-ci" {
-  targets = [
-    "golang-alpine-version-ci",
-    "golang-alpine-latest-ci",
-  ]
-}
-
-target "golang-alpine-version-ci" {
-
-  tags = [
-    VEGITO_DOCKER_ALPINE_GO_IMAGE_VERSION,
-  ]
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "golang-alpine.Dockerfile"
-  cache-from = concat(
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_GOLANG_ALPINE_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_GOLANG_ALPINE_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_DOCKER_ALPINE_GO_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = [
-    USE_REGISTRY_CACHE ? "type=registry,ref=${VEGITO_GOLANG_ALPINE_IMAGE_REGISTRY_CACHE},mode=max" : "type=inline"
-  ]
-  platforms = platforms
-}
-
-target "golang-alpine-latest-ci" {
-  tags = [
-    VEGITO_DOCKER_ALPINE_GO_IMAGE_LATEST,
-  ]
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "golang-alpine.Dockerfile"
-  cache-from = concat(
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_GOLANG_ALPINE_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_GOLANG_ALPINE_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_DOCKER_ALPINE_GO_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = [
-    USE_REGISTRY_CACHE ? "type=registry,ref=${VEGITO_GOLANG_ALPINE_IMAGE_REGISTRY_CACHE},mode=max" : "",
-    "type=inline"
-  ]
-  platforms = platforms
-}
-
-target "golang-alpine" {
-  tags = [
-    VEGITO_DOCKER_ALPINE_GO_IMAGE_VERSION,
-    VEGITO_DOCKER_ALPINE_GO_IMAGE_LATEST,
-  ]
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "golang-alpine.Dockerfile"
-  cache-from = concat(
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_GOLANG_ALPINE_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_GOLANG_ALPINE_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_DOCKER_ALPINE_GO_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = concat(
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_GOLANG_ALPINE_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
-    ] : []
-  )
-}
-
-variable "VEGITO_RUST_IMAGE_LATEST" {
-  default = "${VEGITO_PRIVATE_REPOSITORY}/rust:latest"
-}
-
-variable "VEGITO_RUST_IMAGE_VERSION" {
-  default = "${VEGITO_PRIVATE_REPOSITORY}/rust:${VERSION}"
-}
-
-variable "VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/rust"
-}
-
-variable "VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
-  default = "type=local,mode=max,dest=${VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
-}
-
-variable "VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
-  default = "type=local,src=${VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
-}
-
-variable "VEGITO_RUST_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/rust"
-}
-
-group "rust-ci" {
-  targets = [
-    "rust-version-ci",
-    "rust-latest-ci",
-  ]
-}
-
-target "rust-version-ci" {
-  tags = [
-    VEGITO_RUST_IMAGE_VERSION,
-  ]
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "rust.Dockerfile"
-  cache-from = concat(
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_RUST_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_RUST_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = concat(
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
-    ] : [],
-  )
-  platforms = platforms
-}
-
-target "rust-latest-ci" {
-  tags = [
-    VEGITO_RUST_IMAGE_LATEST,
-  ]
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "rust.Dockerfile"
-  cache-from = concat(
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_RUST_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_RUST_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = [
-    USE_REGISTRY_CACHE ? "type=registry,ref=${VEGITO_RUST_IMAGE_REGISTRY_CACHE},mode=max" : "",
-    "type=inline"
-  ]
-  platforms = platforms
-}
-
-target "rust" {
-  tags = [
-    VEGITO_RUST_IMAGE_LATEST,
-    VEGITO_RUST_IMAGE_VERSION,
-  ]
-  context    = VEGITO_DOCKER_DIR
-  dockerfile = "rust.Dockerfile"
-  cache-from = concat(
-    USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_RUST_IMAGE_REGISTRY_CACHE}"
-    ] : [],
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
-    ] : [],
-    [
-      "type=inline,ref=${VEGITO_RUST_IMAGE_LATEST}"
-    ]
-  )
-  cache-to = concat(
-    ENABLE_LOCAL_CACHE ? [
-      VEGITO_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
-    ] : []
-  )
 }
