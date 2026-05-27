@@ -1,12 +1,13 @@
-ARG debian_version=bookworm
-FROM debian:${debian_version}
+FROM debian
 
 ARG TARGETPLATFORM
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
-ARG debian_version=bookworm
+
+ARG debian_version
+
 RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-lib,target=/var/lib/apt,sharing=locked \
     apt-get -o Acquire::Retries=3 update && apt-get install -y \
@@ -50,7 +51,7 @@ RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-
     zsh
 
 ARG oh_my_zsh_version=1.2.1
-RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v${oh_my_zsh_version}/zsh-in-docker.sh)"
+RUN curl -fsSL https://github.com/deluan/zsh-in-docker/releases/download/v${oh_my_zsh_version}/zsh-in-docker.sh | sh
 
 ARG locales="en_US.UTF-8 fr_FR.UTF-8"
 
@@ -61,8 +62,8 @@ RUN set eu; \
     done; \
     locale-gen
 
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 ARG non_root_user=debian
 ARG uid=1000
@@ -76,5 +77,13 @@ RUN groupadd -g ${gid} ${non_root_user} \
 
 USER ${non_root_user}
 
-ENV USER ${non_root_user}
-ENV HOME /home/${non_root_user}
+ENV USER=${non_root_user}
+ENV HOME=/home/${non_root_user}
+
+COPY --chown=${uid}:${gid} ./entrypoint.sh /usr/local/bin/debian-entrypoint.sh
+RUN chmod +x /usr/local/bin/debian-entrypoint.sh 
+
+COPY --chown=${uid}:${gid} ./container-install.sh /usr/local/bin/debian-container-install.sh
+RUN chmod +x /usr/local/bin/debian-container-install.sh
+
+ENTRYPOINT ["tini", "--", "debian-entrypoint.sh"]
