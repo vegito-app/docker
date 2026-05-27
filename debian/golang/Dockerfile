@@ -1,29 +1,33 @@
-FROM debian
+FROM dockerhub_golang AS go-build
 
-USER root
-
-ARG go_version
-ARG BUILDPLATFORM
+ARG debian_version=bookworm
 ARG TARGETPLATFORM
 
-RUN set -eux; \
-    case "${BUILDPLATFORM}" in \
-    "linux/amd64") archive="go${go_version}.linux-amd64.tar.gz" ;; \
-    "linux/arm64") archive="go${go_version}.linux-arm64.tar.gz" ;; \
-    *) echo "Unsupported BUILDPLATFORM=${BUILDPLATFORM}" && exit 1 ;; \
-    esac; \
-    url="https://dl.google.com/go/${archive}"; \
-    echo "Downloading ${url} for build platform ${BUILDPLATFORM}, target=${TARGETPLATFORM}"; \
-    curl -fSL "${url}" -o /tmp/go.tgz; \
-    tar xzf /tmp/go.tgz -C /usr/local; \
-    rm -f /tmp/go.tgz
+ARG go_pkg=/go/pkg
+ARG go_cache=/.cache
+ENV GOMODCACHE=${go_pkg}/mod
+ENV GOCACHE=${go_cache}
+ENV GOBIN=/go/bin
+ENV CGO_ENABLED=0
+RUN --mount=type=cache,id=vegito-debian-${TARGETPLATFORM}-${debian_version}-root-go-pkg,target=${go_pkg},sharing=locked \
+    --mount=type=cache,id=vegito-debian-${TARGETPLATFORM}-${debian_version}-root-go-build,target=${go_cache},sharing=locked \
+    go install -v github.com/vegito-app/local/proxy@latest \
+    && go install -v github.com/go-delve/delve/cmd/dlv@latest \
+    && go install -v honnef.co/go/tools/cmd/staticcheck@latest \
+    && go install -v github.com/jesseduffield/lazydocker@latest \
+    && go install -v github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest \
+    && go install -v golang.org/x/tools/gopls@latest \
+    && go install -v github.com/cweill/gotests/gotests@v1.6.0 \
+    && go install -v github.com/josharian/impl@v1.4.0 \
+    && go install -v github.com/haya14busa/goplay/cmd/goplay@v1.0.0
 
-ENV CGO_ENABLED=1
-ENV PATH=${PATH}:/usr/local/go/bin
+FROM debian
 
 ARG non_root_user=go
 ARG uid=1000
 ARG gid=1000
+
+USER root
 
 # 👤 Rename non root user
 RUN usermod -l ${non_root_user} ${USER} \
@@ -34,23 +38,13 @@ RUN usermod -l ${non_root_user} ${USER} \
     echo "${non_root_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${non_root_user} && \
     chmod 0440 /etc/sudoers.d/${non_root_user}
 
-USER ${non_root_user}    
+COPY --from=go-build /usr/local/go/ /usr/local/go/
+ENV CGO_ENABLED=0
 
+USER ${non_root_user} 
 ENV USER=${non_root_user}
+COPY --chown=${uid}:${gid} --from=go-build /go/bin/ /home/debian/go/bin/
 
-WORKDIR ${HOME}
-
-# Go tools
-RUN  --mount=type=cache,id=local-builder-${TARGETPLATFORM}-go-mod,target=/home/${non_root_user}/go/pkg,sharing=locked,uid=${uid},gid=${gid} \
-    --mount=type=cache,id=local-builder-${TARGETPLATFORM}-go-build,target=/home/${non_root_user}/.cache/go-build,sharing=locked,uid=${uid},gid=${gid} \
-    GOPATH=/tmp/go GOBIN=${HOME}/bin bash -c " \
-    go install -v golang.org/x/tools/gopls@latest \
-    && go install -v github.com/cweill/gotests/gotests@v1.6.0 \
-    && go install -v github.com/josharian/impl@v1.4.0 \
-    && go install -v github.com/haya14busa/goplay/cmd/goplay@v1.0.0 \
-    && go install -v github.com/go-delve/delve/cmd/dlv@latest \
-    && go install -v honnef.co/go/tools/cmd/staticcheck@latest \
-    && go install -v github.com/jesseduffield/lazydocker@latest \
-    && go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest \
-    "
-
+ENV PATH=${PATH}:/usr/local/go/bin
+RUN mkdir -p /home/debian/go/bin
+ENV PATH=${PATH}:/home/debian/go/bin
