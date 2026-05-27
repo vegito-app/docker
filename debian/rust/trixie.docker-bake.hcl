@@ -3,12 +3,12 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DIR" {
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-rust-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-rust-${VERSION}"
 }
 
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-rust-latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-rust-latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_REGISTRY_CACHE" {
@@ -60,8 +60,23 @@ group "vegito-trixie-debian-rust-ci" {
     "vegito-trixie-debian-rust-version-ci",
     "vegito-trixie-debian-rust-latest-ci",
 
+    "vegito-trixie-debian-rust-desktop-x-ci",
+
+    "vegito-trixie-debian-rust-docker-desktop-x-ci",
+  ]
+}
+
+group "vegito-trixie-debian-rust-desktop-x-ci" {
+  targets = [
     "vegito-trixie-debian-rust-desktop-x-version-ci",
     "vegito-trixie-debian-rust-desktop-x-latest-ci",
+  ]
+}
+
+group "vegito-trixie-debian-rust-docker-desktop-x-ci" {
+  targets = [
+    "vegito-trixie-debian-rust-docker-desktop-x-version-ci",
+    "vegito-trixie-debian-rust-docker-desktop-x-latest-ci",
   ]
 }
 
@@ -81,7 +96,7 @@ target "vegito-trixie-debian-rust-version-ci" {
       VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION
     ] : [],
     [
-      "type=inline,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_LATEST}"
+      VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_LATEST
     ]
   )
   cache-to = concat(
@@ -109,8 +124,8 @@ target "vegito-trixie-debian-rust-latest-ci" {
       VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
-      "type=inline,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_LATEST}",
-      "type=inline,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_LATEST}"
+      VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_LATEST,
+      VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_LATEST
     ]
   )
   cache-to = concat(
@@ -145,8 +160,8 @@ target "vegito-trixie-debian-rust" {
       VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
-      "type=inline,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_LATEST}",
-      "type=inline,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_LATEST}"
+      VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_LATEST,
+      VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_LATEST
     ]
   )
   cache-to = concat(
@@ -157,11 +172,11 @@ target "vegito-trixie-debian-rust" {
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DESKTOP_X_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-rust-desktop-x-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-rust-desktop-x-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DESKTOP_X_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-rust-desktop-x-latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-rust-desktop-x-latest"
 }
 
 target "vegito-trixie-debian-rust-desktop-x-version-ci" {
@@ -192,5 +207,44 @@ target "vegito-trixie-debian-rust-desktop-x" {
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DESKTOP_X_IMAGE_VERSION,
     VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DESKTOP_X_IMAGE_LATEST,
+  ]
+}
+
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DOCKER_DESKTOP_X_IMAGE_VERSION" {
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-docker-rust-desktop-x-${VERSION}"
+}
+
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DOCKER_DESKTOP_X_IMAGE_LATEST" {
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-docker-rust-desktop-x-latest"
+}
+
+target "vegito-trixie-debian-rust-docker-desktop-x-version-ci" {
+  inherits = ["vegito-trixie-debian-rust-desktop-x-version-ci"]
+  contexts = {
+    debian = "target:vegito-trixie-debian-docker-desktop-x-version-ci"
+  }
+  tags = [
+    VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DOCKER_DESKTOP_X_IMAGE_VERSION,
+  ]
+}
+
+target "vegito-trixie-debian-rust-docker-desktop-x-latest-ci" {
+  inherits = ["vegito-trixie-debian-rust-desktop-x-latest-ci"]
+  contexts = {
+    debian = "target:vegito-trixie-debian-docker-desktop-x-latest-ci"
+  }
+  tags = [
+    VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DOCKER_DESKTOP_X_IMAGE_LATEST,
+  ]
+}
+
+target "vegito-trixie-debian-rust-docker-desktop-x" {
+  inherits = ["vegito-trixie-debian-rust-desktop-x"]
+  contexts = {
+    debian = "target:vegito-trixie-debian-docker-desktop-x"
+  }
+  tags = [
+    VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DOCKER_DESKTOP_X_IMAGE_LATEST,
+    VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DOCKER_DESKTOP_X_IMAGE_VERSION,
   ]
 }

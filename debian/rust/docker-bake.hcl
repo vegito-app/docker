@@ -3,16 +3,16 @@ variable "VEGITO_DOCKER_DEBIAN_RUST_DIR" {
 }
 
 variable "VEGITO_PRIVATE_IMAGES_BASE_NAME" {
-  default = "${VEGITO_PRIVATE_REPOSITORY}/vegito-local-private"
+  default = "${VEGITO_PUBLIC_REPOSITORY}/vegito-local-private"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_RUST_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:debian-rust-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-rust-${VERSION}"
 }
 
 
 variable "VEGITO_DOCKER_DEBIAN_RUST_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:debian-rust-latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-rust-latest"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_RUST_IMAGE_REGISTRY_CACHE" {
@@ -84,7 +84,7 @@ target "vegito-debian-rust-version-ci" {
       VEGITO_DOCKER_DEBIAN_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION
     ] : [],
     [
-      "type=inline,ref=${VEGITO_DOCKER_DEBIAN_RUST_IMAGE_LATEST}"
+      VEGITO_DOCKER_DEBIAN_RUST_IMAGE_LATEST
     ]
   )
   cache-to = concat(
@@ -112,8 +112,8 @@ target "vegito-debian-rust-latest-ci" {
       VEGITO_DOCKER_DEBIAN_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
-      "type=inline,ref=${VEGITO_DOCKER_DEBIAN_RUST_IMAGE_LATEST}",
-      "type=inline,ref=${VEGITO_DOCKER_DEBIAN_IMAGE_LATEST}"
+      VEGITO_DOCKER_DEBIAN_RUST_IMAGE_LATEST,
+      VEGITO_DOCKER_DEBIAN_IMAGE_LATEST
     ]
   )
   cache-to = concat(
@@ -148,8 +148,8 @@ target "vegito-debian-rust" {
       VEGITO_DOCKER_DEBIAN_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
     ] : [],
     [
-      "type=inline,ref=${VEGITO_DOCKER_DEBIAN_RUST_IMAGE_LATEST}",
-      "type=inline,ref=${VEGITO_DOCKER_DEBIAN_IMAGE_LATEST}"
+      VEGITO_DOCKER_DEBIAN_RUST_IMAGE_LATEST,
+      VEGITO_DOCKER_DEBIAN_IMAGE_LATEST
     ]
   )
   cache-to = concat(
@@ -160,11 +160,11 @@ target "vegito-debian-rust" {
 }
 
 variable "VEGITO_DOCKER_DEBIAN_RUST_DESKTOP_X_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:debian-rust-desktop-x-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-rust-desktop-x-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_RUST_DESKTOP_X_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_IMAGES_BASE_NAME}:debian-rust-desktop-x-latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-rust-desktop-x-latest"
 }
 
 target "vegito-debian-rust-desktop-x-version-ci" {
