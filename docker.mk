@@ -146,7 +146,7 @@ vegito-docker-images-release-ci:
 VEGITO_DOCKER_BUILDX_NAME ?= vegito-project-builder
 VEGITO_DOCKER_BUILDX_ARM_BUILDER_NAME ?= mac-arm
 
-VEGITO_DOCKER_BUILDX_ARM_BUILDER_ENDPOINT=tcp://10.5.5.2:23751
+VEGITO_DOCKER_BUILDX_ARM_BUILDER_ENDPOINT ?= tcp://10.5.5.2:23751
 
 # Ajout d'un context docker distant pour le Mac
 vegito-docker-context-arm:
