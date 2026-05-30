@@ -135,7 +135,7 @@ $(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-images-update):
 
 vegito-docker-images-release:
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print release
-	@$(VEGITO_DOCKER_BUILDX_BAKE) --push release
+	@$(VEGITO_DOCKER_BUILDX_BAKE) --load release
 .PHONY: vegito-docker-images-release
 
 vegito-docker-images-release-ci:
