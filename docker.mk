@@ -114,7 +114,11 @@ VEGITO_DOCKER_DEBIAN_SPECIFICS ?= \
  kubernetes \
  nodejs \
  vscode
- 
+
+VEGITO_DOCKER_DEBIAN_VSCODE_SPECIFICS ?= \
+ ai \
+ golang
+
 VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian \
   debian-golang-docker \
