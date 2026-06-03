@@ -99,8 +99,22 @@ vegito-docker-build-tags-list-ci-md:
 	  echo "" ; \
 	done
 .PHONY: vegito-docker-build-tags-list-ci-md
-#   debian-golang-ai-docker-desktop-x \
 
+VEGITO_DOCKER_DEBIAN_DIR ?= $(VEGITO_DOCKER_DIR)/debian
+
+VEGITO_DOCKER_DEBIAN_SPECIFICS ?= \
+ ai \
+ desktop-x \
+ docker \
+ golang \
+ python \
+ rust \
+ flutter \
+ terraform \
+ kubernetes \
+ nodejs \
+ vscode
+ 
 VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian \
   debian-golang-docker \
