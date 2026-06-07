@@ -119,7 +119,7 @@ RUN case "$TARGETPLATFORM" in "linux/amd64") \
     && rm -rf /tmp/gitleaks \
     && gitleaks version
 
-ARG non_root_user=local
+ARG non_root_user=project
 ARG uid=1000
 ARG gid=1000
 
