@@ -41,26 +41,26 @@ variable "VEGITO_DOCKER_DEBIAN_FLUTTER_DIR" {
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_REGISTRY_CACHE_IMAGE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/debian-flutter"
+  default = "${VEGITO_CACHE_IMAGES_BASE}/trixie-debian-flutter"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/debian-flutter"
+  default = "${VEGITO_CACHE_IMAGES_BASE}/trixie-debian-flutter"
 }
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-flutter-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-flutter-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_IMAGE_LATEST" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-flutter-latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-flutter-latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian-flutter-version"
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/trixie-debian-flutter-version"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian-flutter-latest"
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/trixie-debian-flutter-latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
@@ -174,27 +174,27 @@ target "vegito-trixie-debian-flutter-debian" {
 # Desktop X
 # ###################################################################
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_DESKTOP_X_REGISTRY_CACHE_IMAGE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/debian-flutter-desktop-x"
+  default = "${VEGITO_CACHE_IMAGES_BASE}/trixie-debian-flutter-desktop-x"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/debian-flutter-desktop-x"
+  default = "${VEGITO_CACHE_IMAGES_BASE}/trixie-debian-flutter-desktop-x"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_DESKTOP_X_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-flutter-desktop-x-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-flutter-desktop-x-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_DESKTOP_X_IMAGE_LATEST" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-flutter-desktop-x-latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-flutter-desktop-x-latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian-flutter-desktop-x-version"
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/trixie-debian-flutter-desktop-x-version"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian-flutter-desktop-x-latest"
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/trixie-debian-flutter-desktop-x-latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
