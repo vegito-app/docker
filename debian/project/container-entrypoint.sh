@@ -8,7 +8,7 @@ set -euo pipefail
 # This is useful for local development environments where you want to keep your settings across container rebuilds.
 # You can set this variable in your devcontainer.json or in your environment before starting the container.
 # Example: export PROJECT_CONTAINER_INSTALL=true
-if [ "${PROJECT_CONTAINER_INSTALL:-}" = true ]; then
+if [ "${PROJECT_CONTAINER_INSTALL:-true}" = true ]; then
     project-container-install.sh
 fi
 

@@ -108,6 +108,12 @@ RUN usermod -l ${non_root_user} ${USER} \
     echo "${non_root_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${non_root_user} && \
     chmod 0440 /etc/sudoers.d/${non_root_user}
 
+ENV XDG_RUNTIME_DIR="/run/user/${uid}"
+
+RUN mkdir -p ${XDG_RUNTIME_DIR} && \
+    chmod 700 ${XDG_RUNTIME_DIR} && \
+    chown ${uid}:${gid} ${XDG_RUNTIME_DIR}
+
 # Install Docker
 ARG docker_version
 ARG docker_compose_version
@@ -189,7 +195,6 @@ RUN \
     docker compose version
 
 ENV USER=${non_root_user}
-
 COPY entrypoint.sh /usr/local/bin/debian-docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/debian-docker-entrypoint.sh
 
