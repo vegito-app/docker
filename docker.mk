@@ -111,6 +111,7 @@ VEGITO_DOCKER_DEBIAN_SPECIFICS ?= \
  kubernetes \
  nodejs \
  project \
+ obs \
  python \
  rust \
  terraform \
@@ -126,6 +127,7 @@ VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian-golang-docker \
   debian-golang-project-builder-docker \
   debian-golang-project-builder-docker-x \
+  debian-obs-vscode-golang-ai-docker \
   debian-vscode-golang-ai-docker-desktop-x \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-desktop-x) \
