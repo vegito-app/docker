@@ -118,9 +118,7 @@ RUN uv venv .venv && \
 RUN . .venv/bin/activate && \
     pip install -e '.[all]'
 
-RUN ln -sf \
-    /home/debian/hermes/.venv/bin/hermes \
-    /usr/local/bin/hermes
+ENV PATH="${HOME}/hermes/.venv/bin/:$PATH"
 
 RUN mkdir -p /home/debian/.hermes && \
     cp -a /home/debian/hermes/. /home/debian/.hermes/
