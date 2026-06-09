@@ -1,4 +1,3 @@
-
 FROM debian
 
 ARG TARGETPLATFORM
@@ -70,6 +69,7 @@ RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-pyth
 # Navigator runtime
 RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-python-build,target=/home/debian/.cache,sharing=locked,uid=${uid},gid=${gid} \
     pip install \
+    uv \
     playwright && \
     playwright install --with-deps
 
@@ -104,3 +104,29 @@ RUN mkdir -p /home/debian/.ollama/models && \
     chmod -R 700 /home/debian/.cache/torch_extensions
 
 HEALTHCHECK CMD test -f /tmp/.ai-runtime-ready || exit 1
+
+WORKDIR /home/debian
+
+RUN git clone https://github.com/NousResearch/Hermes-Agent.git hermes
+
+WORKDIR /home/debian/hermes
+
+RUN uv venv .venv && \
+    . .venv/bin/activate && \
+    uv sync
+
+RUN . .venv/bin/activate && \
+    pip install -e '.[all]'
+
+RUN ln -sf \
+    /home/debian/hermes/.venv/bin/hermes \
+    /usr/local/bin/hermes
+
+RUN mkdir -p /home/debian/.hermes && \
+    cp -a /home/debian/hermes/. /home/debian/.hermes/
+
+RUN curl -fsSL https://claude.ai/install.sh | bash
+
+RUN mkdir -p /home/debian/.hermes/bin
+
+RUN curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
