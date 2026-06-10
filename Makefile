@@ -15,6 +15,9 @@ VERSION ?= $(VEGITO_DOCKER_VERSION)
 
 VEGITO_DOCKER_REGISTRIES ?= dockerhub
 
+GOOGLE_CLOUD_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_REGION)-docker.pkg.devs
+GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_DOCKER_REGISTRY)/$(GOOGLE_CLOUD_PROJECT_ID)
+
 export
 
 # Use docker.io as the default registry for local public images, but allow overriding it if needed.

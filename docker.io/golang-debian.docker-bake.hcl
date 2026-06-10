@@ -1,9 +1,9 @@
 variable "VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/golang-debian:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/golang-debian:latest"
 }
 
 variable "VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/golang-debian:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/golang-debian:${VERSION}"
 }
 
 target "docker-golang-debian-base" {
@@ -47,11 +47,11 @@ target "docker-golang-debian" {
 }
 
 variable "VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/golang-debian-trixie:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/golang-debian-trixie:latest"
 }
 
 variable "VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/golang-debian-trixie:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/golang-debian-trixie:${VERSION}"
 }
 
 target "docker-debian-trixie-golang-base" {

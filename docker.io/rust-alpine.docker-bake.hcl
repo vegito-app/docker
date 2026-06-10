@@ -1,9 +1,9 @@
 variable "VEGITO_DOCKER_ALPINE_RUST_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/rust-alpine:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/rust-alpine:latest"
 }
 
 variable "VEGITO_DOCKER_ALPINE_RUST_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/rust-alpine:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/rust-alpine:${VERSION}"
 }
 
 target "docker-rust-alpine-base" {

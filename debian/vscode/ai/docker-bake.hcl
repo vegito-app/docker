@@ -3,7 +3,7 @@ variable "VEGITO_DOCKER_DEBIAN_VSCODE_AI_DOCKER_VERSION" {
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_AI_DOCKER_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/vegito-debian-vscode-ai-docker"
+  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-debian-vscode-ai-docker"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_AI_DOCKER_DIR" {
@@ -147,7 +147,7 @@ variable "VEGITO_DOCKER_DEBIAN_VSCODE_AI_DOCKER_VERSION" {
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_AI_DOCKER_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/vegito-debian-vscode-golang-ai-docker"
+  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-debian-vscode-golang-ai-docker"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_AI_DOCKER_DIR" {

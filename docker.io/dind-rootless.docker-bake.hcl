@@ -1,10 +1,10 @@
 
 variable "VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/docker-dind-rootless:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/docker-dind-rootless:latest"
 }
 
 variable "VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/docker-dind-rootless:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/docker-dind-rootless:${VERSION}"
 }
 
 group "docker-dind-rootless-ci" {

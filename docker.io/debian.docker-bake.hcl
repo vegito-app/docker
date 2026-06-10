@@ -31,11 +31,11 @@ target "docker-debian-bookworm-base" {
 }
 
 variable "VEGITO_DOCKER_HUB_DEBIAN_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/docker-debian:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/docker-debian:latest"
 }
 
 variable "VEGITO_DOCKER_HUB_DEBIAN_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/docker-debian:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/docker-debian:${VERSION}"
 }
 
 target "docker-debian-bookworm-latest-ci" {
@@ -65,11 +65,11 @@ target "docker-debian-bookworm" {
 # Trixie targets
 
 variable "VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/docker-trixie-debian:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/docker-trixie-debian:latest"
 }
 
 variable "VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/docker-trixie-debian:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/docker-trixie-debian:${VERSION}"
 }
 
 group "docker-debian-trixie-ci" {

@@ -1,9 +1,9 @@
 variable "VEGITO_DOCKER_ALPINE_GOLANG_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/golang-alpine:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/golang-alpine:latest"
 }
 
 variable "VEGITO_DOCKER_ALPINE_GOLANG_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/golang-alpine:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/golang-alpine:${VERSION}"
 }
 
 target "docker-golang-alpine-base" {
