@@ -7,7 +7,7 @@ variable "VEGITO_LINUX_ALPINE_VERSION" {
 }
 
 variable "VEGITO_LINUX_ALPINE_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/alpine"
+  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/alpine"
 }
 
 variable "VEGITO_LINUX_ALPINE_DIR" {
@@ -15,7 +15,7 @@ variable "VEGITO_LINUX_ALPINE_DIR" {
 }
 
 variable "VEGITO_LINUX_ALPINE_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/alpine"
+  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/alpine"
 }
 
 variable "VEGITO_LINUX_ALPINE_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
@@ -31,11 +31,11 @@ variable "VEGITO_LINUX_ALPINE_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
 }
 
 variable "VEGITO_LINUX_ALPINE_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/alpine:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/alpine:latest"
 }
 
 variable "VEGITO_LINUX_ALPINE_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/alpine:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/alpine:${VERSION}"
 }
 
 group "vegito-linux-alpine-ci" {

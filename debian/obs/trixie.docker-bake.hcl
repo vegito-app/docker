@@ -7,11 +7,11 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_REGISTRY_CACHE" {
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/trixie-debian-obs:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/trixie-debian-obs:latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/trixie-debian-obs:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/trixie-debian-obs:${VERSION}"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
@@ -136,11 +136,11 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_REGISTRY
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/trixie-debian-obs-vscode-golang-ai-docker:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/trixie-debian-obs-vscode-golang-ai-docker:latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERSION" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/trixie-debian-obs-vscode-golang-ai-docker:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/trixie-debian-obs-vscode-golang-ai-docker:${VERSION}"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {

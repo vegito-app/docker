@@ -3,7 +3,7 @@ variable "VEGITO_DOCKER_DEBIAN_DESKTOP_X_VERSION" {
 }
 
 variable "VEGITO_DOCKER_DEBIAN_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_CACHE_IMAGES_BASE}/vegito-debian-desktop-x"
+  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-debian-desktop-x"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_DESKTOP_X_DIR" {

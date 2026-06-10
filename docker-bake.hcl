@@ -1,9 +1,9 @@
 variable "VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/vegito-docker"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/vegito-docker"
 }
 
 variable "VEGITO_DOCKER_PRIVATE_IMAGES_BASE" {
-  default = "${VEGITO_PUBLIC_REPOSITORY}/vegito-docker"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/vegito-docker"
 }
 
 variable "USE_REGISTRY_CACHE" {
@@ -93,19 +93,19 @@ variable "INFRA_ENV" {
   default     = "dev"
 }
 
-variable "VEGITO_CACHE_REPOSITORY" {
+variable "VEGITO_DOCKER_CACHE_REPOSITORY" {
   default = "vegito-docker-repository-cache"
 }
 
-variable "VEGITO_CACHE_IMAGES_BASE" {
-  default = "${VEGITO_CACHE_REPOSITORY}/vegito-docker"
+variable "VEGITO_DOCKER_CACHE_IMAGES_BASE" {
+  default = "${VEGITO_DOCKER_CACHE_REPOSITORY}/vegito-docker"
 }
 
-variable "VEGITO_PRIVATE_REPOSITORY" {
+variable "VEGITO_DOCKER_PRIVATE_REPOSITORY" {
   default = "vegito-docker-repository-private"
 }
 
-variable "VEGITO_PUBLIC_REPOSITORY" {
+variable "VEGITO_DOCKER_PUBLIC_REPOSITORY" {
   default = "vegito-docker-repository-public"
 }
 
