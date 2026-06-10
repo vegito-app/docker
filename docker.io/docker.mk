@@ -49,8 +49,8 @@ export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_IMAGE_LATEST             ?= dbndev/veg
 export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_IMAGE_VERSION            ?= dbndev/vegito-public:debian-python-latest
 export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DESKTOP_X_IMAGE_LATEST   ?= dbndev/vegito-public:debian-python-desktop-x-latest
 export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DESKTOP_X_IMAGE_VERSION  ?= dbndev/vegito-public:debian-python-desktop-x-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKER_DESKTOP_X_IMAGE_VERSION ?= dbndev/vegito-public:debian-vscode-golang-ai-docker-desktop-x-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKER_DESKTOP_X_IMAGE_LATEST ?= dbndev/vegito-public:debian-vscode-golang-ai-docker-desktop-x-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERSION ?= dbndev/vegito-public:debian-vscode-golang-ai-docker-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST ?= dbndev/vegito-public:debian-vscode-golang-ai-docker-latest
 
 export VEGITO_DOCKER_DEBIAN_OBS_IMAGE_LATEST             ?= dbndev/vegito-public:debian-obs-latest
 export VEGITO_DOCKER_DEBIAN_OBS_IMAGE_VERSION            ?= dbndev/vegito-public:debian-obs-latest
