@@ -116,11 +116,7 @@ group "vegito-debian-project-obs-vscode-golang-ai-docker-ci" {
 }
 target "vegito-debian-project-base" {
   args = {
-    docker_buildx_version  = DOCKER_BUILDX_VERSION
-    docker_compose_version = DOCKER_COMPOSE_VERSION
-    docker_version         = DOCKER_VERSION
     gitleaks_version       = GITLEAKS_VERSION
-    go_version             = GO_VERSION
     k9s_version            = K9S_VERSION
     kubectl_version        = KUBECTL_VERSION
     node_version           = NODE_VERSION
@@ -522,7 +518,7 @@ group "vegito-debian-project-vscode-golang-ai-docker-x-ci" {
 target "vegito-debian-project-vscode-golang-ai-docker-x-version-ci" {
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
-    debian        = "target:vegito-debian-golang-docker-desktop-x-version-ci"
+    debian        = "target:vegito-debian-vscode-golang-ai-docker-desktop-x-version-ci"
   }
   inherits = ["vegito-debian-project-version-ci"]
   tags = [
@@ -534,7 +530,7 @@ target "vegito-debian-project-vscode-golang-ai-docker-version-ci" {
   inherits = ["vegito-debian-project-base"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
-    debian        = "target:vegito-debian-golang-docker-version-ci"
+    debian        = "target:vegito-debian-vscode-golang-ai-docker-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERSION,
@@ -562,7 +558,7 @@ target "vegito-debian-project-vscode-golang-ai-docker-x-latest-ci" {
   inherits = ["vegito-debian-project-latest-ci"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST}"
-    debian        = "target:vegito-debian-golang-docker-desktop-x-latest-ci"
+    debian        = "target:vegito-debian-vscode-golang-ai-docker-desktop-x-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_X_IMAGE_LATEST,
@@ -573,7 +569,7 @@ target "vegito-debian-project-vscode-golang-ai-docker-latest-ci" {
   inherits = ["vegito-debian-project-base"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
-    debian        = "target:vegito-debian-golang-docker-latest-ci"
+    debian        = "target:vegito-debian-vscode-golang-ai-docker-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST,
@@ -609,7 +605,7 @@ target "vegito-debian-project-vscode-golang-ai-docker-x" {
   inherits = ["vegito-debian-project"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
-    debian        = "target:vegito-debian-golang-docker-desktop-x"
+    debian        = "target:vegito-debian-vscode-golang-ai-docker-desktop-x"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_X_IMAGE_VERSION,
@@ -621,7 +617,7 @@ target "vegito-debian-project-vscode-golang-ai-docker" {
   inherits = ["vegito-debian-project-base"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
-    debian        = "target:vegito-debian-golang-docker"
+    debian        = "target:vegito-debian-vscode-golang-ai-docker"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST,
@@ -728,7 +724,7 @@ target "vegito-debian-project-obs-vscode-golang-ai-docker-version-ci" {
   inherits = ["vegito-debian-project-base"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
-    debian        = "target:vegito-debian-golang-docker-version-ci"
+    debian        = "target:vegito-debian-obs-vscode-golang-ai-docker-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERSION,
@@ -756,7 +752,7 @@ target "vegito-debian-project-obs-vscode-golang-ai-docker-x-latest-ci" {
   inherits = ["vegito-debian-project-latest-ci"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST}"
-    debian        = "target:vegito-debian-vscode-golang-ai-docker-latest-ci"
+    debian        = "target:vegito-debian-obs-vscode-golang-ai-docker-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKER_X_IMAGE_LATEST,
@@ -767,7 +763,7 @@ target "vegito-debian-project-obs-vscode-golang-ai-docker-latest-ci" {
   inherits = ["vegito-debian-project-base"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
-    debian        = "target:vegito-debian-golang-docker-latest-ci"
+    debian        = "target:vegito-debian-obs-vscode-golang-ai-docker-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST,
@@ -815,7 +811,7 @@ target "vegito-debian-project-obs-vscode-golang-ai-docker" {
   inherits = ["vegito-debian-project-base"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
-    debian        = "target:vegito-debian-golang-docker"
+    debian        = "target:vegito-debian-vscode-golang-ai-docker"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST,

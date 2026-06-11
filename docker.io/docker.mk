@@ -69,6 +69,9 @@ export VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DESKTOP_X_IMAGE_VERSION ?= dbndev/vegito
 
 export LOCAL_BUILDER_X_IMAGE_LATEST  ?= dbndev/vegito-local-public:builder-x-latest
 export LOCAL_BUILDER_X_IMAGE_VERSION ?= dbndev/vegito-local-public:builder-x-latest
+
+export VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST  ?= dbndev/vegito-public:trixie-debian-obs-vscode-golang-ai-docker-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERSION ?= dbndev/vegito-public:trixie-debian-obs-vscode-golang-ai-docker-latest
 # Dockerhub replica
 export VEGITO_DOCKER_HUB_DEBIAN_IMAGE_LATEST  ?= dbndev/vegito-public:hub-debian-latest
 export VEGITO_DOCKER_HUB_DEBIAN_IMAGE_VERSION  ?= dbndev/vegito-public:hub-debian-latest
