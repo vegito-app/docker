@@ -18,7 +18,9 @@ RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-
     tesseract-ocr \
     zstd
 
-RUN curl -fsSL https://ollama.com/install.sh | sh
+ARG ollama_version=0.24.0
+
+RUN curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION=${ollama_version} sh
 
 # Runtime desktop automation
 RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-cache,target=/var/cache/apt,sharing=locked \
