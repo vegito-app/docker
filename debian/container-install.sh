@@ -94,6 +94,10 @@ EOF
 container_cache=${LOCAL_NESTOR_CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/nestor}
 mkdir -p $container_cache
 
+BASH_HISTORY_PATH=${HOME}/.bash_history
+rm -f $BASH_HISTORY_PATH
+ln -sfn ${container_cache}/.bash_history $BASH_HISTORY_PATH
+
 # Git config (optional but useful)
 GIT_CONFIG_GLOBAL=${HOME}/.gitconfig
 if [ -f "$GIT_CONFIG_GLOBAL" ]; then

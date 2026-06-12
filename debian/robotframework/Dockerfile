@@ -5,10 +5,6 @@ USER root
 ARG TARGETPLATFORM
 
 ARG debian_version=bookworm
-RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-lib,target=/var/lib/apt,sharing=locked \
-    apt-get -o Acquire::Retries=3 update && apt-get install -y \
-    adb 
 
 ARG non_root_user=robot
 ARG uid=1000
@@ -28,21 +24,21 @@ ENV USER=${non_root_user}
 
 WORKDIR ${HOME}
 
-RUN --mount=type=cache,id=local-robotframework-${TARGETPLATFORM}-pip-cache,target=/home/${non_root_user}/.cache/pip,sharing=locked,uid=${uid},gid=${gid} \
+RUN --mount=type=cache,id=vegito-robotframework-${debian_version}-${TARGETPLATFORM}-pip-cache,target=/home/${non_root_user}/.cache/pip,sharing=locked,uid=${uid},gid=${gid} \
     pip install \
-    firebase-admin \
     robotframework \
     robotframework-appiumlibrary \
     robotframework-requests \
     robotframework-seleniumlibrary \
     robotframework-faker
 
-COPY entrypoint.sh /usr/local/bin/tests-entrypoint.sh
-COPY caches-refresh.sh /usr/local/bin/robotframework-caches-refresh.sh
+COPY container-entrypoint.sh /usr/local/bin/robotframework-container-entrypoint.sh
+COPY container-install.sh /usr/local/bin/robotframework-container-install.sh
+COPY container-start.sh /usr/local/bin/robotframework-container-start.sh
 
 ENV LOCAL_ROBOTFRAMEWORK_TESTS_DIR=${HOME}/robotframework
 
 WORKDIR ${LOCAL_ROBOTFRAMEWORK_TESTS_DIR}
 
-ENTRYPOINT [ "tests-entrypoint.sh" ]
-CMD [ "robot" ]
+ENTRYPOINT ["tini", "--", "robotframework-container-entrypoint.sh" ]
+CMD [ "robotframework-container-start.sh" ]
