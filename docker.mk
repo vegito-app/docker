@@ -110,6 +110,7 @@ VEGITO_DOCKER_DEBIAN_SPECIFICS ?= \
  project \
  obs \
  python \
+ robotframework \
  rust \
  terraform \
  vscode
