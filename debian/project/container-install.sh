@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -uo pipefail
 trap "echo Exited with code $?." EXIT

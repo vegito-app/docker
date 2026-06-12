@@ -1,12 +1,4 @@
-#!/bin/sh
-
-set -euo pipefail
-
-if [ "${LOCAL_ROBOTFRAMEWORK_CONTAINER_INSTALL:-true}" = "true" ]; then
-    robotframework-container-install.sh
-fi
-
-#!/bin/sh
+#!/bin/bash
 
 set -euo pipefail
 
