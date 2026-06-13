@@ -48,34 +48,39 @@ VEGITO_DOCKER_BUILDX_BAKE ?= \
 
 # Local/dev: build all images without pushing them.
 # Tags are generated for all configured registries.
-images: vegito-docker-images-multi-registry-release
+images: \
+docker-login \
+vegito-docker-images-multi-registry-release
 .PHONY: images
 
 # Local/dev: build images in smaller groups without pushing them.
 # Useful when full parallel builds are too heavy for the workstation.
-images-groups-build: vegito-docker-images
+images-groups-build: \
+docker-login \
+vegito-docker-images
 .PHONY: images-groups-build
 
 # CI: build and push all images in parallel.
 # Fastest path; requires runners with enough CPU, RAM and disk I/O.
-images-ci:  \
-vegito-docker-login \
+images-ci: \
+docker-login \
 vegito-docker-images-multi-registry-release-ci
 .PHONY: images-ci
 
 # CI: build and push images in smaller groups.
 # Safer on constrained runners; slower than the full parallel path.
-images-groups-build-ci:  \
-vegito-docker-login \
+images-groups-build-ci: \
+docker-login \
 vegito-docker-images-ci
 .PHONY: images-groups-build-ci
 
 images-pull: \
+docker-login \
 vegito-docker-images-pull-parallel
 .PHONY: images-pull
 
 images-push: \
-vegito-docker-login \
+docker-login \
 vegito-docker-images-push
 .PHONY: images-push
 
@@ -88,7 +93,7 @@ devcontainer-codespaces: devcontainer-vscode-codespaces
 vegito-docker-tags-md-ci: vegito-docker-build-tags-list-ci-md
 .PHONY: vegito-docker-tags-md-ci
 
-vegito-docker-login: vegito-docker-login
-.PHONY: vegito-docker-login
+docker-login: vegito-docker-login
+.PHONY: docker-login
 
 -include local.mk
