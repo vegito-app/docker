@@ -1,5 +1,5 @@
 variable "VEGITO_DOCKER_DEBIAN_AI_DIR" {
-  default = "${VEGITO_DOCKER_DEBIAN_DIR}/ai"
+  default = "${VEGITO_DOCKER_DEBIAN_DIR}/bundle/ai"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_AI_VERSION" {
