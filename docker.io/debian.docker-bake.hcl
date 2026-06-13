@@ -76,8 +76,6 @@ group "docker-debian-trixie-ci" {
   targets = [
     "docker-debian-trixie-version-ci",
     "docker-debian-trixie-latest-ci",
-
-    "docker-debian-trixie-golang-ci"
   ]
 }
 

@@ -37,6 +37,8 @@ VEGITO_DOCKER_BUILDX_BAKE ?= \
   -f $(VEGITO_DOCKER_ALPINE_DIR)/docker-bake.hcl \
   -f $(VEGITO_DOCKER_DEBIAN_DIR)/docker-bake.hcl \
   -f $(VEGITO_DOCKER_DEBIAN_DIR)/trixie.docker-bake.hcl \
+  $(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/docker-bake.hcl) \
+  $(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/trixie.docker-bake.hcl) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/%/docker-bake.hcl) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/%/trixie.docker-bake.hcl) \
   $(VEGITO_DOCKER_DEBIAN_VSCODE_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/vscode/%/docker-bake.hcl) \
