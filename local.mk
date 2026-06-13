@@ -11,11 +11,13 @@ vegito-local-debian-bookworm-images-update
 vegito-local-debian-images-update: \
 vegito-docker-trixie-debian-flutter-desktop-x-images-update \
 vegito-docker-trixie-debian-robotframework-images-update \
-vegito-docker-trixie-debian-project-vscode-golang-ai-docker-images-update
+vegito-docker-trixie-debian-project-vscode-golang-ai-docker-images-update \
+vegito-docker-trixie-debian-project-golang-images-update
 .PHONY: vegito-debian-update
 
 vegito-local-debian-bookworm-images-update: \
 vegito-docker-debian-flutter-desktop-x-images-update \
 vegito-docker-debian-robotframework-images-update \
-vegito-docker-debian-project-vscode-golang-ai-docker-images-update
+vegito-docker-debian-project-vscode-golang-ai-docker-images-update \
+vegito-docker-debian-project-golang-images-update
 .PHONY: vegito-bookworm-debian-update

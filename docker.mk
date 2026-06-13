@@ -121,6 +121,9 @@ VEGITO_DOCKER_DEBIAN_VSCODE_SPECIFICS ?= \
  ai \
  golang
 
+VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS ?= \
+ golang
+
 VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian \
   debian-all \
@@ -131,7 +134,9 @@ VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian-project-vscode-golang-ai-docker \
   debian-project-obs-vscode-golang-ai-docker \
   debian-vscode-golang-ai-docker \
+  $(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS:%=debian-project-%) \
   $(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=debian-%) \
+  $(VEGITO_DOCKER_DEBIAN_VSCODE_SPECIFICS:%=debian-vscode-%) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-ai) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-desktop-x) \

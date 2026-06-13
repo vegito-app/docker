@@ -53,7 +53,7 @@ group "vegito-trixie-debian-vscode-golang-ai-docker-ci" {
 target "vegito-trixie-debian-vscode-golang-ai-docker-version-ci" {
   inherits = ["vegito-debian-vscode-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-golang-ai-docker-desktop-x-version-ci"
+    debian = "target:vegito-trixie-debian-golang-ai-docker-version-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERSION,
@@ -80,7 +80,7 @@ target "vegito-trixie-debian-vscode-golang-ai-docker-version-ci" {
 target "vegito-trixie-debian-vscode-golang-ai-docker-latest-ci" {
   inherits = ["vegito-debian-vscode-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-golang-ai-docker-desktop-x-latest-ci"
+    debian = "target:vegito-trixie-debian-golang-ai-docker-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST,
@@ -114,7 +114,7 @@ target "vegito-trixie-debian-vscode-golang-ai-docker" {
 
   inherits = ["vegito-debian-vscode-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-golang-ai-docker-desktop-x-version-ci"
+    debian = "target:vegito-trixie-debian-golang-ai-docker-version-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST,
