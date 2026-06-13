@@ -91,7 +91,7 @@ alias gl='git log --oneline --graph --decorate'
 EOF
 
 # Local Container Cache
-container_cache=${LOCAL_NESTOR_CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/nestor}
+container_cache=${LOCAL_NESTOR_CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/debian}
 mkdir -p $container_cache
 
 BASH_HISTORY_PATH=${HOME}/.bash_history
