@@ -90,3 +90,5 @@ vegito-docker-tags-md-ci: vegito-docker-build-tags-list-ci-md
 
 vegito-docker-login: vegito-docker-login
 .PHONY: vegito-docker-login
+
+-include local.mk
