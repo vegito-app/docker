@@ -11,7 +11,7 @@ bg_pids=()
 # 🧹 Function called at the end of the script to kill background processes
 kill_jobs() {
     rm -f /tmp/.xpra-ready
-    echo "🧼 Cleaning up background processes..."
+    echo "🧼 Cleaning up Xpra services..."
     for pid in "${bg_pids[@]}"; do
         kill "$pid" || true
         wait "$pid" 2>/dev/null || true

@@ -12,7 +12,7 @@ obs_pid=
 # 🧹 Function called at the end of the script to kill background processes
 kill_jobs() {
     rm -f /tmp/.obs-ready
-    echo "🧼 Cleaning up OBS background..."
+    echo "🧼 Cleaning up OBS services..."
     for pid in "${bg_pids[@]}"; do
         kill "$pid" || true
         wait "$pid" 2>/dev/null || true

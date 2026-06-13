@@ -23,7 +23,7 @@ wayland_socket="${WAYLAND_SOCKET:-$default_wayland_socket}"
 # 🧹 Function called at the end of the script to kill background processes
 kill_jobs() {
     rm -f /tmp/.xdisplay-ready
-    echo "🧼 Cleaning up background processes..."
+    echo "Desktop X services..."
 
     for pid in "${bg_pids[@]}"; do
         kill "$pid" 2>/dev/null || true
