@@ -2,9 +2,6 @@
 
 set -euo pipefail
 
-# 🐧 Setup Debian
-debian-entrypoint.sh echo "✅ Debian setup complete."
-
 # Local container installation script to setup persistent configurations and caches.
 # If VEGITO_FLUTTER_DEBIAN_CONTAINER_INSTALL is set to "true", run the debian-golang-container-install.sh script
 # to install the necessary configurations and caches.

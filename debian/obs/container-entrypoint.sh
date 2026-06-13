@@ -2,9 +2,6 @@
 
 set -euo pipefail
 
-# 🐧 Setup Debian
-debian-entrypoint.sh echo "✅ Debian setup complete."
-
 # Project container installation script to setup persistent configurations and caches.
 # If OBS_CONTAINER_INSTALL is set to "true", run the local-container-install.sh script
 # to install the necessary configurations and caches.
