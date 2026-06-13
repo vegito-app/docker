@@ -54,3 +54,9 @@ ENV NODE_PATH=$NVM_DIR/versions/node/v${node_version}/lib/node_modules
 ENV PATH=$NVM_DIR/versions/node/v${node_version}/bin:$PATH
 
 ENV PATH=${HOME}/bin:$PATH
+
+COPY container-entrypoint.sh /usr/local/bin/nodejs-container-entrypoint.sh
+COPY container-install.sh /usr/local/bin/nodejs-container-install.sh
+
+ENTRYPOINT [ "tini", "--", "nodejs-container-entrypoint.sh" ]
+
