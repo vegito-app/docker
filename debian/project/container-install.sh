@@ -28,17 +28,6 @@ EMACS_DIR=${HOME}/.emacs.d
 mkdir -p ${local_container_cache}/emacs
 ln -sf ${local_container_cache}/emacs $EMACS_DIR
 
-# GO persistence 
-# This allows you to persist your go workspace across container rebuilds.
-GOPATH=${HOME}/go
-sudo chown -R $USER:$USER $GOPATH
-sudo chmod -R +rw $GOPATH
-rsync -a $GOPATH/ ${local_container_cache}/gopath/
-mkdir -p ${local_container_cache}/gopath
-cat <<'EOF' >> ~/.bashrc
-export GOARCH=$(dpkg --print-architecture)
-EOF
-
 local_builder_image=europe-west1-docker.pkg.dev/moov-dev-439608/docker-repository-public/vegito-local:builder-latest
 
 mkdir -p ~/.config

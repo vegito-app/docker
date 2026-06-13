@@ -21,4 +21,3 @@ mkdir -p ${local_container_cache}/gopath
 cat <<'EOF' >> ~/.bashrc
 export GOARCH=$(dpkg --print-architecture)
 EOF
-
