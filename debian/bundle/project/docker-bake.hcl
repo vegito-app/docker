@@ -5,7 +5,7 @@ target "docker-debian-project" {
 }
 
 variable "VEGITO_DOCKER_DEBIAN_PROJECT_DIR" {
-  default = "${VEGITO_DOCKER_DEBIAN_DIR}/project"
+  default = "${VEGITO_DOCKER_DEBIAN_DIR}/bundle/project"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_PROJECT_IMAGE_VERSION" {
