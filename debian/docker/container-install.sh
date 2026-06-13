@@ -14,8 +14,16 @@ check_success() {
 
 # 🚨 Register cleanup function to run on script exit
 trap check_success EXIT
-
+# Local Container Cache
 container_cache=${LOCAL_DOCKER_CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/docker}
+mkdir -p $container_cache
+
+# local docker rootless cache 
+LOCAL_DOCKERD_ROOTLESS_CACHE=${HOME}/.local/share/docker
+mkdir -p $container_cache/dockerd
+mkdir -p ${HOME}/.local/share/
+ln -s $container_cache/dockerd $LOCAL_DOCKERD_ROOTLESS_CACHE
+
 
 mkdir -p ${HOME}/.bashrc.d
 
