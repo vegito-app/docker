@@ -28,3 +28,11 @@ RUN usermod -l ${non_root_user} ${USER} \
 USER ${non_root_user}
 
 ENV USER=${non_root_user}
+
+COPY container-entrypoint.sh /usr/local/bin/obs-container-entrypoint.sh
+COPY container-install.sh /usr/local/bin/obs-container-install.sh
+COPY container-start.sh /usr/local/bin/obs-container-start.sh
+
+ENTRYPOINT [ "tini", "--", "obs-container-entrypoint.sh" ]
+CMD [ "obs-container-start.sh" ]
+
