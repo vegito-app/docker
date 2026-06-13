@@ -128,30 +128,30 @@ VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian-golang-project-builder-docker \
   debian-golang-project-builder-docker-x \
   debian-obs-vscode-golang-ai-docker \
-  debian-vscode-golang-ai-docker \
   debian-project-vscode-golang-ai-docker \
   debian-project-obs-vscode-golang-ai-docker \
+  debian-vscode-golang-ai-docker \
   $(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=debian-%) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-desktop-x) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-ai) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-project) \
+  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-desktop-x) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-docker-desktop-x) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-docker-ai) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-docker-project) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-flutter-desktop-x) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-flutter-ai) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-flutter-project)
+  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-flutter-project) \
+  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-project)
 
 VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGES ?= \
   $(VEGITO_DOCKER_DEBIAN_IMAGES:%=trixie-%)
 
 VEGITO_DOCKER_IO_HUB_IMAGES ?= \
   debian \
-  golang-debian \
   golang-alpine \
-  rust-alpine \
-  dind-rootless
+  golang-debian \
+  dind-rootless \
+  rust-alpine
 
 VEGITO_DOCKER_IMAGES = \
   $(VEGITO_DOCKER_DEBIAN_IMAGES) \
