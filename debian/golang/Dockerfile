@@ -44,7 +44,7 @@ ENV CGO_ENABLED=0
 COPY --chown=${uid}:${gid} ./container-entrypoint.sh /usr/local/bin/debian-golang-entrypoint.sh
 COPY --chown=${uid}:${gid} ./container-install.sh /usr/local/bin/debian-golang-container-install.sh
 
-ENTRYPOINT [ "debian-golang-entrypoint.sh" ]
+ENTRYPOINT [ "tini", "--", "debian-golang-entrypoint.sh" ]
 
 USER ${non_root_user} 
 ENV USER=${non_root_user}

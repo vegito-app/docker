@@ -14,6 +14,30 @@ check_success() {
 # 🚨 Register cleanup function to run on script exit
 trap check_success EXIT
 
+local_container_cache=${VEGITO_DEBIAN_DESKTOP_X_CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/android-studio}
+mkdir -p $local_container_cache
+
+# Desktop X config
+DESKTOP_X_CONFIG=${HOME}/.config/Google
+mkdir -p ${local_container_cache}/Google ${HOME}/.config
+rm -rf $DESKTOP_X_CONFIG
+ln -sf ${local_container_cache}/Google $DESKTOP_X_CONFIG
+
+# Drop lock eventually remaining after previous container run exit
+rm -f ${DESKTOP_X_CONFIG}/AndroidStudio2024.1/.lock
+
+# Desktop X config
+DESKTOP_X_CACHE=${HOME}/.cache/Google
+mkdir -p ${local_container_cache}/.cache/Google ${HOME}/.cache
+rm -rf $DESKTOP_X_CACHE
+ln -sf ${local_container_cache}/.cache/Google $DESKTOP_X_CACHE
+
+# Desktop X config (local)
+DESKTOP_X_LOCAL_SHARE_CONFIG=${HOME}/.share/Google
+mkdir -p ${local_container_cache}/localconfig ${HOME}/.share
+rm -rf $DESKTOP_X_LOCAL_SHARE_CONFIG
+ln -sf ${local_container_cache}/localconfig $DESKTOP_X_LOCAL_SHARE_CONFIG
+
 mkdir -p ~/.bashrc.d
 
 cat <<EOF > ~/.bashrc.d/30-desktop-x.sh

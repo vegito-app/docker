@@ -46,3 +46,8 @@ RUN git clone -b stable https://github.com/flutter/flutter.git $FLUTTER_HOME && 
     flutter config --no-analytics && \
     flutter precache && \
     flutter doctor
+
+COPY --chown=${uid}:${gid} ./container-entrypoint.sh /usr/local/bin/debian-flutter-entrypoint.sh
+COPY --chown=${uid}:${gid} ./container-install.sh /usr/local/bin/debian-flutter-container-install.sh
+
+ENTRYPOINT [ "tini", "--", "debian-flutter-entrypoint.sh" ]
