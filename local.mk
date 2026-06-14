@@ -8,16 +8,15 @@ vegito-local-debian-images-update \
 vegito-local-debian-bookworm-images-update
 .PHONY: vegito-local-update
 
-vegito-local-debian-images-update: \
-vegito-docker-trixie-debian-flutter-desktop-x-images-update \
-vegito-docker-trixie-debian-robotframework-images-update \
-vegito-docker-trixie-debian-project-vscode-golang-ai-docker-images-update \
-vegito-docker-trixie-debian-project-golang-images-update
-.PHONY: vegito-debian-update
+VEGITO_DOCKER_LOCAL_DEBIAN_RELEASE_TARGETS ?= \
+  debian-flutter-desktop-x-images-update \
+  debian-robotframework-images-update \
+  debian-project-golang-docker-images-update \
+  debian-project-golang-docker-desktop-x-images-update \
+  debian-project-vscode-golang-ai-docker-images-update
+  
+vegito-local-debian-images-update: $(VEGITO_DOCKER_LOCAL_DEBIAN_RELEASE_TARGETS:%=vegito-docker-trixie-%)
+.PHONY: vegito-local-debian-images-update
 
-vegito-local-debian-bookworm-images-update: \
-vegito-docker-debian-flutter-desktop-x-images-update \
-vegito-docker-debian-robotframework-images-update \
-vegito-docker-debian-project-vscode-golang-ai-docker-images-update \
-vegito-docker-debian-project-golang-images-update
-.PHONY: vegito-bookworm-debian-update
+vegito-local-debian-bookworm-images-update: $(VEGITO_DOCKER_LOCAL_DEBIAN_RELEASE_TARGETS:%=vegito-docker-%)
+.PHONY: vegito-local-debian-bookworm-images-update

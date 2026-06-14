@@ -134,13 +134,14 @@ VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian-golang-project-builder-docker \
   debian-golang-project-builder-docker-x \
   debian-obs-vscode-golang-ai-docker \
-  debian-project-vscode-golang-ai-docker \
+  debian-project-golang-desktop-x \
+  debian-project-golang-docker \
+  debian-project-golang-docker-desktop-x \
   debian-project-obs-vscode-golang-ai-docker \
+  debian-project-vscode-golang-ai-docker \
   debian-vscode-golang-ai-docker \
   $(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS:%=debian-project-%) \
   $(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=debian-%) \
-  $(VEGITO_DOCKER_DEBIAN_VSCODE_SPECIFICS:%=debian-vscode-%) \
-  $(VEGITO_DOCKER_DEBIAN_GOLANG_SPECIFICS:%=debian-golang-%) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-ai) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-desktop-x) \
