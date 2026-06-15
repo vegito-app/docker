@@ -15,11 +15,11 @@ check_success() {
 # 🚨 Register cleanup function to run on script exit
 trap check_success EXIT
 
-VEGITO_DOCKER_DEBIAN_PYTHON_CONTAINER_CACHE=${LOCAL_WORKSPACE}/.containers/python
-mkdir -p $VEGITO_DOCKER_DEBIAN_PYTHON_CONTAINER_CACHE
+CONTAINER_CACHE=${LOCAL_WORKSPACE}/.containers/python
+mkdir -p $CONTAINER_CACHE
 
 # Local Container Cache
-local_container_cache=${VEGITO_DOCKER_DEBIAN_PYTHON_CONTAINER_CACHE:-${LOCAL_WORKSPACE:-${PWD}}/.containers/python}
+local_container_cache=${CONTAINER_CACHE:-${LOCAL_WORKSPACE:-${PWD}}/.containers/python}
 mkdir -p $local_container_cache
 
 # Python/pip cache

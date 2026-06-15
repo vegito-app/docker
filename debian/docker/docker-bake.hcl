@@ -55,8 +55,6 @@ group "vegito-debian-docker-ci" {
   targets = [
     "vegito-debian-docker-version-ci",
     "vegito-debian-docker-latest-ci",
-
-    "vegito-debian-docker-desktop-x",
   ]
 }
 

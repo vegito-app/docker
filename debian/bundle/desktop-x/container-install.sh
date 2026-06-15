@@ -14,7 +14,7 @@ check_success() {
 # 🚨 Register cleanup function to run on script exit
 trap check_success EXIT
 
-local_container_cache=${VEGITO_DEBIAN_DESKTOP_X_CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/android-studio}
+local_container_cache=${CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/android-studio}
 mkdir -p $local_container_cache
 
 # Desktop X config

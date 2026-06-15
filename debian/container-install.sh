@@ -91,7 +91,7 @@ alias gl='git log --oneline --graph --decorate'
 EOF
 
 # Local Container Cache
-container_cache=${VEGITO_DOCKER_DEBIAN_CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/debian}
+container_cache=${CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/debian}
 mkdir -p $container_cache
 
 BASH_HISTORY_PATH=${HOME}/.bash_history

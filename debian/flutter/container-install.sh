@@ -16,7 +16,7 @@ check_success() {
 # 🚨 Register cleanup function to run on script exit
 trap check_success EXIT
 
-local_container_cache=${LOCAL_FLUTTER_CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/android-studio}
+local_container_cache=${CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/android-studio}
 mkdir -p $local_container_cache
 
 # Flutter Gradle config

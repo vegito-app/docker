@@ -52,11 +52,8 @@ group "vegito-trixie-debian-docker-ci" {
   targets = [
     "vegito-trixie-debian-docker-version-ci",
     "vegito-trixie-debian-docker-latest-ci",
-
-    "vegito-trixie-debian-docker-desktop-x",
   ]
 }
-
 
 group "vegito-trixie-debian-docker-desktop-x-ci" {
   targets = [

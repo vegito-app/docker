@@ -17,7 +17,7 @@ check_success() {
 trap check_success EXIT
 
 # Local Container Cache
-local_container_cache=${LOCAL_ROBOTFRAMEWORK_CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/robotframework}
+local_container_cache=${CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/robotframework}
 mkdir -p $local_container_cache
 
 cat << 'EOF' >> ~/.bashrc.d/110-robotframework
