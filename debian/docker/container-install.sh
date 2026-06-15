@@ -22,7 +22,7 @@ mkdir -p $container_cache
 LOCAL_DOCKERD_ROOTLESS_CACHE=${HOME}/.local/share/docker
 mkdir -p $container_cache/dockerd
 mkdir -p ${HOME}/.local/share/
-ln -s $container_cache/dockerd $LOCAL_DOCKERD_ROOTLESS_CACHE
+ln -sfn $container_cache/dockerd $LOCAL_DOCKERD_ROOTLESS_CACHE
 
 
 mkdir -p ${HOME}/.bashrc.d

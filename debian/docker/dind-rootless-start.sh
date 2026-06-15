@@ -49,7 +49,7 @@ until docker info >/dev/null 2>&1; do echo waiting dockerd startup ; sleep 1 ; d
 docker info
 
 mkdir -p ${HOME}/.docker/run
-ln -sf /run/user/$LOCAL_USER_ID/docker.sock ${HOME}/.docker/run/docker.sock
+ln -sfn /run/user/$LOCAL_USER_ID/docker.sock ${HOME}/.docker/run/docker.sock
 
 # Create a ready flag file for healthchecks and other services to know when the dockerd is ready to exit
 echo "{\"status\":\"ready\",\"ts\":$(date +%s)}" > /tmp/.dockerd-rootless-ready

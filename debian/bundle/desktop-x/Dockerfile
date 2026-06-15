@@ -145,7 +145,7 @@ RUN mkdir -p ${XDG_RUNTIME_DIR} && \
     chown ${uid}:${gid} ${XDG_RUNTIME_DIR}
 
 # Make /bin/sh point to bash (and not dash)
-RUN ln -sf /usr/bin/bash /bin/sh
+RUN ln -sfn /usr/bin/bash /bin/sh
 
 # 👤 Switch to non-root user
 USER ${non_root_user}

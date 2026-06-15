@@ -104,7 +104,7 @@ if [ -f "$GIT_CONFIG_GLOBAL" ]; then
   mkdir -p ${container_cache}/git
   rsync -av "$GIT_CONFIG_GLOBAL" ${container_cache}/git/
   rm -f "$GIT_CONFIG_GLOBAL"
-  ln -s ${container_cache}/git/.gitconfig $GIT_CONFIG_GLOBAL
+  ln -sfn ${container_cache}/git/.gitconfig $GIT_CONFIG_GLOBAL
 fi
 
 mkcd() {

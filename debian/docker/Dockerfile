@@ -190,7 +190,7 @@ RUN \
     mv -vT 'docker-compose' "$plugin"; \
     chmod +x "$plugin"; \
     \
-    ln -sv "$plugin" /usr/local/bin/; \
+    ln -sfn "$plugin" /usr/local/bin/; \
     docker-compose --version; \
     docker compose version
 

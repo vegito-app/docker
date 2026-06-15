@@ -16,7 +16,7 @@ mkdir -p $local_container_cache
 EMACS_DIR=${HOME}/.emacs.d
 [ -d $EMACS_DIR ] && mv $EMACS_DIR ${EMACS_DIR}_back
 mkdir -p ${local_container_cache}/emacs
-ln -sf ${local_container_cache}/emacs $EMACS_DIR
+ln -sfn ${local_container_cache}/emacs $EMACS_DIR
 
 local_builder_image=europe-west1-docker.pkg.dev/moov-dev-439608/docker-repository-public/vegito-local:builder-latest
 
@@ -119,11 +119,11 @@ EOF
 NPM_DIR=${HOME}/.npm
 [ -d $NPM_DIR ] && mv $NPM_DIR ${NPM_DIR}_back
 mkdir -p ${local_container_cache}/npm
-ln -sf ${local_container_cache}/npm $NPM_DIR
+ln -sfn ${local_container_cache}/npm $NPM_DIR
 
 # GCP persistence
 # This allows you to persist your gcloud configuration across container rebuilds.
 GCLOUD_CONFIG=${HOME}/.config/google-cloud
 mkdir -p $GCLOUD_CONFIG ${local_container_cache}/google-cloud
 rm -rf $GCLOUD_CONFIG
-ln -sf ${local_container_cache}/google-cloud $GCLOUD_CONFIG
+ln -sfn ${local_container_cache}/google-cloud $GCLOUD_CONFIG

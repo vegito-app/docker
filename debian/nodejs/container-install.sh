@@ -15,4 +15,4 @@ mkdir -p $local_container_cache
 NPM_DIR=${HOME}/.npm
 [ -d $NPM_DIR ] && mv $NPM_DIR ${NPM_DIR}_back
 mkdir -p ${local_container_cache}/npm
-ln -sf ${local_container_cache}/npm $NPM_DIR
+ln -sfn ${local_container_cache}/npm $NPM_DIR

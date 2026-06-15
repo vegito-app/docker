@@ -26,6 +26,6 @@ mkdir -p $local_container_cache
 PIP_CACHE_DIR=${HOME}/.cache/pip
 [ -d $PIP_CACHE_DIR ] && mv $PIP_CACHE_DIR ${PIP_CACHE_DIR}_back || true
 mkdir -p ${local_container_cache}/pip ${PIP_CACHE_DIR}
-ln -sf ${local_container_cache}/pip $PIP_CACHE_DIR
+ln -sfn ${local_container_cache}/pip $PIP_CACHE_DIR
 
 caches_refresh_success=true

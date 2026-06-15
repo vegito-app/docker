@@ -21,7 +21,7 @@ mkdir -p $local_container_cache
 DESKTOP_X_CONFIG=${HOME}/.config/Google
 mkdir -p ${local_container_cache}/Google ${HOME}/.config
 rm -rf $DESKTOP_X_CONFIG
-ln -sf ${local_container_cache}/Google $DESKTOP_X_CONFIG
+ln -sfn ${local_container_cache}/Google $DESKTOP_X_CONFIG
 
 # Drop lock eventually remaining after previous container run exit
 rm -f ${DESKTOP_X_CONFIG}/AndroidStudio2024.1/.lock
@@ -30,13 +30,13 @@ rm -f ${DESKTOP_X_CONFIG}/AndroidStudio2024.1/.lock
 DESKTOP_X_CACHE=${HOME}/.cache/Google
 mkdir -p ${local_container_cache}/.cache/Google ${HOME}/.cache
 rm -rf $DESKTOP_X_CACHE
-ln -sf ${local_container_cache}/.cache/Google $DESKTOP_X_CACHE
+ln -sfn ${local_container_cache}/.cache/Google $DESKTOP_X_CACHE
 
 # Desktop X config (local)
 DESKTOP_X_LOCAL_SHARE_CONFIG=${HOME}/.share/Google
 mkdir -p ${local_container_cache}/localconfig ${HOME}/.share
 rm -rf $DESKTOP_X_LOCAL_SHARE_CONFIG
-ln -sf ${local_container_cache}/localconfig $DESKTOP_X_LOCAL_SHARE_CONFIG
+ln -sfn ${local_container_cache}/localconfig $DESKTOP_X_LOCAL_SHARE_CONFIG
 
 mkdir -p ~/.bashrc.d
 

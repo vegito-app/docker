@@ -21,7 +21,7 @@ current_workspace=$PWD
 
 LOCAL_WORKSPACE=${LOCAL_WORKSPACE:-/workspaces/vegito-app/local}
 if [ "$current_workspace" != "$LOCAL_WORKSPACE" ] ; then
-    sudo ln -s $current_workspace $LOCAL_WORKSPACE 2>&1 || true
+    sudo ln -sfn $current_workspace $LOCAL_WORKSPACE 2>&1 || true
     echo "Linked current workspace $current_workspace to $LOCAL_WORKSPACE"
 fi
 
