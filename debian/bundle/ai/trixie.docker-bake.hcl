@@ -331,7 +331,7 @@ group "vegito-trixie-debian-ai-docker-ci" {
 target "vegito-trixie-debian-ai-docker-version-ci" {
   inherits = ["vegito-trixie-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-python-desktop-x-version-ci"
+    debian = "target:vegito-trixie-debian-python-docker-version-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKER_IMAGE_VERSION,
@@ -358,7 +358,7 @@ target "vegito-trixie-debian-ai-docker-version-ci" {
 target "vegito-trixie-debian-ai-docker-latest-ci" {
   inherits = ["vegito-trixie-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-python-desktop-x-latest-ci"
+    debian = "target:vegito-trixie-debian-python-docker-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKER_IMAGE_LATEST,

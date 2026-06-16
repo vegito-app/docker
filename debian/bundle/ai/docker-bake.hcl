@@ -319,7 +319,7 @@ variable "VEGITO_DOCKER_DEBIAN_AI_DOCKER_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LA
 target "vegito-debian-ai-docker-version-ci" {
   inherits = ["vegito-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-debian-python-desktop-x-version-ci"
+    debian = "target:vegito-debian-python-docker-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_AI_DOCKER_IMAGE_VERSION,
@@ -346,7 +346,7 @@ target "vegito-debian-ai-docker-version-ci" {
 target "vegito-debian-ai-docker-latest-ci" {
   inherits = ["vegito-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-debian-python-desktop-x-latest-ci"
+    debian = "target:vegito-debian-python-docker-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_AI_DOCKER_IMAGE_LATEST,
