@@ -623,16 +623,8 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERS
   default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-obs-vscode-golang-ai-docker-${VERSION}"
 }
 
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_X_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-obs-vscode-golang-ai-docker-x-${VERSION}"
-}
-
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST" {
   default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-obs-vscode-golang-ai-docker-latest"
-}
-
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_X_IMAGE_LATEST" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-obs-vscode-golang-ai-docker-x-latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_IMAGE_REGISTRY_CACHE" {
@@ -678,24 +670,6 @@ group "vegito-trixie-debian-project-obs-vscode-golang-ai-docker-ci" {
   ]
 }
 
-group "vegito-trixie-debian-project-obs-vscode-golang-ai-docker-x-ci" {
-  targets = [
-    "vegito-trixie-debian-project-obs-vscode-golang-ai-docker-x-version-ci",
-    "vegito-trixie-debian-project-obs-vscode-golang-ai-docker-x-latest-ci",
-  ]
-}
-
-target "vegito-trixie-debian-project-obs-vscode-golang-ai-docker-x-version-ci" {
-  contexts = {
-    debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
-    debian        = "target:vegito-trixie-debian-obs-vscode-golang-ai-docker-version-ci"
-  }
-  inherits = ["vegito-trixie-debian-project-obs-vscode-golang-ai-docker-version-ci"]
-  tags = [
-    VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_X_IMAGE_VERSION,
-  ]
-}
-
 target "vegito-trixie-debian-project-obs-vscode-golang-ai-docker-version-ci" {
   inherits = ["vegito-trixie-debian-project-base"]
   contexts = {
@@ -722,17 +696,6 @@ target "vegito-trixie-debian-project-obs-vscode-golang-ai-docker-version-ci" {
     ] : []
   )
   platforms = platforms
-}
-
-target "vegito-trixie-debian-project-obs-vscode-golang-ai-docker-x-latest-ci" {
-  inherits = ["vegito-trixie-debian-project-obs-vscode-golang-ai-docker-latest-ci"]
-  contexts = {
-    debian-golang = "docker-image://${VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST}"
-    debian        = "target:vegito-trixie-debian-obs-vscode-golang-ai-docker-latest-ci"
-  }
-  tags = [
-    VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_X_IMAGE_LATEST,
-  ]
 }
 
 target "vegito-trixie-debian-project-obs-vscode-golang-ai-docker-latest-ci" {
@@ -769,18 +732,6 @@ target "vegito-trixie-debian-project-obs-vscode-golang-ai-docker-latest-ci" {
     ]
   )
   platforms = platforms
-}
-
-target "vegito-trixie-debian-project-obs-vscode-golang-ai-docker-x" {
-  inherits = ["vegito-trixie-debian-project-obs-vscode-golang-ai-docker"]
-  contexts = {
-    debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
-    debian        = "target:vegito-trixie-debian-obs-vscode-golang-ai-docker"
-  }
-  tags = [
-    VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_X_IMAGE_VERSION,
-    VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_VSCODE_GOLANG_AI_DOCKER_X_IMAGE_LATEST,
-  ]
 }
 
 target "vegito-trixie-debian-project-obs-vscode-golang-ai-docker" {
