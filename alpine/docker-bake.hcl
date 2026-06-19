@@ -6,10 +6,6 @@ variable "VEGITO_LINUX_ALPINE_VERSION" {
   default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:alpine-${VERSION}"
 }
 
-variable "VEGITO_LINUX_ALPINE_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/alpine"
-}
-
 variable "VEGITO_LINUX_ALPINE_DIR" {
   default = "${VEGITO_DOCKER_DIR}/alpine"
 }

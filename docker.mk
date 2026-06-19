@@ -133,18 +133,17 @@ VEGITO_DOCKER_DEBIAN_GOLANG_SPECIFICS ?= \
 VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian \
   debian-all \
+  debian-desktop-x-vscode-golang-ai-dockerd \
   debian-golang-docker \
   debian-golang-dockerd \
   debian-golang-project-docker \
-  debian-project-golang-docker-desktop-x \
   debian-obs-vscode-golang-ai-dockerd \
   debian-project-golang-desktop-x \
   debian-project-golang-docker \
   debian-project-golang-docker-desktop-x \
-  debian-project-obs-desktop-x-vscode-golang-ai-dockerd \
+  debian-project-obs-vscode-golang-ai-dockerd \
   debian-project-vscode-golang-ai-dockerd \
   debian-vscode-golang-ai-dockerd \
-  debian-desktop-x-vscode-golang-ai-dockerd \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-ai) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-desktop-x) \
@@ -270,3 +269,16 @@ vegito-docker-buildx-cache-clean:
 	  done \
 	'
 .PHONY: vegito-docker-buildx-cache-clean
+
+BUILDX_BAKE_DAG_ITEMS ?= target group variable
+
+vegito-docker-check-buildx-bake-duplicates: $(BUILDX_BAKE_DAG_ITEMS:%=check-buildx-bake-duplicates-%)
+.PHONY: check-buildx-bake-duplicates
+
+$(BUILDX_BAKE_DAG_ITEMS:%=check-buildx-bake-duplicates-%):
+	grep -R '^$(@:check-buildx-bake-duplicates-%=%) "' . \
+	  | sed 's/.*$(@:check-buildx-bake-duplicates-%=%) "//' \
+	  | sed 's/".*//' \
+	  | sort \
+	  | uniq -d
+.PHONY: vegito-docker-check-buildx-bake-duplicates-targets

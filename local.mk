@@ -13,7 +13,8 @@ VEGITO_DOCKER_LOCAL_DEBIAN_RELEASE_TARGETS ?= \
   debian-project-golang-docker-desktop-x-images-update \
   debian-project-golang-docker-images-update \
   debian-project-golang-update \
-  debian-project-vscode-golang-ai-dockerd-images-update \
+  debian-project-vscode-golang-ai-dockerd-desktop-x-images-update \
+  debian-project-obs-vscode-golang-ai-dockerd-desktop-x-images-update \
   debian-robotframework-images-update
 
 vegito-local-debian-images-update: $(VEGITO_DOCKER_LOCAL_DEBIAN_RELEASE_TARGETS:%=vegito-docker-trixie-%)

@@ -67,7 +67,7 @@ target "vegito-trixie-debian-docker-version-ci" {
   contexts = {
     debian               = "target:vegito-trixie-debian-version-ci"
     debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
-    docker_dind_rootless = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
+    docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_IMAGE_VERSION,
@@ -96,7 +96,7 @@ target "vegito-trixie-debian-docker-latest-ci" {
   contexts = {
     debian               = "target:vegito-trixie-debian-latest-ci"
     debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
-    docker_dind_rootless = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
+    docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_IMAGE_LATEST,
@@ -131,7 +131,7 @@ target "vegito-trixie-debian-docker" {
   contexts = {
     debian               = "target:vegito-trixie-debian"
     debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
-    docker_dind_rootless = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
+    docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_IMAGE_LATEST,
@@ -199,7 +199,7 @@ target "vegito-trixie-debian-docker-desktop-x-version-ci" {
   contexts = {
     debian               = "target:vegito-trixie-debian-desktop-x-version-ci"
     debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
-    docker_dind_rootless = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_VERSION}"
+    docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   inherits = ["vegito-trixie-debian-docker-base"]
   tags = [
@@ -229,7 +229,7 @@ target "vegito-trixie-debian-docker-desktop-x-latest-ci" {
   contexts = {
     debian               = "target:vegito-trixie-debian-desktop-x-latest-ci"
     debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
-    docker_dind_rootless = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
+    docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_DESKTOP_X_IMAGE_LATEST,
@@ -264,7 +264,7 @@ target "vegito-trixie-debian-docker-desktop-x" {
   contexts = {
     debian               = "target:vegito-trixie-debian-desktop-x"
     debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
-    docker_dind_rootless = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
+    docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_DESKTOP_X_IMAGE_VERSION,

@@ -127,55 +127,55 @@ target "vegito-trixie-debian-obs" {
   )
 }
 
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_DIR" {
-  default = "${VEGITO_DOCKER_DEBIAN_DIR}/obs-vscode-golang-ai-docker"
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_DIR" {
+  default = "${VEGITO_DOCKER_DEBIAN_DIR}/obs-vscode-golang-ai-dockerd"
 }
 
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_REGISTRY_CACHE}-obs-vscode-golang-ai-docker"
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_REGISTRY_CACHE" {
+  default = "${VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_REGISTRY_CACHE}-obs-vscode-golang-ai-dockerd"
 }
 
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST" {
-  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/trixie-debian-obs-vscode-golang-ai-docker-latest"
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST" {
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/trixie-debian-obs-vscode-golang-ai-dockerd-latest"
 }
 
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/trixie-debian-obs-vscode-golang-ai-docker:${VERSION}"
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_VERSION" {
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/trixie-debian-obs-vscode-golang-ai-dockerd:${VERSION}"
 }
 
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
-  default = "${VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}-obs-vscode-golang-ai-docker"
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
+  default = "${VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}-obs-vscode-golang-ai-dockerd"
 }
 
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
-  default = "type=local,mode=max,dest=${VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
+  default = "type=local,mode=max,dest=${VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
   default = "type=local,src=${VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-group "vegito-trixie-debian-obs-vscode-golang-ai-docker" {
+group "vegito-trixie-debian-obs-vscode-golang-ai-dockerd" {
   targets = [
-    "vegito-trixie-debian-obs-vscode-golang-ai-docker-version",
-    "vegito-trixie-debian-obs-vscode-golang-ai-docker-latest",
+    "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-version",
+    "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-latest",
   ]
 }
 
-group "vegito-trixie-debian-obs-vscode-golang-ai-docker-ci" {
+group "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-ci" {
   targets = [
-    "vegito-trixie-debian-obs-vscode-golang-ai-docker-version-ci",
-    "vegito-trixie-debian-obs-vscode-golang-ai-docker-latest-ci",
+    "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-version-ci",
+    "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-latest-ci",
   ]
 }
 
-target "vegito-trixie-debian-obs-vscode-golang-ai-docker-version-ci" {
+target "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-version-ci" {
   inherits = ["vegito-trixie-debian-obs-base"]
   tags = [
-    VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERSION,
+    VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_VERSION,
   ]
   contexts = {
-    debian = "target:vegito-trixie-debian-vscode-golang-ai-docker-version-ci"
+    debian = "target:vegito-trixie-debian-vscode-golang-ai-dockerd-version-ci"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
@@ -185,7 +185,7 @@ target "vegito-trixie-debian-obs-vscode-golang-ai-docker-version-ci" {
       VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
     ] : [],
     [
-      VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST
+      VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST
     ]
   )
   cache-to = concat(
@@ -196,13 +196,13 @@ target "vegito-trixie-debian-obs-vscode-golang-ai-docker-version-ci" {
   platforms = platforms
 }
 
-target "vegito-trixie-debian-obs-vscode-golang-ai-docker-latest-ci" {
+target "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-latest-ci" {
   inherits = ["vegito-trixie-debian-obs-base"]
   tags = [
-    VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST,
+    VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST,
   ]
   contexts = {
-    debian = "target:vegito-trixie-debian-vscode-golang-ai-docker-latest-ci"
+    debian = "target:vegito-trixie-debian-vscode-golang-ai-dockerd-latest-ci"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
@@ -212,7 +212,7 @@ target "vegito-trixie-debian-obs-vscode-golang-ai-docker-latest-ci" {
       VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
     ] : [],
     [
-      VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST
+      VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST
     ]
   )
   cache-to = [
@@ -222,14 +222,14 @@ target "vegito-trixie-debian-obs-vscode-golang-ai-docker-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-trixie-debian-obs-vscode-golang-ai-docker" {
+target "vegito-trixie-debian-obs-vscode-golang-ai-dockerd" {
   inherits = ["vegito-trixie-debian-obs-base"]
   tags = [
-    VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST,
-    VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERSION,
+    VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST,
+    VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_VERSION,
   ]
   contexts = {
-    debian = "target:trixie-debian-golang-ai-docker-desktop-x"
+    debian = "target:vegito-trixie-debian-vscode-golang-ai-dockerd"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
@@ -239,7 +239,7 @@ target "vegito-trixie-debian-obs-vscode-golang-ai-docker" {
       VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
     ] : [],
     [
-      VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST
+      VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST
     ]
   )
   cache-to = concat(

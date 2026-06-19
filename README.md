@@ -142,10 +142,12 @@ The generated OCI images are intended to be consumed from external repositories 
 
 The Makefile provides a curated build interface for common workflows. It does not need to expose every Bake target present in the graph.
 
-Naming distinguishes Docker CLI/client support from Docker daemon support:
+Naming distinguishes Docker CLI/client support from Docker daemon runtime support:
 
 - `docker` refers to Docker client or Docker tooling.
-- `dockerd` refers to Docker daemon or Docker-in-Docker runtime support.
+- `dockerd` refers to a usable Docker daemon / Docker-in-Docker runtime capability.
+
+In practice, `dockerd` images may include the Docker client as part of the usable runtime. Target names therefore prefer `dockerd` over the noisier `docker-dockerd` form.
 
 ## Repository Role
 

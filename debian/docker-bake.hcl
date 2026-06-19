@@ -26,14 +26,6 @@ variable "VEGITO_DOCKER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
   default = "type=local,mode=max,dest=${VEGITO_DOCKER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-variable "VEGITO_DOCKER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
-  default = "type=local,src=${VEGITO_DOCKER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
-}
-
-variable "VEGITO_DOCKER_DEBIAN_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/debian:${VERSION}"
-}
-
 group "vegito-debian-all-ci" {
   targets = [
     "vegito-debian-ci",

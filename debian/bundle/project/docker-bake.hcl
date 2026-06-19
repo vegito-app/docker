@@ -13,7 +13,7 @@ variable "VEGITO_DOCKER_DEBIAN_PROJECT_IMAGE_VERSION" {
 }
 
 variable "VEGITO_DOCKER_DEBIAN_PROJECT_DESKTOP_X_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-project-x-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-project-desktop-x-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_PROJECT_IMAGE_LATEST" {
@@ -21,7 +21,7 @@ variable "VEGITO_DOCKER_DEBIAN_PROJECT_IMAGE_LATEST" {
 }
 
 variable "VEGITO_DOCKER_DEBIAN_PROJECT_DESKTOP_X_IMAGE_LATEST" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-project-x-latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-project-desktop-x-latest"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_PROJECT_IMAGE_REGISTRY_CACHE" {
@@ -59,14 +59,14 @@ variable "VEGITO_DOCKER_DEBIAN_PROJECT_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATE
 group "vegito-debian-projects" {
   targets = [
     "vegito-debian-project",
-    "vegito-debian-project-x",
+    "vegito-debian-project-desktop-x",
   ]
 }
 
 group "vegito-debian-projects-ci" {
   targets = [
     "vegito-debian-project-ci",
-    "vegito-debian-project-x-ci",
+    "vegito-debian-project-desktop-x-ci",
   ]
 }
 
@@ -77,10 +77,10 @@ group "vegito-debian-project-ci" {
   ]
 }
 
-group "vegito-debian-project-x-ci" {
+group "vegito-debian-project-desktop-x-ci" {
   targets = [
-    "vegito-debian-project-x-version-ci",
-    "vegito-debian-project-x-latest-ci",
+    "vegito-debian-project-desktop-x-version-ci",
+    "vegito-debian-project-desktop-x-latest-ci",
   ]
 }
 
@@ -98,13 +98,6 @@ group "vegito-debian-project-obs-golang-ci" {
   ]
 }
 
-group "vegito-debian-project-obs-vscode-golang-ai-dockerd-ci" {
-  targets = [
-    "vegito-debian-project-obs-vscode-golang-ai-dockerd-version-ci",
-    "vegito-debian-project-obs-vscode-golang-ai-dockerd-latest-ci",
-  ]
-}
-
 target "vegito-debian-project-base" {
   args = {
     gitleaks_version       = GITLEAKS_VERSION
@@ -119,7 +112,7 @@ target "vegito-debian-project-base" {
   dockerfile = "Dockerfile"
 }
 
-target "vegito-debian-project-x-version-ci" {
+target "vegito-debian-project-desktop-x-version-ci" {
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
     debian        = "target:vegito-debian-desktop-x-version-ci"
@@ -158,7 +151,7 @@ target "vegito-debian-project-version-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-project-x-latest-ci" {
+target "vegito-debian-project-desktop-x-latest-ci" {
   inherits = ["vegito-debian-project-latest-ci"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST}"
@@ -205,7 +198,7 @@ target "vegito-debian-project-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-project-x" {
+target "vegito-debian-project-desktop-x" {
   inherits = ["vegito-debian-project"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"

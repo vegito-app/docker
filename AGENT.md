@@ -142,11 +142,27 @@ This creates compilation boundaries and prevents rebuilding the entire graph aft
 
 Use `docker` for the Docker CLI/client capability.
 
-Use `dockerd` for Docker daemon / Docker-in-Docker capability.
+Use `dockerd` for a usable Docker daemon / Docker-in-Docker runtime capability.
+
+In practical images, `dockerd` may inherit from or include the `docker` client component so that the daemon is immediately usable from inside the image.
+
+Do not encode this as `docker-dockerd` in target names unless the distinction is truly necessary for a specific target.
+
+Prefer:
+
+```text
+vegito-debian-golang-ai-dockerd
+```
+
+Over:
+
+```text
+vegito-debian-golang-ai-docker-dockerd
+```
 
 Target names should include `dockerd` when the image provides or depends on a Docker daemon runtime.
 
-Avoid mixing `docker` and `dockerd` for the same capability in target names.
+Avoid using both `docker` and `dockerd` in the same target name for the same Docker runtime capability.
 
 ### `x` vs `desktop-x`
 

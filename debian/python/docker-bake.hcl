@@ -6,10 +6,6 @@ variable "VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_DEBIAN_IMAGE_REGISTRY_CACHE}-debian-python"
 }
 
-variable "VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
-  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}-debian-python"
-}
-
 variable "VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_LATEST" {
   default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/debian-python:latest"
 }
@@ -36,21 +32,7 @@ group "vegito-debian-python-ci" {
     "vegito-debian-python-latest-ci",
     "vegito-debian-python-desktop-x-version-ci",
     "vegito-debian-python-desktop-x-latest-ci",
-
-    "vegito-trixie-debian-python-ci",
-  ]
-}
-
-group "vegito-debian-python-ci" {
-  targets = [
-    "vegito-trixie-debian-python-ci",
-
-    "vegito-debian-python-version-ci",
-    "vegito-debian-python-latest-ci",
-
-    "vegito-debian-python-desktop-x-ci",
-
-    "vegito-debian-python-docker-desktop-x-ci",
+    "vegito-debian-python-dockerd-desktop-x-ci",
   ]
 }
 

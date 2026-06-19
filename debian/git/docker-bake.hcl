@@ -6,10 +6,6 @@ variable "VEGITO_DOCKER_DEBIAN_GIT_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_DEBIAN_IMAGE_REGISTRY_CACHE}-python"
 }
 
-variable "VEGITO_DOCKER_DEBIAN_GIT_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
-  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}-python"
-}
-
 variable "VEGITO_DOCKER_DEBIAN_GIT_IMAGE_LATEST" {
   default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/debian-python:latest"
 }
@@ -40,18 +36,6 @@ group "vegito-debian-git-ci" {
     "vegito-debian-git-docker-desktop-x-latest-ci",
 
     "vegito-trixie-debian-python-ci",
-  ]
-}
-
-group "vegito-debian-git-ci" {
-  targets = [
-    "vegito-trixie-debian-python-ci",
-    "vegito-debian-git-version-ci",
-    "vegito-debian-git-latest-ci",
-    "vegito-debian-git-desktop-x-version-ci",
-    "vegito-debian-git-desktop-x-latest-ci",
-    "vegito-debian-git-docker-desktop-x-version-ci",
-    "vegito-debian-git-docker-desktop-x-latest-ci",
   ]
 }
 

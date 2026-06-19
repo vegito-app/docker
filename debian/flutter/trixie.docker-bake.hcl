@@ -1,8 +1,4 @@
 
-variable "FLUTTER_VERSION" {
-  default = "3.41.0"
-}
-
 group "vegito-trixie-debian-flutter-ci" {
   targets = [
     "vegito-trixie-debian-flutter-version-ci",
@@ -36,10 +32,6 @@ target "vegito-trixie-debian-flutter-base-ci" {
 # ###################################################################
 # LOCAL FLUTTER DEBIAN
 # ###################################################################
-variable "VEGITO_DOCKER_DEBIAN_FLUTTER_DIR" {
-  default = "${VEGITO_DOCKER_DIR}/debian/flutter"
-}
-
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_REGISTRY_CACHE_IMAGE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/trixie-debian-flutter"
 }

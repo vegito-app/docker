@@ -3,7 +3,7 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_VERSION" {
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_DESKTOP_X_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-x-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-desktop-x-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_LATEST" {
@@ -11,7 +11,7 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_LATEST" {
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_DESKTOP_X_IMAGE_LATEST" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-x-latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-desktop-x-latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_REGISTRY_CACHE" {
@@ -50,14 +50,14 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_RE
 group "vegito-trixie-debian-projects" {
   targets = [
     "vegito-trixie-debian-project",
-    "vegito-trixie-debian-project-x",
+    "vegito-trixie-debian-project-desktop-x",
   ]
 }
 
 group "vegito-trixie-debian-projects-ci" {
   targets = [
     "vegito-trixie-debian-project-ci",
-    "vegito-trixie-debian-project-x-ci",
+    "vegito-trixie-debian-project-desktop-x-ci",
   ]
 }
 
@@ -68,17 +68,10 @@ group "vegito-trixie-debian-project-ci" {
   ]
 }
 
-group "vegito-trixie-debian-project-x-ci" {
+group "vegito-trixie-debian-project-desktop-x-ci" {
   targets = [
-    "vegito-trixie-debian-project-x-version-ci",
-    "vegito-trixie-debian-project-x-latest-ci",
-  ]
-}
-
-group "vegito-trixie-debian-project-vscode-golang-ci" {
-  targets = [
-    "vegito-trixie-debian-project-vscode-golang-version-ci",
-    "vegito-trixie-debian-project-vscode-golang-latest-ci",
+    "vegito-trixie-debian-project-desktop-x-version-ci",
+    "vegito-trixie-debian-project-desktop-x-latest-ci",
   ]
 }
 
@@ -96,15 +89,32 @@ target "vegito-trixie-debian-project-base" {
   }
 }
 
-target "vegito-trixie-debian-project-x-version-ci" {
+target "vegito-trixie-debian-project-desktop-x-version-ci" {
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
     debian        = "target:vegito-trixie-debian-desktop-x-version-ci"
   }
-  inherits = ["vegito-trixie-debian-project-version-ci"]
+  inherits = ["vegito-trixie-debian-project-base"]
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_DESKTOP_X_IMAGE_VERSION,
   ]
+  cache-from = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_REGISTRY_CACHE}"
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION
+    ] : [],
+    [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_LATEST
+    ]
+  )
+  cache-to = concat(
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION,
+    ] : []
+  )
+  platforms = platforms
 }
 
 target "vegito-trixie-debian-project-version-ci" {
@@ -135,8 +145,8 @@ target "vegito-trixie-debian-project-version-ci" {
   platforms = platforms
 }
 
-target "vegito-trixie-debian-project-x-latest-ci" {
-  inherits = ["vegito-trixie-debian-project-latest-ci"]
+target "vegito-trixie-debian-project-desktop-x-latest-ci" {
+  inherits = ["vegito-trixie-debian-project-base"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST}"
     debian        = "target:vegito-trixie-debian-desktop-x-latest-ci"
@@ -144,6 +154,31 @@ target "vegito-trixie-debian-project-x-latest-ci" {
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_DESKTOP_X_IMAGE_LATEST,
   ]
+  cache-from = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_REGISTRY_CACHE}",
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_REGISTRY_CACHE}"
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
+    ] : [],
+    [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_LATEST,
+      VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_LATEST
+    ]
+  )
+  cache-to = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_REGISTRY_CACHE},mode=max"
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
+    ] : [],
+    [
+      "type=inline"
+    ]
+  )
+  platforms = platforms
 }
 
 target "vegito-trixie-debian-project-latest-ci" {
@@ -182,8 +217,8 @@ target "vegito-trixie-debian-project-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-trixie-debian-project-x" {
-  inherits = ["vegito-trixie-debian-project"]
+target "vegito-trixie-debian-project-desktop-x" {
+  inherits = ["vegito-trixie-debian-project-base"]
   contexts = {
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
     debian        = "target:vegito-trixie-debian-desktop-x"
@@ -192,6 +227,24 @@ target "vegito-trixie-debian-project-x" {
     VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_DESKTOP_X_IMAGE_VERSION,
     VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_DESKTOP_X_IMAGE_LATEST,
   ]
+  cache-from = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_REGISTRY_CACHE}",
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_REGISTRY_CACHE}"
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
+    ] : [],
+    [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_LATEST,
+      VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_LATEST
+    ]
+  )
+  cache-to = concat(
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST,
+    ] : []
+  )
 }
 
 target "vegito-trixie-debian-project" {

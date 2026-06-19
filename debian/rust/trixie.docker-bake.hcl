@@ -43,10 +43,6 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_
   default     = "type=local,src=${VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-variable "RUST_VERSION" {
-  default = "1.89.0"
-}
-
 target "vegito-trixie-debian-rust-base" {
   args = {
     rust_version   = RUST_VERSION
