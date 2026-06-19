@@ -26,9 +26,13 @@ This repository contains reusable Docker and runtime foundations used by the Veg
 
 ## DockerSphere Model
 
-DockerSphere is built around a component graph rather than a collection of standalone images.
+DockerSphere is built around a Buildx Bake component graph rather than a collection of standalone images.
 
-A directory represents a component.
+The authoritative graph is defined by Bake targets, groups, `inherits`, and `contexts` relationships.
+
+Directory paths are an organization aid for humans. They are intentionally correlated with the graph, but they are not a strict mirror of the target name.
+
+A directory usually groups Dockerfiles and Bake definitions related to a component, capability, or distribution slice.
 
 Examples:
 
@@ -38,22 +42,27 @@ Examples:
 /debian/docker/dockerd
 /debian/vscode
 /debian/obs
+/debian/bundle/project/obs
 ```
 
-A component inherits the Dockerfile of its parent unless it provides its own Dockerfile.
+A target name describes the logical composition of an image.
 
-This allows features to be accumulated incrementally while keeping Dockerfiles focused on a single concern.
+A Bake file location describes where the corresponding HCL has been placed for readability and maintainability.
+
+A Dockerfile location describes the default build context and installation logic used by that slice.
+
+These three dimensions should stay coherent, but they do not have to be identical.
 
 Conceptually:
 
 ```text
-debian
- └── golang
-      └── ai
-           └── dockerd
-                └── desktop-x
-                     └── vscode
+Target name      -> logical image composition
+Bake file path   -> HCL organization
+Dockerfile path  -> default build context / implementation root
+Makefile target  -> curated release or developer interface
 ```
+
+### Logical Composition
 
 Target names describe accumulated capabilities.
 
@@ -66,11 +75,36 @@ vegito-trixie-debian-golang-ai-dockerd-desktop-x
 represents:
 
 ```text
-Debian
+Debian Trixie
 + Golang
 + AI tooling
 + Docker daemon runtime
 + Desktop X runtime
+```
+
+The beginning of the target name usually identifies the Dockerfile family used by default.
+
+The remaining suffix describes the base image or capability chain injected through Buildx contexts.
+
+For example, a target such as:
+
+```text
+vegito-trixie-debian-golang-ai-dockerd-desktop-x
+```
+
+may live in a Bake file under `debian/golang/` or a nested file such as `debian/golang/ai/` depending on where the HCL remains readable. It does not require a physical path such as:
+
+```text
+debian/golang/ai/dockerd/desktop-x
+```
+
+The graph should be read from Bake itself, especially from:
+
+```hcl
+inherits = [...]
+contexts = {
+  debian = "target:..."
+}
 ```
 
 The beginning of the target name usually identifies the Dockerfile family used by default.
@@ -102,7 +136,7 @@ Even if the current implementation happens to enforce such relationships.
 
 ### Capability Extraction
 
-DockerSphere favors extracting optional capabilities into dedicated components.
+DockerSphere favors extracting optional capabilities into dedicated components when they become reusable or independently meaningful.
 
 For example, Docker client tooling and Docker daemon functionality are modeled separately:
 
@@ -113,9 +147,13 @@ For example, Docker client tooling and Docker daemon functionality are modeled s
 
 This keeps base images lightweight while allowing higher-level distributions to opt into additional runtime capabilities.
 
+However, not every tool deserves a first-class component in the main DAG. Very granular tools may be installed directly by a higher-level Dockerfile or moved later into a bundle or CI-oriented slice when the reuse justifies it.
+
 ### Bake File Locality
 
-Bake files are organized close to the component or distribution slice they describe.
+Bake files are organized close to the component, capability, or distribution slice they describe.
+
+This is a locality convention, not a target-name-to-path contract.
 
 For example:
 
@@ -125,6 +163,8 @@ For example:
 ```
 
 This allows the parent bundle to stay readable while specialized targets remain grouped with their capability.
+
+Nested Bake files may be introduced simply to split large HCL sections. They do not necessarily mean the physical directory has become a new canonical component boundary.
 
 Target names should use descriptive capability names. In particular, `desktop-x` is preferred over the older shorthand `x` for X11 / desktop runtime targets.
 
@@ -179,6 +219,13 @@ build-foundation-images
 The generated OCI images are intended to be consumed from external repositories using immutable image references instead of `target:` BuildKit dependencies.
 
 The Makefile provides a curated build interface for common workflows. It does not need to expose every Bake target present in the graph.
+
+The repository intentionally maintains two different lists:
+
+- the Bake file inclusion list, which should be exhaustive enough to load the full HCL graph;
+- the Makefile image/update list, which is a curated public or local build interface.
+
+Agents should treat Buildx Bake as the source of truth for the graph, and the Makefile as a convenience layer that selects which graph nodes are exposed as routine build commands.
 
 Naming distinguishes Docker CLI/client support from Docker daemon runtime support:
 

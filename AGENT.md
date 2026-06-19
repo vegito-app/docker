@@ -16,17 +16,23 @@ Agents must reason about components, capabilities, and distributions before reas
 
 ### Component
 
-A directory represents a component.
+A component is a logical capability or implementation slice in the Buildx Bake graph.
 
-Examples:
+A directory usually groups files related to a component, capability, or distribution slice, but the directory tree is not the authoritative DAG.
+
+Examples of component or capability names:
 
 - debian
 - golang
 - ai
+- docker
 - dockerd
 - desktop-x
 - vscode
 - obs
+- project
+
+The authoritative graph is expressed by Bake targets, groups, `inherits`, and `contexts` relationships.
 
 ### Component Boundaries
 
@@ -41,30 +47,48 @@ A component may depend on another component, but should not silently absorb its 
 
 When functionality becomes optional, prefer extracting it into a dedicated component instead of growing the parent component.
 
-### Dockerfile Inheritance
+### Dockerfile and Context Inheritance
 
-A component inherits the Dockerfile of its parent directory unless it provides its own Dockerfile.
+A target uses the Dockerfile and context declared by its Bake definition.
 
-Examples:
+A directory may provide a Dockerfile for a capability family, but a nested Bake file may still define targets whose logical name is longer than the physical path.
 
-```text
-/debian/golang
-    Dockerfile
+Do not assume that every capability in a target name has a corresponding nested directory.
 
-/debian/golang/ai
-    inherits /debian/golang/Dockerfile
-```
+Example:
 
 ```text
-/debian/golang/ai
-    Dockerfile
+vegito-trixie-debian-golang-ai-dockerd-desktop-x
 ```
 
-In this case the local Dockerfile becomes the new inheritance root.
+may be declared under:
+
+```text
+/debian/golang/docker-bake.hcl
+```
+
+or under:
+
+```text
+/debian/golang/ai/trixie.docker-bake.hcl
+```
+
+depending on where the HCL is easiest to maintain.
+
+The real build relationship is determined by:
+
+```hcl
+inherits = [...]
+contexts = {
+  debian = "target:..."
+}
+```
+
+When reasoning about the graph, parse Bake first. Use the file path only as locality and maintainability context.
 
 ### Target Naming
 
-Target names describe accumulated capabilities.
+Target names describe logical image composition and accumulated capabilities.
 
 Example:
 
@@ -75,10 +99,10 @@ vegito-trixie-debian-golang-ai-dockerd-desktop-x
 means:
 
 ```text
-Debian
+Debian Trixie
 + Golang
 + AI tooling
-+ Docker daemon
++ Docker daemon runtime
 + Desktop X runtime
 ```
 
@@ -258,7 +282,7 @@ When modifying this repository:
 2. Preserve target naming consistency.
 3. Prefer extending the graph instead of duplicating logic.
 4. Avoid introducing special cases.
-5. Keep Buildx Bake as the source of truth.
+5. Keep Buildx Bake targets, groups, `inherits`, and `contexts` as the source of truth.
 6. Treat Makefiles as convenience interfaces.
 7. Prefer reusable components over monolithic images.
 8. Verify that new targets remain composable.
