@@ -2,7 +2,7 @@
 ![Release Version](https://img.shields.io/github/v/release/vegito-app/docker?sort=semver)
 ![CI](https://github.com/vegito-app/docker/actions/workflows/docker-release.yml/badge.svg?branch=main)
 
-# docker
+# DockerSphere
 
 Standalone OCI foundation images extracted from `vegito-app/local`.
 
@@ -18,10 +18,88 @@ This repository contains reusable Docker and runtime foundations used by the Veg
 
 ## Goals
 
-- Reduce BuildKit DAG complexity in `vegito-app/local`
+- Reduce BuildKit DAG complexity in higher-level repositories
 - Stabilize reusable OCI foundations
-- Improve CI build times and cache reuse
+- Improve cache reuse and CI build performance
 - Decouple foundation image releases from application repositories
+- Provide a component-oriented image composition model
+- Expose reproducible developer and runtime distributions
+
+## DockerSphere Model
+
+DockerSphere is built around a component graph rather than a collection of standalone images.
+
+A directory represents a component.
+
+Examples:
+
+```text
+/debian/golang
+/debian/golang/ai
+/debian/docker/dockerd
+/debian/vscode
+/debian/obs
+```
+
+A component inherits the Dockerfile of its parent unless it provides its own Dockerfile.
+
+This allows features to be accumulated incrementally while keeping Dockerfiles focused on a single concern.
+
+Conceptually:
+
+```text
+debian
+ └── golang
+      └── ai
+           └── dockerd
+                └── desktop-x
+                     └── vscode
+```
+
+Target names describe accumulated capabilities.
+
+Example:
+
+```text
+vegito-trixie-debian-golang-ai-dockerd-desktop-x
+```
+
+represents:
+
+```text
+Debian
++ Golang
++ AI tooling
++ Docker daemon
++ Desktop runtime
+```
+
+### Bundles
+
+Directories under `debian/bundle` represent distributions rather than individual components.
+
+Examples:
+
+```text
+/debian/bundle/project
+/debian/bundle/project/obs
+```
+
+A bundle assembles multiple reusable components into a developer or runtime environment.
+
+### External OCI Foundations
+
+Images stored under `docker.io/` belong to a separate DAG and are published independently.
+
+Buildx contexts may reference them through:
+
+```hcl
+contexts = {
+  debian = "docker-image://..."
+}
+```
+
+This creates a compilation boundary, allowing foundation images to evolve independently without forcing a full graph rebuild.
 
 ## CI
 
