@@ -119,7 +119,7 @@ target "vegito-debian-project-golang" {
 
   inherits = ["vegito-debian-project-golang-base"]
   contexts = {
-    debian = "target:vegito-debian-golang-ai-docker-version-ci"
+    debian = "target:vegito-debian-golang-ai-dockerd-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_IMAGE_LATEST,
@@ -190,18 +190,18 @@ variable "VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_AI_DOCKERD_IMAGE_VERSION" {
   default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-project-golang-ai-dockerd-${VERSION}"
 }
 
-group "vegito-debian-project-golang-ai-docker-ci" {
+group "vegito-debian-project-golang-ai-dockerd-ci" {
   description = "Build and push Debian VSCode images"
   targets = [
-    "vegito-debian-project-golang-ai-docker-version-ci",
-    "vegito-debian-project-golang-ai-docker-latest-ci",
+    "vegito-debian-project-golang-ai-dockerd-version-ci",
+    "vegito-debian-project-golang-ai-dockerd-latest-ci",
   ]
 }
 
-target "vegito-debian-project-golang-ai-docker-version-ci" {
+target "vegito-debian-project-golang-ai-dockerd-version-ci" {
   inherits = ["vegito-debian-project-golang-base"]
   contexts = {
-    debian = "target:vegito-debian-golang-ai-docker-desktop-x-version-ci"
+    debian = "target:vegito-debian-golang-ai-dockerd-desktop-x-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_AI_DOCKERD_IMAGE_VERSION,
@@ -225,10 +225,10 @@ target "vegito-debian-project-golang-ai-docker-version-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-project-golang-ai-docker-latest-ci" {
+target "vegito-debian-project-golang-ai-dockerd-latest-ci" {
   inherits = ["vegito-debian-project-golang-base"]
   contexts = {
-    debian = "target:vegito-debian-golang-ai-docker-desktop-x-latest-ci"
+    debian = "target:vegito-debian-golang-ai-dockerd-desktop-x-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_AI_DOCKERD_IMAGE_LATEST,
@@ -258,11 +258,11 @@ target "vegito-debian-project-golang-ai-docker-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-project-golang-ai-docker" {
+target "vegito-debian-project-golang-ai-dockerd" {
 
   inherits = ["vegito-debian-project-golang-base"]
   contexts = {
-    debian = "target:vegito-debian-golang-ai-docker-version-ci"
+    debian = "target:vegito-debian-golang-ai-dockerd-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_AI_DOCKERD_IMAGE_LATEST,

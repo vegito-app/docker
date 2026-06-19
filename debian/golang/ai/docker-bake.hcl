@@ -49,7 +49,7 @@ group "vegito-debian-golang-ai-ci" {
 target "vegito-debian-golang-ai-version-ci" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
-    debian           = "target:vegito-debian-ai-docker-version-ci"
+    debian           = "target:vegito-debian-ai-dockerd-version-ci"
     dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
   }
   tags = [
@@ -115,18 +115,18 @@ variable "VEGITO_DOCKER_DEBIAN_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE
   default     = "type=local,src=${VEGITO_DOCKER_DEBIAN_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-group "vegito-debian-golang-ai-docker-ci" {
+group "vegito-debian-golang-ai-dockerd-ci" {
   description = "Build and push Android Emmulator images"
   targets = [
-    "vegito-debian-golang-ai-docker-version-ci",
-    "vegito-debian-golang-ai-docker-latest-ci",
+    "vegito-debian-golang-ai-dockerd-version-ci",
+    "vegito-debian-golang-ai-dockerd-latest-ci",
   ]
 }
 
-target "vegito-debian-golang-ai-docker-version-ci" {
+target "vegito-debian-golang-ai-dockerd-version-ci" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
-    debian           = "target:vegito-debian-ai-docker-version-ci"
+    debian           = "target:vegito-debian-ai-dockerd-version-ci"
     dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
   }
   tags = [
@@ -151,10 +151,10 @@ target "vegito-debian-golang-ai-docker-version-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-golang-ai-docker-latest-ci" {
+target "vegito-debian-golang-ai-dockerd-latest-ci" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
-    debian           = "target:vegito-debian-ai-docker-latest-ci"
+    debian           = "target:vegito-debian-ai-dockerd-latest-ci"
     dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
   }
   tags = [
@@ -188,7 +188,7 @@ target "vegito-debian-golang-ai-docker-latest-ci" {
 target "vegito-debian-golang-ai-dockerd" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
-    debian           = "target:vegito-debian-ai-docker"
+    debian           = "target:vegito-debian-ai-dockerd"
     dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
   }
   tags = [
@@ -253,18 +253,18 @@ variable "VEGITO_DOCKER_DEBIAN_GOLANG_AI_DOCKERD_DESKTOP_X_IMAGE_DOCKER_BUILDX_L
   default     = "type=local,src=${VEGITO_DOCKER_DEBIAN_GOLANG_AI_DOCKERD_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-group "vegito-debian-golang-ai-docker-desktop-x-ci" {
+group "vegito-debian-golang-ai-dockerd-desktop-x-ci" {
   description = "Build and push Android Emmulator images"
   targets = [
-    "vegito-debian-golang-ai-docker-desktop-x-version-ci",
-    "vegito-debian-golang-ai-docker-desktop-x-latest-ci",
+    "vegito-debian-golang-ai-dockerd-desktop-x-version-ci",
+    "vegito-debian-golang-ai-dockerd-desktop-x-latest-ci",
   ]
 }
 
-target "vegito-debian-golang-ai-docker-desktop-x-version-ci" {
+target "vegito-debian-golang-ai-dockerd-desktop-x-version-ci" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
-    debian           = "target:vegito-debian-ai-docker-desktop-x-version-ci"
+    debian           = "target:vegito-debian-ai-dockerd-desktop-x-version-ci"
     dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
   }
   tags = [
@@ -289,10 +289,10 @@ target "vegito-debian-golang-ai-docker-desktop-x-version-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-golang-ai-docker-desktop-x-latest-ci" {
+target "vegito-debian-golang-ai-dockerd-desktop-x-latest-ci" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
-    debian           = "target:vegito-debian-ai-docker-desktop-x-latest-ci"
+    debian           = "target:vegito-debian-ai-dockerd-desktop-x-latest-ci"
     dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
   }
   tags = [
@@ -323,10 +323,10 @@ target "vegito-debian-golang-ai-docker-desktop-x-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-golang-ai-docker-desktop-x" {
+target "vegito-debian-golang-ai-dockerd-desktop-x" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
-    debian           = "target:vegito-debian-ai-docker-desktop-x"
+    debian           = "target:vegito-debian-ai-dockerd-desktop-x"
     dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
   }
   tags = [

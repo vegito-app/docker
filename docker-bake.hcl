@@ -143,16 +143,13 @@ group "runners-ci" {
   ]
 }
 
-
 group "default" {
-
   targets = [
     "release",
     "release-ci",
   ]
   pull            = true
   max_parallelism = VEGITO_RELEASE_BUILD_MAX_PARALLELISM
-
 }
 
 group "release" {

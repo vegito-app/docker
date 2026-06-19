@@ -149,31 +149,31 @@ variable "VEGITO_DOCKER_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_
 
 group "vegito-debian-obs-vscode-golang-ai-dockerd" {
   targets = [
-    "vegito-debian-obs-vscode-golang-ai-docker-version",
-    "vegito-debian-obs-vscode-golang-ai-docker-latest",
+    "vegito-debian-obs-vscode-golang-ai-dockerd-version",
+    "vegito-debian-obs-vscode-golang-ai-dockerd-latest",
   ]
 }
-group "vegito-debian-obs-vscode-golang-ai-docker-ci" {
+group "vegito-debian-obs-vscode-golang-ai-dockerd-ci" {
   targets = [
-    "vegito-debian-obs-vscode-golang-ai-docker-version-ci",
-    "vegito-debian-obs-vscode-golang-ai-docker-latest-ci",
+    "vegito-debian-obs-vscode-golang-ai-dockerd-version-ci",
+    "vegito-debian-obs-vscode-golang-ai-dockerd-latest-ci",
   ]
 }
 
-target "vegito-debian-obs-vscode-golang-ai-docker-base" {
+target "vegito-debian-obs-vscode-golang-ai-dockerd-base" {
   context = VEGITO_DOCKER_DEBIAN_OBS_DIR
   args = {
     debian_version = "bookworm"
   }
 }
 
-target "vegito-debian-obs-vscode-golang-ai-docker-version-ci" {
-  inherits = ["vegito-debian-obs-vscode-golang-ai-docker-base"]
+target "vegito-debian-obs-vscode-golang-ai-dockerd-version-ci" {
+  inherits = ["vegito-debian-obs-vscode-golang-ai-dockerd-base"]
   tags = [
     VEGITO_DOCKER_DEBIAN_OBS_IMAGE_VERSION,
   ]
   contexts = {
-    debian = "target:vegito-debian-golang-ai-docker-desktop-x-version-ci"
+    debian = "target:vegito-debian-golang-ai-dockerd-desktop-x-version-ci"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
@@ -194,13 +194,13 @@ target "vegito-debian-obs-vscode-golang-ai-docker-version-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-obs-vscode-golang-ai-docker-latest-ci" {
-  inherits = ["vegito-debian-obs-vscode-golang-ai-docker-base"]
+target "vegito-debian-obs-vscode-golang-ai-dockerd-latest-ci" {
+  inherits = ["vegito-debian-obs-vscode-golang-ai-dockerd-base"]
   tags = [
     VEGITO_DOCKER_DEBIAN_OBS_IMAGE_LATEST,
   ]
   contexts = {
-    debian = "target:vegito-debian-golang-ai-docker-desktop-x-latest-ci"
+    debian = "target:vegito-debian-golang-ai-dockerd-desktop-x-latest-ci"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
@@ -220,14 +220,14 @@ target "vegito-debian-obs-vscode-golang-ai-docker-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-obs-vscode-golang-ai-docker-" {
-  inherits = ["vegito-debian-obs-vscode-golang-ai-docker-base"]
+target "vegito-debian-obs-vscode-golang-ai-dockerd-" {
+  inherits = ["vegito-debian-obs-vscode-golang-ai-dockerd-base"]
   tags = [
     VEGITO_DOCKER_DEBIAN_OBS_IMAGE_LATEST,
     VEGITO_DOCKER_DEBIAN_OBS_IMAGE_VERSION,
   ]
   contexts = {
-    debian = "target-debian-golang-ai-docker-desktop-x"
+    debian = "target-debian-golang-ai-dockerd-desktop-x"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [

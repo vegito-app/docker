@@ -67,7 +67,7 @@ group "vegito-trixie-debian-golang-ci" {
     "vegito-trixie-debian-golang-docker-ci",
     "vegito-trixie-debian-golang-docker-desktop-x-ci",
     "vegito-trixie-debian-golang-desktop-x-ci",
-    "vegito-trixie-debian-golang-ai-docker-desktop-x-ci",
+    "vegito-trixie-debian-golang-ai-dockerd-desktop-x-ci",
   ]
 }
 
