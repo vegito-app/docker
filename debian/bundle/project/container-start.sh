@@ -4,13 +4,28 @@ set -euo pipefail
 
 # 🚀 Setup background services
 
-# Listening docker socket at local TCP 2375 will allow vscode to forward it to your remote editor.
-# (localhost:2375 will be used if it is available on your editor machine or another one will be tried by vscode).
-# This is working both on Github Codespaces and on local vscode with the "Remote - Containers" extension.
-# Port forwarding is automatically done by vscode when a process is listening.
-# This is secure as the socket is only accessible from inside the container and you have an ssh or vscode remote session.
-socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock &
-bg_pids+=("$!")
+if [ "${DOCKER_RUNTIME:-host}" = "dind" ]; then
+    echo "🐳 Starting Docker DIND Rootless"
+    /usr/local/bin/debian-dind-start.sh &
+    bg_pids+=("$!")
+
+    # Forward Docker DIND Rootless socket
+    socat TCP-LISTEN:23766,fork UNIX-CONNECT:/run/user/1000/docker/docker.sock > /tmp/socat-docker-23766.log 2>&1 &
+    bg_pids+=("$!")
+
+else
+    echo "🐳 Docker DIND Rootless not started."
+
+    # Forwarding host docker socket
+    # Listening docker socket at local TCP 2375 will allow vscode to forward it to your remote editor.
+    # (localhost:2375 will be used if it is available on your editor machine or another one will be tried by vscode).
+    # This is working both on Github Codespaces and on local vscode with the "Remote - Containers" extension.
+    # Port forwarding is automatically done by vscode when a process is listening.
+    # This is secure as the socket is only accessible from inside the container and you have an ssh or vscode remote session.
+    socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock > /tmp/socat-docker-2375.log 2>&1 &
+    bg_pids+=("$!")
+fi
+
 
 # Pay attention to use a path that is mounted inside the container. Because you want to edit files from your host machine.
 # This is typically a workspace folder mounted inside the container.

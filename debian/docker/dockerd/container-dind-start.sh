@@ -3,14 +3,14 @@
 set -euo pipefail
 
 # Nettoyage du flag d'état à chaque arrêt
-rm -f /tmp/.dockerd-rootless-ready
+rm -f /tmp/.dockerd-ready
 
 # 📌 List of PIDs of background processes
 bg_pids=()
 
 # 🧹 Function called at the end of the script to kill background processes
 kill_jobs() {
-  rm -f /tmp/.dockerd-rootless-ready
+  rm -f /tmp/.dockerd-ready
   echo "🧼 Cleaning up Docker services..."
   for pid in "${bg_pids[@]}"; do
     kill "$pid" || true
@@ -52,6 +52,6 @@ mkdir -p ${HOME}/.docker/run
 ln -sfn /run/user/$LOCAL_USER_ID/docker.sock ${HOME}/.docker/run/docker.sock
 
 # Create a ready flag file for healthchecks and other services to know when the dockerd is ready to exit
-echo "{\"status\":\"ready\",\"ts\":$(date +%s)}" > /tmp/.dockerd-rootless-ready
+echo "{\"status\":\"ready\",\"ts\":$(date +%s)}" > /tmp/.dockerd-ready
 
 wait "$dockerd_pid"

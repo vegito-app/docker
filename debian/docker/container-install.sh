@@ -18,17 +18,9 @@ trap check_success EXIT
 container_cache=${CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/docker}
 mkdir -p $container_cache
 
-# local docker rootless cache 
-LOCAL_DOCKERD_ROOTLESS_CACHE=${HOME}/.local/share/docker
-mkdir -p $container_cache/dockerd
-mkdir -p ${HOME}/.local/share/
-ln -sfn $container_cache/dockerd $LOCAL_DOCKERD_ROOTLESS_CACHE
-
-
 mkdir -p ${HOME}/.bashrc.d
 
 cat <<EOF > ~/.bashrc.d/20-docker.sh
-export DOCKER_HOST=unix:///run/user/${LOCAL_USER_ID:-1000}/docker.sock
 export DOCKER_CONFIG=${container_cache}/.docker
 export DOCKER_BUILDKIT=1
 

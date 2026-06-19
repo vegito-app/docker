@@ -28,6 +28,19 @@ Examples:
 - vscode
 - obs
 
+### Component Boundaries
+
+Components should represent a single capability.
+
+Example:
+
+- `docker` provides Docker client tooling.
+- `dockerd` provides Docker daemon / DIND capability.
+
+A component may depend on another component, but should not silently absorb its responsibilities.
+
+When functionality becomes optional, prefer extracting it into a dedicated component instead of growing the parent component.
+
 ### Dockerfile Inheritance
 
 A component inherits the Dockerfile of its parent directory unless it provides its own Dockerfile.

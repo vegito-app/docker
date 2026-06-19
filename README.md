@@ -73,6 +73,19 @@ Debian
 + Desktop runtime
 ```
 
+### Capability Extraction
+
+DockerSphere favors extracting optional capabilities into dedicated components.
+
+For example, Docker client tooling and Docker daemon functionality are modeled separately:
+
+```text
+/debian/docker
+/debian/docker/dockerd
+```
+
+This keeps base images lightweight while allowing higher-level distributions to opt into additional runtime capabilities.
+
 ### Bundles
 
 Directories under `debian/bundle` represent distributions rather than individual components.
