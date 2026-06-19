@@ -148,6 +148,30 @@ Target names should include `dockerd` when the image provides or depends on a Do
 
 Avoid mixing `docker` and `dockerd` for the same capability in target names.
 
+### `x` vs `desktop-x`
+
+Use `desktop-x` for X11 / desktop runtime capability in target names.
+
+Avoid introducing new targets with the shorthand `x`.
+
+Legacy tags may still contain `-x-` when kept for compatibility, but newly added variable names and target names should prefer `DESKTOP_X` / `desktop-x`.
+
+
+### Bake File Locality
+
+A Bake file should describe the component or distribution located in the same directory.
+
+When a section grows around a sub-capability, prefer moving it into a nested Bake file next to that sub-capability.
+
+Example:
+
+```text
+/debian/bundle/project/docker/docker-bake.hcl
+/debian/bundle/project/docker/trixie.docker-bake.hcl
+```
+
+This keeps the parent bundle readable while preserving the full graph through explicit Bake file inclusion.
+
 ### Makefile Scope
 
 The Makefile exposes a practical subset of Buildx Bake targets.

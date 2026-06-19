@@ -86,6 +86,21 @@ For example, Docker client tooling and Docker daemon functionality are modeled s
 
 This keeps base images lightweight while allowing higher-level distributions to opt into additional runtime capabilities.
 
+### Bake File Locality
+
+Bake files are organized close to the component or distribution slice they describe.
+
+For example:
+
+```text
+/debian/bundle/project/docker/docker-bake.hcl
+/debian/bundle/project/docker/trixie.docker-bake.hcl
+```
+
+This allows the parent bundle to stay readable while specialized targets remain grouped with their capability.
+
+Target names should use descriptive capability names. In particular, `desktop-x` is preferred over the older shorthand `x` for X11 / desktop runtime targets.
+
 ### Bundles
 
 Directories under `debian/bundle` represent distributions rather than individual components.

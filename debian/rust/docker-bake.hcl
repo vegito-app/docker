@@ -105,7 +105,7 @@ target "vegito-debian-rust-latest-ci" {
   ]
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
-      "type=registry,ref=${VEGITO_DOCKER_DEBIAN_RUST_IMAGE_REGISTR_CACHE}",
+      "type=registry,ref=${VEGITO_DOCKER_DEBIAN_RUST_IMAGE_REGISTRY_CACHE}",
       "type=registry,ref=${VEGITO_DOCKER_DEBIAN_IMAGE_REGISTRY_CACHE}"
     ] : [],
     ENABLE_LOCAL_CACHE ? [
