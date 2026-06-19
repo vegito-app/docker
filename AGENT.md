@@ -82,7 +82,42 @@ Debian
 + Desktop X runtime
 ```
 
-Target names are descriptive and intentionally verbose.
+Target names should remain as explicit as reasonably possible.
+
+Agents are expected to reconstruct the capability chain directly from the target name.
+
+Avoid relying on hidden rules such as:
+
+- ai implies python;
+- vscode implies desktop-x;
+- obs implies desktop-x.
+
+Such relationships may exist in the implementation, but they should not be required to understand the graph.
+
+When a capability is important for understanding runtime behavior, prefer keeping it visible in the target name.
+
+The target name is more authoritative than the file path for understanding what image is being produced.
+
+The physical path only tells where the HCL and Dockerfile implementation have been placed.
+
+### Bake File Locality
+
+A Bake file should describe targets related to the component, capability, or distribution slice located in the same directory.
+
+This is a locality rule, not a strict mirror between target names and paths.
+
+For example:
+
+```text
+/debian/bundle/project/docker/docker-bake.hcl
+/debian/bundle/project/docker/trixie.docker-bake.hcl
+```
+
+This keeps the parent bundle readable while preserving the full graph through explicit Bake file inclusion.
+
+Nested Bake files may be introduced to split large HCL sections even when no new Dockerfile is introduced.
+
+Agents must not infer the complete graph from the directory tree alone. They must parse the included Bake files.
 
 ---
 
@@ -111,6 +146,15 @@ Example:
 ```
 
 represents the project distribution extended with OBS capabilities.
+
+Bundles are the primary exception to the explicit-capability rule.
+
+A bundle may expose a concise distribution name while internally aggregating several lower-level capabilities.
+
+Agents should therefore distinguish:
+
+- capability targets, which should remain descriptive and composable;
+- distribution targets, which may intentionally hide internal implementation details.
 
 ---
 
@@ -232,5 +276,11 @@ Repository -> Images
 Think:
 
 ```text
-Repository -> Components -> Capabilities -> Distributions -> OCI Images
+Repository -> Bake files -> Targets -> Context edges -> Capability Graph -> Distributions -> OCI Images
 ```
+
+When in doubt, infer the graph from target names and Bake contexts first.
+
+Directory layout is a maintainability concern.
+Bundles are a distribution concern.
+The capability graph is the architectural concern.

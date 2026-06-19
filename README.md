@@ -69,9 +69,36 @@ represents:
 Debian
 + Golang
 + AI tooling
-+ Docker daemon
-+ Desktop runtime
++ Docker daemon runtime
++ Desktop X runtime
 ```
+
+The beginning of the target name usually identifies the Dockerfile family used by default.
+
+The remaining suffix describes the base image or capability chain injected through Buildx contexts.
+
+Target names are intended to be self-descriptive.
+
+Agents should be able to infer the expected capability chain directly from the target name without relying on repository-specific implicit rules.
+
+For example:
+
+vegito-trixie-debian-vscode-golang-ai-dockerd
+
+should be interpreted literally as a composition containing:
+
+- vscode
+- golang
+- ai
+- dockerd
+
+and not as:
+
+- vscode implicitly means desktop-x
+- ai implicitly means python
+- obs implicitly means desktop-x
+
+Even if the current implementation happens to enforce such relationships.
 
 ### Capability Extraction
 
@@ -113,6 +140,17 @@ Examples:
 ```
 
 A bundle assembles multiple reusable components into a developer or runtime environment.
+
+Bundles are allowed to represent curated distributions and may intentionally hide internal implementation details.
+
+For example, an `ai` bundle may internally depend on Python tooling because its Dockerfile is implemented in Python.
+
+However, capability-oriented targets should prefer explicit composition in their names so that the Buildx DAG remains understandable without additional repository knowledge.
+
+A useful rule is:
+
+- capabilities should be explicit;
+- distributions may aggregate capabilities.
 
 ### External OCI Foundations
 

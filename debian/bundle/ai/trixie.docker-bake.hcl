@@ -320,18 +320,18 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE
   default     = "type=local,src=${VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-group "vegito-trixie-debian-ai-docker-ci" {
+group "vegito-trixie-debian-ai-dockerd-ci" {
   description = "Build and push Android Emmulator images"
   targets = [
-    "vegito-trixie-debian-ai-docker-version-ci",
-    "vegito-trixie-debian-ai-docker-latest-ci",
+    "vegito-trixie-debian-ai-dockerd-version-ci",
+    "vegito-trixie-debian-ai-dockerd-latest-ci",
   ]
 }
 
-target "vegito-trixie-debian-ai-docker-version-ci" {
+target "vegito-trixie-debian-ai-dockerd-version-ci" {
   inherits = ["vegito-trixie-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-python-docker-version-ci"
+    debian = "target:vegito-trixie-debian-python-dockerd-version-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKERD_IMAGE_VERSION,
@@ -355,10 +355,10 @@ target "vegito-trixie-debian-ai-docker-version-ci" {
   platforms = platforms
 }
 
-target "vegito-trixie-debian-ai-docker-latest-ci" {
+target "vegito-trixie-debian-ai-dockerd-latest-ci" {
   inherits = ["vegito-trixie-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-python-docker-latest-ci"
+    debian = "target:vegito-trixie-debian-python-dockerd-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKERD_IMAGE_LATEST,
@@ -391,7 +391,7 @@ target "vegito-trixie-debian-ai-docker-latest-ci" {
 target "vegito-trixie-debian-ai-dockerd" {
   inherits = ["vegito-trixie-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-python-docker"
+    debian = "target:vegito-trixie-debian-python-dockerd"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKERD_IMAGE_VERSION,
@@ -455,18 +455,18 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKERD_DESKTOP_X_IMAGE_DOCKER_BUILDX_L
   default     = "type=local,src=${VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKERD_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-group "vegito-trixie-debian-ai-docker-desktop-x-ci" {
+group "vegito-trixie-debian-ai-dockerd-desktop-x-ci" {
   description = "Build and push Android Emmulator images"
   targets = [
-    "vegito-trixie-debian-ai-docker-desktop-x-version-ci",
-    "vegito-trixie-debian-ai-docker-desktop-x-latest-ci",
+    "vegito-trixie-debian-ai-dockerd-desktop-x-version-ci",
+    "vegito-trixie-debian-ai-dockerd-desktop-x-latest-ci",
   ]
 }
 
-target "vegito-trixie-debian-ai-docker-desktop-x-version-ci" {
+target "vegito-trixie-debian-ai-dockerd-desktop-x-version-ci" {
   inherits = ["vegito-trixie-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-python-docker-desktop-x-version-ci"
+    debian = "target:vegito-trixie-debian-python-dockerd-desktop-x-version-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKERD_DESKTOP_X_IMAGE_VERSION,
@@ -490,10 +490,10 @@ target "vegito-trixie-debian-ai-docker-desktop-x-version-ci" {
   platforms = platforms
 }
 
-target "vegito-trixie-debian-ai-docker-desktop-x-latest-ci" {
+target "vegito-trixie-debian-ai-dockerd-desktop-x-latest-ci" {
   inherits = ["vegito-trixie-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-python-docker-desktop-x-latest-ci"
+    debian = "target:vegito-trixie-debian-python-dockerd-desktop-x-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKERD_DESKTOP_X_IMAGE_LATEST,
@@ -523,10 +523,10 @@ target "vegito-trixie-debian-ai-docker-desktop-x-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-trixie-debian-ai-docker-desktop-x" {
+target "vegito-trixie-debian-ai-dockerd-desktop-x" {
   inherits = ["vegito-trixie-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-python-docker-desktop-x"
+    debian = "target:vegito-trixie-debian-python-dockerd-desktop-x"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_AI_DOCKERD_DESKTOP_X_IMAGE_VERSION,

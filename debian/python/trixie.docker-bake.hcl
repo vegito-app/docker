@@ -272,7 +272,7 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DOCKER_IMAGE_DOCKER_BUILDX_LOCAL_CA
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DOCKER_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_REGISTRY_CACHE}-python-docker"
+  default = "${VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_REGISTRY_CACHE}-python-dockerd"
 }
 
 target "vegito-trixie-debian-python-dockerd-version-ci" {
@@ -328,7 +328,7 @@ target "vegito-trixie-debian-python-dockerd-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-trixie-debian-python-docker" {
+target "vegito-trixie-debian-python-dockerd" {
   inherits = ["vegito-trixie-debian-python-base"]
   contexts = {
     debian = "target:vegito-trixie-debian-docker-version-ci"

@@ -316,10 +316,10 @@ variable "VEGITO_DOCKER_DEBIAN_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_L
   default     = "type=local,src=${VEGITO_DOCKER_DEBIAN_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-target "vegito-debian-ai-docker-version-ci" {
+target "vegito-debian-ai-dockerd-version-ci" {
   inherits = ["vegito-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-debian-python-docker-version-ci"
+    debian = "target:vegito-debian-python-dockerd-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_AI_DOCKERD_IMAGE_VERSION,
@@ -343,10 +343,10 @@ target "vegito-debian-ai-docker-version-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-ai-docker-latest-ci" {
+target "vegito-debian-ai-dockerd-latest-ci" {
   inherits = ["vegito-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-debian-python-docker-latest-ci"
+    debian = "target:vegito-debian-python-dockerd-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_AI_DOCKERD_IMAGE_LATEST,
@@ -379,7 +379,7 @@ target "vegito-debian-ai-docker-latest-ci" {
 target "vegito-debian-ai-dockerd" {
   inherits = ["vegito-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-debian-python-docker"
+    debian = "target:vegito-debian-python-dockerd"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_AI_DOCKERD_IMAGE_VERSION,
@@ -443,10 +443,10 @@ variable "VEGITO_DOCKER_DEBIAN_AI_DOCKERD_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CA
   default     = "type=local,src=${VEGITO_DOCKER_DEBIAN_AI_DOCKERD_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-target "vegito-debian-ai-docker-desktop-x-version-ci" {
+target "vegito-debian-ai-dockerd-desktop-x-version-ci" {
   inherits = ["vegito-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-debian-python-docker-desktop-x-version-ci"
+    debian = "target:vegito-debian-python-dockerd-desktop-x-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_AI_DOCKERD_DESKTOP_X_IMAGE_VERSION,
@@ -470,10 +470,10 @@ target "vegito-debian-ai-docker-desktop-x-version-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-ai-docker-desktop-x-latest-ci" {
+target "vegito-debian-ai-dockerd-desktop-x-latest-ci" {
   inherits = ["vegito-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-debian-python-docker-desktop-x-latest-ci"
+    debian = "target:vegito-debian-python-dockerd-desktop-x-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_AI_DOCKERD_DESKTOP_X_IMAGE_LATEST,
@@ -503,10 +503,10 @@ target "vegito-debian-ai-docker-desktop-x-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-ai-docker-desktop-x" {
+target "vegito-debian-ai-dockerd-desktop-x" {
   inherits = ["vegito-debian-ai-base"]
   contexts = {
-    debian = "target:vegito-debian-python-docker-desktop-x"
+    debian = "target:vegito-debian-python-dockerd-desktop-x"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_AI_DOCKERD_DESKTOP_X_IMAGE_VERSION,
