@@ -42,18 +42,18 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKERD_IMAGE_VERSION" {
   default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-vscode-golang-ai-dockerd-${VERSION}"
 }
 
-group "vegito-trixie-debian-vscode-golang-ai-docker-ci" {
+group "vegito-trixie-debian-vscode-golang-ai-dockerd-ci" {
   description = "Build and push Android Emmulator images"
   targets = [
-    "vegito-trixie-debian-vscode-golang-ai-docker-version-ci",
-    "vegito-trixie-debian-vscode-golang-ai-docker-latest-ci",
+    "vegito-trixie-debian-vscode-golang-ai-dockerd-version-ci",
+    "vegito-trixie-debian-vscode-golang-ai-dockerd-latest-ci",
   ]
 }
 
-target "vegito-trixie-debian-vscode-golang-ai-docker-version-ci" {
+target "vegito-trixie-debian-vscode-golang-ai-dockerd-version-ci" {
   inherits = ["vegito-trixie-debian-vscode-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-golang-ai-docker-version-ci"
+    debian = "target:vegito-trixie-debian-golang-ai-dockerd-version-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKERD_IMAGE_VERSION,
@@ -77,10 +77,10 @@ target "vegito-trixie-debian-vscode-golang-ai-docker-version-ci" {
   platforms = platforms
 }
 
-target "vegito-trixie-debian-vscode-golang-ai-docker-latest-ci" {
+target "vegito-trixie-debian-vscode-golang-ai-dockerd-latest-ci" {
   inherits = ["vegito-trixie-debian-vscode-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-golang-ai-docker-latest-ci"
+    debian = "target:vegito-trixie-debian-golang-ai-dockerd-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST,
@@ -114,7 +114,7 @@ target "vegito-trixie-debian-vscode-golang-ai-dockerd" {
 
   inherits = ["vegito-trixie-debian-vscode-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-golang-ai-docker-version-ci"
+    debian = "target:vegito-trixie-debian-golang-ai-dockerd-version-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST,

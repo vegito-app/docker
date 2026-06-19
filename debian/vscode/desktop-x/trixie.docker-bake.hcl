@@ -112,7 +112,7 @@ target "vegito-trixie-debian-vscode-desktop-x-golang-ai-dockerd-latest-ci" {
 
 target "vegito-trixie-debian-vscode-desktop-x-golang-ai-dockerd" {
 
-  inherits = ["vegito-trixie-debian-desktop-x-base"]
+  inherits = ["vegito-trixie-debian-vscode-base"]
   contexts = {
     debian = "target:vegito-trixie-debian-golang-ai-dockerd-version-ci"
   }
