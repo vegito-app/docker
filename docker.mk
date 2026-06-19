@@ -117,6 +117,12 @@ VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS ?= \
  desktop-x \
  project
 
+VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS ?= \
+  docker \
+  golang \
+  obs \
+  vscode
+
 VEGITO_DOCKER_DEBIAN_VSCODE_SPECIFICS ?= \
  ai \
  golang
@@ -124,34 +130,33 @@ VEGITO_DOCKER_DEBIAN_VSCODE_SPECIFICS ?= \
 VEGITO_DOCKER_DEBIAN_GOLANG_SPECIFICS ?= \
  ai
 
-VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS ?= \
- golang
-
 VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian \
   debian-all \
   debian-golang-docker \
-  debian-golang-project-builder-docker \
-  debian-golang-project-builder-docker-x \
-  debian-obs-vscode-golang-ai-docker \
+  debian-golang-dockerd \
+  debian-golang-project-docker \
+  debian-project-golang-docker-desktop-x \
+  debian-obs-vscode-golang-ai-dockerd \
   debian-project-golang-desktop-x \
   debian-project-golang-docker \
   debian-project-golang-docker-desktop-x \
-  debian-project-obs-vscode-golang-ai-docker \
-  debian-project-vscode-golang-ai-docker \
-  debian-vscode-golang-ai-docker \
-  $(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS:%=debian-project-%) \
-  $(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=debian-%) \
+  debian-project-obs-desktop-x-vscode-golang-ai-dockerd \
+  debian-project-vscode-golang-ai-dockerd \
+  debian-vscode-golang-ai-dockerd \
+  debian-desktop-x-vscode-golang-ai-dockerd \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-ai) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-desktop-x) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-docker-desktop-x) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-docker-ai) \
+  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-dockerd-ai) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-docker-project) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-flutter-desktop-x) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-flutter-ai) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-flutter-project) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-project)
+  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-project) \
+  $(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=debian-%) \
+  $(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS:%=debian-project-%) \
 
 VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGES ?= \
   $(VEGITO_DOCKER_DEBIAN_IMAGES:%=trixie-%)

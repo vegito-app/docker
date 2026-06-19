@@ -11,23 +11,20 @@ ifeq ($(VEGITO_DOCKER_VERSION),)
 VEGITO_DOCKER_VERSION := latest
 endif
 
-VERSION ?= $(VEGITO_DOCKER_VERSION)
+export VERSION ?= $(VEGITO_DOCKER_VERSION)
 
-VEGITO_DOCKER_REGISTRIES ?= dockerhub
+export VEGITO_DOCKER_REGISTRIES ?= dockerhub
 
-GOOGLE_CLOUD_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_REGION)-docker.pkg.devs
-GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_DOCKER_REGISTRY)/$(GOOGLE_CLOUD_PROJECT_ID)
-
-export
-
+export GOOGLE_CLOUD_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_REGION)-docker.pkg.dev
+export GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_DOCKER_REGISTRY)/$(GOOGLE_CLOUD_PROJECT_ID)
 # Use docker.io as the default registry for local public images, but allow overriding it if needed.
 # Remove after gcr is back in shape and can be used as the default registry for local public images.
-VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME  ?= docker.io/dbndev/vegito-public
-VEGITO_DOCKER_BUILD_ENABLE_LOCAL_CACHE ?= false
+export VEGITO_DOCKER_PUBLIC_REPOSITORY ?= docker.io/dbndev
+export VEGITO_DOCKER_BUILD_ENABLE_LOCAL_CACHE ?= false
 
-VEGITO_DOCKER_ALPINE_DIR ?= $(VEGITO_DOCKER_DIR)/alpine
-VEGITO_DOCKER_DEBIAN_DIR ?= $(VEGITO_DOCKER_DIR)/debian
-VEGITO_DOCKER_IO_DIR     ?= $(VEGITO_DOCKER_DIR)/docker.io
+export VEGITO_DOCKER_ALPINE_DIR ?= $(VEGITO_DOCKER_DIR)/alpine
+export VEGITO_DOCKER_DEBIAN_DIR ?= $(VEGITO_DOCKER_DIR)/debian
+export VEGITO_DOCKER_IO_DIR     ?= $(VEGITO_DOCKER_DIR)/docker.io
 
 VEGITO_DOCKER_BUILDX_BAKE ?= \
   docker buildx bake \
@@ -37,6 +34,8 @@ VEGITO_DOCKER_BUILDX_BAKE ?= \
   -f $(VEGITO_DOCKER_ALPINE_DIR)/docker-bake.hcl \
   -f $(VEGITO_DOCKER_DEBIAN_DIR)/docker-bake.hcl \
   -f $(VEGITO_DOCKER_DEBIAN_DIR)/trixie.docker-bake.hcl \
+  -f $(VEGITO_DOCKER_DEBIAN_DIR)/docker/dockerd/docker-bake.hcl \
+  -f $(VEGITO_DOCKER_DEBIAN_DIR)/docker/dockerd/trixie.docker-bake.hcl \
   $(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/docker-bake.hcl) \
   $(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/trixie.docker-bake.hcl) \
   $(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/project/%/docker-bake.hcl) \

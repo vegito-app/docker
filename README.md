@@ -1,4 +1,3 @@
-
 ![Release Version](https://img.shields.io/github/v/release/vegito-app/docker?sort=semver)
 ![CI](https://github.com/vegito-app/docker/actions/workflows/docker-release.yml/badge.svg?branch=main)
 
@@ -112,6 +111,13 @@ build-foundation-images
 ```
 
 The generated OCI images are intended to be consumed from external repositories using immutable image references instead of `target:` BuildKit dependencies.
+
+The Makefile provides a curated build interface for common workflows. It does not need to expose every Bake target present in the graph.
+
+Naming distinguishes Docker CLI/client support from Docker daemon support:
+
+- `docker` refers to Docker client or Docker tooling.
+- `dockerd` refers to Docker daemon or Docker-in-Docker runtime support.
 
 ## Repository Role
 

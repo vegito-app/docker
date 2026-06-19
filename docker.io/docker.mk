@@ -1,5 +1,5 @@
 
-VEGITO_DOCKER_HUB_REGISTRY ?= docker.io/dbndev
+export VEGITO_DOCKER_HUB_REGISTRY ?= docker.io/dbndev
 
 DOCKERHUB_USERNAME ?= $(VEGITO_DOCKERHUB_USERNAME)
 DOCKERHUB_PAT ?= $(VEGITO_DOCKERHUB_PAT)
@@ -13,76 +13,79 @@ DOCKERHUB_PAT ?= $(VEGITO_DOCKERHUB_PAT)
 # VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST ?= docker:dind-rootless
 # VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_VERSION ?= docker:dind-rootless
 
-export VEGITO_DOCKER_DEBIAN_IMAGE_LATEST          ?= dbndev/vegito-public:bookworm-debian-latest
-export VEGITO_DOCKER_DEBIAN_IMAGE_VERSION         ?= dbndev/vegito-public:bookworm-debian-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_LATEST   ?= dbndev/vegito-public:trixie-debian-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_VERSION  ?= dbndev/vegito-public:trixie-debian-latest
+export VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME  ?= $(VEGITO_DOCKER_PUBLIC_REPOSITORY)/vegito-public
 
-export VEGITO_GO_IMAGE_LATEST  ?= dbndev/vegito-public:docker-golang-alpine-latest
-export VEGITO_GO_IMAGE_VERSION ?= dbndev/vegito-public:docker-golang-alpine-latest
+export VEGITO_DOCKER_DEBIAN_IMAGE_LATEST          ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):bookworm-debian-latest
+export VEGITO_DOCKER_DEBIAN_IMAGE_VERSION         ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):bookworm-debian-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_LATEST   ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-latest
 
-export VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_LATEST   ?= dbndev/vegito-public:debian-python-latest
-export VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_VERSION  ?= dbndev/vegito-public:debian-python-latest
+export VEGITO_GO_IMAGE_LATEST  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):docker-golang-alpine-latest
+export VEGITO_GO_IMAGE_VERSION ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):docker-golang-alpine-latest
 
-export VEGITO_DOCKER_ALPINE_GOLANG_IMAGE_LATEST   ?= dbndev/vegito-public:golang-alpine-latest
-export VEGITO_DOCKER_ALPINE_GOLANG_IMAGE_VERSION  ?= dbndev/vegito-public:golang-alpine-latest
+export VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_LATEST   ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-python-latest
+export VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-python-latest
 
-export VEGITO_DOCKER_ALPINE_RUST_IMAGE_LATEST    ?= dbndev/vegito-public:rust-alpine-latest
-export VEGITO_DOCKER_ALPINE_RUST_IMAGE_VERSION   ?= dbndev/vegito-public:rust-alpine-latest
+export VEGITO_DOCKER_ALPINE_GOLANG_IMAGE_LATEST   ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):golang-alpine-latest
+export VEGITO_DOCKER_ALPINE_GOLANG_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):golang-alpine-latest
 
-export VEGITO_DOCKER_DEBIAN_GOLANG_IMAGE_LATEST   ?= dbndev/vegito-public:debian-golang-latest
-export VEGITO_DOCKER_DEBIAN_GOLANG_IMAGE_VERSION  ?= dbndev/vegito-public:debian-golang-latest
-export VEGITO_DOCKER_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST  ?= dbndev/vegito-public:debian-golang-desktop-x-latest
-export VEGITO_DOCKER_DEBIAN_GOLANG_DESKTOP_X_IMAGE_VERSION ?= dbndev/vegito-public:debian-golang-desktop-x-latest
+export VEGITO_DOCKER_ALPINE_RUST_IMAGE_LATEST    ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):rust-alpine-latest
+export VEGITO_DOCKER_ALPINE_RUST_IMAGE_VERSION   ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):rust-alpine-latest
 
-export VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_IMAGE_LATEST             ?= dbndev/vegito-public:trixie-debian-golang-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_IMAGE_VERSION            ?= dbndev/vegito-public:trixie-debian-golang-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST   ?= dbndev/vegito-public:trixie-debian-golang-desktop-x-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_DESKTOP_X_IMAGE_VERSION  ?= dbndev/vegito-public:trixie-debian-golang-desktop-x-latest
+export VEGITO_DOCKER_DEBIAN_GOLANG_IMAGE_LATEST   ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-golang-latest
+export VEGITO_DOCKER_DEBIAN_GOLANG_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-golang-latest
+export VEGITO_DOCKER_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-golang-desktop-x-latest
+export VEGITO_DOCKER_DEBIAN_GOLANG_DESKTOP_X_IMAGE_VERSION ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-golang-desktop-x-latest
 
-export VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_LATEST             ?= dbndev/vegito-public:debian-python-latest
-export VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_VERSION            ?= dbndev/vegito-public:debian-python-latest
-export VEGITO_DOCKER_DEBIAN_PYTHON_DESKTOP_X_IMAGE_LATEST   ?= dbndev/vegito-public:debian-python-desktop-x-latest
-export VEGITO_DOCKER_DEBIAN_PYTHON_DESKTOP_X_IMAGE_VERSION  ?= dbndev/vegito-public:debian-python-desktop-x-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_IMAGE_LATEST             ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-golang-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_IMAGE_VERSION            ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-golang-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST   ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-golang-desktop-x-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_DESKTOP_X_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-golang-desktop-x-latest
 
-export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_IMAGE_LATEST             ?= dbndev/vegito-public:debian-python-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_IMAGE_VERSION            ?= dbndev/vegito-public:debian-python-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DESKTOP_X_IMAGE_LATEST   ?= dbndev/vegito-public:debian-python-desktop-x-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DESKTOP_X_IMAGE_VERSION  ?= dbndev/vegito-public:debian-python-desktop-x-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERSION ?= dbndev/vegito-public:debian-vscode-golang-ai-docker-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST ?= dbndev/vegito-public:debian-vscode-golang-ai-docker-latest
+export VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_LATEST             ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-python-latest
+export VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_VERSION            ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-python-latest
+export VEGITO_DOCKER_DEBIAN_PYTHON_DESKTOP_X_IMAGE_LATEST   ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-python-desktop-x-latest
+export VEGITO_DOCKER_DEBIAN_PYTHON_DESKTOP_X_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-python-desktop-x-latest
 
-export VEGITO_DOCKER_DEBIAN_OBS_IMAGE_LATEST             ?= dbndev/vegito-public:debian-obs-latest
-export VEGITO_DOCKER_DEBIAN_OBS_IMAGE_VERSION            ?= dbndev/vegito-public:debian-obs-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_LATEST             ?= dbndev/vegito-public:trixie-debian-obs-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_VERSION            ?= dbndev/vegito-public:trixie-debian-obs-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_IMAGE_LATEST             ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-python-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_IMAGE_VERSION            ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-python-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DESKTOP_X_IMAGE_LATEST   ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-python-desktop-x-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DESKTOP_X_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-python-desktop-x-latest
 
-export VEGITO_DOCKER_DEBIAN_RUST_IMAGE_LATEST             ?= dbndev/vegito-public:debian-rust-latest
-export VEGITO_DOCKER_DEBIAN_RUST_IMAGE_VERSION            ?= dbndev/vegito-public:debian-rust-latest
-export VEGITO_DOCKER_DEBIAN_RUST_DESKTOP_X_IMAGE_LATEST   ?= dbndev/vegito-public:debian-rust-desktop-x-latest
-export VEGITO_DOCKER_DEBIAN_RUST_DESKTOP_X_IMAGE_VERSION  ?= dbndev/vegito-public:debian-rust-desktop-x-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-vscode-golang-ai-dockerd-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKERD_IMAGE_VERSION ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-vscode-golang-ai-dockerd-latest
 
-export VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_LATEST            ?= dbndev/vegito-public:debian-rust-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_VERSION           ?= dbndev/vegito-public:debian-rust-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DESKTOP_X_IMAGE_LATEST  ?= dbndev/vegito-public:debian-rust-desktop-x-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DESKTOP_X_IMAGE_VERSION ?= dbndev/vegito-public:debian-rust-desktop-x-latest
+export VEGITO_DOCKER_DEBIAN_OBS_IMAGE_LATEST             ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-obs-latest
+export VEGITO_DOCKER_DEBIAN_OBS_IMAGE_VERSION            ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-obs-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_LATEST             ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-obs-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_VERSION            ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-obs-latest
+
+export VEGITO_DOCKER_DEBIAN_RUST_IMAGE_LATEST             ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-rust-latest
+export VEGITO_DOCKER_DEBIAN_RUST_IMAGE_VERSION            ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-rust-latest
+export VEGITO_DOCKER_DEBIAN_RUST_DESKTOP_X_IMAGE_LATEST   ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-rust-desktop-x-latest
+export VEGITO_DOCKER_DEBIAN_RUST_DESKTOP_X_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-rust-desktop-x-latest
+
+export VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_LATEST            ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-rust-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_IMAGE_VERSION           ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-rust-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DESKTOP_X_IMAGE_LATEST  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-rust-desktop-x-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_RUST_DESKTOP_X_IMAGE_VERSION ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):debian-rust-desktop-x-latest
 
 export LOCAL_BUILDER_X_IMAGE_LATEST  ?= dbndev/vegito-local-public:builder-x-latest
 export LOCAL_BUILDER_X_IMAGE_VERSION ?= dbndev/vegito-local-public:builder-x-latest
 
-export VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_LATEST  ?= dbndev/vegito-public:trixie-debian-obs-vscode-golang-ai-docker-latest
-export VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKER_IMAGE_VERSION ?= dbndev/vegito-public:trixie-debian-obs-vscode-golang-ai-docker-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-obs-vscode-golang-ai-dockerd-latest
+export VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_VERSION ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):trixie-debian-obs-vscode-golang-ai-dockerd-latest
 # Dockerhub replica
-export VEGITO_DOCKER_HUB_DEBIAN_IMAGE_LATEST  ?= dbndev/vegito-public:hub-debian-latest
-export VEGITO_DOCKER_HUB_DEBIAN_IMAGE_VERSION  ?= dbndev/vegito-public:hub-debian-latest
-export VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_LATEST  ?= dbndev/vegito-public:hub-trixie-debian-latest
-export VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_VERSION  ?= dbndev/vegito-public:hub-trixie-debian-latest
-export VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST  ?= dbndev/vegito-public:hub-debian-golang-latest
-export VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION  ?= dbndev/vegito-public:hub-debian-golang-latest
-export VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST  ?= dbndev/vegito-public:hub-trixie-debian-golang-latest
-export VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION ?= dbndev/vegito-public:hub-trixie-debian-golang-latest
-export VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST  ?= dbndev/vegito-public:hub-docker-dind-rootless-latest
-export VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_VERSION  ?= dbndev/vegito-public:hub-docker-dind-rootless-latest
+export VEGITO_DOCKER_HUB_DEBIAN_IMAGE_LATEST  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):hub-debian-latest
+export VEGITO_DOCKER_HUB_DEBIAN_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):hub-debian-latest
+export VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_LATEST  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):hub-trixie-debian-latest
+export VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):hub-trixie-debian-latest
+export VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):hub-debian-golang-latest
+export VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):hub-debian-golang-latest
+export VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):hub-trixie-debian-golang-latest
+export VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):hub-trixie-debian-golang-latest
+export VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):hub-docker-dind-rootless-latest
+export VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_VERSION  ?= $(VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME):hub-docker-dind-rootless-latest
 
 vegito-docker-login-dockerhub:
 	@echo "Logging into Docker Hub"

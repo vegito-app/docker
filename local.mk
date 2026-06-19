@@ -10,11 +10,12 @@ vegito-local-debian-bookworm-images-update
 
 VEGITO_DOCKER_LOCAL_DEBIAN_RELEASE_TARGETS ?= \
   debian-flutter-desktop-x-images-update \
-  debian-robotframework-images-update \
-  debian-project-golang-docker-images-update \
   debian-project-golang-docker-desktop-x-images-update \
-  debian-project-vscode-golang-ai-docker-images-update
-  
+  debian-project-golang-docker-images-update \
+  debian-project-golang-update \
+  debian-project-vscode-golang-ai-dockerd-images-update \
+  debian-robotframework-images-update
+
 vegito-local-debian-images-update: $(VEGITO_DOCKER_LOCAL_DEBIAN_RELEASE_TARGETS:%=vegito-docker-trixie-%)
 .PHONY: vegito-local-debian-images-update
 

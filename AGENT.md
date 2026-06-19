@@ -123,6 +123,36 @@ This creates compilation boundaries and prevents rebuilding the entire graph aft
 
 ---
 
+## Naming and Build Interfaces
+
+### `docker` vs `dockerd`
+
+Use `docker` for the Docker CLI/client capability.
+
+Use `dockerd` for Docker daemon / Docker-in-Docker capability.
+
+Target names should include `dockerd` when the image provides or depends on a Docker daemon runtime.
+
+Avoid mixing `docker` and `dockerd` for the same capability in target names.
+
+### Makefile Scope
+
+The Makefile exposes a practical subset of Buildx Bake targets.
+
+It is not expected to expose every target present in the graph.
+
+When reviewing or editing targets, treat the Bake HCL graph as authoritative and the Makefile as a curated interface.
+
+### Release Target Lists
+
+Release target lists should remain coherent with target names.
+
+When a target is renamed in Bake, update the corresponding Makefile target list in the same change.
+
+Do not keep obsolete target aliases unless they are intentionally maintained for compatibility.
+
+---
+
 ## Agent Rules
 
 When modifying this repository:
