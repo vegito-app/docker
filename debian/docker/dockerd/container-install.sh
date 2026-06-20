@@ -35,13 +35,14 @@ else
     : "${XDG_RUNTIME_DIR:=/run/user/$uid}"
     dockerSocket="unix://$XDG_RUNTIME_DIR/docker.sock"
 fi
+
 case "${DOCKER_HOST:-}" in
     unix://*)
         dockerSocket="$DOCKER_HOST"
         ;;
 esac
 
-cat <<<EOF > ~/.bashrc.d/21-dockerd.sh
+cat <<EOF > ~/.bashrc.d/21-dockerd.sh
 export DOCKER_HOST=${dockerSocket}
 export DOCKER_RUNTIME=dind
 EOF

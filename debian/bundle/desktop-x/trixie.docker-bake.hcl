@@ -146,7 +146,7 @@ target "vegito-trixie-debian-desktop-x" {
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKERD_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-desktop-x-project-obs-vscode-golang-ai-dockerd-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_REGISTRY_CACHE" {
@@ -154,11 +154,11 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_PROJECT_OBS_VSCODE_GOLANG_AI_DOC
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian-desktop-x-project-obs-vscode-golang-ai-dockerd-version"
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-version"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest"
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
@@ -182,11 +182,11 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_PROJECT_OBS_VSCODE_GOLANG_AI_DOC
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-desktop-x-project-obs-vscode-golang-ai-dockerd-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-${VERSION}"
 }
 
 group "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-ci" {

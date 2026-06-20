@@ -55,13 +55,6 @@ group "vegito-trixie-debian-python-desktop-x-ci" {
   ]
 }
 
-group "vegito-trixie-debian-python-dockerd-desktop-x-ci" {
-  targets = [
-    "vegito-trixie-debian-python-dockerd-desktop-x-version-ci",
-    "vegito-trixie-debian-python-dockerd-desktop-x-latest-ci",
-  ]
-}
-
 target "vegito-trixie-debian-python-base" {
   context = VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DIR
   args = {
@@ -199,6 +192,13 @@ target "vegito-trixie-debian-python-desktop-x-version-ci" {
   platforms = platforms
 }
 
+group "vegito-trixie-debian-python-dockerd-desktop-x-ci" {
+  targets = [
+    "vegito-trixie-debian-python-dockerd-desktop-x-version-ci",
+    "vegito-trixie-debian-python-dockerd-desktop-x-latest-ci",
+  ]
+}
+
 target "vegito-trixie-debian-python-desktop-x-latest-ci" {
   inherits = ["vegito-trixie-debian-python-base"]
   contexts = {
@@ -275,9 +275,16 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DOCKER_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_REGISTRY_CACHE}-python-dockerd"
 }
 
+group "vegito-trixie-debian-python-dockerd-ci" {
+  targets = [
+    "vegito-trixie-debian-python-dockerd-version-ci",
+    "vegito-trixie-debian-python-dockerd-latest-ci",
+  ]
+}
+
 target "vegito-trixie-debian-python-dockerd-version-ci" {
   contexts = {
-    debian = "target:vegito-trixie-debian-docker-version-ci"
+    debian = "target:vegito-trixie-debian-dockerd-version-ci"
   }
   inherits = ["vegito-trixie-debian-python-base"]
   tags = [
@@ -305,7 +312,7 @@ target "vegito-trixie-debian-python-dockerd-version-ci" {
 target "vegito-trixie-debian-python-dockerd-latest-ci" {
   inherits = ["vegito-trixie-debian-python-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-docker-latest-ci"
+    debian = "target:vegito-trixie-debian-dockerd-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DOCKER_IMAGE_LATEST,
@@ -331,7 +338,7 @@ target "vegito-trixie-debian-python-dockerd-latest-ci" {
 target "vegito-trixie-debian-python-dockerd" {
   inherits = ["vegito-trixie-debian-python-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-docker-version-ci"
+    debian = "target:vegito-trixie-debian-dockerd-version-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DOCKER_IMAGE_VERSION,
@@ -366,7 +373,7 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DOCKER_DESKTOP_X_IMAGE_LATEST" {
 target "vegito-trixie-debian-python-dockerd-desktop-x-version-ci" {
   inherits = ["vegito-trixie-debian-python-desktop-x-version-ci"]
   contexts = {
-    debian = "target:vegito-trixie-debian-docker-desktop-x-version-ci"
+    debian = "target:vegito-trixie-debian-dockerd-desktop-x-version-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DOCKER_DESKTOP_X_IMAGE_VERSION,
@@ -376,7 +383,7 @@ target "vegito-trixie-debian-python-dockerd-desktop-x-version-ci" {
 target "vegito-trixie-debian-python-dockerd-desktop-x-latest-ci" {
   inherits = ["vegito-trixie-debian-python-desktop-x-latest-ci"]
   contexts = {
-    debian = "target:vegito-trixie-debian-docker-desktop-x-latest-ci"
+    debian = "target:vegito-trixie-debian-dockerd-desktop-x-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DOCKER_DESKTOP_X_IMAGE_LATEST,
@@ -386,7 +393,7 @@ target "vegito-trixie-debian-python-dockerd-desktop-x-latest-ci" {
 target "vegito-trixie-debian-python-dockerd-desktop-x" {
   inherits = ["vegito-trixie-debian-python-desktop-x"]
   contexts = {
-    debian = "target:vegito-trixie-debian-docker-desktop-x"
+    debian = "target:vegito-trixie-debian-dockerd-desktop-x"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_DOCKER_DESKTOP_X_IMAGE_LATEST,

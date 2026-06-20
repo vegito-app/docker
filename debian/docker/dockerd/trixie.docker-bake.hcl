@@ -42,6 +42,7 @@ target "vegito-trixie-debian-dockerd-base" {
   inherits = ["vegito-debian-dockerd-base"]
   args = {
     debian_version = "trixie"
+    docker_version = DOCKER_VERSION
   }
 }
 

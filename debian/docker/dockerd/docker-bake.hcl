@@ -44,6 +44,7 @@ variable "VEGITO_DOCKER_DEBIAN_DOCKERD_IMAGE_DOCKERD_BUILDX_LOCAL_CACHE_READ_LAT
 target "vegito-debian-dockerd-base" {
   args = {
     debian_version = "bookworm"
+    docker_version = DOCKER_VERSION
   }
   context = VEGITO_DOCKER_DEBIAN_DOCKERD_DIR
 }
