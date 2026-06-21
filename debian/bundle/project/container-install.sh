@@ -90,8 +90,6 @@ fi
 # Developer-friendly aliases
 alias k='kubectl'
 
-alias nestor-logs='tail -f ${NESTOR_LOGS_PATH}'
-
 alias tf='terraform'
 alias tfi='terraform init'
 alias tfp='terraform plan'
