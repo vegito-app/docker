@@ -3,13 +3,13 @@
 set -euo pipefail
 
 # Nettoyage du flag d'état à chaque arrêt
-rm -f /tmp/.ai-agent-ready
+rm -f /tmp/.ai-runtime-ready
 
 bg_pids=()
 ollama_pid=
 
 kill_jobs() {
-    rm -f /tmp/.ai-agent-ready
+    rm -f /tmp/.ai-runtime-ready
     echo "🧼 Cleaning up Ai services..."
     for pid in "${bg_pids[@]}"; do
         kill "$pid" 2>/dev/null || true
@@ -31,9 +31,9 @@ else
 fi
 
 # Create a ready flag file for healthchecks and other services to know when the AI agent is ready
-echo "{\"status\":\"ready\",\"ts\":$(date +%s)}" > /tmp/.ai-agent-ready
+echo "{\"status\":\"ready\",\"ts\":$(date +%s)}" > /tmp/.ai-runtime-ready
 
-echo "✅ Ai agent started successfully."
+echo "✅ Ai runtime started successfully."
 
 if [ -n "${ollama_pid}" ];then
   wait "${ollama_pid}"
