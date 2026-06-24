@@ -46,7 +46,7 @@ if [ "$ENABLE_AUDIO" = "1" ]; then
     echo "🔊 Audio on"
     XPRA_ARGS_ARRAY+=(
         --speaker=on
-        --microphone=off 
+        --microphone=off
     )
 else
     echo "🔇 Audio off"
@@ -59,6 +59,19 @@ fi
 echo "🌀 XPRA arguments:"
 printf '  %s\n' "${XPRA_ARGS_ARRAY[@]}"
 
+# Work around xpra-x11 6.x packaging issue on Debian Trixie:
+# xpra.x11.bindings.xkb references libX11 symbols without a DT_NEEDED entry.
+if [ -n "${LD_PRELOAD:-}" ]; then
+    export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libX11.so.6:${LD_PRELOAD}"
+else
+    export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libX11.so.6"
+fi
+
+python3 - <<'PY'
+import xpra.x11.bindings.xkb
+print("✅ Xpra XKB bindings loaded")
+PY
+
 echo "🌀 Starting Xpra on ${display}"
 xpra start "${display}" \
     --bind-tcp=0.0.0.0:5901 \
@@ -69,16 +82,24 @@ xpra start "${display}" \
     &
 
 display_pid="$!"
+bg_pids+=("${display_pid}")
 
-XPRA_SOCKET="$XPRA_SOCKET_DIR/$(hostname)-${display#:}"
 export XPRA_SERVER_SOCKET="$XPRA_SOCKET"
 
-until [ -S "$XPRA_SOCKET" ]; do
+for i in $(seq 1 30); do
+    if [ -S "$XPRA_SOCKET" ] && xpra info "socket://$XPRA_SOCKET" >/dev/null 2>&1; then
+        echo "🌀 Xpra socket ready on ${display}."
+        break
+    fi
+
     echo "⏳ Waiting for xpra socket..."
     sleep 1
 done
 
-echo "🌀 Xpra started successfully on ${display}."
+if ! xpra info "socket://$XPRA_SOCKET" >/dev/null 2>&1; then
+    echo "❌ Xpra socket not ready."
+    exit 1
+fi
 
 if [ "$ENABLE_AUDIO" = "1" ]; then
     for i in $(seq 1 10); do
@@ -97,4 +118,4 @@ echo "{\"status\":\"ready\",\"ts\":$(date +%s)}" > /tmp/.xpra-ready
 
 echo "✅ Xpra started successfully."
 
-wait $display_pid
+wait "$display_pid"£

@@ -31,15 +31,17 @@ kill_jobs() {
     done
 
     pkill -f -9 "Xwayland $display" || true
-    pkill -f "weston.*${wayland_socket}" || true
+    pkill -f "weston.*${WAYLAND_DISPLAY_NAME}" || true
     rm -rf /tmp/.X11-unix/X${display#*:}
     rm -rf /tmp/.X${display#*:}-lock
 }
 
 # 🚨 Register cleanup function to run on script exit
 trap kill_jobs EXIT
-
-WAYLAND_DISPLAY_NAME=${WAYLAND_DISPLAY_NAME:-${WAYLAND_DISPLAY:-$default_wayland_socket}}
+# Keep exactly one Wayland socket name source of truth:
+# - default: wayland-1
+# - override: existing WAYLAND_DISPLAY from docker-compose/env
+WAYLAND_DISPLAY_NAME="${WAYLAND_DISPLAY:-${WAYLAND_DISPLAY_NAME:-$wayland_socket}}"
 DISPLAY_RESOLUTION=${DISPLAY_RESOLUTION:-$default_resolution}
 
 # -------------------------------------------------------------------
@@ -47,6 +49,7 @@ DISPLAY_RESOLUTION=${DISPLAY_RESOLUTION:-$default_resolution}
 # -------------------------------------------------------------------
 
 export WAYLAND_DISPLAY="${WAYLAND_DISPLAY_NAME}"
+echo "WAYLAND_DISPLAY=${WAYLAND_DISPLAY_NAME}"
 
 mkdir -p /tmp/.X11-unix
 
@@ -75,12 +78,11 @@ echo "🚀 Starting Weston compositor with NVIDIA OpenGL..."
 weston \
   --backend=headless-backend.so \
   --use-gl \
-  --socket="${wayland_socket}" \
+  --socket="${WAYLAND_DISPLAY_NAME}" \
   --config=/tmp/weston.ini \
   --width="${width}" \
   --height="${height}" \
     > /tmp/weston.log 2>&1 &
-
 weston_pid=$!
 bg_pids+=("${weston_pid}")
 
@@ -140,6 +142,16 @@ echo "🔍 OpenGL renderer"
 glxinfo -B | grep -E "OpenGL vendor|OpenGL renderer|OpenGL version" || echo "⚠️ OpenGL info not available"
 
 echo "✅ Weston/XWayland started successfully on display ${display}."
+
+if command -v setxkbmap >/dev/null 2>&1; then
+    echo "🔍 XWayland keyboard map"
+    setxkbmap -display "${DISPLAY}" -query || true
+fi
+
+if command -v xkbcomp >/dev/null 2>&1; then
+    echo "🔍 XWayland effective XKB symbols"
+    xkbcomp -xkb "${DISPLAY}" - 2>/dev/null | grep -m1 'xkb_symbols' || true
+fi
 
 
 # -------------------------------------------------------------------
