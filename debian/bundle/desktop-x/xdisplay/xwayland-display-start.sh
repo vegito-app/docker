@@ -39,7 +39,7 @@ kill_jobs() {
 # 🚨 Register cleanup function to run on script exit
 trap kill_jobs EXIT
 
-WAYLAND_DISPLAY_NAME=${WAYLAND_DISPLAY_NAME:-$default_wayland_socket}
+WAYLAND_DISPLAY_NAME=${WAYLAND_DISPLAY_NAME:-${WAYLAND_DISPLAY:-$default_wayland_socket}}
 DISPLAY_RESOLUTION=${DISPLAY_RESOLUTION:-$default_resolution}
 
 # -------------------------------------------------------------------
@@ -151,7 +151,7 @@ if command -v glxinfo >/dev/null 2>&1; then
     glxinfo -B || true
 fi
 
-export WAYLAND_DISPLAY="${WAYLAND_DISPLAY}"
+export WAYLAND_DISPLAY="${WAYLAND_DISPLAY_NAME}"
 export WAYLAND_DEBUG=0
 
 WAYVNC_PORT=${WAYVNC_PORT:-5901}
@@ -173,7 +173,7 @@ echo "🔍 Weston GPU capabilities"
 grep -E "GL renderer|GL vendor|GL version" /tmp/weston.log || true
 
 echo "🖥️ Weston headless GPU session ready"
-echo "📺 XWayland display available on DISPLAY=:0"
+echo "📺 XWayland display available on DISPLAY=${display}"
 echo "✅ GPU compositor active"
 echo "ℹ️ Launch Wayland-native applications inside this session"
 
@@ -194,9 +194,9 @@ else
     echo "⚠️ Invalid display mode. Please choose 'xpra' or 'vnc'."
 fi
 
-echo "$GBM_BACKEND"
-echo "$__GLX_VENDOR_LIBRARY_NAME"
-echo "$__EGL_VENDOR_LIBRARY_FILENAMES"
+echo "GBM_BACKEND=${GBM_BACKEND:-unset}"
+echo "__GLX_VENDOR_LIBRARY_NAME=${__GLX_VENDOR_LIBRARY_NAME:-unset}"
+echo "__EGL_VENDOR_LIBRARY_FILENAMES=${__EGL_VENDOR_LIBRARY_FILENAMES:-unset}"
 
 glxinfo -B | grep -Ei "vendor|renderer"
 # Création d'un flag indiquant que tout le display est prêt
