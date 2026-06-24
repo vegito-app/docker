@@ -41,3 +41,38 @@ jobs:
       GOOGLE_CLOUD_PROJECT_NUMBER: ${{ secrets.GOOGLE_CLOUD_PROJECT_NUMBER }}
       GOOGLE_CLOUD_SERVICE_ACCOUNT_EMAIL: github-actions-main@${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}.iam.gserviceaccount.com
       GOOGLE_CLOUD_WORKLOAD_IDENTITY_PROVIDER: projects/${{ secrets.GOOGLE_CLOUD_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ vars.WORKLOAD_IDENTITY_POOL_ID }}/providers/${{ vars.WORKLOAD_IDENTITY_PROVIDER_ID }}
+
+  version_finalize:
+    needs:
+      - version-changelog
+      - build-images
+    runs-on: self-hosted
+    name: Finalize Release ✨
+    environment: prod
+
+    steps:
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout release commit 🏷
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "build-and-push-images-action@github.com"
+          git fetch --tags
+          git checkout ${{ needs.version-changelog.outputs.commit_sha }}
+
+      - name: Push commit to branch
+        run: |
+          git push origin HEAD:main --follow-tags
+
+      - name: Create GitHub Release ✨
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.version-changelog.outputs.version }}
+          name: Release ${{ needs.version-changelog.outputs.version }}
+          body: |
+            ${{ needs.version-changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
