@@ -60,7 +60,7 @@ target "vegito-trixie-debian-desktop-x-base" {
 target "vegito-trixie-debian-desktop-x-version-ci" {
   inherits = ["vegito-trixie-debian-desktop-x-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-vscode-golang-ai-dockerd-version-ci"
+    debian = "target:vegito-trixie-debian-version-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_IMAGE_VERSION,
@@ -87,7 +87,7 @@ target "vegito-trixie-debian-desktop-x-version-ci" {
 target "vegito-trixie-debian-desktop-x-latest-ci" {
   inherits = ["vegito-trixie-debian-desktop-x-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-vscode-golang-ai-dockerd-latest-ci"
+    debian = "target:vegito-trixie-debian"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_IMAGE_LATEST,
@@ -121,7 +121,7 @@ target "vegito-trixie-debian-desktop-x" {
 
   inherits = ["vegito-trixie-debian-desktop-x-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-vscode-golang-ai-dockerd-version-ci"
+    debian = "target:vegito-trixie-debian"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_IMAGE_LATEST,
@@ -193,7 +193,7 @@ group "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-ci" {
   description = "Build and push bundle desktop-x project OBS Vscode Goalng AI DockerD"
   targets = [
     "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-version-ci",
-    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest-ci",
+    "vegito-trixie-debian-desktop-x-project-obs",
   ]
 }
 
@@ -231,10 +231,10 @@ target "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-vers
   platforms = platforms
 }
 
-target "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest-ci" {
+target "vegito-trixie-debian-desktop-x-project-obs" {
   inherits = ["vegito-trixie-debian-desktop-x-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-project-obs-vscode-golang-ai-dockerd-latest-ci"
+    debian = "target:vegito-trixie-debian-project-obs"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST,
