@@ -54,7 +54,7 @@ DISPLAY_MODE="${DISPLAY_MODE:-xpra}"
 
 if [ "$DISPLAY_MODE" = "xpra" ]; then
  
-  xpra-start.sh &
+  desktop-x-xpra-start.sh &
   display_pid="$!"
 
 elif [ "$DISPLAY_MODE" = "vnc" ]; then

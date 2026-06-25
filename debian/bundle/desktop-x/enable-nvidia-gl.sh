@@ -1,5 +1,5 @@
 #!/bin/bash
 
-source /usr/local/bin/nvidia-gl-env.sh
+source /usr/local/bin/desktop-x-nvidia-gl-env.sh 
 
 exec "$@"

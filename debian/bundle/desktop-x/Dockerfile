@@ -159,27 +159,28 @@ RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-pyth
 
 ENV PATH=${PATH}:/home/debian/.local/bin
 
-COPY --chown=${non_root_user}:${non_root_user} xdisplay/xvfb-display-start.sh     /usr/local/bin/
-COPY --chown=${non_root_user}:${non_root_user} xdisplay/xorg-display-start.sh     /usr/local/bin/
-COPY --chown=${non_root_user}:${non_root_user} xdisplay/xwayland-display-start.sh /usr/local/bin/
-COPY --chown=${non_root_user}:${non_root_user} xdisplay/xpra-start.sh             /usr/local/bin/
+COPY --chown=${non_root_user}:${non_root_user} xdisplay/xvfb-display-start.sh     /usr/local/bin/desktop-x-display-xvfb.sh     
+COPY --chown=${non_root_user}:${non_root_user} xdisplay/xorg-display-start.sh     /usr/local/bin/desktop-x-display-xorg.sh     
+COPY --chown=${non_root_user}:${non_root_user} xdisplay/xwayland-display-start.sh /usr/local/bin/desktop-x-display-wayland.sh 
+COPY --chown=${non_root_user}:${non_root_user} xdisplay/xpra-start.sh             /usr/local/bin/desktop-x-xpra-start.sh             
 
-COPY --chown=${non_root_user}:${non_root_user} enable-nvidia-gl.sh /usr/local/bin/
-COPY --chown=${non_root_user}:${non_root_user} nvidia-gl-env.sh    /usr/local/bin/
+COPY --chown=${non_root_user}:${non_root_user} container-enable-nvidia-gl.sh /usr/local/bin/desktop-x-enable-nvidia-gl.sh
+COPY --chown=${non_root_user}:${non_root_user} container-nvidia-gl-env.sh    /usr/local/bin/desktop-x-nvidia-gl-env.sh  
 
-COPY --chown=${non_root_user}:${non_root_user} entrypoint.sh         /usr/local/bin/desktop-x-entrypoint.sh
-COPY --chown=${non_root_user}:${non_root_user} container-install.sh  /usr/local/bin/desktop-x-install.sh
-COPY --chown=${non_root_user}:${non_root_user} container-start.sh    /usr/local/bin/desktop-x-start.sh
+COPY --chown=${non_root_user}:${non_root_user} container-entrypoint.sh      /usr/local/bin/desktop-x-entrypoint.sh
+COPY --chown=${non_root_user}:${non_root_user} container-install.sh         /usr/local/bin/desktop-x-install.sh
+COPY --chown=${non_root_user}:${non_root_user} container-start.sh           /usr/local/bin/desktop-x-start.sh
+COPY --chown=${non_root_user}:${non_root_user} container-display-start.sh   /usr/local/bin/desktop-x-display-start.sh
 
 RUN chmod +x \
     /usr/local/bin/desktop-x-entrypoint.sh \
     /usr/local/bin/desktop-x-start.sh \
-    /usr/local/bin/enable-nvidia-gl.sh \
-    /usr/local/bin/nvidia-gl-env.sh \
-    /usr/local/bin/xorg-display-start.sh \
-    /usr/local/bin/xpra-start.sh \
-    /usr/local/bin/xvfb-display-start.sh \
-    /usr/local/bin/xwayland-display-start.sh
+    /usr/local/bin/desktop-x-enable-nvidia-gl.sh \
+    /usr/local/bin/desktop-x-nvidia-gl-env.sh  \
+    /usr/local/bin/desktop-x-display-xorg.sh \
+    /usr/local/bin/desktop-x-xpra-start.sh \
+    /usr/local/bin/desktop-x-display-xvfb.sh \
+    /usr/local/bin/desktop-x-display-wayland.sh
 
 # 📱 By default, we can pass an APK already mounted in /apk/app.apk
 ARG default_apk_path=/apk/app.apk
