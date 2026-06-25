@@ -59,18 +59,12 @@ fi
 echo "🌀 XPRA arguments:"
 printf '  %s\n' "${XPRA_ARGS_ARRAY[@]}"
 
-# Work around xpra-x11 6.x packaging issue on Debian Trixie:
-# xpra.x11.bindings.xkb references libX11 symbols without a DT_NEEDED entry.
-if [ -n "${LD_PRELOAD:-}" ]; then
-    export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libX11.so.6:${LD_PRELOAD}"
-else
-    export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libX11.so.6"
-fi
+# Work around xpra-x11 packaging issue.
+libx11=/usr/lib/x86_64-linux-gnu/libX11.so.6
 
-python3 - <<'PY'
-import xpra.x11.bindings.xkb
-print("✅ Xpra XKB bindings loaded")
-PY
+if [ -r "$libx11" ]; then
+    export LD_PRELOAD="${libx11}${LD_PRELOAD:+:$LD_PRELOAD}"
+fi
 
 echo "🌀 Starting Xpra on ${display}"
 xpra start "${display}" \
