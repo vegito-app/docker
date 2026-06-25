@@ -193,7 +193,7 @@ group "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-ci" {
   description = "Build and push bundle desktop-x project OBS Vscode Goalng AI DockerD"
   targets = [
     "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-version-ci",
-    "vegito-trixie-debian-desktop-x-project-obs",
+    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest-ci",
   ]
 }
 
@@ -231,10 +231,10 @@ target "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-vers
   platforms = platforms
 }
 
-target "vegito-trixie-debian-desktop-x-project-obs" {
+target "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest-ci" {
   inherits = ["vegito-trixie-debian-desktop-x-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-project-obs"
+    debian = "target:vegito-trixie-debian-project-obs-vscode-golang-ai-dockerd-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_PROJECT_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_LATEST,
