@@ -120,10 +120,16 @@ RUN uv venv .venv && \
 RUN . .venv/bin/activate && \
     pip install -e '.[all]'
 
-ENV PATH="${HOME}/hermes/.venv/bin/:$PATH"
+# /!\ Do not add Hermes venv PATH to the global PATH
+# ENV PATH="${HOME}/hermes/.venv/bin/:$PATH"
 
 RUN mkdir -p /home/debian/.hermes && \
     cp -a /home/debian/hermes/. /home/debian/.hermes/
+
+RUN mkdir -p /home/debian/.local/bin && \
+    ln -sf \
+    /home/debian/hermes/.venv/bin/hermes \
+    /home/debian/.local/bin/hermes
 
 RUN curl -fsSL https://claude.ai/install.sh | bash
 
