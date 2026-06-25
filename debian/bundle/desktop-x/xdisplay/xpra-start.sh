@@ -113,9 +113,24 @@ fi
 
 xpra info "socket://$XPRA_SERVER_SOCKET" | grep -Ei "nvenc|device_count|gpu.encodings"
 
+# Xpra correctly detects the client keyboard layout (eg. "fr")
+# but the underlying X server keeps its default XKB layout ("us")
+# on Xvfb, XWayland and host Xorg.
+#
+# Apply an initial XKB layout so applications receive a sane keyboard
+# mapping until Xpra updates it correctly.
+xkbmap_default="${XKBMAP_DEFAULT:-fr}"
+if command -v setxkbmap >/dev/null 2>&1; then
+    echo "⌨️ Applying X keyboard layout: ${xkbmap_default} on ${display}"
+    DISPLAY="${display}" setxkbmap "${xkbmap_default}" || true
+    DISPLAY="${display}" setxkbmap -query || true
+else
+    echo "⚠️ setxkbmap not found; skipping X keyboard layout setup"
+fi
+
 # Création d'un flag indiquant que Xpra est prêt
 echo "{\"status\":\"ready\",\"ts\":$(date +%s)}" > /tmp/.xpra-ready
 
 echo "✅ Xpra started successfully."
 
-wait "$display_pid"£
+wait "$display_pid"
