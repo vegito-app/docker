@@ -100,12 +100,17 @@ ln -sfn ${container_cache}/.bash_history $BASH_HISTORY_PATH
 
 # Git config (optional but useful)
 GIT_CONFIG_GLOBAL=${HOME}/.gitconfig
-if [ -f "$GIT_CONFIG_GLOBAL" ]; then
-  mkdir -p ${container_cache}/git
-  rsync -av "$GIT_CONFIG_GLOBAL" ${container_cache}/git/
-  rm -f "$GIT_CONFIG_GLOBAL"
-  ln -sfn ${container_cache}/git/.gitconfig $GIT_CONFIG_GLOBAL
+GIT_CONFIG_CACHE=${container_cache}/.gitconfig
+
+mkdir -p "${container_cache}"
+
+if [ -f "$GIT_CONFIG_GLOBAL" ] && [ ! -e "$GIT_CONFIG_CACHE" ]; then
+    cp "$GIT_CONFIG_GLOBAL" "$GIT_CONFIG_CACHE"
 fi
+
+touch "$GIT_CONFIG_CACHE"
+rm -f "$GIT_CONFIG_GLOBAL"
+ln -sfn "$GIT_CONFIG_CACHE" "$GIT_CONFIG_GLOBAL"
 
 mkcd() {
     mkdir -p "$1" && cd "$1"
