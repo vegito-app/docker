@@ -130,7 +130,7 @@ target "vegito-debian-dockerd-latest-ci" {
 target "vegito-debian-dockerd" {
   inherits = ["vegito-debian-dockerd-base"]
   contexts = {
-    debian               = "target:vegito-debian"
+    debian               = "target:vegito-debian-docker"
     debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
@@ -228,8 +228,8 @@ target "vegito-debian-dockerd-desktop-x-version-ci" {
 target "vegito-debian-dockerd-desktop-x-latest-ci" {
   inherits = ["vegito-debian-dockerd-base"]
   contexts = {
-    debian               = "target:vegito-debian-docker-desktop-x-latest-ci"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
+    debian = "target:vegito-debian-docker-desktop-x-latest-ci"
+    debian_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
@@ -263,8 +263,8 @@ target "vegito-debian-dockerd-desktop-x-latest-ci" {
 target "vegito-debian-dockerd-desktop-x" {
   inherits = ["vegito-debian-dockerd-base"]
   contexts = {
-    debian               = "target:vegito-debian-docker-desktop-x"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
+    debian = "target:vegito-debian-docker-desktop-x"
+    debian_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
