@@ -38,10 +38,6 @@ target "vegito-trixie-debian-flutter-base-ci" {
 # ###################################################################
 # LOCAL FLUTTER DEBIAN
 # ###################################################################
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_REGISTRY_CACHE_IMAGE" {
-  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/trixie-debian-flutter"
-}
-
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/trixie-debian-flutter"
 }
@@ -171,10 +167,6 @@ target "vegito-trixie-debian-flutter-debian" {
 # ###################################################################
 # Desktop X
 # ###################################################################
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_DESKTOP_X_REGISTRY_CACHE_IMAGE" {
-  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/trixie-debian-flutter-desktop-x"
-}
-
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/trixie-debian-flutter-desktop-x"
 }

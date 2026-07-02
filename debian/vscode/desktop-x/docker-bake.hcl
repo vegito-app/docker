@@ -1,7 +1,3 @@
-variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_DIR" {
-  default = "${VEGITO_DOCKER_DEBIAN_DIR}/vscode"
-}
-
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_LATEST" {
   default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-vscode-desktop-x-latest"
 }

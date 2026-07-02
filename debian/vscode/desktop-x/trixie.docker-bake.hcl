@@ -1,7 +1,3 @@
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_DESKTOP_X_GOLANG_AI_DOCKERD_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-vscode-desktop-x-golang-ai-dockerd-${VERSION}"
-}
-
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_DESKTOP_X_GOLANG_AI_DOCKERD_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-trixie-debian-vscode-desktop-x-golang-ai-dockerd"
 }
@@ -136,10 +132,6 @@ target "vegito-trixie-debian-vscode-desktop-x-golang-ai-dockerd" {
       VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_DESKTOP_X_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
     ] : []
   )
-}
-
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_DESKTOP_X_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-vscode-desktop-x-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_DESKTOP_X_IMAGE_REGISTRY_CACHE" {

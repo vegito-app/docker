@@ -1,7 +1,3 @@
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_DIR" {
-  default = "${VEGITO_DOCKER_DEBIAN_DIR}/golang"
-}
-
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_IMAGE_VERSION" {
   default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-golang-${VERSION}"
 }

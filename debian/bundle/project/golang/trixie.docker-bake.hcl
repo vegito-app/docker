@@ -137,10 +137,6 @@ target "vegito-trixie-debian-project-golang" {
   )
 }
 
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_GOLANG_DESKTOP_X_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-golang-desktop-x-${VERSION}"
-}
-
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_GOLANG_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-trixie-debian-project-golang-desktop-x"
 }
@@ -278,10 +274,6 @@ target "vegito-trixie-debian-project-golang-desktop-x" {
       VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_GOLANG_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
     ] : []
   )
-}
-
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_GOLANG_DOCKER_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-golang-docker-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_GOLANG_DOCKER_IMAGE_REGISTRY_CACHE" {
@@ -423,10 +415,6 @@ target "vegito-trixie-debian-project-golang-docker" {
   )
 }
 
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_GOLANG_DOCKER_DESKTOP_X_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-golang-docker-desktop-x-${VERSION}"
-}
-
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_GOLANG_DOCKER_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-trixie-debian-project-golang-docker-desktop-x"
 }
@@ -564,10 +552,6 @@ target "vegito-trixie-debian-project-golang-docker-desktop-x" {
       VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_GOLANG_DOCKER_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
     ] : []
   )
-}
-
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_GOLANG_AI_DOCKERD_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-project-golang-ai-dockerd-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_GOLANG_AI_DOCKERD_IMAGE_REGISTRY_CACHE" {

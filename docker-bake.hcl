@@ -88,17 +88,8 @@ variable "VEGITO_DOCKER_CACHE_IMAGES_BASE" {
   default = "${VEGITO_DOCKER_CACHE_REPOSITORY}/vegito-docker"
 }
 
-variable "VEGITO_DOCKER_PRIVATE_REPOSITORY" {
-  default = "vegito-docker-repository-private"
-}
-
 variable "VEGITO_DOCKER_PUBLIC_REPOSITORY" {
   default = "vegito-docker-repository-public"
-}
-
-variable "GOOGLE_CLOUD_PROJECT_ID" {
-  description = "Google Cloud Project ID"
-  default     = "moov-dev-439608"
 }
 
 variable "platforms" {

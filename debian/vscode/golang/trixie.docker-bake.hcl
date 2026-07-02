@@ -1,7 +1,3 @@
-variable "VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKERD_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-vscode-golang-ai-dockerd-${VERSION}"
-}
-
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_VSCODE_GOLANG_AI_DOCKERD_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-trixie-debian-vscode-golang-ai-dockerd"
 }

@@ -47,10 +47,6 @@ variable "VEGITO_DOCKER_DEBIAN_FLUTTER_DIR" {
   default = "${VEGITO_DOCKER_DIR}/debian/flutter"
 }
 
-variable "VEGITO_DOCKER_DEBIAN_FLUTTER_REGISTRY_CACHE_IMAGE" {
-  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/debian-flutter"
-}
-
 variable "VEGITO_DOCKER_DEBIAN_FLUTTER_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/debian-flutter"
 }
@@ -180,10 +176,6 @@ target "vegito-debian-flutter" {
 # ###################################################################
 # Desktop X
 # ###################################################################
-variable "VEGITO_DOCKER_DEBIAN_FLUTTER_DESKTOP_X_REGISTRY_CACHE_IMAGE" {
-  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/debian-flutter-desktop-x"
-}
-
 variable "VEGITO_DOCKER_DEBIAN_FLUTTER_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/debian-flutter-desktop-x"
 }

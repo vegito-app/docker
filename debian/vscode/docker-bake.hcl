@@ -1,7 +1,3 @@
-variable "VEGITO_DOCKER_DEBIAN_VSCODE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-vscode-${VERSION}"
-}
-
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-debian-vscode"
 }

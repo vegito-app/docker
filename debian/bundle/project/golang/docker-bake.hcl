@@ -2,10 +2,6 @@ variable "VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-debian-project-golang"
 }
 
-variable "VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_DIR" {
-  default = "${VEGITO_DOCKER_DEBIAN_DIR}/project-golang"
-}
-
 variable "VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
   default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian-project-golang-version"
 }
@@ -138,16 +134,9 @@ target "vegito-debian-project-golang" {
     ] : []
   )
 }
-variable "VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_AI_DOCKERD_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-project-golang-ai-dockerd-${VERSION}"
-}
 
 variable "VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_AI_DOCKERD_IMAGE_REGISTRY_CACHE" {
   default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-debian-project-golang-ai-dockerd"
-}
-
-variable "VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_AI_DOCKERD_DIR" {
-  default = "${VEGITO_DOCKER_DEBIAN_DIR}/vscode"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_PROJECT_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
