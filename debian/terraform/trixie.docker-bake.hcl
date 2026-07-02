@@ -1,3 +1,7 @@
+variable "VEGITO_DOCKER_DEBIAN_TERRAFORM_DIR" {
+  default = "${VEGITO_DOCKER_DEBIAN_DIR}/terraform"
+}
+
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_TERRAFORM_IMAGE_VERSION" {
   default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-terraform-${VERSION}"
 }
@@ -39,7 +43,10 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_
 }
 
 target "vegito-trixie-debian-terraform-base" {
-  inherits = ["vegito-trixie-debian-terraform-base"]
+  inherits = ["vegito-debian-terraform-base"]
+  args = {
+    debian_version = "trixie"
+  }
 }
 
 group "vegito-trixie-debian-terraformlang" {
@@ -60,7 +67,6 @@ group "vegito-trixie-debian-terraform-ci" {
 }
 
 target "vegito-trixie-debian-terraform-version-ci" {
-  inherits = ["vegito-trixie-debian-terraform-base"]
   contexts = {
     debian = "target:vegito-trixie-debian-version-ci"
   }
