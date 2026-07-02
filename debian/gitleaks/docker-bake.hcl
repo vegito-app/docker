@@ -1,21 +1,21 @@
 variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_DIR" {
-  default = "${VEGITO_DOCKER_DEBIAN_DIR}/python"
+  default = "${VEGITO_DOCKER_DEBIAN_DIR}/gitleaks"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_REGISTRY_CACHE}-python"
+  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_REGISTRY_CACHE}-gitleaks"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_IMAGE_LATEST" {
-  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/debian-python:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/debian-gitleaks:latest"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/debian-python:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/debian-gitleaks:${VERSION}"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
-  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}-python"
+  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}-gitleaks"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
@@ -35,7 +35,7 @@ group "vegito-debian-gitleaks-ci" {
     "vegito-debian-gitleaks-docker-desktop-x-version-ci",
     "vegito-debian-gitleaks-docker-desktop-x-latest-ci",
 
-    "vegito-trixie-debian-python-ci",
+    "vegito-trixie-debian-gitleaks-ci",
   ]
 }
 
@@ -124,14 +124,14 @@ target "vegito-debian-gitleaks" {
 }
 
 variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_DESKTOP_X_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-python-desktop-x-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-gitleaks-desktop-x-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_DESKTOP_X_IMAGE_LATEST" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-python-desktop-x-latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-gitleaks-desktop-x-latest"
 }
 variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
-  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}-python"
+  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}-gitleaks"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
@@ -143,12 +143,12 @@ variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACH
 }
 
 variable "VEGITO_DOCKER_DEBIAN_GITLEAKS_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_REGISTRY_CACHE}-python-desktop-x"
+  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_REGISTRY_CACHE}-gitleaks-desktop-x"
 }
 
 target "vegito-debian-gitleaks-desktop-x-version-ci" {
   contexts = {
-    debian = "target:vegito-debian-python-desktop-x-version-ci"
+    debian = "target:vegito-debian-gitleaks-desktop-x-version-ci"
   }
   inherits = ["vegito-debian-gitleaks-base"]
   tags = [
@@ -176,7 +176,7 @@ target "vegito-debian-gitleaks-desktop-x-version-ci" {
 target "vegito-debian-gitleaks-desktop-x-latest-ci" {
   inherits = ["vegito-debian-gitleaks-base"]
   contexts = {
-    debian = "target:vegito-debian-python-desktop-x-latest-ci"
+    debian = "target:vegito-debian-gitleaks-desktop-x-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_GITLEAKS_DESKTOP_X_IMAGE_LATEST,
@@ -202,7 +202,7 @@ target "vegito-debian-gitleaks-desktop-x-latest-ci" {
 target "vegito-debian-gitleaks-desktop-x" {
   inherits = ["vegito-debian-gitleaks-base"]
   contexts = {
-    debian = "target:vegito-debian-python-desktop-x-version-ci"
+    debian = "target:vegito-debian-gitleaks-desktop-x-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_GITLEAKS_DESKTOP_X_IMAGE_VERSION,

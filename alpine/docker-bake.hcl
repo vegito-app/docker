@@ -88,10 +88,10 @@ target "vegito-linux-alpine-latest-ci" {
   platforms = platforms
 }
 
-group "vegito-alpine-local" {
+group "vegito-linux-alpine-local" {
   targets = [
-    "vegito-alpine",
-    // "vegito-alpine-desktop-x",
+    "vegito-linux-alpine",
+    // "vegito-linux-alpine-desktop-x",
   ]
 }
 
