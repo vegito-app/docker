@@ -18,6 +18,7 @@ if [ -z "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE:-}" ]; then
     export VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE="swiftshader_indirect"
     echo "ℹ️ No GPU acceleration detected -> using SwiftShader fallback"
 fi
+export DISPLAY="${DISPLAY:-:1}"
 
 case "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE}" in
     "host")

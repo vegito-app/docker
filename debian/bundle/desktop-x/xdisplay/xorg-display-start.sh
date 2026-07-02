@@ -48,12 +48,11 @@ default_resolution="1920x1080"
 default_framerate="60"
 default_depth="24"
 default_dpi="96"
-default_display_number=":1"
 
 resolution="${DISPLAY_RESOLUTION:-$default_resolution}"
 depth="${DISPLAY_DEPTH:-$default_depth}"
 dpi="${DISPLAY_DPI:-$default_dpi}"
-display="${DISPLAY:-$default_display_number}"
+
 framerate="${DISPLAY_FRAMERATE:-$default_framerate}"
 
 # 🖥️ ModeLine personnalisé
@@ -124,22 +123,19 @@ EndSection
 EOF
 
 if [ "$XORG_MODE" = "host" ]; then
-    echo "🚀 Starting Xorg on display $display (HOST mode)..."
-    sudo Xorg "$display" -config "$xorg_config" -screen Screen0 &
+    echo "🚀 Starting Xorg on display $DISPLAY (HOST mode)..."
+    sudo Xorg "$DISPLAY" -config "$xorg_config" -screen Screen0 &
     bg_pids+=("$!")
 
-    until pgrep -f "Xorg $display" > /dev/null; do 
-      echo "⏳ Waiting for Xorg to start on $display...";
+    until pgrep -f "Xorg $DISPLAY" > /dev/null; do 
+      echo "⏳ Waiting for Xorg to start on $DISPLAY...";
       sleep 1; 
     done
 
-    echo "✅ Xorg started successfully on $display."
+    echo "✅ Xorg started successfully on $DISPLAY."
 
 else
     echo "🔌 Connecting to remote Xorg at $XORG_HOST (CLIENT mode)..."
-
-    # Use shared unix socket DISPLAY instead of TCP
-    export DISPLAY="${DISPLAY:-:20}"
 
     # Wait for remote X socket to be available
     until xdpyinfo >/dev/null 2>&1; do
@@ -206,5 +202,5 @@ fi
 # Création d'un flag indiquant que tout le display est prêt
 echo "{\"status\":\"ready\",\"ts\":$(date +%s)}" > /tmp/.xdisplay-ready
 
-wait "$display_pid" || true
+wait "$DISPLAY_pid" || true
 echo "🛑 Session ended."
