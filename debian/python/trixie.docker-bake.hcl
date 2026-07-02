@@ -26,15 +26,14 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_REA
   default = "type=local,src=${VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-
 group "vegito-trixie-debian-python" {
   targets = [
-    "vegito-trixie-debian-python-version",
-    "vegito-trixie-debian-python-latest",
-    "vegito-trixie-debian-python-desktop-x-version",
-    "vegito-trixie-debian-python-desktop-x-latest",
-    "vegito-trixie-debian-python-dockerd-desktop-x-version",
-    "vegito-trixie-debian-python-dockerd-desktop-x-latest",
+    "vegito-trixie-debian-python-version-ci",
+    "vegito-trixie-debian-python-latest-ci",
+    "vegito-trixie-debian-python-desktop-x-version-ci",
+    "vegito-trixie-debian-python-desktop-x-latest-ci",
+    "vegito-trixie-debian-python-dockerd-desktop-x-version-ci",
+    "vegito-trixie-debian-python-dockerd-desktop-x-latest-ci",
   ]
 }
 group "vegito-trixie-debian-python-ci" {

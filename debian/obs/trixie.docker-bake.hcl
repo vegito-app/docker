@@ -26,11 +26,10 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" 
   default = "type=local,src=${VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-
 group "vegito-trixie-debian-obs" {
   targets = [
-    "vegito-trixie-debian-obs-version",
-    "vegito-trixie-debian-obs-latest",
+    "vegito-trixie-debian-obs-version-ci",
+    "vegito-trixie-debian-obs-latest-ci",
   ]
 }
 group "vegito-trixie-debian-obs-ci" {
