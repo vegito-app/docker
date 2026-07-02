@@ -30,18 +30,17 @@ group "vegito-trixie-debian-python-local" {
   targets = [
     "vegito-trixie-debian-python",
     "vegito-trixie-debian-python-desktop-x",
+    "vegito-trixie-debian-python-dockerd",
     "vegito-trixie-debian-python-dockerd-desktop-x",
   ]
 }
 
-group "vegito-trixie-debian-python-ci" {
+group "vegito-trixie-debian-python-all-ci" {
   targets = [
-    "vegito-trixie-debian-python-version-ci",
-    "vegito-trixie-debian-python-latest-ci",
-    "vegito-trixie-debian-python-desktop-x-version-ci",
-    "vegito-trixie-debian-python-desktop-x-latest-ci",
-    "vegito-trixie-debian-python-dockerd-desktop-x-version-ci",
-    "vegito-trixie-debian-python-dockerd-desktop-x-latest-ci",
+    "vegito-trixie-debian-python-ci",
+    "vegito-trixie-debian-python-desktop-x-ci",
+    "vegito-trixie-debian-python-dockerd-ci",
+    "vegito-trixie-debian-python-dockerd-desktop-x-ci",
   ]
 }
 
@@ -49,10 +48,6 @@ group "vegito-trixie-debian-python-ci" {
   targets = [
     "vegito-trixie-debian-python-version-ci",
     "vegito-trixie-debian-python-latest-ci",
-
-    "vegito-trixie-debian-python-desktop-x-ci",
-
-    "vegito-trixie-debian-python-dockerd-desktop-x-ci",
   ]
 }
 
@@ -60,6 +55,20 @@ group "vegito-trixie-debian-python-desktop-x-ci" {
   targets = [
     "vegito-trixie-debian-python-desktop-x-version-ci",
     "vegito-trixie-debian-python-desktop-x-latest-ci",
+  ]
+}
+
+group "vegito-trixie-debian-python-dockerd-ci" {
+  targets = [
+    "vegito-trixie-debian-python-dockerd-version-ci",
+    "vegito-trixie-debian-python-dockerd-latest-ci",
+  ]
+}
+
+group "vegito-trixie-debian-python-dockerd-desktop-x-ci" {
+  targets = [
+    "vegito-trixie-debian-python-dockerd-desktop-x-version-ci",
+    "vegito-trixie-debian-python-dockerd-desktop-x-latest-ci",
   ]
 }
 
@@ -130,7 +139,7 @@ target "vegito-trixie-debian-python" {
     VEGITO_DOCKER_TRIXIE_DEBIAN_PYTHON_IMAGE_VERSION,
   ]
   contexts = {
-    debian = "target:debian"
+    debian = "target:vegito-trixie-debian"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [

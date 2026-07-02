@@ -144,7 +144,7 @@ target "vegito-trixie-debian-flutter-version-ci" {
 target "vegito-trixie-debian-flutter-debian" {
   inherits = ["vegito-trixie-debian-flutter-base"]
   contexts = {
-    debian = "target:debian"
+    debian = "target:vegito-trixie-debian"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_FLUTTER_IMAGE_LATEST,

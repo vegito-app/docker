@@ -234,7 +234,7 @@ target "vegito-debian-obs-vscode-golang-ai-dockerd" {
     VEGITO_DOCKER_DEBIAN_OBS_IMAGE_VERSION,
   ]
   contexts = {
-    debian = "target:debian-golang-ai-dockerd-desktop-x"
+    debian = "target:vegito-debian-golang-ai-dockerd-desktop-x"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [

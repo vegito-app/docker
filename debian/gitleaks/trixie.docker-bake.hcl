@@ -26,24 +26,25 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_GITLEAKS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_R
   default = "type=local,src=${VEGITO_DOCKER_TRIXIE_DEBIAN_GITLEAKS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-group "vegito-trixie-debian-gitleaks" {
-  targets = [
-    "vegito-trixie-debian-gitleaks-version-ci",
-    "vegito-trixie-debian-gitleaks-latest-ci",
-    "vegito-trixie-debian-gitleaks-desktop-x-version-ci",
-    "vegito-trixie-debian-gitleaks-desktop-x-latest-ci",
-    "vegito-trixie-debian-gitleaks-docker-desktop-x-version-ci",
-    "vegito-trixie-debian-gitleaks-docker-desktop-x-latest-ci",
+group "vegito-trixie-debian-gitleaks-all" {
+    "vegito-trixie-debian-gitleaks",
+    "vegito-trixie-debian-gitleaks-desktop-x",
+    "vegito-trixie-debian-gitleaks-docker-desktop-x",
   ]
 }
+
+group "vegito-trixie-debian-gitleaks-all-ci" {
+  targets = [
+    "vegito-trixie-debian-gitleaks-ci",
+    "vegito-trixie-debian-gitleaks-desktop-x-ci",
+    "vegito-trixie-debian-gitleaks-docker-desktop-x-ci",
+  ]
+}
+
 group "vegito-trixie-debian-gitleaks-ci" {
   targets = [
     "vegito-trixie-debian-gitleaks-version-ci",
     "vegito-trixie-debian-gitleaks-latest-ci",
-
-    "vegito-trixie-debian-gitleaks-desktop-x-ci",
-
-    "vegito-trixie-debian-gitleaks-docker-desktop-x-ci",
   ]
 }
 
@@ -128,7 +129,7 @@ target "vegito-trixie-debian-gitleaks" {
     VEGITO_DOCKER_TRIXIE_DEBIAN_GITLEAKS_IMAGE_VERSION,
   ]
   contexts = {
-    debian = "target:debian"
+    debian = "target:vegito-trixie-debian"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
