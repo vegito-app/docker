@@ -153,13 +153,13 @@ variable "VEGITO_DOCKER_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_DOCKER_BUILDX_
   default = "type=local,src=${VEGITO_DOCKER_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-
-group "vegito-debian-obs-vscode-golang-ai-dockerd" {
+group "vegito-debian-obs-vscode-golang-ai-dockerd-ci" {
   targets = [
-    "vegito-debian-obs-vscode-golang-ai-dockerd-version",
-    "vegito-debian-obs-vscode-golang-ai-dockerd-latest",
+    "vegito-debian-obs-vscode-golang-ai-dockerd-version-ci",
+    "vegito-debian-obs-vscode-golang-ai-dockerd-latest-ci",
   ]
 }
+
 group "vegito-debian-obs-vscode-golang-ai-dockerd-ci" {
   targets = [
     "vegito-debian-obs-vscode-golang-ai-dockerd-version-ci",
@@ -227,14 +227,14 @@ target "vegito-debian-obs-vscode-golang-ai-dockerd-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-obs-vscode-golang-ai-dockerd-" {
+target "vegito-debian-obs-vscode-golang-ai-dockerd" {
   inherits = ["vegito-debian-obs-vscode-golang-ai-dockerd-base"]
   tags = [
     VEGITO_DOCKER_DEBIAN_OBS_IMAGE_LATEST,
     VEGITO_DOCKER_DEBIAN_OBS_IMAGE_VERSION,
   ]
   contexts = {
-    debian = "target-debian-golang-ai-dockerd-desktop-x"
+    debian = "target:debian-golang-ai-dockerd-desktop-x"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
