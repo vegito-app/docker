@@ -91,7 +91,6 @@ target "vegito-linux-alpine-latest-ci" {
 group "vegito-linux-alpine-local" {
   targets = [
     "vegito-linux-alpine",
-    // "vegito-linux-alpine-desktop-x",
   ]
 }
 

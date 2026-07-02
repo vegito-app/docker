@@ -74,6 +74,39 @@ target "vegito-trixie-debian-golang-ai-version-ci" {
   platforms = platforms
 }
 
+target "vegito-trixie-debian-golang-ai-latest-ci" {
+  inherits = ["vegito-trixie-debian-golang-base"]
+  contexts = {
+    debian           = "target:vegito-trixie-debian-ai-latest-ci"
+    dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
+  }
+  tags = [
+    VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_AI_IMAGE_LATEST,
+  ]
+  cache-from = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_AI_IMAGE_REGISTRY_CACHE}",
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_AI_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
+    ] : [],
+    [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_AI_IMAGE_LATEST,
+    ]
+  )
+  cache-to = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_AI_IMAGE_REGISTRY_CACHE},mode=max"
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_AI_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
+    ] : [],
+    [
+      "type=inline"
+    ]
+  )
+  platforms = platforms
+}
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_AI_DOCKERD_IMAGE_VERSION" {
   default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-golang-ai-dockerd-${VERSION}"

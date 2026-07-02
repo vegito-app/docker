@@ -67,6 +67,13 @@ group "vegito-debian-nodejs-ci" {
   ]
 }
 
+group"vegito-debian-nodejs-desktop-x-ci" {
+  targets = [
+    "vegito-debian-nodejs-desktop-x-version-ci",
+    "vegito-debian-nodejs-desktop-x-latest-ci",
+  ]
+}
+
 target "vegito-debian-nodejs-version-ci" {
   inherits = ["vegito-debian-nodejs-base"]
   contexts = {

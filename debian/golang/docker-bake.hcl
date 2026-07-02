@@ -135,7 +135,7 @@ target "vegito-debian-golang-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-go" {
+target "vegito-debian-golang" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
     debian           = "target:vegito-debian"

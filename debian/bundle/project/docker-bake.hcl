@@ -85,13 +85,6 @@ group "vegito-debian-project-vscode-golang-ci" {
   ]
 }
 
-group "vegito-debian-project-obs-golang-ci" {
-  targets = [
-    "vegito-debian-project-obs-golang-version-ci",
-    "vegito-debian-project-obs-golang-latest-ci",
-  ]
-}
-
 target "vegito-debian-project-base" {
   args = {
     gitleaks_version       = GITLEAKS_VERSION

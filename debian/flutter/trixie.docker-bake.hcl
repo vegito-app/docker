@@ -2,7 +2,6 @@ group "vegito-trixie-debian-flutter-local" {
   targets = [
     "vegito-trixie-debian-flutter",
     "vegito-trixie-debian-flutter-desktop-x",
-    "vegito-trixie-debian-flutter-dockerd-desktop-x",
   ]
 }
 

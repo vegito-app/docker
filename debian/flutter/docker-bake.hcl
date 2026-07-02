@@ -7,7 +7,6 @@ group "vegito-debian-flutter-local" {
   targets = [
     "vegito-debian-flutter",
     "vegito-debian-flutter-desktop-x",
-    "vegito-debian-flutter-dockerd-desktop-x",
   ]
 }
 
@@ -150,7 +149,7 @@ target "vegito-debian-flutter-version-ci" {
   )
 }
 
-target "vegito-debian-flutter-debian" {
+target "vegito-debian-flutter" {
   inherits = ["vegito-debian-flutter-base"]
   contexts = {
     debian = "target:vegito-debian"

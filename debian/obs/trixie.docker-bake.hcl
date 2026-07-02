@@ -26,12 +26,12 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" 
   default = "type=local,src=${VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-group "vegito-trixie-debian-obs" {
+group "vegito-trixie-debian-obs-local" {
   targets = [
-    "vegito-trixie-debian-obs-version-ci",
-    "vegito-trixie-debian-obs-latest-ci",
+    "vegito-trixie-debian-obs",
   ]
 }
+
 group "vegito-trixie-debian-obs-ci" {
   targets = [
     "vegito-trixie-debian-obs-version-ci",
@@ -154,10 +154,9 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_DOCKER_
   default = "type=local,src=${VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
-group "vegito-trixie-debian-obs-vscode-golang-ai-dockerd" {
+group "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-local" {
   targets = [
     "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-version",
-    "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-latest",
   ]
 }
 
