@@ -149,7 +149,6 @@ VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian-python-dockerd \
   debian-dockerd \
   debian-project-vscode-golang-ai-dockerd \
-  debian-vscode-golang-ai-dockerd \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-ai) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-desktop-x) \
@@ -182,6 +181,11 @@ vegito-docker-hub-images-update:
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print dockerhub-ci
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --push dockerhub-ci
 .PHONY: vegito-docker-hub-images-update
+
+$(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-images-update-local):
+	@$(VEGITO_DOCKER_BUILDX_BAKE) --print $(@:vegito-docker-%-images-update-local=vegito-%)
+	@$(VEGITO_DOCKER_BUILDX_BAKE) --load $(@:vegito-docker-%-images-update-local=vegito-%)
+.PHONY: $(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-images-update-local)
 
 $(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-images-update):
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print $(@:vegito-docker-%-images-update=vegito-%-ci)
