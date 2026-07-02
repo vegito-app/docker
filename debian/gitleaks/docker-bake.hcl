@@ -103,7 +103,7 @@ target "vegito-debian-gitleaks" {
     VEGITO_DOCKER_DEBIAN_GITLEAKS_IMAGE_VERSION,
   ]
   contexts = {
-    debian = "target:debian"
+    debian = "target:vegito-debian"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [

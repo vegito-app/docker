@@ -97,7 +97,7 @@ target "vegito-debian-obs" {
     VEGITO_DOCKER_DEBIAN_OBS_IMAGE_VERSION,
   ]
   contexts = {
-    debian = "target:debian-desktop-x"
+    debian = "target:vegito-debian-desktop-x"
   }
   cache-from = concat(
     USE_REGISTRY_CACHE ? [
