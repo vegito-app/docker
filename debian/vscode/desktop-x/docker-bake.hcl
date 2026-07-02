@@ -3,57 +3,57 @@ variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_DIR" {
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_LATEST" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-vscode-desktop-x-dockerd-latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-vscode-desktop-x-latest"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-vscode-desktop-x-dockerd-${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-vscode-desktop-x-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_REGISTRY_CACHE" {
-  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-debian-vscode-desktop-x-dockerd"
+  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/vegito-debian-vscode-desktop-x"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian-vscode-desktop-x-dockerd-version"
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian-vscode-desktop-x-version"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
-  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian-vscode-desktop-x-dockerd-latest"
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/debian-vscode-desktop-x-latest"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
-  description = "local write cache for vegito-debian-vscode-desktop-x-dockerd version image build"
+  description = "local write cache for vegito-debian-vscode-desktop-x version image build"
   default     = "type=local,mode=max,dest=${VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST" {
-  description = "local write cache for vegito-debian-vscode-desktop-x-dockerd latest image build"
+  description = "local write cache for vegito-debian-vscode-desktop-x latest image build"
   default     = "type=local,mode=max,dest=${VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION" {
-  description = "local read cache for vegito-debian-vscode-desktop-x-dockerd version image build (cannot be used before first write)"
+  description = "local read cache for vegito-debian-vscode-desktop-x version image build (cannot be used before first write)"
   default     = "type=local,src=${VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
 }
 
 variable "VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST" {
-  description = "local read cache for vegito-debian-vscode-desktop-x-dockerd latest image build (cannot be used before first write)"
+  description = "local read cache for vegito-debian-vscode-desktop-x latest image build (cannot be used before first write)"
   default     = "type=local,src=${VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
-group "vegito-debian-vscode-desktop-x-dockerd-ci" {
+group "vegito-debian-vscode-desktop-x-ci" {
   description = "Build and push Debian VSCode images"
   targets = [
-    "vegito-debian-vscode-desktop-x-dockerd-version-ci",
-    "vegito-debian-vscode-desktop-x-dockerd-latest-ci",
+    "vegito-debian-vscode-desktop-x-version-ci",
+    "vegito-debian-vscode-desktop-x-latest-ci",
   ]
 }
 
-target "vegito-debian-vscode-desktop-x-dockerd-version-ci" {
+target "vegito-debian-vscode-desktop-x-version-ci" {
   inherits = ["vegito-debian-vscode-base"]
   contexts = {
-    debian = "target:vegito-debian-desktop-x-dockerd-version-ci"
+    debian = "target:vegito-debian-desktop-x-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_VERSION,
@@ -77,10 +77,10 @@ target "vegito-debian-vscode-desktop-x-dockerd-version-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-vscode-desktop-x-dockerd-latest-ci" {
+target "vegito-debian-vscode-desktop-x-latest-ci" {
   inherits = ["vegito-debian-vscode-base"]
   contexts = {
-    debian = "target:vegito-debian-desktop-x-dockerd-latest-ci"
+    debian = "target:vegito-debian-desktop-x-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_LATEST,
@@ -110,11 +110,11 @@ target "vegito-debian-vscode-desktop-x-dockerd-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-debian-vscode-desktop-x-dockerd" {
+target "vegito-debian-vscode-desktop-x" {
 
   inherits = ["vegito-debian-vscode-base"]
   contexts = {
-    debian = "target:vegito-debian-desktop-x-dockerd-version-ci"
+    debian = "target:vegito-debian-desktop-x-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_VSCODE_DESKTOP_X_IMAGE_LATEST,
