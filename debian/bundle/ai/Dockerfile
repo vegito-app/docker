@@ -18,7 +18,7 @@ RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-
     tesseract-ocr \
     zstd
 
-ARG ollama_version=0.24.0
+ARG ollama_version=0.31.1
 
 RUN curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION=${ollama_version} sh
 
