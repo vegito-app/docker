@@ -67,7 +67,7 @@ group "vegito-debian-nodejs-ci" {
   ]
 }
 
-group"vegito-debian-nodejs-desktop-x-ci" {
+group "vegito-debian-nodejs-desktop-x-ci" {
   targets = [
     "vegito-debian-nodejs-desktop-x-version-ci",
     "vegito-debian-nodejs-desktop-x-latest-ci",

@@ -152,7 +152,7 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_OBS_VSCODE_GOLANG_AI_DOCKERD_IMAGE_DOCKER_
 
 group "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-local" {
   targets = [
-    "vegito-trixie-debian-obs-vscode-golang-ai-dockerd-version",
+    "vegito-trixie-debian-obs-vscode-golang-ai-dockerd",
   ]
 }
 

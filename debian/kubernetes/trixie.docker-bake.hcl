@@ -119,7 +119,7 @@ target "vegito-trixie-debian-kubernetes-latest-ci" {
   platforms = platforms
 }
 
-target "vegito-trixie-debian-golang" {
+target "vegito-trixie-debian-kubernetes" {
   inherits = ["vegito-trixie-debian-kubernetes-base"]
   contexts = {
     debian = "target:vegito-trixie-debian-version-ci"
