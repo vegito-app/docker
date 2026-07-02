@@ -37,7 +37,6 @@ variable "VEGITO_LINUX_ALPINE_IMAGE_VERSION" {
 group "vegito-linux-alpine-ci" {
   targets = [
     "vegito-linux-alpine-version-ci",
-
     "vegito-linux-alpine-latest-ci",
   ]
 }
@@ -87,6 +86,13 @@ target "vegito-linux-alpine-latest-ci" {
     "type=inline"
   ]
   platforms = platforms
+}
+
+group "vegito-alpine-local" {
+  targets = [
+    "vegito-alpine",
+    // "vegito-alpine-desktop-x",
+  ]
 }
 
 target "vegito-linux-alpine" {

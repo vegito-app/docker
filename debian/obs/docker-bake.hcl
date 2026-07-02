@@ -26,6 +26,13 @@ variable "VEGITO_DOCKER_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
   default = "type=local,src=${VEGITO_DOCKER_DEBIAN_OBS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
+group "vegito-debian-obs-local" {
+  targets = [
+    "vegito-debian-obs",
+    "vegito-debian-obs-vscode-golang-ai-dockerd",
+  ]
+}
+
 group "vegito-debian-obs-ci" {
   targets = [
     "vegito-debian-obs-version-ci",

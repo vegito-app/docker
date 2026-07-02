@@ -49,6 +49,13 @@ target "vegito-debian-dockerd-base" {
   context = VEGITO_DOCKER_DEBIAN_DOCKERD_DIR
 }
 
+group "vegito-debian-dockerd-local" {
+  targets = [
+    "vegito-debian-dockerd",
+    "vegito-debian-dockerd-desktop-x",
+  ]
+}
+
 group "vegito-debian-dockerd-ci" {
   targets = [
     "vegito-debian-dockerd-version-ci",

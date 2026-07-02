@@ -51,6 +51,13 @@ variable "VEGITO_DOCKER_DEBIAN_NODEJS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATES
   default     = "type=local,src=${VEGITO_DOCKER_DEBIAN_NODEJS_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
 }
 
+group "vegito-debian-nodejs-local" {
+  targets = [
+    "vegito-debian-nodejs",
+    "vegito-debian-nodejs-desktop-x",
+  ]
+}
+
 group "vegito-debian-nodejs-ci" {
   targets = [
     "vegito-debian-nodejs-version-ci",
@@ -59,7 +66,6 @@ group "vegito-debian-nodejs-ci" {
     "vegito-debian-nodejs-desktop-x-ci",
   ]
 }
-
 
 target "vegito-debian-nodejs-version-ci" {
   inherits = ["vegito-debian-nodejs-base"]

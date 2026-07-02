@@ -50,7 +50,7 @@ target "vegito-debian-golang-base" {
   context = VEGITO_DOCKER_DEBIAN_GOLANG_DIR
 }
 
-group "vegito-debian-golang" {
+group "vegito-debian-golang-local" {
   targets = [
     "vegito-debian-golang",
     "vegito-debian-golang-desktop-x",

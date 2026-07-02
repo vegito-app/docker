@@ -3,6 +3,14 @@ variable "FLUTTER_VERSION" {
   default = "3.41.0"
 }
 
+group "vegito-debian-flutter-local" {
+  targets = [
+    "vegito-debian-flutter",
+    "vegito-debian-flutter-desktop-x",
+    "vegito-debian-flutter-dockerd-desktop-x",
+  ]
+}
+
 group "vegito-debian-flutter-ci" {
   targets = [
     "vegito-debian-flutter-version-ci",

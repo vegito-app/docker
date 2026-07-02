@@ -26,6 +26,14 @@ variable "VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
   default = "type=local,src=${VEGITO_DOCKER_DEBIAN_PYTHON_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
 }
 
+group "vegito-debian-python-local" {
+  targets = [
+    "vegito-debian-python",
+    "vegito-debian-python-desktop-x",
+    "vegito-debian-python-dockerd-desktop-x",
+  ]
+}
+
 group "vegito-debian-python-ci" {
   targets = [
     "vegito-debian-python-version-ci",

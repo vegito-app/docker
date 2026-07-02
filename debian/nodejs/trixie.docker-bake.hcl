@@ -45,7 +45,7 @@ target "vegito-trixie-debian-nodejs-base" {
   }
 }
 
-group "vegito-trixie-debian-nodejs" {
+group "vegito-trixie-debian-nodejs-local" {
   targets = [
     "vegito-trixie-debian-nodejs",
     "vegito-trixie-debian-nodejs-desktop-x",

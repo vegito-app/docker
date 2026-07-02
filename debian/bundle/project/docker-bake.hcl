@@ -1,9 +1,3 @@
-target "docker-debian-project" {
-  contxexts = {
-    local = "target:docker-debian-project-local"
-  }
-}
-
 variable "VEGITO_DOCKER_DEBIAN_PROJECT_DIR" {
   default = "${VEGITO_DOCKER_DEBIAN_DIR}/bundle/project"
 }
