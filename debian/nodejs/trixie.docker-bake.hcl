@@ -45,9 +45,9 @@ target "vegito-trixie-debian-nodejs-base" {
   }
 }
 
-group "vegito-trixie-debian-nodejslang" {
+group "vegito-trixie-debian-nodejs" {
   targets = [
-    "vegito-trixie-debian-nodejslang",
+    "vegito-trixie-debian-nodejs",
     "vegito-trixie-debian-nodejs-desktop-x",
   ]
 }
