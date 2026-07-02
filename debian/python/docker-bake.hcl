@@ -32,6 +32,7 @@ group "vegito-debian-python-ci" {
     "vegito-debian-python-latest-ci",
     "vegito-debian-python-desktop-x-version-ci",
     "vegito-debian-python-desktop-x-latest-ci",
+    "vegito-debian-python-dockerd-ci",
     "vegito-debian-python-dockerd-desktop-x-ci",
   ]
 }
@@ -40,6 +41,13 @@ group "vegito-debian-python-desktop-x-ci" {
   targets = [
     "vegito-debian-python-desktop-x-version-ci",
     "vegito-debian-python-desktop-x-latest-ci",
+  ]
+}
+
+group "vegito-debian-python-dockerd-ci" {
+  targets = [
+    "vegito-debian-python-dockerd-version-ci",
+    "vegito-debian-python-dockerd-latest-ci",
   ]
 }
 
@@ -237,6 +245,109 @@ target "vegito-debian-python-desktop-x" {
   )
 }
 
+variable "VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_VERSION" {
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-python-dockerd-${VERSION}"
+}
+
+variable "VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_LATEST" {
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-python-dockerd-latest"
+}
+variable "VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE" {
+  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}-python"
+}
+
+variable "VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE" {
+  default = "type=local,mode=max,dest=${VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
+}
+
+variable "VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ" {
+  default = "type=local,src=${VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE}"
+}
+
+variable "VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_REGISTRY_CACHE" {
+  default = "${VEGITO_DOCKER_DEBIAN_IMAGE_REGISTRY_CACHE}-python-dockerd"
+}
+
+target "vegito-debian-python-dockerd-version-ci" {
+  contexts = {
+    debian = "target:vegito-debian-dockerd-version-ci"
+  }
+  inherits = ["vegito-debian-python-base"]
+  tags = [
+    VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_VERSION,
+  ]
+  cache-from = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_REGISTRY_CACHE}"
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
+    ] : [],
+    [
+      VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_LATEST
+    ]
+  )
+  cache-to = concat(
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
+    ] : [],
+  )
+  platforms = platforms
+}
+
+target "vegito-debian-python-dockerd-latest-ci" {
+  inherits = ["vegito-debian-python-base"]
+  contexts = {
+    debian = "target:vegito-debian-dockerd-latest-ci"
+  }
+  tags = [
+    VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_LATEST,
+  ]
+  cache-from = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_REGISTRY_CACHE}"
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
+    ] : [],
+    [
+      VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_LATEST
+    ]
+  )
+  cache-to = [
+    USE_REGISTRY_CACHE ? "type=registry,ref=${VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_REGISTRY_CACHE},mode=max" : "",
+    "type=inline"
+  ]
+  platforms = platforms
+}
+
+target "vegito-debian-python-dockerd" {
+  inherits = ["vegito-debian-python-base"]
+  contexts = {
+    debian = "target:vegito-debian-dockerd-version-ci"
+  }
+  tags = [
+    VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_VERSION,
+    VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_LATEST,
+  ]
+  cache-from = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_REGISTRY_CACHE}"
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ
+    ] : [],
+    [
+      VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_LATEST
+    ]
+  )
+  cache-to = concat(
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_DEBIAN_PYTHON_DOCKERD_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_WRITE
+    ] : []
+  )
+}
+
 variable "VEGITO_DOCKER_DEBIAN_PYTHON_DOCKER_DESKTOP_X_IMAGE_VERSION" {
   default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:debian-docker-python-desktop-x-${VERSION}"
 }
@@ -248,7 +359,7 @@ variable "VEGITO_DOCKER_DEBIAN_PYTHON_DOCKER_DESKTOP_X_IMAGE_LATEST" {
 target "vegito-debian-python-dockerd-desktop-x-version-ci" {
   inherits = ["vegito-debian-python-desktop-x-version-ci"]
   contexts = {
-    debian = "target:vegito-debian-docker-desktop-x-version-ci"
+    debian = "target:vegito-debian-dockerd-desktop-x-version-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PYTHON_DOCKER_DESKTOP_X_IMAGE_VERSION,
@@ -258,7 +369,7 @@ target "vegito-debian-python-dockerd-desktop-x-version-ci" {
 target "vegito-debian-python-dockerd-desktop-x-latest-ci" {
   inherits = ["vegito-debian-python-desktop-x-latest-ci"]
   contexts = {
-    debian = "target:vegito-debian-docker-desktop-x-latest-ci"
+    debian = "target:vegito-debian-dockerd-desktop-x-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PYTHON_DOCKER_DESKTOP_X_IMAGE_LATEST,
@@ -268,7 +379,7 @@ target "vegito-debian-python-dockerd-desktop-x-latest-ci" {
 target "vegito-debian-python-dockerd-desktop-x" {
   inherits = ["vegito-debian-python-desktop-x"]
   contexts = {
-    debian = "target:vegito-debian-docker-desktop-x"
+    debian = "target:vegito-debian-dockerd-desktop-x"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_PYTHON_DOCKER_DESKTOP_X_IMAGE_LATEST,

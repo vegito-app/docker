@@ -55,7 +55,7 @@ group "vegito-debian-project-golang-ci" {
 }
 
 target "vegito-debian-project-golang-version-ci" {
-  inherits = ["vegito-debian-project-golang-base"]
+  inherits = ["vegito-debian-project-base"]
   contexts = {
     debian = "target:vegito-debian-golang-version-ci"
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
@@ -83,7 +83,7 @@ target "vegito-debian-project-golang-version-ci" {
 }
 
 target "vegito-debian-project-golang-latest-ci" {
-  inherits = ["vegito-debian-project-golang-base"]
+  inherits = ["vegito-debian-project-base"]
   contexts = {
     debian = "target:vegito-debian-golang-latest-ci"
   }
@@ -117,7 +117,7 @@ target "vegito-debian-project-golang-latest-ci" {
 
 target "vegito-debian-project-golang" {
 
-  inherits = ["vegito-debian-project-golang-base"]
+  inherits = ["vegito-debian-project-base"]
   contexts = {
     debian = "target:vegito-debian-golang-ai-dockerd-version-ci"
   }
@@ -199,7 +199,7 @@ group "vegito-debian-project-golang-ai-dockerd-ci" {
 }
 
 target "vegito-debian-project-golang-ai-dockerd-version-ci" {
-  inherits = ["vegito-debian-project-golang-base"]
+  inherits = ["vegito-debian-project-base"]
   contexts = {
     debian = "target:vegito-debian-golang-ai-dockerd-desktop-x-version-ci"
   }
@@ -226,7 +226,7 @@ target "vegito-debian-project-golang-ai-dockerd-version-ci" {
 }
 
 target "vegito-debian-project-golang-ai-dockerd-latest-ci" {
-  inherits = ["vegito-debian-project-golang-base"]
+  inherits = ["vegito-debian-project-base"]
   contexts = {
     debian = "target:vegito-debian-golang-ai-dockerd-desktop-x-latest-ci"
   }
@@ -260,7 +260,7 @@ target "vegito-debian-project-golang-ai-dockerd-latest-ci" {
 
 target "vegito-debian-project-golang-ai-dockerd" {
 
-  inherits = ["vegito-debian-project-golang-base"]
+  inherits = ["vegito-debian-project-base"]
   contexts = {
     debian = "target:vegito-debian-golang-ai-dockerd-version-ci"
   }
