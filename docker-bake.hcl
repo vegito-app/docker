@@ -2,10 +2,6 @@ variable "VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME" {
   default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/vegito-docker"
 }
 
-variable "VEGITO_DOCKER_PRIVATE_IMAGES_BASE" {
-  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/vegito-docker"
-}
-
 variable "USE_REGISTRY_CACHE" {
   default = false
   type    = bool
@@ -32,10 +28,6 @@ variable "VERSION" {
 variable "GO_VERSION" {
   description = "current Go version"
   default     = "1.26.3"
-}
-
-variable "TRIVY_VERSION" {
-  default = "0.70.0"
 }
 
 variable "NODE_VERSION" {
@@ -86,11 +78,6 @@ variable "K9S_VERSION" {
 variable "GITLEAKS_VERSION" {
   description = "current Gitleaks version"
   default     = "8.28.0"
-}
-
-variable "INFRA_ENV" {
-  description = "production, staging or dev"
-  default     = "dev"
 }
 
 variable "VEGITO_DOCKER_CACHE_REPOSITORY" {
