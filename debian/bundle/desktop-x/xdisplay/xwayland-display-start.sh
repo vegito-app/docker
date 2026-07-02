@@ -9,14 +9,13 @@ bg_pids=()
 
 # 🖥️ Default parameters
 default_depth="24"
-default_display_number=":1"
 default_framerate="60"
 default_resolution="1920x1080"
 default_wayland_socket="wayland-1"
 
 resolution="${DISPLAY_RESOLUTION:-$default_resolution}"
 depth="${DISPLAY_DEPTH:-$default_depth}"
-display="${DISPLAY:-$default_display_number}"
+
 framerate="${DISPLAY_FRAMERATE:-$default_framerate}"
 wayland_socket="${WAYLAND_SOCKET:-$default_wayland_socket}"
 
@@ -30,10 +29,10 @@ kill_jobs() {
         wait "$pid" 2>/dev/null || true
     done
 
-    pkill -f -9 "Xwayland $display" || true
+    pkill -f -9 "Xwayland $DISPLAY" || true
     pkill -f "weston.*${WAYLAND_DISPLAY_NAME}" || true
-    rm -rf /tmp/.X11-unix/X${display#*:}
-    rm -rf /tmp/.X${display#*:}-lock
+    rm -rf /tmp/.X11-unix/X${DISPLAY#*:}
+    rm -rf /tmp/.X${DISPLAY#*:}-lock
 }
 
 # 🚨 Register cleanup function to run on script exit
@@ -110,16 +109,14 @@ echo "✅ Weston started successfully."
 # Manual XWayland startup
 # -------------------------------------------------------------------
 
-export DISPLAY="${display}"
-
-rm -f /tmp/.X11-unix/X${display#*:}
-rm -f /tmp/.X${display#*:}-lock
+rm -f /tmp/.X11-unix/X${DISPLAY#*:}
+rm -f /tmp/.X${DISPLAY#*:}-lock
 
 echo "🚀 Starting manual XWayland EGLStream server..."
 
 # 🖥️ XWayland
 
-Xwayland "${display}" \
+Xwayland "$DISPLAY" \
     +extension GLX \
     +extension RANDR \
     +extension RENDER \
@@ -141,7 +138,7 @@ done
 echo "🔍 OpenGL renderer"
 glxinfo -B | grep -E "OpenGL vendor|OpenGL renderer|OpenGL version" || echo "⚠️ OpenGL info not available"
 
-echo "✅ Weston/XWayland started successfully on display ${display}."
+echo "✅ Weston/XWayland started successfully on display $DISPLAY."
 
 if command -v setxkbmap >/dev/null 2>&1; then
     echo "🔍 XWayland keyboard map"
@@ -185,7 +182,7 @@ echo "🔍 Weston GPU capabilities"
 grep -E "GL renderer|GL vendor|GL version" /tmp/weston.log || true
 
 echo "🖥️ Weston headless GPU session ready"
-echo "📺 XWayland display available on DISPLAY=${display}"
+echo "📺 XWayland display available on DISPLAY=$DISPLAY"
 echo "✅ GPU compositor active"
 echo "ℹ️ Launch Wayland-native applications inside this session"
 
@@ -193,7 +190,7 @@ DISPLAY_MODE="${DISPLAY_MODE:-xpra}"
 
 if [ "$DISPLAY_MODE" = "xpra" ]; then
 
-    echo "🌀 Starting Xpra on ${display}"
+    echo "🌀 Starting Xpra on $DISPLAY"
     desktop-x-xpra-start.sh &
     display_pid="$!"
 

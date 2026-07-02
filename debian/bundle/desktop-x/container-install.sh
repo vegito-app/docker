@@ -43,7 +43,6 @@ mkdir -p ~/.bashrc.d
 cat <<EOF > ~/.bashrc.d/30-desktop-x.sh
 # Environment Variables
 
-export DISPLAY=:99
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-wayland-1}
 export XPRA_SOCKET_DIR="${XPRA_SOCKET_DIR:-${XDG_RUNTIME_DIR}/xpra}"

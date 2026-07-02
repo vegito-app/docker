@@ -66,10 +66,10 @@ if [ -r "$libx11" ]; then
     export LD_PRELOAD="${libx11}${LD_PRELOAD:+:$LD_PRELOAD}"
 fi
 
-echo "🌀 Starting Xpra on ${display}"
-xpra start "${display}" \
+echo "🌀 Starting Xpra on $DISPLAY"
+xpra start "$DISPLAY" \
     --bind-tcp=0.0.0.0:5901 \
-    --env=DISPLAY="${display}" \
+    --env=DISPLAY="$DISPLAY" \
     --env=PATH="${PATH}" \
     --no-daemon \
     "${XPRA_ARGS_ARRAY[@]}" \
@@ -78,12 +78,12 @@ xpra start "${display}" \
 display_pid="$!"
 bg_pids+=("${display_pid}")
 
-XPRA_SOCKET="$XPRA_SOCKET_DIR/$(hostname)-${display#:}"
+XPRA_SOCKET="$XPRA_SOCKET_DIR/$(hostname)-${DISPLAY#:}"
 export XPRA_SERVER_SOCKET="$XPRA_SOCKET"
 
 for i in $(seq 1 30); do
     if [ -S "$XPRA_SOCKET" ] && xpra info "socket://$XPRA_SOCKET" >/dev/null 2>&1; then
-        echo "🌀 Xpra socket ${XPRA_SOCKET} ready on ${display}."
+        echo "🌀 Xpra socket ${XPRA_SOCKET} ready on $DISPLAY."
         break
     fi
 
@@ -116,9 +116,9 @@ xpra info "socket://$XPRA_SERVER_SOCKET" | grep -Ei "nvenc|device_count|gpu.enco
 # mapping until Xpra updates it correctly.
 xkbmap_default="${XKBMAP_DEFAULT:-fr}"
 if command -v setxkbmap >/dev/null 2>&1; then
-    echo "⌨️ Applying X keyboard layout: ${xkbmap_default} on ${display}"
-    DISPLAY="${display}" setxkbmap "${xkbmap_default}" || true
-    DISPLAY="${display}" setxkbmap -query || true
+    echo "⌨️ Applying X keyboard layout: ${xkbmap_default} on $DISPLAY"
+    DISPLAY="$DISPLAY" setxkbmap "${xkbmap_default}" || true
+    DISPLAY="$DISPLAY" setxkbmap -query || true
 else
     echo "⚠️ setxkbmap not found; skipping X keyboard layout setup"
 fi

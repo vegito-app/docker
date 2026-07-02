@@ -22,31 +22,26 @@ kill_jobs() {
 trap kill_jobs EXIT
 
 # 🖥️ Default parameters
-default_display_number=":1"
 default_dpi="96"
 default_resolution="1920x1080"
 
-# Utiliser la variable d'environnement si elle existe, sinon utiliser la valeur par défaut
-display=${DISPLAY:-$default_display_number}
 dpi=${DISPLAY_DPI:-$default_dpi}
 resolution=${DISPLAY_RESOLUTION:-$default_resolution}
 
-export DISPLAY="${display}"
-
 # Lancez xvfb en arrière-plan
-Xvfb "${display}" -nolisten tcp -ac -screen 0, ${resolution}x24 &
+Xvfb "$DISLPLAY" -nolisten tcp -ac -screen 0, ${resolution}x24 &
 bg_pids+=("$!")
 
 timeout_xvfb=60
 for i in $(seq 1 $timeout_xvfb); do
-    if xdpyinfo -display "${display}" > /dev/null 2>&1; then
+    if xdpyinfo -display "$DISLPLAY" > /dev/null 2>&1; then
         break
     fi
     echo Waiting X display frame buffer
     sleep 1
 done
-if ! xdpyinfo -display "${display}" > /dev/null 2>&1; then
-    echo "❌ Timeout waiting for X display ${display}."
+if ! xdpyinfo -display "$DISLPLAY" > /dev/null 2>&1; then
+    echo "❌ Timeout waiting for X display $DISLPLAY."
     exit 1
 fi
 
