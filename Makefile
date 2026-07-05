@@ -36,6 +36,8 @@ VEGITO_DOCKER_BUILDX_BAKE ?= \
 	-f $(VEGITO_DOCKER_DEBIAN_DIR)/trixie.docker-bake.hcl \
 	-f $(VEGITO_DOCKER_DEBIAN_DIR)/docker/dockerd/docker-bake.hcl \
 	-f $(VEGITO_DOCKER_DEBIAN_DIR)/docker/dockerd/trixie.docker-bake.hcl \
+	-f $(VEGITO_DOCKER_DEBIAN_DIR)/terraform/docker-bake.hcl \
+	-f $(VEGITO_DOCKER_DEBIAN_DIR)/terraform/trixie.docker-bake.hcl \
 	$(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/docker-bake.hcl) \
 	$(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/trixie.docker-bake.hcl) \
 	$(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/project/%/docker-bake.hcl) \

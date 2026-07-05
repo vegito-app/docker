@@ -149,6 +149,7 @@ VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian-python-dockerd \
   debian-dockerd \
   debian-project-vscode-golang-ai-dockerd \
+  debian-terraform-dockerd \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-ai) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-desktop-x) \
