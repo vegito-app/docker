@@ -308,3 +308,37 @@ When in doubt, infer the graph from target names and Bake contexts first.
 Directory layout is a maintainability concern.
 Bundles are a distribution concern.
 The capability graph is the architectural concern.
+
+---
+
+## Repository Analysis
+
+Agents should build a mental model of the repository before proposing changes.
+
+Preferred workflow:
+
+1. Understand the repository purpose.
+2. Identify the architectural source of truth.
+3. Reconstruct the Buildx Bake dependency graph.
+4. Explain the existing architecture before suggesting modifications.
+5. Propose the smallest coherent change.
+6. Validate that the Buildx graph remains consistent.
+
+Repository architecture and Buildx Bake definitions always take precedence over directory organization.
+
+---
+
+## Documentation Priorities
+
+Documentation should be interpreted in the following order:
+
+1. **README.md**
+   Explains why the repository exists and how to get started.
+
+2. **ARCHITECTURE.md**
+   Explains the repository mental model, conceptual layers, and the Buildx Bake graph.
+
+3. **AGENT.md**
+   Defines how AI agents should reason about and modify the repository.
+
+When documentation and directory layout appear to disagree, documentation together with the Buildx Bake graph should be considered authoritative.
