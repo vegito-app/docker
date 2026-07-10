@@ -287,3 +287,136 @@ target "vegito-trixie-debian-docker-desktop-x" {
     ] : []
   )
 }
+
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_VERSION" {
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-docker-terraform-${VERSION}"
+}
+
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_LATEST" {
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-docker-terraform-latest"
+}
+
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_REGISTRY_CACHE" {
+  default = "${VEGITO_DOCKER_CACHE_IMAGES_BASE}/trixie-debian-docker-terraform"
+}
+
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION" {
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/trixie-debian-docker-terraform-version"
+}
+
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST" {
+  default = "${VEGITO_DOCKER_BUILDX_LOCAL_CACHE_DIR}/trixie-debian-docker-terraform-latest"
+}
+
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION" {
+  description = "local write cache (version)"
+  default     = "type=local,mode=max,dest=${VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
+}
+
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST" {
+  description = "local write cache (latest)"
+  default     = "type=local,mode=max,dest=${VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
+}
+
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION" {
+  description = "local read cache (version)"
+  default     = "type=local,src=${VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_VERSION}"
+}
+
+variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST" {
+  description = "local read cache (latest)"
+  default     = "type=local,src=${VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_LATEST}"
+}
+
+target "vegito-trixie-debian-docker-terraform-version-ci" {
+  contexts = {
+    debian               = "target:vegito-trixie-debian-terraform-version-ci"
+    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
+    docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
+  }
+  inherits = ["vegito-trixie-debian-docker-base"]
+  tags = [
+    VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_VERSION,
+  ]
+  cache-from = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_REGISTRY_CACHE}"
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_VERSION
+    ] : [],
+    [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_LATEST
+    ]
+  )
+  cache-to = concat(
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_CACHE_WRITE_VERSION,
+    ] : []
+  )
+  platforms = platforms
+}
+
+target "vegito-trixie-debian-docker-terraform-latest-ci" {
+  inherits = ["vegito-trixie-debian-docker-base"]
+  contexts = {
+    debian               = "target:vegito-trixie-debian-terraform-latest-ci"
+    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
+    docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
+  }
+  tags = [
+    VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_LATEST,
+  ]
+  cache-from = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_REGISTRY_CACHE}",
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
+    ] : [],
+    [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_LATEST,
+    ]
+  )
+  cache-to = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_REGISTRY_CACHE},mode=max"
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST
+    ] : [],
+    [
+      "type=inline"
+    ]
+  )
+  platforms = platforms
+}
+
+target "vegito-trixie-debian-docker-terraform" {
+  inherits = ["vegito-trixie-debian-docker-base"]
+  contexts = {
+    debian               = "target:vegito-trixie-debian-terraform"
+    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
+    docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
+  }
+  tags = [
+    VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_VERSION,
+    VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_LATEST,
+  ]
+  cache-from = concat(
+    USE_REGISTRY_CACHE ? [
+      "type=registry,ref=${VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_REGISTRY_CACHE}",
+    ] : [],
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL_CACHE_READ_LATEST
+    ] : [],
+    [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_LATEST,
+    ]
+  )
+  cache-to = concat(
+    ENABLE_LOCAL_CACHE ? [
+      VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_CACHE_WRITE_LATEST,
+    ] : []
+  )
+}

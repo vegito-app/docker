@@ -119,6 +119,7 @@ VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS ?= \
 
 VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS ?= \
   docker \
+  kubernetes \
   golang \
   obs \
   vscode
@@ -149,6 +150,7 @@ VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian-python-dockerd \
   debian-dockerd \
   debian-project-vscode-golang-ai-dockerd \
+  debian-project-docker-terraform \
   debian-terraform-dockerd \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%) \
   $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-ai) \

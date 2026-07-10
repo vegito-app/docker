@@ -87,6 +87,7 @@ group "vegito-trixie-debian-terraform-dockerd-ci" {
 }
 
 target "vegito-trixie-debian-terraform-version-ci" {
+  inherits = ["vegito-trixie-debian-terraform-base"]
   contexts = {
     debian = "target:vegito-trixie-debian-version-ci"
   }

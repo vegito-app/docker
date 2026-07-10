@@ -59,12 +59,6 @@ RUN --mount=type=cache,id=local-builder-${TARGETPLATFORM}-apt-cache,target=/var/
     google-cloud-cli-gke-gcloud-auth-plugin \
     google-cloud-sdk
 
-# Terraform
-ARG terraform_version=1.11.2
-RUN curl -OL https://releases.hashicorp.com/terraform/${terraform_version}/terraform_${terraform_version}_linux_amd64.zip \
-    && unzip terraform_${terraform_version}_linux_amd64.zip -d /usr/local/bin/ \
-    && rm terraform_${terraform_version}_linux_amd64.zip
-
 ARG gitleaks_version=8.28.0
 
 RUN case "$TARGETPLATFORM" in "linux/amd64") \
