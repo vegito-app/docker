@@ -21,6 +21,22 @@ kill_jobs() {
 # 🚨 Register cleanup function to run on script exit
 trap kill_jobs EXIT
 
+get_upstream_dns() {
+    local dns=()
+
+    while read -r line; do
+        if [[ "$line" =~ ^#\ ExtServers:\ \[(.*)\]$ ]]; then
+            for server in ${BASH_REMATCH[1]}; do
+              # Discard the default Docker DNS server if present
+              [[ "$dns" == "127.0.0.11" ]] && continue
+              dns+=("$server")
+            done
+        fi
+    done < /etc/resolv.conf
+
+    printf '%s\n' "${dns[@]}"
+}
+
 LOCAL_USER="$(id -un)"
 
 if ! grep -q "^${LOCAL_USER}:" /etc/subuid; then
@@ -38,16 +54,16 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf; sudo sys
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /run/user/$LOCAL_USER_ID/sysctl.conf
 sudo sysctl -p /run/user/$LOCAL_USER_ID/sysctl.conf
 
-mapfile -t DNS_SERVERS < <(awk '/^nameserver/ { print $2 }' /etc/resolv.conf)
+DNS_ARGS=()
 
-DOCKERD_ARGS=()
-for dns in "${DNS_SERVERS[@]}"; do
-    DOCKERD_ARGS+=(--dns="$dns")
-done
+while read -r server; do
+    DNS_ARGS+=(--dns="$server")
+done < <(get_upstream_dns)
 
-echo "Starting dockerd with arguments: ${DOCKERD_ARGS[@]}"
 
-dockerd-entrypoint.sh "${DOCKERD_ARGS[@]}" &
+echo "Starting dockerd with arguments: ${DNS_ARGS[@]}"
+
+dockerd-entrypoint.sh "${DNS_ARGS[@]}" &
 dockerd_pid="$!"
 
 export LOCAL_USER_ID=$(id -u)
