@@ -33,12 +33,21 @@ fi
 
 export LOCAL_USER_ID=$(id -u)
 # Set inotify watches limit
-echo fs.inotify.max_user_watches=524288 |  sudo tee -a /etc/sysctl.conf; sudo sysctl -p
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
 # Set inotify watches limit for rootless dockerd
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /run/user/$LOCAL_USER_ID/sysctl.conf
 sudo sysctl -p /run/user/$LOCAL_USER_ID/sysctl.conf
 
-dockerd-entrypoint.sh --dns=8.8.8.8 --dns=8.8.4.4 &
+mapfile -t DNS_SERVERS < <(awk '/^nameserver/ { print $2 }' /etc/resolv.conf)
+
+DOCKERD_ARGS=()
+for dns in "${DNS_SERVERS[@]}"; do
+    DOCKERD_ARGS+=(--dns="$dns")
+done
+
+echo "Starting dockerd with arguments: ${DOCKERD_ARGS[@]}"
+
+dockerd-entrypoint.sh "${DOCKERD_ARGS[@]}" &
 dockerd_pid="$!"
 
 export LOCAL_USER_ID=$(id -u)
