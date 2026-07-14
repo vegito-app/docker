@@ -134,5 +134,3 @@ USER ${non_root_user}
 ENV USER=${non_root_user}
 
 ENTRYPOINT ["tini", "--", "debian-docker-entrypoint.sh"]
-
-HEALTHCHECK CMD test -f /tmp/.dockerd-ready || exit 1

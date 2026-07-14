@@ -121,7 +121,7 @@ RUN . .venv/bin/activate && \
     pip install -e '.[all]'
 
 # /!\ Do not add Hermes venv PATH to the global PATH
-# ENV PATH="${HOME}/hermes/.venv/bin/:$PATH"
+ENV PATH="${HOME}/hermes/.venv/bin/:$PATH"
 
 RUN mkdir -p /home/debian/.hermes && \
     cp -a /home/debian/hermes/. /home/debian/.hermes/
