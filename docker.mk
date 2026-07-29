@@ -137,7 +137,6 @@ VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian-desktop-x-vscode-golang-ai-dockerd \
   debian-golang-docker \
   debian-golang-dockerd \
-  debian-golang-project-docker \
   debian-obs-vscode-golang-ai-dockerd \
   debian-project-golang-desktop-x \
   debian-project-golang-docker \
