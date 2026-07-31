@@ -327,7 +327,7 @@ group "vegito-trixie-debian-project-golang-docker-ci" {
 target "vegito-trixie-debian-project-golang-docker-version-ci" {
   inherits = ["vegito-trixie-debian-project-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-golang-version-ci"
+    debian = "target:vegito-trixie-debian-golang-docker-version-ci"
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
   }
   tags = [
@@ -605,7 +605,7 @@ group "vegito-trixie-debian-project-golang-ai-dockerd-ci" {
 target "vegito-trixie-debian-project-golang-ai-dockerd-version-ci" {
   inherits = ["vegito-trixie-debian-project-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-golang-version-ci"
+    debian = "target:vegito-trixie-debian-golang-ai-dockerd-version-ci"
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
   }
   tags = [
@@ -633,7 +633,7 @@ target "vegito-trixie-debian-project-golang-ai-dockerd-version-ci" {
 target "vegito-trixie-debian-project-golang-ai-dockerd-latest-ci" {
   inherits = ["vegito-trixie-debian-project-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian-golang-latest-ci"
+    debian = "target:vegito-trixie-debian-golang-ai-dockerd-latest-ci"
     debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
   }
   tags = [
