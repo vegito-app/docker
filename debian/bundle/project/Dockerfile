@@ -132,6 +132,6 @@ COPY container-start.sh /usr/local/bin/project-container-start.sh
 
 COPY --from=go-build /home/debian/go/bin/proxy /usr/local/bin/localproxy
 
-ENTRYPOINT [ "project-container-entrypoint.sh" ]
+ENTRYPOINT [ "tini", "--", "project-container-entrypoint.sh" ]
 CMD [ "project-container-start.sh" ]
 
