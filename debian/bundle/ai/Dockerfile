@@ -118,7 +118,8 @@ RUN uv venv .venv && \
     uv sync
 
 RUN . .venv/bin/activate && \
-    pip install -e '.[all]'
+    pip install -e '.[all]' && \
+    uv pip install aiohttp
 
 # /!\ Do not add Hermes venv PATH to the global PATH
 ENV PATH="${HOME}/hermes/.venv/bin/:$PATH"
