@@ -17,14 +17,15 @@ RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-
     python3-scipy \
     tesseract-ocr \
     zstd
-
-ARG ollama_version=0.31.1
-
-RUN curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION=${ollama_version} sh
-
-# Runtime desktop automation
-RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-cache,target=/var/cache/apt,sharing=locked \
+    
+    ARG ollama_version=0.31.1
+    
+    RUN curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION=${ollama_version} sh
+    
+    # Runtime desktop automation
+    RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-lib,target=/var/lib/apt,sharing=locked \
+    apt-get update && \
     apt-get install -y \
     xdotool \
     wmctrl 
