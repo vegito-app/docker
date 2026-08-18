@@ -4,20 +4,27 @@ set -euo pipefail
 
 # Nettoyage du flag d'état à chaque arrêt
 rm -f /tmp/.xdisplay-ready
+
+# Keep exactly one Wayland socket name source of truth:
+# - default: wayland-1
+# - override: existing WAYLAND_DISPLAY from docker-compose/env
+WAYLAND_DISPLAY_NAME="${WAYLAND_DISPLAY:-${WAYLAND_DISPLAY_NAME:-$wayland_socket}}"
+DISPLAY_RESOLUTION=${DISPLAY_RESOLUTION:-$default_resolution}
+
+echo "🧼 Cleaning stale Xwayland runtime state
+rm -f "${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY_NAME}"
+rm -f "${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY_NAME}.lock"
+
+pkill -f "weston.*${WAYLAND_DISPLAY_NAME}" || true
+pkill -f "Xwayland ${DISPLAY}" 2>/dev/null || true
+pkill -f -9 "Xwayland $DISPLAY" || true
+
+# Nettoyage des sockets X11 et de lock X11
+rm -rf /tmp/.X11-unix/X${DISPLAY#*:}
+rm -rf /tmp/.X${DISPLAY#*:}-lock
+
 # 📌 List of PIDs of background processes
 bg_pids=()
-
-# 🖥️ Default parameters
-default_depth="24"
-default_framerate="60"
-default_resolution="1920x1080"
-default_wayland_socket="wayland-1"
-
-resolution="${DISPLAY_RESOLUTION:-$default_resolution}"
-depth="${DISPLAY_DEPTH:-$default_depth}"
-
-framerate="${DISPLAY_FRAMERATE:-$default_framerate}"
-wayland_socket="${WAYLAND_SOCKET:-$default_wayland_socket}"
 
 # 🧹 Function called at the end of the script to kill background processes
 kill_jobs() {
@@ -37,11 +44,19 @@ kill_jobs() {
 
 # 🚨 Register cleanup function to run on script exit
 trap kill_jobs EXIT
-# Keep exactly one Wayland socket name source of truth:
-# - default: wayland-1
-# - override: existing WAYLAND_DISPLAY from docker-compose/env
-WAYLAND_DISPLAY_NAME="${WAYLAND_DISPLAY:-${WAYLAND_DISPLAY_NAME:-$wayland_socket}}"
-DISPLAY_RESOLUTION=${DISPLAY_RESOLUTION:-$default_resolution}
+
+
+# 🖥️ Default parameters
+default_depth="24"
+default_framerate="60"
+default_resolution="1920x1080"
+default_wayland_socket="wayland-1"
+
+resolution="${DISPLAY_RESOLUTION:-$default_resolution}"
+depth="${DISPLAY_DEPTH:-$default_depth}"
+
+framerate="${DISPLAY_FRAMERATE:-$default_framerate}"
+wayland_socket="${WAYLAND_SOCKET:-$default_wayland_socket}"
 
 # -------------------------------------------------------------------
 # Weston startup

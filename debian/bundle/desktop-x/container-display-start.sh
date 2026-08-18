@@ -2,6 +2,17 @@
 
 set -euo pipefail
 
+echo "🧼 Cleaning stale Desktop-X runtime state..."
+
+rm -f /tmp/.xdisplay-ready
+
+export DISPLAY="${DISPLAY:-:1}"
+
+rm -f "/tmp/.X11-unix/X$${DISPLAY#*:}"
+rm -f "/tmp/.X$${DISPLAY#*:}-lock"
+
+echo "🧼 Cleaning stale Desktop-X runtime state... Done
+
 # -------------------------------------------------------------------
 # GPU mode auto-detection
 # -------------------------------------------------------------------
@@ -18,7 +29,6 @@ if [ -z "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE:-}" ]; then
     export VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE="swiftshader_indirect"
     echo "ℹ️ No GPU acceleration detected -> using SwiftShader fallback"
 fi
-export DISPLAY="${DISPLAY:-:1}"
 
 case "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE}" in
     "host")
