@@ -9,9 +9,8 @@ rm -f /tmp/.xdisplay-ready
 # - default: wayland-1
 # - override: existing WAYLAND_DISPLAY from docker-compose/env
 WAYLAND_DISPLAY_NAME="${WAYLAND_DISPLAY:-${WAYLAND_DISPLAY_NAME:-$wayland_socket}}"
-DISPLAY_RESOLUTION=${DISPLAY_RESOLUTION:-$default_resolution}
 
-echo "🧼 Cleaning stale Xwayland runtime state
+echo "🧼 Cleaning stale Xwayland runtime state"
 rm -f "${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY_NAME}"
 rm -f "${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY_NAME}.lock"
 

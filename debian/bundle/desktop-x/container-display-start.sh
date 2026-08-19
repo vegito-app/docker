@@ -11,7 +11,7 @@ export DISPLAY="${DISPLAY:-:1}"
 rm -f "/tmp/.X11-unix/X$${DISPLAY#*:}"
 rm -f "/tmp/.X$${DISPLAY#*:}-lock"
 
-echo "🧼 Cleaning stale Desktop-X runtime state... Done
+echo "🧼 Cleaning stale Desktop-X runtime state... Done"
 
 # -------------------------------------------------------------------
 # GPU mode auto-detection
