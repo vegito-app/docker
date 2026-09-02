@@ -68,10 +68,6 @@ bg_pids+=("$!")
 socat TCP-LISTEN:8080,fork,reuseaddr TCP:application-backend:8080 > /tmp/socat-backend-8080.log 2>&1 &
 bg_pids+=("$!")
 
-# access to debug backend using localhost (position retrieval unauthorized using insecure http frontend with google-chrome)
-socat TCP-LISTEN:8888,fork,reuseaddr TCP:devcontainer:8888 > /tmp/socat-devcontainer-8888.log 2>&1 &
-bg_pids+=("$!")
-
 if [ -f /usr/local/bin/desktop-x-start.sh ]; then
     echo "🖥️ X Desktop starting..."
     /usr/local/bin/desktop-x-start.sh
