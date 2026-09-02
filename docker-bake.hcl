@@ -32,7 +32,7 @@ variable "GO_VERSION" {
 
 variable "NODE_VERSION" {
   description = "current Node version"
-  default     = "22.14.0"
+  default     = "22.22.0"
 }
 
 variable "OH_MY_ZSH_VERSION" {
