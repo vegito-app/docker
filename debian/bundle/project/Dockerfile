@@ -56,7 +56,7 @@ RUN --mount=type=cache,id=local-builder-${TARGETPLATFORM}-apt-cache,target=/var/
     && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg \
     && apt-get -o Acquire::Retries=3 update && apt-get install -y \
     google-cloud-cli-gke-gcloud-auth-plugin \
-    google-cloud-sdk
+    google-cloud-cli
 
 ARG gitleaks_version=8.28.0
 
