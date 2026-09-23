@@ -40,13 +40,19 @@ if [ "$current_workspace" != "$LOCAL_WORKSPACE" ] ; then
     echo "Linked current workspace $current_workspace to $LOCAL_WORKSPACE"
 fi
 
-# Forward firebase-emulators to container as localhost
+
+
+# Forward firebase-emulators to container as localhost using provided forwarder ports
+socat TCP-LISTEN:9499,fork,reuseaddr TCP:firebase-emulators:9599 > /tmp/socat-firebase-emulators-9599.log 2>&1 &
+bg_pids+=("$!")
 socat TCP-LISTEN:9299,fork,reuseaddr TCP:firebase-emulators:9399 > /tmp/socat-firebase-emulators-9399.log 2>&1 &
 bg_pids+=("$!")
 socat TCP-LISTEN:4500,fork,reuseaddr TCP:firebase-emulators:4501 > /tmp/socat-firebase-emulators-4501.log 2>&1 &
 bg_pids+=("$!")
 socat TCP-LISTEN:4400,fork,reuseaddr TCP:firebase-emulators:4401 > /tmp/socat-firebase-emulators-4401.log 2>&1 &
 bg_pids+=("$!")
+
+# Forward firebase-emulators to container as localhost
 socat TCP-LISTEN:9000,fork,reuseaddr TCP:firebase-emulators:9000 > /tmp/socat-firebase-emulators-9000.log 2>&1 &
 bg_pids+=("$!")
 socat TCP-LISTEN:9099,fork,reuseaddr TCP:firebase-emulators:9099 > /tmp/socat-firebase-emulators-9099.log 2>&1 &
