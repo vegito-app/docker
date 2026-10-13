@@ -5,6 +5,18 @@ set -euo pipefail
 # Nettoyage du flag d'état à chaque arrêt
 rm -f /tmp/.xdisplay-ready
 
+
+# 🖥️ Default parameters
+default_depth="24"
+default_framerate="60"
+default_resolution="1920x1080"
+default_wayland_socket="wayland-1"
+
+resolution="${DISPLAY_RESOLUTION:-$default_resolution}"
+depth="${DISPLAY_DEPTH:-$default_depth}"
+
+framerate="${DISPLAY_FRAMERATE:-$default_framerate}"
+wayland_socket="${WAYLAND_SOCKET:-$default_wayland_socket}"
 # Keep exactly one Wayland socket name source of truth:
 # - default: wayland-1
 # - override: existing WAYLAND_DISPLAY from docker-compose/env
@@ -43,19 +55,6 @@ kill_jobs() {
 
 # 🚨 Register cleanup function to run on script exit
 trap kill_jobs EXIT
-
-
-# 🖥️ Default parameters
-default_depth="24"
-default_framerate="60"
-default_resolution="1920x1080"
-default_wayland_socket="wayland-1"
-
-resolution="${DISPLAY_RESOLUTION:-$default_resolution}"
-depth="${DISPLAY_DEPTH:-$default_depth}"
-
-framerate="${DISPLAY_FRAMERATE:-$default_framerate}"
-wayland_socket="${WAYLAND_SOCKET:-$default_wayland_socket}"
 
 # -------------------------------------------------------------------
 # Weston startup
