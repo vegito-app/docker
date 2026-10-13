@@ -27,7 +27,7 @@ variable "VERSION" {
 
 variable "GO_VERSION" {
   description = "current Go version"
-  default     = "1.26.5"
+  default     = "1.27.2"
 }
 
 variable "NODE_VERSION" {
