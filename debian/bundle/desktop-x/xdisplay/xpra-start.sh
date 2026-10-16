@@ -78,7 +78,7 @@ xpra start "$DISPLAY" \
 display_pid="$!"
 bg_pids+=("${display_pid}")
 
-XPRA_SOCKET="$XPRA_SOCKET_DIR/$(hostname)-${DISPLAY#:}"
+XPRA_SOCKET="$XPRA_SOCKET_DIR/${DISPLAY#:}/socket"
 export XPRA_SERVER_SOCKET="$XPRA_SOCKET"
 
 for i in $(seq 1 30); do
@@ -92,7 +92,7 @@ for i in $(seq 1 30); do
 done
 
 if ! xpra info "socket://$XPRA_SOCKET" >/dev/null 2>&1; then
-    echo "❌ Xpra socket not ready."
+    echo "❌ Xpra socket not ready: $XPRA_SOCKET"
     exit 1
 fi
 
