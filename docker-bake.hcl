@@ -140,6 +140,38 @@ group "release" {
 group "release-ci" {
   targets = [
     "dockerhub-ci",
-    "runners-ci",
+
+    "vegito-trixie-debian-desktop-x-version-ci",
+    "vegito-trixie-debian-desktop-x-latest-ci",
+    
+    "vegito-trixie-debian-nodejs-version-ci",
+    "vegito-trixie-debian-nodejs-latest-ci",
+
+    "vegito-trixie-debian-nodejs-desktop-x-version-ci",
+    "vegito-trixie-debian-nodejs-desktop-x-latest-ci",
+
+    "vegito-trixie-debian-flutter-version-ci",
+    "vegito-trixie-debian-flutter-latest-ci",
+
+    "vegito-trixie-debian-flutter-desktop-x-version-ci",
+    "vegito-trixie-debian-flutter-desktop-x-latest-ci",
+
+    "vegito-trixie-debian-golang-version-ci",
+    "vegito-trixie-debian-golang-latest-ci",
+    
+    "vegito-trixie-debian-python-version-ci",
+    "vegito-trixie-debian-python-latest-ci",
+    
+    "vegito-trixie-debian-python-dockerd-ci",
+    "vegito-trixie-debian-python-dockerd-desktop-x-ci",
+    
+    "vegito-trixie-debian-rust-version-ci",
+    "vegito-trixie-debian-rust-latest-ci",
+
+    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-version-ci",
+    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest-ci",
+
+    "vegito-trixie-debian-docker-version-ci",
+    "vegito-trixie-debian-docker-latest-ci",
   ]
 }
