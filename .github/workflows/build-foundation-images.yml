@@ -65,7 +65,6 @@ jobs:
       VEGITO_PROJECT_USER: gha-${{ github.run_id }}-${{ inputs.environment }}
       VERSION: ${{ inputs.version }}
       GOOGLE_CLOUD_PROJECT_ID: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
-      INFRA_ENV: ${{ inputs.environment }}
       USE_REGISTRY_CACHE: ${{ inputs.use_registry_cache }}
       VEGITO_DOCKERHUB_PAT: ${{ secrets.VEGITO_DOCKERHUB_PAT }}
       VEGITO_DOCKERHUB_USERNAME: ${{ secrets.VEGITO_DOCKERHUB_USERNAME }}

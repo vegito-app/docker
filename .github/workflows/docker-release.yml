@@ -25,7 +25,7 @@ jobs:
 
     strategy:
       matrix:
-        environment: [dev,staging, prod]
+        environment: [dev]
 
     with:
       version: ${{ needs.version-changelog.outputs.version }}
