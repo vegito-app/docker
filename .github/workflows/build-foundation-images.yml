@@ -42,10 +42,6 @@ on:
         required: true
       GOOGLE_CLOUD_PROJECT_NUMBER:
         required: true
-      GOOGLE_CLOUD_SERVICE_ACCOUNT_EMAIL:
-        required: true
-      GOOGLE_CLOUD_WORKLOAD_IDENTITY_PROVIDER:
-        required: true
       VEGITO_DOCKERHUB_PAT:
         required: false
       VEGITO_DOCKERHUB_USERNAME:
@@ -65,11 +61,12 @@ jobs:
       VEGITO_PROJECT_USER: gha-${{ github.run_id }}-${{ inputs.environment }}
       VERSION: ${{ inputs.version }}
       GOOGLE_CLOUD_PROJECT_ID: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
+      GOOGLE_CLOUD_SERVICE_ACCOUNT_EMAIL: github-actions-main@${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}.iam.gserviceaccount.com
+      GOOGLE_CLOUD_WORKLOAD_IDENTITY_PROVIDER: projects/${{ secrets.GOOGLE_CLOUD_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ vars.WORKLOAD_IDENTITY_POOL_ID }}/providers/${{ vars.WORKLOAD_IDENTITY_PROVIDER_ID }}
       USE_REGISTRY_CACHE: ${{ inputs.use_registry_cache }}
       VEGITO_DOCKERHUB_PAT: ${{ secrets.VEGITO_DOCKERHUB_PAT }}
       VEGITO_DOCKERHUB_USERNAME: ${{ secrets.VEGITO_DOCKERHUB_USERNAME }}
-      VEGITO_DOCKER_REGISTRIES: ${{ inputs.docker_registry_mode }}
-
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -84,13 +81,26 @@ jobs:
           else
           echo "⚠️ gha-env-vars not found"
           fi
+      - name: Validate WIF configuration
+        run: |
+          set -euo pipefail
+          WIF_PROVIDER=${{ env.GOOGLE_CLOUD_WORKLOAD_IDENTITY_PROVIDER }}
+          if [[ -z "$WIF_PROVIDER" ]]; then
+            echo "::error::Missing GOOGLE_CLOUD_WORKLOAD_IDENTITY_PROVIDER"
+            exit 1
+          fi
+          if [[ ! "$WIF_PROVIDER" =~ ^projects/[0-9]+/locations/global/workloadIdentityPools/[^/]+/providers/[^/]+$ ]]; then
+            echo "::error::Invalid WIF provider resource format"
+            exit 1
+          fi
+          echo "✅ WIF provider format is valid"
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: ${{ secrets.GOOGLE_CLOUD_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.GOOGLE_CLOUD_SERVICE_ACCOUNT_EMAIL }}
-          project_id: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
+          workload_identity_provider: ${{ env.GOOGLE_CLOUD_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.GOOGLE_CLOUD_SERVICE_ACCOUNT_EMAIL }}
+          project_id: ${{ env.GOOGLE_CLOUD_PROJECT_ID }}
           token_format: "access_token"
           export_environment_variables: true
 
