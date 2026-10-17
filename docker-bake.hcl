@@ -121,6 +121,66 @@ group "runners-ci" {
   ]
 }
 
+group "vegito-app-ci" {
+  targets = [
+    
+    // Used by 
+    // - vegito-app/caddy
+    // - vegito-app/local/firebase-emulators
+    // - vegito-app/local/vault-dev
+    "vegito-trixie-debian-version-ci",
+    "vegito-trixie-debian-latest-ci",
+
+    // Used by 
+    // - vegito-app/local/android/emulators
+    "vegito-trixie-debian-desktop-x-version-ci",
+    "vegito-trixie-debian-desktop-x-latest-ci",
+
+    // Used by 
+    // - vegito-app/local/android/emulators (flutter alternate)
+    "vegito-trixie-debian-flutter-desktop-x-version-ci",
+    "vegito-trixie-debian-flutter-desktop-x-latest-ci",
+    
+    // Used by vegito-app/caddy as Dockerfile builder
+    "vegito-trixie-debian-golang-version-ci",
+    "vegito-trixie-debian-golang-latest-ci",
+
+    // Used as service base by :
+    // - vegito-app/local/robotframework
+    "vegito-trixie-debian-python-version-ci",
+    "vegito-trixie-debian-python-latest-ci",
+    
+    // Use as builder by vegito-app/local/clarinet-devnet
+    "docker-rust-alpine-ci",
+
+    // Used by vegito-app/ai as common AI service base
+    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-version-ci",
+    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest-ci",
+
+    // Used as service runner by :
+    // - vegito-app/jitsi
+    // - vegito-app/mattermost
+    // - vegito-app/local/clarinet-devnet
+    "vegito-trixie-debian-dockerd-version-ci",
+    "vegito-trixie-debian-dockerd-latest-ci",
+
+    // Used by variable
+    // - vegito-app/local
+    // - vegito-app/vegito
+    // - vegito-app/docker-ssh-bridge
+    "vegito-trixie-debian-project-golang-docker-version-ci",
+    "vegito-trixie-debian-project-golang-docker-latest-ci",
+
+    // Used by Vegito vegito-app/payment project builder
+    "vegito-trixie-debian-project-golang-docker-desktop-x-version-ci",
+    "vegito-trixie-debian-project-golang-docker-desktop-x-latest-ci",
+
+    // Used by vegito-app/auth as Authentik service image base
+    "vegito-trixie-debian-terraform-dockerd-version-ci",
+    "vegito-trixie-debian-terraform-dockerd-latest-ci",
+  ]
+}
+
 group "default" {
   targets = [
     "release",
@@ -140,38 +200,6 @@ group "release" {
 group "release-ci" {
   targets = [
     "dockerhub-ci",
-
-    "vegito-trixie-debian-desktop-x-version-ci",
-    "vegito-trixie-debian-desktop-x-latest-ci",
-    
-    "vegito-trixie-debian-nodejs-version-ci",
-    "vegito-trixie-debian-nodejs-latest-ci",
-
-    "vegito-trixie-debian-nodejs-desktop-x-version-ci",
-    "vegito-trixie-debian-nodejs-desktop-x-latest-ci",
-
-    "vegito-trixie-debian-flutter-version-ci",
-    "vegito-trixie-debian-flutter-latest-ci",
-
-    "vegito-trixie-debian-flutter-desktop-x-version-ci",
-    "vegito-trixie-debian-flutter-desktop-x-latest-ci",
-
-    "vegito-trixie-debian-golang-version-ci",
-    "vegito-trixie-debian-golang-latest-ci",
-    
-    "vegito-trixie-debian-python-version-ci",
-    "vegito-trixie-debian-python-latest-ci",
-    
-    "vegito-trixie-debian-python-dockerd-ci",
-    "vegito-trixie-debian-python-dockerd-desktop-x-ci",
-    
-    "vegito-trixie-debian-rust-version-ci",
-    "vegito-trixie-debian-rust-latest-ci",
-
-    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-version-ci",
-    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest-ci",
-
-    "vegito-trixie-debian-docker-version-ci",
-    "vegito-trixie-debian-docker-latest-ci",
+    "runners-ci"
   ]
 }

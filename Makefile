@@ -51,7 +51,7 @@ VEGITO_DOCKER_BUILDX_BAKE ?= \
 
 DOCKER_IMAGES_BUILD_GROUPS ?= \
   dockerhub \
-  runners
+  vegito-app
 
 VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS = $(DOCKER_IMAGES_BUILD_GROUPS) 
 
@@ -72,7 +72,7 @@ vegito-docker-images
 .PHONY: images
 
 # CI: build and push all images in parallel.
-# Fastest path; requires runners with enough CPU, RAM and disk I/O.
+# Fastest path; requires vegito-app with enough CPU, RAM and disk I/O.
 images-ci-multi-registry-release-fast: \
 docker-login \
 vegito-docker-images-multi-registry-release-ci
