@@ -99,7 +99,7 @@ vegito-docker-build-tags-list-ci-md:
 
 VEGITO_DOCKER_DEBIAN_DIR ?= $(VEGITO_DOCKER_DIR)/debian
 
-VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS ?= \
+VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS ?= \
  docker \
  flutter \
  golang \
@@ -151,16 +151,16 @@ VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS ?= \
   debian-project-vscode-golang-ai-dockerd \
   debian-project-docker-terraform \
   debian-terraform-dockerd \
-  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%) \
-  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-ai) \
-  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-desktop-x) \
-  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-docker-desktop-x) \
-  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-dockerd-ai) \
-  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-docker-project) \
-  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-flutter-desktop-x) \
-  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-flutter-ai) \
-  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-flutter-project) \
-  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-project) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%-ai) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%-desktop-x) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%-docker-desktop-x) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%-dockerd-ai) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%-docker-project) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%-flutter-desktop-x) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%-flutter-ai) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%-flutter-project) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%-project) \
   $(VEGITO_DOCKER_DEBIAN_BUNDLE_BUILDX_BAKE_TARGETS:%=debian-%) \
   $(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS:%=debian-project-%) \
 

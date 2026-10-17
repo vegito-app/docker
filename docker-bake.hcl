@@ -164,7 +164,7 @@ group "vegito-app-ci" {
     "vegito-trixie-debian-dockerd-version-ci",
     "vegito-trixie-debian-dockerd-latest-ci",
 
-    // Used by variable
+    // Used as image base
     // - vegito-app/local
     // - vegito-app/vegito
     // - vegito-app/docker-ssh-bridge
@@ -174,6 +174,10 @@ group "vegito-app-ci" {
     // Used by Vegito vegito-app/payment project builder
     "vegito-trixie-debian-project-golang-docker-desktop-x-version-ci",
     "vegito-trixie-debian-project-golang-docker-desktop-x-latest-ci",
+
+    // Used by Vegito vegito-app/payment project builder
+    "vegito-trixie-debian-project-docker-version-ci",
+    "vegito-trixie-debian-project-docker-latest-ci",
 
     // Used by vegito-app/auth as Authentik service image base
     "vegito-trixie-debian-terraform-dockerd-version-ci",
