@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/vegito-app/docker/compare/v0.0.1...v0.0.2) (2026-10-17)
+
+
+### Bug Fixes
+
+* **workflows:** corriger l'utilisation de la variable use_registry_cache dans les workflows de construction et de publication ([1a51c78](https://github.com/vegito-app/docker/commit/1a51c78607758d05288846d7b20499161bd8f011))
+* **workflows:** mettre à jour les groupes d'images pour le workflow vegito-app et supprimer les cibles obsolètes ([5c1fa21](https://github.com/vegito-app/docker/commit/5c1fa21e6cfcc44c9983a30d1961d9cb5d51b957))
+
 ### [0.0.1](https://github.com/vegito-app/docker/compare/v0.0.0...v0.0.1) (2026-10-17)
 
 
