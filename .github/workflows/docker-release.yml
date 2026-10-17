@@ -15,7 +15,7 @@ concurrency:
 jobs:
 
   version-changelog:
-    uses: vegito-app/local/.github/workflows/version-changelog.yml@v1.20.1
+    uses: vegito-app/local/.github/workflows/version-changelog.yml@v1.24.0
     secrets: inherit
 
   build-images:
@@ -30,11 +30,10 @@ jobs:
     with:
       version: ${{ needs.version-changelog.outputs.version }}
       environment: ${{ matrix.environment }}
+      docker_images_build_groups: ${{ vars.DOCKER_IMAGES_BUILD_GROUPS }}
       use_registry_cache: true
       env_bucket_map: |
         dev: vegito-app-dev-github-actions-ci-artifacts
-        staging: vegito-app-staging-github-actions-ci-artifacts
-        prod: vegito-app-prod-github-actions-ci-artifacts
 
     secrets: inherit
 

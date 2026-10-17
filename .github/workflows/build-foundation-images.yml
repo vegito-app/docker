@@ -29,7 +29,7 @@ on:
         required: false
         type: boolean
         default: false
-      images_ci_build_groups:
+      docker_images_build_groups:
         required: false
         type: string
         default: "dockerhub runners builders services applications"
@@ -38,10 +38,6 @@ on:
         type: string
         default: "gcr"
     secrets:
-      GOOGLE_CLOUD_PROJECT_ID:
-        required: true
-      GOOGLE_CLOUD_PROJECT_NUMBER:
-        required: true
       VEGITO_DOCKERHUB_PAT:
         required: false
       VEGITO_DOCKERHUB_USERNAME:
@@ -135,16 +131,14 @@ jobs:
         run: |
           echo "VEGITO_RELEASE_BUCKET=${{ steps.resolve_bucket.outputs.bucket }}/${{ inputs.release_bucket_prefix }}" >> $GITHUB_ENV
 
-      - name: Configure Cloud SDK and Docker
+      - name: Configure Docker
         run: |
-          # make gcloud-config-set-project
-          # make gcloud-auth-docker
-          make vegito-docker-login
-          make vegito-docker-buildx-setup
+          make docker-login
+          make docker-buildx-setup
 
       - name: Build Docker image
         env:
-          VEGITO_DOCKER_BUILDX_CI_BUILD_GROUPS: ${{ inputs.images_ci_build_groups }}
+          DOCKER_IMAGES_BUILD_GROUPS: ${{ inputs.docker_images_build_groups }}
           VERSION: ${{ inputs.version }}
         run: |
           set -o pipefail
@@ -159,7 +153,7 @@ jobs:
       - name: Generate docker image tag list for ${{ inputs.environment }}
         id: docker_tags
         run: |
-          make vegito-docker-tags-md-ci > vegito-docker-tags.md
+          make docker-tags-md-ci > vegito-docker-tags.md
           if ! gcloud storage cp vegito-docker-tags.md gs://${{ env.VEGITO_RELEASE_BUCKET }}/${{ inputs.version }}/docker-tags.md; then
             echo "::warning::failed to upload vegito-docker-tags.md"
           fi
