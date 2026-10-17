@@ -128,60 +128,48 @@ group "vegito-app-ci" {
     // - vegito-app/caddy
     // - vegito-app/local/firebase-emulators
     // - vegito-app/local/vault-dev
-    "vegito-trixie-debian-version-ci",
-    "vegito-trixie-debian-latest-ci",
+    "vegito-trixie-debian-ci",
 
     // Used by 
     // - vegito-app/local/android/emulators
-    "vegito-trixie-debian-desktop-x-version-ci",
-    "vegito-trixie-debian-desktop-x-latest-ci",
+    "vegito-trixie-debian-desktop-x-ci",
 
     // Used by 
     // - vegito-app/local/android/emulators (flutter alternate)
-    "vegito-trixie-debian-flutter-desktop-x-version-ci",
-    "vegito-trixie-debian-flutter-desktop-x-latest-ci",
+    "vegito-trixie-debian-flutter-desktop-x-ci",
     
     // Used by vegito-app/caddy as Dockerfile builder
-    "vegito-trixie-debian-golang-version-ci",
-    "vegito-trixie-debian-golang-latest-ci",
+    "vegito-trixie-debian-golang-ci",
 
-    // Used as service base by :
-    // - vegito-app/local/robotframework
-    "vegito-trixie-debian-python-version-ci",
-    "vegito-trixie-debian-python-latest-ci",
+    // Used by vegito-app/local/robotframework as service base
+    "vegito-debian-robotframework-ci",
     
     // Use as builder by vegito-app/local/clarinet-devnet
     "docker-rust-alpine-ci",
 
     // Used by vegito-app/ai as common AI service base
-    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-version-ci",
-    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-latest-ci",
+    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-ci",
 
     // Used as service runner by :
     // - vegito-app/jitsi
     // - vegito-app/mattermost
     // - vegito-app/local/clarinet-devnet
-    "vegito-trixie-debian-dockerd-version-ci",
-    "vegito-trixie-debian-dockerd-latest-ci",
+    "vegito-trixie-debian-dockerd-ci",
 
     // Used as image base
     // - vegito-app/local
     // - vegito-app/vegito
     // - vegito-app/docker-ssh-bridge
-    "vegito-trixie-debian-project-golang-docker-version-ci",
-    "vegito-trixie-debian-project-golang-docker-latest-ci",
+    "vegito-trixie-debian-project-golang-docker-ci",
 
     // Used by Vegito vegito-app/payment project builder
-    "vegito-trixie-debian-project-golang-docker-desktop-x-version-ci",
-    "vegito-trixie-debian-project-golang-docker-desktop-x-latest-ci",
+    "vegito-trixie-debian-project-golang-docker-desktop-x-ci",
 
     // Used by Vegito vegito-app/payment project builder
-    "vegito-trixie-debian-project-docker-version-ci",
-    "vegito-trixie-debian-project-docker-latest-ci",
+    "vegito-trixie-debian-project-docker-ci",
 
     // Used by vegito-app/auth as Authentik service image base
-    "vegito-trixie-debian-terraform-dockerd-version-ci",
-    "vegito-trixie-debian-terraform-dockerd-latest-ci",
+    "vegito-trixie-debian-terraform-dockerd-ci",
   ]
 }
 
