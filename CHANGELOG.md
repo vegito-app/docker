@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/vegito-app/docker/compare/v0.0.3...v0.0.4) (2026-10-17)
+
+
+### Bug Fixes
+
+* **docker-bake.hcl:** simplifier les cibles de construction en supprimant les suffixes obsolètes ([14dc7bd](https://github.com/vegito-app/docker/commit/14dc7bdb4977df87ae033e89ac87cb1499a1d64c))
+* **Makefile, docker-bake.hcl, docker.mk:** renommer les cibles de construction pour une meilleure clarté et cohérence ([0879634](https://github.com/vegito-app/docker/commit/0879634cd0eba5257911521e4753ae75b5993660))
+
 ### [0.0.3](https://github.com/vegito-app/docker/compare/v0.0.2...v0.0.3) (2026-10-17)
 
 
