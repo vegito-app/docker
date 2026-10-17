@@ -1,9 +1,9 @@
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_LATEST" {
-  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/trixie-debian:latest"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-latest"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_REPOSITORY}/trixie-debian:${VERSION}"
+  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:trixie-debian-${VERSION}"
 }
 
 variable "VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGE_REGISTRY_CACHE" {
