@@ -30,7 +30,7 @@ VEGITO_DOCKER_BUILDX_BAKE ?= \
 	docker buildx bake \
 	-f $(VEGITO_DOCKER_DIR)/docker-bake.hcl \
 	-f $(VEGITO_DOCKER_IO_DIR)/docker-bake.hcl \
-	$(VEGITO_DOCKER_IO_HUB_IMAGES:%=-f $(VEGITO_DOCKER_IO_DIR)/%.docker-bake.hcl) \
+	$(VEGITO_DOCKER_IO_HUB_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_IO_DIR)/%.docker-bake.hcl) \
 	-f $(VEGITO_DOCKER_ALPINE_DIR)/docker-bake.hcl \
 	-f $(VEGITO_DOCKER_DEBIAN_DIR)/docker-bake.hcl \
 	-f $(VEGITO_DOCKER_DEBIAN_DIR)/trixie.docker-bake.hcl \
@@ -38,46 +38,52 @@ VEGITO_DOCKER_BUILDX_BAKE ?= \
 	-f $(VEGITO_DOCKER_DEBIAN_DIR)/docker/dockerd/trixie.docker-bake.hcl \
 	-f $(VEGITO_DOCKER_DEBIAN_DIR)/terraform/docker-bake.hcl \
 	-f $(VEGITO_DOCKER_DEBIAN_DIR)/terraform/trixie.docker-bake.hcl \
-	$(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/trixie.docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/project/%/docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/project/%/trixie.docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/%/docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/%/trixie.docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_GOLANG_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/golang/%/docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_GOLANG_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/golang/%/trixie.docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_VSCODE_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/vscode/%/docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_VSCODE_SPECIFICS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/vscode/%/trixie.docker-bake.hcl)
+	$(VEGITO_DOCKER_DEBIAN_BUNDLE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_BUNDLE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/trixie.docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/project/%/docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/project/%/trixie.docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/%/docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/%/trixie.docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_GOLANG_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/golang/%/docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_GOLANG_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/golang/%/trixie.docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_VSCODE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/vscode/%/docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_VSCODE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/vscode/%/trixie.docker-bake.hcl)
+
+DOCKER_IMAGES_BUILD_GROUPS ?= \
+  dockerhub \
+  runners
+
+VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS = $(DOCKER_IMAGES_BUILD_GROUPS) 
 
 -include docker.mk
 
 # Local/dev: build all images without pushing them.
 # Tags are generated for all configured registries.
-images: \
+images-multi-release-fast: \
 docker-login \
 vegito-docker-images-multi-registry-release
-.PHONY: images
+.PHONY: images-multi-release-fast
 
 # Local/dev: build images in smaller groups without pushing them.
 # Useful when full parallel builds are too heavy for the workstation.
-images-groups-build: \
+images: \
 docker-login \
 vegito-docker-images
-.PHONY: images-groups-build
+.PHONY: images
 
 # CI: build and push all images in parallel.
 # Fastest path; requires runners with enough CPU, RAM and disk I/O.
-images-ci: \
+images-ci-multi-registry-release-fast: \
 docker-login \
 vegito-docker-images-multi-registry-release-ci
-.PHONY: images-ci
+.PHONY: images-ci-multi-registry-release-fast
 
 # CI: build and push images in smaller groups.
 # Safer on constrained runners; slower than the full parallel path.
-images-groups-build-ci: \
+images-ci: \
 docker-login \
 vegito-docker-images-ci
-.PHONY: images-groups-build-ci
+.PHONY: images-ci
 
 images-pull: \
 docker-login \
@@ -95,11 +101,14 @@ devcontainer: devcontainer-vscode
 devcontainer-codespaces: devcontainer-vscode-codespaces
 .PHONY: devcontainer-codespaces
 
-vegito-docker-tags-md-ci: vegito-docker-build-tags-list-ci-md
-.PHONY: vegito-docker-tags-md-ci
+docker-tags-md-ci: vegito-docker-build-tags-list-ci-md
+.PHONY: docker-tags-md-ci
 
 docker-login: vegito-docker-login
 .PHONY: docker-login
+
+docker-buildx-setup: vegito-docker-buildx-setup
+.PHONY: docker-buildx-setup
 
 docker-buildx-bake-target-keys-graph:
 	$(VEGITO_DOCKER_BUILDX_BAKE) --print vegito-trixie-debian-project-obs-vscode-golang-ai-dockerd  

@@ -39,20 +39,20 @@ vegito-docker-clean:
 
 # Groups are used to manage the build process. 
 # If an image is built in a group, all images in that group are built together.
-VEGITO_DOCKER_BUILDX_BUILD_GROUPS ?= \
+VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS ?= \
   dockerhub \
   runners
 
 # Build all images (dev)
 # In this variant, images are built and loaded into the local Docker daemon.
 # The build does not push images to a remote registry.
-vegito-docker-images: $(VEGITO_DOCKER_BUILDX_BUILD_GROUPS:%=%-docker-images)
+vegito-docker-images: $(VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS:%=%-docker-images)
 .PHONY: vegito-docker-images
 
-$(VEGITO_DOCKER_BUILDX_BUILD_GROUPS:%=%-docker-images): vegito-docker-buildx-setup
+$(VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS:%=%-docker-images): vegito-docker-buildx-setup
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print $(@:%-docker-images=%)
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --load $(@:%-docker-images=%)
-.PHONY: $(VEGITO_DOCKER_BUILDX_BUILD_GROUPS:%=%-docker-images)
+.PHONY: $(VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS:%=%-docker-images)
 
 vegito-docker-images-multi-registry-release: $(VEGITO_DOCKER_REGISTRIES:%=vegito-docker-images-%-release)
 	@echo "✅ DevBuilt local images tagged for all registries successfully. No push performed."
@@ -63,13 +63,13 @@ vegito-docker-images-gcr-release: vegito-docker-images-release
 
 # Build all images (CI)
 # In this variant, images are built and pushed to the remote registry.
-vegito-docker-images-ci: $(VEGITO_DOCKER_BUILDX_BUILD_GROUPS:%=%-docker-images-ci)
+vegito-docker-images-ci: $(VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS:%=%-docker-images-ci)
 .PHONY: vegito-docker-images-ci
 
-$(VEGITO_DOCKER_BUILDX_BUILD_GROUPS:%=%-docker-images-ci): vegito-docker-buildx-setup
+$(VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS:%=%-docker-images-ci): vegito-docker-buildx-setup
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print $(@:%-docker-images-ci=%-ci)
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --push $(@:%-docker-images-ci=%-ci)
-.PHONY: $(VEGITO_DOCKER_BUILDX_BUILD_GROUPS:%=%-docker-images-ci)
+.PHONY: $(VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS:%=%-docker-images-ci)
 
 vegito-docker-images-multi-registry-release-ci: $(VEGITO_DOCKER_REGISTRIES:%=vegito-docker-images-%-release-ci)
 	@echo "✅ CI Built and pushed images to all registries successfully."
@@ -78,16 +78,16 @@ vegito-docker-images-multi-registry-release-ci: $(VEGITO_DOCKER_REGISTRIES:%=veg
 vegito-docker-images-gcr-release-ci: vegito-docker-images-release-ci
 .PHONY: vegito-docker-gcr-images-ci
 
-vegito-docker-group-tags-list-ci: $(VEGITO_DOCKER_BUILDX_BUILD_GROUPS:%=%-docker-group-tags-list-ci)
+vegito-docker-group-tags-list-ci: $(VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS:%=%-docker-group-tags-list-ci)
 .PHONY: vegito-docker-group-tags-list-ci
 
-$(VEGITO_DOCKER_BUILDX_BUILD_GROUPS:%=%-docker-group-tags-list-ci):
+$(VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS:%=%-docker-group-tags-list-ci):
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print $(@:%-docker-group-tags-list-ci=%-ci) | jq -r '.target | to_entries[] | .value.tags[]'
-.PHONY: $(VEGITO_DOCKER_BUILDX_BUILD_GROUPS:%=%-docker-group-tags-list-ci)
+.PHONY: $(VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS:%=%-docker-group-tags-list-ci)
 
 vegito-docker-build-tags-list-ci-md:
 	@echo "### 🐳 Docker Images Built (excluding latest):"
-	@set -e; for group in $(VEGITO_DOCKER_BUILDX_BUILD_GROUPS); do \
+	@set -e; for group in $(VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS); do \
 	  echo "#### Group: '$$group'" ; \
 	 $(MAKE) $$group-docker-group-tags-list-ci \
 	 | grep -vE 'latest$$' \
@@ -99,7 +99,7 @@ vegito-docker-build-tags-list-ci-md:
 
 VEGITO_DOCKER_DEBIAN_DIR ?= $(VEGITO_DOCKER_DIR)/debian
 
-VEGITO_DOCKER_DEBIAN_SPECIFICS ?= \
+VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS ?= \
  docker \
  flutter \
  golang \
@@ -112,26 +112,26 @@ VEGITO_DOCKER_DEBIAN_SPECIFICS ?= \
  terraform \
  vscode
 
-VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS ?= \
+VEGITO_DOCKER_DEBIAN_BUNDLE_BUILDX_BAKE_TARGETS ?= \
  ai \
  desktop-x \
  project
 
-VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS ?= \
+VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS ?= \
   docker \
   kubernetes \
   golang \
   obs \
   vscode
 
-VEGITO_DOCKER_DEBIAN_VSCODE_SPECIFICS ?= \
+VEGITO_DOCKER_DEBIAN_VSCODE_BUILDX_BAKE_TARGETS ?= \
  ai \
  golang
 
-VEGITO_DOCKER_DEBIAN_GOLANG_SPECIFICS ?= \
+VEGITO_DOCKER_DEBIAN_GOLANG_BUILDX_BAKE_TARGETS ?= \
  ai
 
-VEGITO_DOCKER_DEBIAN_IMAGES ?= \
+VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS ?= \
   debian \
   debian-all \
   debian-desktop-x-vscode-golang-ai-dockerd \
@@ -151,48 +151,48 @@ VEGITO_DOCKER_DEBIAN_IMAGES ?= \
   debian-project-vscode-golang-ai-dockerd \
   debian-project-docker-terraform \
   debian-terraform-dockerd \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-ai) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-desktop-x) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-docker-desktop-x) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-dockerd-ai) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-docker-project) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-flutter-desktop-x) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-flutter-ai) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-flutter-project) \
-  $(VEGITO_DOCKER_DEBIAN_SPECIFICS:%=debian-%-project) \
-  $(VEGITO_DOCKER_DEBIAN_BUNDLE_SPECIFICS:%=debian-%) \
-  $(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_SPECIFICS:%=debian-project-%) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-ai) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-desktop-x) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-docker-desktop-x) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-dockerd-ai) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-docker-project) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-flutter-desktop-x) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-flutter-ai) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-flutter-project) \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=debian-%-project) \
+  $(VEGITO_DOCKER_DEBIAN_BUNDLE_BUILDX_BAKE_TARGETS:%=debian-%) \
+  $(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS:%=debian-project-%) \
 
-VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGES ?= \
-  $(VEGITO_DOCKER_DEBIAN_IMAGES:%=trixie-%)
+VEGITO_DOCKER_TRIXIE_DEBIAN_BUILDX_BAKE_TARGETS ?= \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=trixie-%)
 
-VEGITO_DOCKER_IO_HUB_IMAGES ?= \
+VEGITO_DOCKER_IO_HUB_BUILDX_BAKE_TARGETS ?= \
   debian \
   golang-alpine \
   golang-debian \
   dind-rootless \
   rust-alpine
 
-VEGITO_DOCKER_IMAGES = \
-  $(VEGITO_DOCKER_DEBIAN_IMAGES) \
-  $(VEGITO_DOCKER_TRIXIE_DEBIAN_IMAGES) \
-  $(VEGITO_DOCKER_IO_HUB_IMAGES:%=hub-%)
+VEGITO_DOCKER_BUILDX_BAKE_TARGETS = \
+  $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS) \
+  $(VEGITO_DOCKER_TRIXIE_DEBIAN_BUILDX_BAKE_TARGETS) \
+  $(VEGITO_DOCKER_IO_HUB_BUILDX_BAKE_TARGETS:%=hub-%)
 
 vegito-docker-hub-images-update:	
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print dockerhub-ci
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --push dockerhub-ci
 .PHONY: vegito-docker-hub-images-update
 
-$(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-images-update-local):
+$(VEGITO_DOCKER_BUILDX_BAKE_TARGETS:%=vegito-docker-%-images-update-local):
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print $(@:vegito-docker-%-images-update-local=vegito-%)
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --load $(@:vegito-docker-%-images-update-local=vegito-%)
-.PHONY: $(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-images-update-local)
+.PHONY: $(VEGITO_DOCKER_BUILDX_BAKE_TARGETS:%=vegito-docker-%-images-update-local)
 
-$(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-images-update):
+$(VEGITO_DOCKER_BUILDX_BAKE_TARGETS:%=vegito-docker-%-images-update):
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print $(@:vegito-docker-%-images-update=vegito-%-ci)
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --push $(@:vegito-docker-%-images-update=vegito-%-ci)
-.PHONY: $(VEGITO_DOCKER_IMAGES:%=vegito-docker-%-images-update)
+.PHONY: $(VEGITO_DOCKER_BUILDX_BAKE_TARGETS:%=vegito-docker-%-images-update)
 
 vegito-docker-images-release:
 	@$(VEGITO_DOCKER_BUILDX_BAKE) --print release
