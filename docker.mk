@@ -207,7 +207,7 @@ vegito-docker-images-release-ci:
 VEGITO_DOCKER_BUILDX_NAME ?= vegito-project-builder
 VEGITO_DOCKER_BUILDX_ARM_BUILDER_NAME ?= mac-arm
 
-VEGITO_DOCKER_BUILDX_ARM_BUILDER_ENDPOINT ?= tcp://10.5.5.2:23751
+VEGITO_DOCKER_BUILDX_ARM_BUILDER_ENDPOINT ?= tcp://arm-builder:2375
 
 # Ajout d'un context docker distant pour le Mac
 vegito-docker-context-arm:
@@ -228,13 +228,11 @@ vegito-docker-clean-all:
 	  vegito-docker-buildx-cache-clean
 .PHONY: vegito-docker-clean-all
 
-VEGITO_DOCKER_BUILDX_ENABLE_RAM_BUILDER ?= false
+VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER ?= false
 
-ifeq ($(VEGITO_DOCKER_BUILDX_ENABLE_RAM_BUILDER),true)
+ifeq ($(VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER),true)
 VEGITO_DOCKER_BUILDX_CREATE_DRIVER_OPTS += memory=20g
 endif
-
-VEGITO_DOCKER_BUILDX_ENABLE_MAC_BUILDER ?= false
 
 vegito-docker-buildx-setup:
 	@echo "🔨  Creating buildx context $(VEGITO_DOCKER_BUILDX_NAME)"
@@ -248,7 +246,7 @@ vegito-docker-buildx-setup:
 	    --platform linux/arm64 \
 	    --platform linux/amd64; \
 	}
-ifeq ($(VEGITO_DOCKER_BUILDX_ENABLE_MAC_BUILDER),true)
+ifeq ($(VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER),true)
 	@$(MAKE) vegito-docker-context-arm
 	@docker buildx inspect $(VEGITO_DOCKER_BUILDX_NAME) | grep $(VEGITO_DOCKER_BUILDX_ARM_BUILDER_NAME) >/dev/null 2>&1 || \
 	  docker buildx create \
