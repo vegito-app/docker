@@ -10,31 +10,42 @@ bg_pids=()
 
 # 🧹 Function called at the end of the script to kill background processes
 kill_jobs() {
-  rm -f /tmp/.dockerd-ready
-  echo "🧼 Cleaning up Docker services..."
-  for pid in "${bg_pids[@]}"; do
-    kill "$pid" || true
-    wait "$pid" 2>/dev/null || true
-  done
+    rm -f /tmp/.dockerd-ready
+
+    echo "Cleaning up Docker services..."
+
+    local pid
+
+    for pid in "${bg_pids[@]}"; do
+        if kill -0 "$pid" 2>/dev/null; then
+            kill "$pid" 2>/dev/null || true
+        fi
+    done
+
+    for pid in "${bg_pids[@]}"; do
+        wait "$pid" 2>/dev/null || true
+    done
 }
 
 # 🚨 Register cleanup function to run on script exit
 trap kill_jobs EXIT
 
 get_upstream_dns() {
-    local dns=()
+    local line server
+    local -a dns=()
 
-    while read -r line; do
+    while IFS= read -r line; do
         if [[ "$line" =~ ^#\ ExtServers:\ \[(.*)\]$ ]]; then
             for server in ${BASH_REMATCH[1]}; do
-              # Discard the default Docker DNS server if present
-              [[ "$dns" == "127.0.0.11" ]] && continue
-              dns+=("$server")
+                [[ "$server" == "127.0.0.11" ]] && continue
+                dns+=("$server")
             done
         fi
     done < /etc/resolv.conf
 
-    printf '%s\n' "${dns[@]}"
+    if (( ${#dns[@]} > 0 )); then
+        printf '%s\n' "${dns[@]}"
+    fi
 }
 
 LOCAL_USER="$(id -un)"
@@ -66,11 +77,39 @@ echo "Starting dockerd with arguments: ${DNS_ARGS[@]}"
 dockerd-entrypoint.sh "${DNS_ARGS[@]}" &
 dockerd_pid="$!"
 
-export LOCAL_USER_ID=$(id -u)
-export DOCKER_HOST=unix:///run/user/$LOCAL_USER_ID/docker.sock
+export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
 
-until docker info >/dev/null 2>&1; do echo waiting dockerd startup ; sleep 1 ; done
+echo "Waiting for Docker daemon (PID=$dockerd_pid)..."
 
+DOCKER_START_TIMEOUT="${DOCKER_START_TIMEOUT:-120}"
+start_time=$SECONDS
+
+until docker info >/dev/null 2>&1; do
+
+    # Vérifier si le processus de lancement est toujours actif
+    if ! kill -0 "$dockerd_pid" 2>/dev/null; then
+        echo "ERROR: Docker daemon process exited unexpectedly"
+
+        wait "$dockerd_pid" || true
+
+        exit 1
+    fi
+
+    # Timeout
+    if (( SECONDS - start_time >= DOCKER_START_TIMEOUT )); then
+        echo "ERROR: Docker daemon startup timeout after ${DOCKER_START_TIMEOUT}s"
+
+        kill "$dockerd_pid" 2>/dev/null || true
+        wait "$dockerd_pid" 2>/dev/null || true
+
+        exit 1
+    fi
+
+    echo "Waiting for Docker daemon..."
+    sleep 1
+done
+
+echo "Docker daemon is ready"
 docker info
 
 mkdir -p ${HOME}/.docker/run
