@@ -479,6 +479,7 @@ target "vegito-trixie-debian-golang-docker-desktop-x-version-ci" {
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_DOCKER_DESKTOP_X_IMAGE_VERSION,
   ]
+  platforms = platforms
 }
 
 target "vegito-trixie-debian-golang-docker-desktop-x-latest-ci" {
@@ -490,6 +491,7 @@ target "vegito-trixie-debian-golang-docker-desktop-x-latest-ci" {
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_DOCKER_DESKTOP_X_IMAGE_LATEST,
   ]
+  platforms = platforms
 }
 
 target "vegito-trixie-debian-golang-docker-desktop-x" {
