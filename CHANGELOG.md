@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/vegito-app/docker/compare/v0.0.4...v0.0.5) (2026-10-19)
+
+
+### Bug Fixes
+
+* **container-dind-start.sh:** améliorer la gestion des processus en arrière-plan et ajouter des vérifications de démarrage du daemon Docker ([c49f71c](https://github.com/vegito-app/docker/commit/c49f71c7bef262327b978f7128d01ec95e085847))
+* **docker.mk:** ajuster la configuration de buildx pour prendre en charge les architectures ARM et AMD64 ([f62e3a5](https://github.com/vegito-app/docker/commit/f62e3a5b911f6854ad76ca1924b0d9dbdb98ae3c))
+* **docker.mk:** corriger la syntaxe des commandes docker buildx pour une meilleure lisibilité et cohérence ([dd33a93](https://github.com/vegito-app/docker/commit/dd33a9338d0aa6cb7d23add3ee893f0d7e07b323))
+* **docker.mk:** mettre à jour l'endpoint du constructeur ARM pour utiliser un nom d'hôte ([a299596](https://github.com/vegito-app/docker/commit/a299596fbd81184c7a0241869d28a587de660451))
+* **trixie.docker-bake.hcl:** corriger les chemins d'image pour utiliser la base d'images correcte ([ca55a70](https://github.com/vegito-app/docker/commit/ca55a70a3c113815dd75e07f400ab622348f6960))
+* **trixie.docker-bake.hcl:** corriger les chemins d'image pour utiliser la base d'images Debian appropriée ([63c7f9b](https://github.com/vegito-app/docker/commit/63c7f9bee35a6b94f559d332af79c8589eff6e68))
+* **trixie.docker-bake.hcl:** mettre à jour le contexte de la cible pour utiliser la version la plus récente de l'image Debian ([7642abc](https://github.com/vegito-app/docker/commit/7642abcc0547d854989405625d6efe5d76dd8617))
+
 ### [0.0.4](https://github.com/vegito-app/docker/compare/v0.0.3...v0.0.4) (2026-10-17)
 
 
