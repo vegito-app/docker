@@ -87,7 +87,7 @@ target "vegito-trixie-debian-desktop-x-version-ci" {
 target "vegito-trixie-debian-desktop-x-latest-ci" {
   inherits = ["vegito-trixie-debian-desktop-x-base"]
   contexts = {
-    debian = "target:vegito-trixie-debian"
+    debian = "target:vegito-trixie-debian-latest-ci"
   }
   tags = [
     VEGITO_DOCKER_TRIXIE_DEBIAN_DESKTOP_X_IMAGE_LATEST,
