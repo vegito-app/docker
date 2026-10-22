@@ -142,7 +142,7 @@ group "vegito-app-ci" {
     "vegito-trixie-debian-golang-ci",
 
     // Used by vegito-app/local/robotframework as service base
-    "vegito-debian-robotframework-ci",
+    "vegito-trixie-debian-robotframework-ci",
     
     // Use as builder by vegito-app/local/clarinet-devnet
     "docker-rust-alpine-ci",
