@@ -62,6 +62,7 @@ jobs:
       USE_REGISTRY_CACHE: ${{ inputs.use_registry_cache }}
       VEGITO_DOCKERHUB_PAT: ${{ secrets.VEGITO_DOCKERHUB_PAT }}
       VEGITO_DOCKERHUB_USERNAME: ${{ secrets.VEGITO_DOCKERHUB_USERNAME }}
+      VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER: ${{ vars.VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER }}
       
     steps:
       - name: Checkout repository

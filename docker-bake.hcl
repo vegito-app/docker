@@ -157,6 +157,7 @@ group "vegito-app-ci" {
     "vegito-trixie-debian-dockerd-ci",
 
     // Used as image base
+    // - vegito-app/example-application
     // - vegito-app/local
     // - vegito-app/vegito
     // - vegito-app/docker-ssh-bridge
