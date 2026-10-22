@@ -39,7 +39,7 @@ ENV USER=${non_root_user}
 ARG flutter_version
 ENV FLUTTER_HOME=${HOME}/flutter
 ENV PATH="${PATH}:${FLUTTER_HOME}/bin"
-# tar -xf ~/Downloads/flutter_linux_${flutter_version}-stable.tar.xz -C ~/home/${non_root_user}
+
 RUN git clone -b stable https://github.com/flutter/flutter.git $FLUTTER_HOME && \
     cd $FLUTTER_HOME && \
     git checkout $flutter_version && \

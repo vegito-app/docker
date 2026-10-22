@@ -24,7 +24,7 @@ ENV USER=${non_root_user}
 
 WORKDIR ${HOME}
 
-RUN --mount=type=cache,id=vegito-robotframework-${debian_version}-${TARGETPLATFORM}-pip-cache,target=/home/${non_root_user}/.cache/pip,sharing=locked,uid=${uid},gid=${gid} \
+RUN --mount=type=cache,id=vegito-robotframework-${debian_version}-${TARGETPLATFORM}-pip-cache,target=/home/debian/.cache/pip,sharing=locked,uid=${uid},gid=${gid} \
     pip install \
     robotframework \
     robotframework-appiumlibrary \

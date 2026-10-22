@@ -81,7 +81,7 @@ COPY --chown=${uid}:${gid} ./container-install.sh /usr/local/bin/debian-containe
 USER ${non_root_user}
 
 ENV USER=${non_root_user}
-ENV HOME=/home/${non_root_user}
+ENV HOME=/home/debian
 ENV PATH=${PATH}:${HOME}/.local/bin
 
 RUN mkdir -p ${HOME}/.local/bin
