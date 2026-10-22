@@ -32,6 +32,8 @@ else
     echo "🖥️ X Desktop not started."
 fi
 
+desktop-x-display-wait.sh 
+
 obs &
 obs_pid=$!
 

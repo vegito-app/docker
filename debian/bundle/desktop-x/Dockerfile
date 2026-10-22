@@ -166,10 +166,11 @@ COPY --chown=${non_root_user}:${non_root_user} xdisplay/xpra-start.sh           
 COPY --chown=${non_root_user}:${non_root_user} container-enable-nvidia-gl.sh /usr/local/bin/desktop-x-enable-nvidia-gl.sh
 COPY --chown=${non_root_user}:${non_root_user} container-nvidia-gl-env.sh    /usr/local/bin/desktop-x-nvidia-gl-env.sh  
 
+COPY --chown=${non_root_user}:${non_root_user} container-display-start.sh   /usr/local/bin/desktop-x-display-start.sh
+COPY --chown=${non_root_user}:${non_root_user} container-display-wait.sh    /usr/local/bin/desktop-x-display-wait.sh             
 COPY --chown=${non_root_user}:${non_root_user} container-entrypoint.sh      /usr/local/bin/desktop-x-entrypoint.sh
 COPY --chown=${non_root_user}:${non_root_user} container-install.sh         /usr/local/bin/desktop-x-install.sh
 COPY --chown=${non_root_user}:${non_root_user} container-start.sh           /usr/local/bin/desktop-x-start.sh
-COPY --chown=${non_root_user}:${non_root_user} container-display-start.sh   /usr/local/bin/desktop-x-display-start.sh
 
 RUN chmod +x \
     /usr/local/bin/desktop-x-entrypoint.sh \
