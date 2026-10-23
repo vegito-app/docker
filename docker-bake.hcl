@@ -144,9 +144,6 @@ group "vegito-app-ci" {
     // Used by vegito-app/local/robotframework as service base
     "vegito-trixie-debian-robotframework-ci",
     
-    // Use as builder by vegito-app/local/clarinet-devnet
-    "docker-rust-alpine-ci",
-
     // Used by vegito-app/ai as common AI service base
     "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-ci",
 
