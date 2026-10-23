@@ -169,14 +169,6 @@ group "vegito-app-ci" {
     // Used by vegito-app/auth as Authentik service image base
     "vegito-trixie-debian-terraform-dockerd-ci",
   ]
-}
-
-group "default" {
-  targets = [
-    "release",
-    "release-ci",
-    "vegito-app-ci",
-  ]
   pull            = true
   max_parallelism = VEGITO_RELEASE_BUILD_MAX_PARALLELISM
 }
@@ -193,4 +185,6 @@ group "release-ci" {
     "dockerhub-ci",
     "runners-ci"
   ]
+  pull            = true
+  max_parallelism = VEGITO_RELEASE_BUILD_MAX_PARALLELISM
 }
