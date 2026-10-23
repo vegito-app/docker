@@ -178,6 +178,7 @@ group "default" {
   targets = [
     "release",
     "release-ci",
+    "vegito-app-ci",
   ]
   pull            = true
   max_parallelism = VEGITO_RELEASE_BUILD_MAX_PARALLELISM
