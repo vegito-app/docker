@@ -17,9 +17,11 @@ export VEGITO_DOCKER_REGISTRIES ?= dockerhub
 
 export GOOGLE_CLOUD_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_REGION)-docker.pkg.dev
 export GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_DOCKER_REGISTRY)/$(GOOGLE_CLOUD_PROJECT_ID)
-# Use docker.io as the default registry for local public images, but allow overriding it if needed.
-# Remove after gcr is back in shape and can be used as the default registry for local public images.
-export VEGITO_DOCKER_PUBLIC_REPOSITORY ?= docker.io/dbndev
+
+export VEGITO_DOCKER_PUBLIC_REPOSITORY ?= registry-public.vegito.app/$(VEGITO_PROJECT_NAME)
+export VEGITO_DOCKER_HUB_REGISTRY ?= registry-private.vegito.app/$(VEGITO_PROJECT_NAME)
+export VEGITO_DOCKER_CACHE_REPOSITORY ?= registry-cache.vegito.app/$(VEGITO_PROJECT_NAME)
+
 export VEGITO_DOCKER_BUILD_ENABLE_LOCAL_CACHE ?= false
 
 export VEGITO_DOCKER_ALPINE_DIR ?= $(VEGITO_DOCKER_DIR)/alpine
