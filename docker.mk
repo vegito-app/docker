@@ -44,16 +44,38 @@ export VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME ?= $(VEGITO_DOCKER_PUBLIC_REPOSITOR
 export VEGITO_DOCKER_PRIVATE_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)/docker-repository-private
 export VEGITO_DOCKER_PRIVATE_IMAGES_BASE_NAME ?= $(VEGITO_DOCKER_PRIVATE_REPOSITORY)/$(VEGITO_DOCKER_IMAGES_BASE)
 
-ENABLE_LOCAL_CACHE ?= $(VEGITO_DOCKER_BUILD_ENABLE_LOCAL_CACHE)
+export VEGITO_DOCKER_ALPINE_DIR ?= $(VEGITO_DOCKER_DIR)/alpine
+export VEGITO_DOCKER_DEBIAN_DIR ?= $(VEGITO_DOCKER_DIR)/debian
+export VEGITO_DOCKER_IO_DIR     ?= $(VEGITO_DOCKER_DIR)/docker.io
 
-VEGITO_LAB_DOCKER_REGISTRIES ?= public private cache 
+VEGITO_DOCKER_BUILDX_BAKE ?= \
+	docker buildx bake \
+	-f $(VEGITO_DOCKER_DIR)/docker-bake.hcl \
+	-f $(VEGITO_DOCKER_IO_DIR)/docker-bake.hcl \
+	$(VEGITO_DOCKER_IO_HUB_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_IO_DIR)/%.docker-bake.hcl) \
+	-f $(VEGITO_DOCKER_ALPINE_DIR)/docker-bake.hcl \
+	-f $(VEGITO_DOCKER_DEBIAN_DIR)/docker-bake.hcl \
+	-f $(VEGITO_DOCKER_DEBIAN_DIR)/trixie.docker-bake.hcl \
+	-f $(VEGITO_DOCKER_DEBIAN_DIR)/docker/dockerd/docker-bake.hcl \
+	-f $(VEGITO_DOCKER_DEBIAN_DIR)/docker/dockerd/trixie.docker-bake.hcl \
+	-f $(VEGITO_DOCKER_DEBIAN_DIR)/terraform/docker-bake.hcl \
+	-f $(VEGITO_DOCKER_DEBIAN_DIR)/terraform/trixie.docker-bake.hcl \
+	$(VEGITO_DOCKER_DEBIAN_BUNDLE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_BUNDLE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/trixie.docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/project/%/docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/project/%/trixie.docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/%/docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/%/trixie.docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_GOLANG_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/golang/%/docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_GOLANG_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/golang/%/trixie.docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_VSCODE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/vscode/%/docker-bake.hcl) \
+	$(VEGITO_DOCKER_DEBIAN_VSCODE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/vscode/%/trixie.docker-bake.hcl)
 
-vegito-docker-login-lab:
-	@echo "Logging into Vegito Lab Docker registry internally not required"
-# 	@docker login $(VEGITO_LAB_DOCKER_REGISTRY)
-.PHONY: vegito-docker-login-lab
+docker-buildx-bake-target-keys-graph:
+	$(VEGITO_DOCKER_BUILDX_BAKE) --print vegito-trixie-debian-project-obs-vscode-golang-ai-dockerd  
+.PHONY: docker-buildx-bake-target-keys-graph
 
-vegito-docker-login-gcr: gcloud-auth-docker
+vegito-gcr-docker-login: gcloud-auth-docker
 	@echo "Logging into $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)"
 	@docker login $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)
 .PHONY: vegito-gcr-docker-login

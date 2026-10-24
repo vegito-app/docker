@@ -23,40 +23,13 @@ export VEGITO_DOCKER_PUBLIC_REPOSITORY ?= registry-public.vegito.app/$(VEGITO_PR
 export VEGITO_DOCKER_HUB_REGISTRY ?= registry-private.vegito.app/$(VEGITO_PROJECT_NAME)
 export VEGITO_DOCKER_CACHE_REPOSITORY ?= registry-cache.vegito.app/$(VEGITO_PROJECT_NAME)
 
-export VEGITO_DOCKER_BUILD_ENABLE_LOCAL_CACHE ?= false
-
-export VEGITO_DOCKER_ALPINE_DIR ?= $(VEGITO_DOCKER_DIR)/alpine
-export VEGITO_DOCKER_DEBIAN_DIR ?= $(VEGITO_DOCKER_DIR)/debian
-export VEGITO_DOCKER_IO_DIR     ?= $(VEGITO_DOCKER_DIR)/docker.io
-
-VEGITO_DOCKER_BUILDX_BAKE ?= \
-	docker buildx bake \
-	-f $(VEGITO_DOCKER_DIR)/docker-bake.hcl \
-	-f $(VEGITO_DOCKER_IO_DIR)/docker-bake.hcl \
-	$(VEGITO_DOCKER_IO_HUB_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_IO_DIR)/%.docker-bake.hcl) \
-	-f $(VEGITO_DOCKER_ALPINE_DIR)/docker-bake.hcl \
-	-f $(VEGITO_DOCKER_DEBIAN_DIR)/docker-bake.hcl \
-	-f $(VEGITO_DOCKER_DEBIAN_DIR)/trixie.docker-bake.hcl \
-	-f $(VEGITO_DOCKER_DEBIAN_DIR)/docker/dockerd/docker-bake.hcl \
-	-f $(VEGITO_DOCKER_DEBIAN_DIR)/docker/dockerd/trixie.docker-bake.hcl \
-	-f $(VEGITO_DOCKER_DEBIAN_DIR)/terraform/docker-bake.hcl \
-	-f $(VEGITO_DOCKER_DEBIAN_DIR)/terraform/trixie.docker-bake.hcl \
-	$(VEGITO_DOCKER_DEBIAN_BUNDLE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_BUNDLE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/%/trixie.docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/project/%/docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/bundle/project/%/trixie.docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/%/docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/%/trixie.docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_GOLANG_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/golang/%/docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_GOLANG_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/golang/%/trixie.docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_VSCODE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/vscode/%/docker-bake.hcl) \
-	$(VEGITO_DOCKER_DEBIAN_VSCODE_BUILDX_BAKE_TARGETS:%=-f $(VEGITO_DOCKER_DEBIAN_DIR)/vscode/%/trixie.docker-bake.hcl)
-
 DOCKER_IMAGES_BUILD_GROUPS ?= \
   dockerhub \
   vegito-app
 
 VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS = $(DOCKER_IMAGES_BUILD_GROUPS) 
+
+VEGITO_DOCKER_IMAGES_BASE ?= vegito
 
 -include docker.mk
 
@@ -113,9 +86,6 @@ docker-login: vegito-docker-login
 docker-buildx-setup: vegito-docker-buildx-setup
 .PHONY: docker-buildx-setup
 
-docker-buildx-bake-target-keys-graph:
-	$(VEGITO_DOCKER_BUILDX_BAKE) --print vegito-trixie-debian-project-obs-vscode-golang-ai-dockerd  
-.PHONY: docker-buildx-bake-target-keys-graph
 
 check-buildx-bake-duplicates: vegito-docker-check-buildx-bake-duplicates
 .PHONY: check-buildx-bake-duplicates
