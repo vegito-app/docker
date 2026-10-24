@@ -14,20 +14,10 @@ export VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME ?= $(VEGITO_DOCKER_PUBLIC_REPOSITOR
 export VEGITO_DOCKER_PRIVATE_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)/docker-repository-private
 export VEGITO_DOCKER_PRIVATE_IMAGES_BASE_NAME ?= $(VEGITO_DOCKER_PRIVATE_REPOSITORY)/$(VEGITO_DOCKER_IMAGES_BASE)
 
-ENABLE_LOCAL_CACHE ?= $(VEGITO_DOCKER_BUILD_ENABLE_LOCAL_CACHE)
-
-VEGITO_LAB_DOCKER_REGISTRIES ?= public private cache 
-
-vegito-docker-login-lab: $(VEGITO_LAB_DOCKER_REGISTRIES:%=vegito-docker-login-%-lab)
-	@echo "Logged into Vegito lab Docker registry internally not required"
-.PHONY: vegito-docker-login-lab
-
-$(VEGITO_LAB_DOCKER_REGISTRIES:%=vegito-docker-login-%-lab):
-	@echo "Logging into Vegito lab '$(@:vegito-docker-login-%-lab=%)' Docker registry internally not required"
-	@docker login registry-$(@:vegito-docker-login-%-lab=%).vegito.app
-.PHONY: $(VEGITO_LAB_DOCKER_REGISTRIES:%=vegito-docker-login-%-lab)
+export ENABLE_LOCAL_CACHE ?= false
 
 export VEGITO_DOCKER_DIR ?= $(CURDIR)
+include $(VEGITO_DOCKER_DIR)/lab.mk
 include $(VEGITO_DOCKER_DIR)/docker.io/docker.mk
 
 VEGITO_DOCKER_IMAGES_BASE ?= vegito
@@ -42,19 +32,6 @@ export VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME ?= $(VEGITO_DOCKER_PUBLIC_REPOSITOR
 
 export VEGITO_DOCKER_PRIVATE_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)/docker-repository-private
 export VEGITO_DOCKER_PRIVATE_IMAGES_BASE_NAME ?= $(VEGITO_DOCKER_PRIVATE_REPOSITORY)/$(VEGITO_DOCKER_IMAGES_BASE)
-
-ENABLE_LOCAL_CACHE ?= $(VEGITO_DOCKER_BUILD_ENABLE_LOCAL_CACHE)
-
-VEGITO_LAB_DOCKER_REGISTRIES ?= public private cache 
-
-vegito-docker-login-lab:
-	@echo "Logging into Vegito Lab Docker registry internally not required"
-# 	@docker login $(VEGITO_LAB_DOCKER_REGISTRY)
-.PHONY: vegito-docker-login-lab
-export VEGITO_DOCKER_DIR ?= $(CURDIR)
-include $(VEGITO_DOCKER_DIR)/docker.io/docker.mk
-
-VEGITO_DOCKER_IMAGES_BASE ?= vegito
 
 export VEGITO_DOCKER_PRIVATE_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)/docker-repository-private
 
@@ -79,12 +56,12 @@ vegito-docker-login-lab:
 vegito-docker-login-gcr: gcloud-auth-docker
 	@echo "Logging into $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)"
 	@docker login $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)
-.PHONY: vegito-docker-login-gcr
+.PHONY: vegito-gcr-docker-login
 
 # Custom values: gcr, dockerhub, ... (space separed)
-VEGITO_DOCKER_REGISTRIES ?= lab 
+VEGITO_DOCKER_REGISTRIES ?= lab
 
-vegito-docker-login: $(VEGITO_DOCKER_REGISTRIES:%=vegito-docker-login-%)
+vegito-docker-login: $(VEGITO_DOCKER_REGISTRIES:%=vegito-%-docker-login)
 	@echo "🔐 Logged into: $(VEGITO_DOCKER_REGISTRIES)"
 .PHONY: vegito-docker-login
 
