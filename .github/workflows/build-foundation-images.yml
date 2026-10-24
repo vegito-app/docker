@@ -134,7 +134,6 @@ jobs:
 
       - name: Configure Docker
         run: |
-          make docker-login
           make docker-buildx-setup
 
       - name: Build Docker image
