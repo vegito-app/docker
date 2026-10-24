@@ -1,7 +1,4 @@
 export VEGITO_DOCKER_DIR ?= $(CURDIR)
-include $(VEGITO_DOCKER_DIR)/docker.io/docker.mk
-
-VEGITO_DOCKER_IMAGES_BASE ?= vegito
 
 export VEGITO_DOCKER_PRIVATE_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)/docker-repository-private
 
@@ -15,12 +12,6 @@ export VEGITO_DOCKER_PRIVATE_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTR
 export VEGITO_DOCKER_PRIVATE_IMAGES_BASE_NAME ?= $(VEGITO_DOCKER_PRIVATE_REPOSITORY)/$(VEGITO_DOCKER_IMAGES_BASE)
 
 export ENABLE_LOCAL_CACHE ?= false
-
-export VEGITO_DOCKER_DIR ?= $(CURDIR)
-include $(VEGITO_DOCKER_DIR)/lab.mk
-include $(VEGITO_DOCKER_DIR)/docker.io/docker.mk
-
-VEGITO_DOCKER_IMAGES_BASE ?= vegito
 
 export VEGITO_DOCKER_PRIVATE_REPOSITORY ?= $(GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY)/docker-repository-private
 
@@ -47,6 +38,11 @@ export VEGITO_DOCKER_PRIVATE_IMAGES_BASE_NAME ?= $(VEGITO_DOCKER_PRIVATE_REPOSIT
 export VEGITO_DOCKER_ALPINE_DIR ?= $(VEGITO_DOCKER_DIR)/alpine
 export VEGITO_DOCKER_DEBIAN_DIR ?= $(VEGITO_DOCKER_DIR)/debian
 export VEGITO_DOCKER_IO_DIR     ?= $(VEGITO_DOCKER_DIR)/docker.io
+
+include $(VEGITO_DOCKER_DIR)/lab.mk
+include $(VEGITO_DOCKER_DIR)/docker.io/docker.mk
+
+VEGITO_DOCKER_IMAGES_BASE ?= vegito
 
 VEGITO_DOCKER_BUILDX_BAKE ?= \
 	docker buildx bake \
@@ -294,6 +290,17 @@ ifeq ($(VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER),true)
 VEGITO_DOCKER_BUILDX_CREATE_DRIVER_OPTS += memory=20g
 endif
 
+# Force the local Docker gateway DNS for the native BuildKit daemon.
+# This avoids inheriting the LAN DHCP DNS, which cannot resolve Vegito registries.
+VEGITO_DOCKER_BUILDX_NATIVE_DNS ?= 172.16.0.1
+
+.PHONY: vegito-docker-buildx-configure-dns
+vegito-docker-buildx-configure-dns:
+	@echo "🔧 Configuring native BuildKit DNS: $(VEGITO_DOCKER_BUILDX_NATIVE_DNS)"
+	@docker --context default exec \
+		buildx_buildkit_$(VEGITO_DOCKER_BUILDX_NAME)0 \
+		sh -c 'printf "nameserver %s\n" "$(VEGITO_DOCKER_BUILDX_NATIVE_DNS)" > /etc/resolv.conf'
+
 vegito-docker-buildx-setup:
 	@echo "🔨  Creating buildx context $(VEGITO_DOCKER_BUILDX_NAME)"
 ifeq ($(VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER),true)
@@ -325,7 +332,8 @@ else
 	    $(VEGITO_DOCKER_BUILDX_CREATE_DRIVER_OPTS:%=--driver-opt "%"); \
 	}
 endif
-	@docker buildx inspect --bootstrap
+	@docker buildx inspect $(VEGITO_DOCKER_BUILDX_NAME) --bootstrap
+	@$(MAKE) vegito-docker-buildx-configure-dns
 	@docker run --privileged --rm tonistiigi/binfmt --install all
 .PHONY: vegito-docker-buildx-setup
 
