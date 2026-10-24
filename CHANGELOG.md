@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/vegito-app/docker/compare/v0.0.5...v0.0.6) (2026-10-24)
+
+
+### Features
+
+* **docker.mk:** déplacer la gestion des cibles de construction avec buildx et mise à jour des répertoires Docker ([837c8c2](https://github.com/vegito-app/docker/commit/837c8c234a71db0e58090aad8dfc88abb4b1e72d))
+* **docker.mk:** réorganiser les inclusions et ajouter la configuration DNS pour BuildKit ([a2ea939](https://github.com/vegito-app/docker/commit/a2ea9396c937281957e31b0cf65f4e55acf440f9))
+* **lab.mk:** ajouter un fichier pour la gestion des connexions aux registres Docker du laboratoire Vegito ([e7a2442](https://github.com/vegito-app/docker/commit/e7a244266857802288c74837a295da33f57f17fd))
+* **lab.mk:** ajouter un fichier pour la gestion des connexions aux registres Docker du laboratoire Vegito ([487f344](https://github.com/vegito-app/docker/commit/487f3447d5096d38617d7c93956b3a2d3ea2d484))
+
+
+### Bug Fixes
+
+* **.gitignore:** ajouter des règles pour ignorer les fichiers de log ([65eb59d](https://github.com/vegito-app/docker/commit/65eb59dbc7ba3086629a75b711efb2b610c1d705))
+* **build-foundation-images:** rendre les identifiants de projet Google Cloud obligatoires ([f5a6c34](https://github.com/vegito-app/docker/commit/f5a6c3454da76383187e8f128c7b1219675da646))
+* **build-foundation-images:** supprimer la commande de connexion Docker dans le workflow ([bbc9157](https://github.com/vegito-app/docker/commit/bbc9157b28283bc5b2997f57ba74fa88dfeb8328))
+* **Makefile, docker.mk:** mettre à jour les registres Docker pour utiliser 'lab' par défaut ([9b8a71a](https://github.com/vegito-app/docker/commit/9b8a71a32e0cd305f48cbaaddeeda6d2e1ab450e))
+* **Makefile:** mettre à jour les dépôts Docker publics et privés pour le projet Vegito ([e19cda2](https://github.com/vegito-app/docker/commit/e19cda2e236922a82697a6991babee29ef23d9d0))
+
 ### [0.0.5](https://github.com/vegito-app/docker/compare/v0.0.4...v0.0.5) (2026-10-23)
 
 
