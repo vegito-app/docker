@@ -2,6 +2,10 @@ variable "VEGITO_DOCKER_IO_HUB_DIR" {
   default = "${VEGITO_DOCKER_DIR}/docker.io"
 }
 
+variable "VEGITO_DOCKER_HUB_IMAGE_BASE" {
+  default = "${VEGITO_DOCKER_PRIVATE_REPOSITORY}/dockerhub"
+}
+
 # Groups are used to build incrementally the images in the correct order:
 # - Dockerhub: the base images that we replicate to our private repository
 # - Runners: the most basic level, they are used to run the services and applications

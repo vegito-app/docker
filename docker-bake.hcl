@@ -92,6 +92,10 @@ variable "VEGITO_DOCKER_PUBLIC_REPOSITORY" {
   default = "vegito-docker-repository-public"
 }
 
+variable "VEGITO_DOCKER_PRIVATE_REPOSITORY" {
+  default = "vegito-docker-repository-private"
+}
+
 variable "platforms" {
   default = [
     "linux/amd64",

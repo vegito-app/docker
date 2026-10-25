@@ -3,7 +3,7 @@ variable "VEGITO_DOCKER_LINUX_ALPINE_DIR" {
 }
 
 variable "VEGITO_LINUX_ALPINE_VERSION" {
-  default = "${VEGITO_DOCKER_PUBLIC_IMAGES_BASE_NAME}:alpine-${VERSION}"
+  default = "${VEGITO_DOCKER_HUB_IMAGE_BASE}/linux:alpine-${VERSION}"
 }
 
 variable "VEGITO_LINUX_ALPINE_DIR" {
