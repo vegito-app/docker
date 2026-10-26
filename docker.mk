@@ -271,6 +271,7 @@ ifeq ($(VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER),true)
 	  docker context use default && \
 	  docker buildx create \
 	    --name $(VEGITO_DOCKER_BUILDX_NAME) \
+		--buildkitd-config buildkitd-arm64.toml \
 	    --driver docker-container \
 	    --use \
 	    --platform linux/amd64 \
@@ -289,6 +290,8 @@ else
 	  docker buildx create \
 	    --name $(VEGITO_DOCKER_BUILDX_NAME) \
 	    --driver docker-container \
+		--driver-opt memory=8g \
+		--buildkitd-config buildkitd-arm64.toml \
 	    --use \
 	    --platform linux/arm64 \
 	    --platform linux/amd64 \
