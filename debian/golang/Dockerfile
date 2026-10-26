@@ -1,16 +1,18 @@
-FROM dockerhub_golang AS go-build
-
+FROM go_builder AS go-build
 ARG debian_version=bookworm
 ARG TARGETPLATFORM
 
-ARG go_pkg=/go/pkg
-ARG go_cache=/.cache
+ARG uid=1000
+ARG gid=1000
+
+ARG go_pkg=/home/debian/go/pkg
+ARG go_cache=/home/debian/.cache/go-build
 ENV GOMODCACHE=${go_pkg}/mod
 ENV GOCACHE=${go_cache}
-ENV GOBIN=/go/bin
+ENV GOBIN=/home/debian/go/bin
 ENV CGO_ENABLED=0
-RUN --mount=type=cache,id=vegito-debian-${TARGETPLATFORM}-${debian_version}-root-go-pkg,target=${go_pkg},sharing=locked \
-    --mount=type=cache,id=vegito-debian-${TARGETPLATFORM}-${debian_version}-root-go-build,target=${go_cache},sharing=locked \
+RUN --mount=type=cache,id=vegito-debian-${TARGETPLATFORM}-${debian_version}-root-go-pkg,target=${go_pkg},sharing=locked,uid=${uid},gid=${gid} \
+    --mount=type=cache,id=vegito-debian-${TARGETPLATFORM}-${debian_version}-root-go-build,target=${go_cache},sharing=locked,uid=${uid},gid=${gid} \
     go install -v github.com/go-delve/delve/cmd/dlv@latest \
     && go install -v honnef.co/go/tools/cmd/staticcheck@latest \
     && go install -v github.com/jesseduffield/lazydocker@latest \
@@ -47,7 +49,7 @@ ENTRYPOINT [ "tini", "--", "debian-golang-container-entrypoint.sh" ]
 
 USER ${non_root_user} 
 ENV USER=${non_root_user}
-COPY --chown=${uid}:${gid} --from=go-build /go/bin/ /home/debian/go/bin/
+COPY --chown=${uid}:${gid} --from=go-build /home/debian/go//bin/ /home/debian/go/bin/
 
 ENV PATH=${PATH}:/usr/local/go/bin
 RUN mkdir -p /home/debian/go/bin
