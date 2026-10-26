@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/vegito-app/docker/compare/v0.0.7...v0.0.8) (2026-10-26)
+
+
+### Features
+
+* **docker:** ajouter des variables pour les registres Docker et le dépôt public ([d27af9d](https://github.com/vegito-app/docker/commit/d27af9d21382df90e46500ad73493d1400c1467e))
+* **docker:** ajouter plusieurs groupes de construction pour vegito-app dans Makefile et docker-bake.hcl ([924ac65](https://github.com/vegito-app/docker/commit/924ac657785f6ba429dacc64aba232937a0360fd))
+* **docker:** ajouter un fichier de configuration buildkitd et des options de pilote pour Docker Buildx ([eb5d492](https://github.com/vegito-app/docker/commit/eb5d492c812461fe5e61a4d045177880f82eb75e))
+
 ### [0.0.7](https://github.com/vegito-app/docker/compare/v0.0.6...v0.0.7) (2026-10-25)
 
 
