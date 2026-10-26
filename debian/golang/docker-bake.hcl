@@ -75,7 +75,7 @@ target "vegito-debian-golang-version-ci" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
     debian           = "target:vegito-debian-version-ci"
-    dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
+    go_builder = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_GOLANG_IMAGE_VERSION,
@@ -103,7 +103,7 @@ target "vegito-debian-golang-latest-ci" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
     debian           = "target:vegito-debian-latest-ci"
-    dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
+    go_builder = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_GOLANG_IMAGE_LATEST,
@@ -137,7 +137,7 @@ target "vegito-debian-golang" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
     debian           = "target:vegito-debian"
-    dockerhub_golang = "docker-image://${VEGITO_DOCKER_DEBIAN_GOLANG_IMAGE_LATEST}"
+    go_builder = "docker-image://${VEGITO_DOCKER_DEBIAN_GOLANG_IMAGE_LATEST}"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_GOLANG_IMAGE_LATEST,
@@ -205,7 +205,7 @@ target "vegito-debian-golang-desktop-x-version-ci" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
     debian           = "target:vegito-debian-desktop-x-version-ci"
-    dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
+    go_builder = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_GOLANG_DESKTOP_X_IMAGE_VERSION,
@@ -233,7 +233,7 @@ target "vegito-debian-golang-desktop-x-latest-ci" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
     debian           = "target:vegito-debian-desktop-x-latest-ci"
-    dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
+    go_builder = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST,
@@ -267,7 +267,7 @@ target "vegito-debian-golang-desktop-x" {
   inherits = ["vegito-debian-golang-base"]
   contexts = {
     debian           = "target:vegito-debian-golang-desktop-x"
-    dockerhub_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
+    go_builder = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
   }
   tags = [
     VEGITO_DOCKER_DEBIAN_GOLANG_DESKTOP_X_IMAGE_VERSION,

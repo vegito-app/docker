@@ -66,7 +66,7 @@ target "vegito-trixie-debian-docker-version-ci" {
   inherits = ["vegito-trixie-debian-docker-base"]
   contexts = {
     debian               = "target:vegito-trixie-debian-version-ci"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
@@ -95,7 +95,7 @@ target "vegito-trixie-debian-docker-latest-ci" {
   inherits = ["vegito-trixie-debian-docker-base"]
   contexts = {
     debian               = "target:vegito-trixie-debian-latest-ci"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
@@ -130,7 +130,7 @@ target "vegito-trixie-debian-docker" {
   inherits = ["vegito-trixie-debian-docker-base"]
   contexts = {
     debian               = "target:vegito-trixie-debian"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
@@ -198,7 +198,7 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_DESKTOP_X_IMAGE_DOCKER_BUILDX_LOCAL
 target "vegito-trixie-debian-docker-desktop-x-version-ci" {
   contexts = {
     debian               = "target:vegito-trixie-debian-desktop-x-version-ci"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   inherits = ["vegito-trixie-debian-docker-base"]
@@ -228,7 +228,7 @@ target "vegito-trixie-debian-docker-desktop-x-latest-ci" {
   inherits = ["vegito-trixie-debian-docker-base"]
   contexts = {
     debian               = "target:vegito-trixie-debian-desktop-x-latest-ci"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
@@ -263,7 +263,7 @@ target "vegito-trixie-debian-docker-desktop-x" {
   inherits = ["vegito-trixie-debian-docker-base"]
   contexts = {
     debian               = "target:vegito-trixie-debian-desktop-x"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
@@ -331,7 +331,7 @@ variable "VEGITO_DOCKER_TRIXIE_DEBIAN_DOCKER_TERRAFORM_IMAGE_DOCKER_BUILDX_LOCAL
 target "vegito-trixie-debian-docker-terraform-version-ci" {
   contexts = {
     debian               = "target:vegito-trixie-debian-terraform-version-ci"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   inherits = ["vegito-trixie-debian-docker-base"]
@@ -361,7 +361,7 @@ target "vegito-trixie-debian-docker-terraform-latest-ci" {
   inherits = ["vegito-trixie-debian-docker-base"]
   contexts = {
     debian               = "target:vegito-trixie-debian-terraform-latest-ci"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
@@ -396,7 +396,7 @@ target "vegito-trixie-debian-docker-terraform" {
   inherits = ["vegito-trixie-debian-docker-base"]
   contexts = {
     debian               = "target:vegito-trixie-debian-terraform"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [

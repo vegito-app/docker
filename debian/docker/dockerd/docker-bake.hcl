@@ -74,7 +74,7 @@ target "vegito-debian-dockerd-version-ci" {
   inherits = ["vegito-debian-dockerd-base"]
   contexts = {
     debian               = "target:vegito-debian-docker-version-ci"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
@@ -103,7 +103,7 @@ target "vegito-debian-dockerd-latest-ci" {
   inherits = ["vegito-debian-dockerd-base"]
   contexts = {
     debian               = "target:vegito-debian-docker-latest-ci"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
@@ -138,7 +138,7 @@ target "vegito-debian-dockerd" {
   inherits = ["vegito-debian-dockerd-base"]
   contexts = {
     debian               = "target:vegito-debian-docker"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
@@ -206,7 +206,7 @@ variable "VEGITO_DOCKER_DEBIAN_DOCKERD_DESKTOP_X_IMAGE_DOCKERD_BUILDX_LOCAL_CACH
 target "vegito-debian-dockerd-desktop-x-version-ci" {
   contexts = {
     debian               = "target:vegito-debian-docker-desktop-x-version-ci"
-    debian_golang        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
+    go_builder        = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   inherits = ["vegito-debian-dockerd-base"]
@@ -236,7 +236,7 @@ target "vegito-debian-dockerd-desktop-x-latest-ci" {
   inherits = ["vegito-debian-dockerd-base"]
   contexts = {
     debian = "target:vegito-debian-docker-desktop-x-latest-ci"
-    debian_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
+    go_builder = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
@@ -271,7 +271,7 @@ target "vegito-debian-dockerd-desktop-x" {
   inherits = ["vegito-debian-dockerd-base"]
   contexts = {
     debian = "target:vegito-debian-docker-desktop-x"
-    debian_golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
+    go_builder = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST}"
     docker_dind = "docker-image://${VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST}"
   }
   tags = [
