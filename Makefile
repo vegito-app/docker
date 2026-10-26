@@ -25,7 +25,9 @@ export VEGITO_DOCKER_CACHE_REPOSITORY ?= registry-cache.vegito.app
 
 DOCKER_IMAGES_BUILD_GROUPS ?= \
   dockerhub \
-  vegito-app
+  vegito-app-1 \
+  vegito-app-2 \
+  vegito-app-3
 
 VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS = $(DOCKER_IMAGES_BUILD_GROUPS) 
 

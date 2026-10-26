@@ -125,9 +125,17 @@ group "runners-ci" {
   ]
 }
 
+
 group "vegito-app-ci" {
   targets = [
-    
+    "vegito-app-1-ci",
+    "vegito-app-2-ci",
+    "vegito-app-3-ci",
+  ]
+}
+
+group "vegito-app-1-ci" {
+  targets = [
     // Used by 
     // - vegito-app/caddy
     // - vegito-app/local/firebase-emulators
@@ -147,15 +155,22 @@ group "vegito-app-ci" {
 
     // Used by vegito-app/local/robotframework as service base
     "vegito-trixie-debian-robotframework-ci",
-    
-    // Used by vegito-app/ai as common AI service base
-    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-ci",
 
     // Used as service runner by :
     // - vegito-app/jitsi
     // - vegito-app/mattermost
     // - vegito-app/local/clarinet-devnet
     "vegito-trixie-debian-dockerd-ci",
+  ]
+  pull            = true
+  max_parallelism = VEGITO_RELEASE_BUILD_MAX_PARALLELISM
+}
+
+group "vegito-app-2-ci" {
+  targets = [
+
+    // Used by Vegito vegito-app/payment project builder
+    "vegito-trixie-debian-project-docker-ci",
 
     // Used as image base
     // - vegito-app/example-application
@@ -167,11 +182,20 @@ group "vegito-app-ci" {
     // Used by Vegito vegito-app/payment project builder
     "vegito-trixie-debian-project-golang-docker-desktop-x-ci",
 
-    // Used by Vegito vegito-app/payment project builder
-    "vegito-trixie-debian-project-docker-ci",
+  ]
+  pull            = true
+  max_parallelism = VEGITO_RELEASE_BUILD_MAX_PARALLELISM
+}
+
+group "vegito-app-3-ci" {
+  targets = [
 
     // Used by vegito-app/auth as Authentik service image base
     "vegito-trixie-debian-terraform-dockerd-ci",
+    
+    // Used by vegito-app/ai as common AI service base
+    "vegito-trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd-ci",
+    
   ]
   pull            = true
   max_parallelism = VEGITO_RELEASE_BUILD_MAX_PARALLELISM
