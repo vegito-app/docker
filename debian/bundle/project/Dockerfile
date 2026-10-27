@@ -31,10 +31,6 @@ RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-
     LIBNCURSES_PACKAGE=libncurses5; \
     fi; \
     apt-get -o Acquire::Retries=3 update && apt-get install -y \
-    build-essential \
-    g++ \
-    gcc \
-    gcc \
     libbz2-1.0 \
     libc6 \
     libcairo2-dev \
