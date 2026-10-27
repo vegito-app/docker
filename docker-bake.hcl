@@ -79,21 +79,32 @@ variable "GITLEAKS_VERSION" {
   description = "current Gitleaks version"
   default     = "8.28.0"
 }
+variable "VEGITO_DOCKER_CACHE_REGISTRY" {
+  default = "registry-cache.vegito.app"
+}
 
 variable "VEGITO_DOCKER_CACHE_REPOSITORY" {
-  default = "vegito-docker-repository-cache"
+  default = "${VEGITO_DOCKER_CACHE_REGISTRY}/vegito-app"
 }
 
 variable "VEGITO_DOCKER_CACHE_IMAGES_BASE" {
   default = "${VEGITO_DOCKER_CACHE_REPOSITORY}/vegito-docker"
 }
 
+variable "VEGITO_DOCKER_PUBLIC_REGISTRY" {
+  default = "registry-public.vegito.app"
+}
+
 variable "VEGITO_DOCKER_PUBLIC_REPOSITORY" {
-  default = "vegito-docker-repository-public"
+  default = "${VEGITO_DOCKER_PUBLIC_REGISTRY}/vegito-app"
+}
+
+variable "VEGITO_DOCKER_PRIVATE_REGISTRY" {
+  default = "registry-private.vegito.app"
 }
 
 variable "VEGITO_DOCKER_PRIVATE_REPOSITORY" {
-  default = "vegito-docker-repository-private"
+  default = "${VEGITO_DOCKER_PRIVATE_REGISTRY}/vegito-app"
 }
 
 variable "platforms" {

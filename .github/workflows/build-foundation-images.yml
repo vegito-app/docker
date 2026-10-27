@@ -68,6 +68,7 @@ jobs:
       VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER: ${{ vars.VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER }}
       VEGITO_DOCKER_REGISTRIES: ${{ vars.VEGITO_DOCKER_REGISTRIES }}
       VEGITO_DOCKER_PUBLIC_REPOSITORY: ${{ vars.VEGITO_DOCKER_PUBLIC_REPOSITORY }}
+      VEGITO_IMAGES_CI_RELEASE_TARGET: ${{ vars.VEGITO_IMAGES_CI_RELEASE_TARGET }}
       
     steps:
       - name: Checkout repository
@@ -143,7 +144,7 @@ jobs:
 
       - name: Build Docker image
         env:
-          DOCKER_IMAGES_BUILD_GROUPS: ${{ inputs.docker_images_build_groups }}
+          VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS: ${{ inputs.docker_images_build_groups }}
           VERSION: ${{ inputs.version }}
         run: |
           set -o pipefail
