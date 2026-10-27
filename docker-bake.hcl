@@ -79,6 +79,7 @@ variable "GITLEAKS_VERSION" {
   description = "current Gitleaks version"
   default     = "8.28.0"
 }
+
 variable "VEGITO_DOCKER_CACHE_REGISTRY" {
   default = "registry-cache.vegito.app"
 }
