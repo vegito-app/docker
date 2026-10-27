@@ -30,7 +30,7 @@ jobs:
     with:
       version: ${{ needs.version-changelog.outputs.version }}
       environment: ${{ matrix.environment }}
-      docker_images_build_groups: ${{ vars.DOCKER_IMAGES_BUILD_GROUPS }}
+      docker_images_build_groups: ${{ vars.VEGITO_DOCKER_BUILDX_BAKE_TARGETS_BUILD_GROUPS }}
       use_registry_cache: ${{ vars.USE_REGISTRY_CACHE == 'true' }}
       env_bucket_map: |
         dev: vegito-app-dev-github-actions-ci-artifacts
