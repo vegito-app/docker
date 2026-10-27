@@ -1,10 +1,7 @@
 # Targets in this file are helper releasing 
 # for github.com/vegito-app internal integration.
-# It will update the DAG part used by this secondary project.
 
-# Use an ordered target list due CI machine limitations.
-# We could build a full graph with more powerful build resources.
-VEGITO_APP_INTERNAL_TARGETS ?= \
+VEGITO_APP_INTERNAL_DEFAULT_TARGETS ?= \
   hub \
   trixie-debian \
   trixie-debian-golang \
@@ -17,6 +14,12 @@ VEGITO_APP_INTERNAL_TARGETS ?= \
   trixie-debian-project-golang-docker-desktop-x \
   trixie-debian-desktop-x \
   trixie-debian-desktop-x-project-obs-vscode-golang-ai-dockerd
+
+# This is used in CI to rebuild a subset. 
+# To use this feature: define the variable VEGITO_APP_INTERNAL_TARGETS.
+# cf .github/workflows/docker-fundation-build.yml
+# Allow overriding the target list from environment variables.
+VEGITO_APP_INTERNAL_TARGETS := $(or $(VEGITO_APP_INTERNAL_TARGETS), $(VEGITO_APP_INTERNAL_DEFAULT_TARGETS))
 
 vegito-app-release-images-ci: $(VEGITO_APP_INTERNAL_TARGETS:%=vegito-docker-%-images-update)
 .PHONY: vegito-app-release-images-ci
