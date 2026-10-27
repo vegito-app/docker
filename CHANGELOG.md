@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9](https://github.com/vegito-app/docker/compare/v0.0.8...v0.0.9) (2026-10-27)
+
+
+### Features
+
+* **docker:** réorganiser les cibles de construction et ajouter un fichier vegito.mk pour l'intégration interne ([74f0078](https://github.com/vegito-app/docker/commit/74f0078a1c4935089aaf1746d27b12b6d93e3d77))
+
 ### [0.0.8](https://github.com/vegito-app/docker/compare/v0.0.7...v0.0.8) (2026-10-26)
 
 
