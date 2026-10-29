@@ -47,7 +47,7 @@ variable "NVM_VERSION" {
 
 variable "DOCKER_VERSION" {
   description = "current Docker version"
-  default     = "28.0.2"
+  default     = "28.5.2"
 }
 
 variable "DOCKER_COMPOSE_VERSION" {
@@ -62,7 +62,7 @@ variable "DOCKER_BUILDX_VERSION" {
 
 variable "TERRAFORM_VERSION" {
   description = "current Terraform version"
-  default     = "1.11.2"
+  default     = "1.16.7"
 }
 
 variable "KUBECTL_VERSION" {
@@ -72,7 +72,7 @@ variable "KUBECTL_VERSION" {
 
 variable "K9S_VERSION" {
   description = "current K9S version"
-  default     = "0.50.9"
+  default     = "0.51.0"
 }
 
 variable "GITLEAKS_VERSION" {
