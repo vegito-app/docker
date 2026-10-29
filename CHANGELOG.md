@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.11](https://github.com/vegito-app/docker/compare/v0.0.10...v0.0.11) (2026-10-29)
+
+
+### Features
+
+* **docker:** ajouter des cibles internes pour la construction d'images et réorganiser les cibles par défaut ([f4c0f54](https://github.com/vegito-app/docker/commit/f4c0f546f7acde5493d471e11e779727e47c3bca))
+* **docker:** ajouter une nouvelle variable pour la version de Gitleaks ([3a56840](https://github.com/vegito-app/docker/commit/3a568409151a1cd05cbf0473e06b4d1b790144ce))
+
+
+### Bug Fixes
+
+* **docker:** mettre à jour la version de Go à 1.27.3 ([34267e7](https://github.com/vegito-app/docker/commit/34267e7fc4fba019ec41340fc2a032be3d2ee6a6))
+* **docker:** mettre à jour le registre Docker Hub à vegitoapp ([736caf5](https://github.com/vegito-app/docker/commit/736caf5934ecfe7aec8b800704aadb31ea9baf97))
+* **docker:** mettre à jour les versions de Docker, Terraform, K9S et Gitleaks ([c9fca5e](https://github.com/vegito-app/docker/commit/c9fca5e82054ad8a86f38445db22d0326da7b1a6))
+
 ### [0.0.10](https://github.com/vegito-app/docker/compare/v0.0.9...v0.0.10) (2026-10-27)
 
 
