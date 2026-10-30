@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.12](https://github.com/vegito-app/docker/compare/v0.0.11...v0.0.12) (2026-10-30)
+
+
+### Bug Fixes
+
+* **docker:** renommer VEGITO_APP_INTERNAL_TARGETS en VEGITO_APP_RELEASE_TARGETS et mettre à jour les cibles de construction ([4abc27b](https://github.com/vegito-app/docker/commit/4abc27bcf8fbdc1d886b9778f10cde988e69d64d))
+
 ### [0.0.11](https://github.com/vegito-app/docker/compare/v0.0.10...v0.0.11) (2026-10-29)
 
 
