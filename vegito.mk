@@ -2,6 +2,7 @@
 # for github.com/vegito-app internal integration.
 
 VEGITO_APP_RELEASE_DEFAULT_TARGETS ?= \
+  hub \
   trixie-debian \
   trixie-debian-golang \
   trixie-debian-robotframework \
