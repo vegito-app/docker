@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.13](https://github.com/vegito-app/docker/compare/v0.0.12...v0.0.13) (2026-11-02)
+
+
+### Features
+
+* **docker:** ajouter la prise en charge de la construction et de la publication d'images Docker pour le dépôt Docker Hub ([12a9d1d](https://github.com/vegito-app/docker/commit/12a9d1da13627d6295e3824164a227f38f23ac73))
+
+
+### Bug Fixes
+
+* **docker:** corriger le nom de la variable VEGITO_DOCKER_HUB_REPOSITORY et ajouter 'hub' aux cibles de publication ([35ac8e2](https://github.com/vegito-app/docker/commit/35ac8e297d9093dec4ba03a428349fa85473da9c))
+
 ### [0.0.12](https://github.com/vegito-app/docker/compare/v0.0.11...v0.0.12) (2026-10-30)
 
 
