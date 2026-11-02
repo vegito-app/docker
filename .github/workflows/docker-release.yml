@@ -34,6 +34,7 @@ jobs:
       use_registry_cache: ${{ vars.USE_REGISTRY_CACHE == 'true' }}
       env_bucket_map: |
         dev: vegito-app-dev-github-actions-ci-artifacts
+      docker_public_repository: ${{ vars.VEGITO_DOCKER_PUBLIC_REPOSITORY }}
 
     secrets: inherit
 

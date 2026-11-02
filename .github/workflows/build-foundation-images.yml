@@ -37,6 +37,10 @@ on:
         required: false
         type: string
         default: "gcr"
+      docker_public_repository:
+        required: true
+        type: string
+        default: docker.io/vegitoapp
     secrets:
       VEGITO_DOCKERHUB_PAT:
         required: false
@@ -69,7 +73,7 @@ jobs:
       VEGITO_IMAGES_CI_RELEASE_TARGET: ${{ vars.VEGITO_IMAGES_CI_RELEASE_TARGET }}
       VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER: ${{ vars.VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER }}
       VEGITO_DOCKER_REGISTRIES: ${{ vars.VEGITO_DOCKER_REGISTRIES }}
-      VEGITO_DOCKER_PUBLIC_REPOSITORY: ${{ vars.VEGITO_DOCKER_PUBLIC_REPOSITORY }}
+      VEGITO_DOCKER_PUBLIC_REPOSITORY: ${{ inputs.docker_public_repository }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
