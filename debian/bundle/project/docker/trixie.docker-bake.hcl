@@ -317,7 +317,7 @@ target "vegito-trixie-debian-project-docker-version-ci" {
 target "vegito-trixie-debian-project-docker-terraform-latest-ci" {
   inherits = ["vegito-trixie-debian-project-latest-ci"]
   contexts = {
-    debian-golang = "docker-image://${VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST}"
+    debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
     debian        = "target:vegito-trixie-debian-docker-terraform-latest-ci"
   }
   tags = [
@@ -328,7 +328,7 @@ target "vegito-trixie-debian-project-docker-terraform-latest-ci" {
 target "vegito-trixie-debian-project-docker-desktop-x-latest-ci" {
   inherits = ["vegito-trixie-debian-project-latest-ci"]
   contexts = {
-    debian-golang = "docker-image://${VEGITO_DOCKER_TRIXIE_DEBIAN_GOLANG_DESKTOP_X_IMAGE_LATEST}"
+    debian-golang = "docker-image://${VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION}"
     debian        = "target:vegito-trixie-debian-docker-desktop-x-latest-ci"
   }
   tags = [
@@ -379,8 +379,8 @@ target "vegito-trixie-debian-project-docker-terraform" {
     debian        = "target:vegito-trixie-debian-docker-terraform"
   }
   tags = [
-    VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_DOCKER_DESKTOP_X_IMAGE_VERSION,
-    VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_DOCKER_DESKTOP_X_IMAGE_LATEST,
+    VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_DOCKER_TERRAFORM_IMAGE_VERSION,
+    VEGITO_DOCKER_TRIXIE_DEBIAN_PROJECT_DOCKER_TERRAFORM_IMAGE_LATEST,
   ]
 }
 

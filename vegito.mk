@@ -10,6 +10,7 @@ VEGITO_APP_RELEASE_DEFAULT_TARGETS ?= \
   trixie-debian-desktop-x \
   trixie-debian-flutter-desktop-x \
   trixie-debian-terraform-dockerd \
+  trixie-debian-project-docker-terraform \
   trixie-debian-project-docker \
   trixie-debian-project-golang-docker \
   trixie-debian-project-golang-docker-desktop-x
