@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.14](https://github.com/vegito-app/docker/compare/v0.0.13...v0.0.14) (2026-11-06)
+
+
+### Features
+
+* **docker:** ajouter la cible de construction pour le projet Docker Terraform dans vegito.mk ([ca9b720](https://github.com/vegito-app/docker/commit/ca9b7207f8d76471c30e2a2e599e85f12bf41b73))
+
 ### [0.0.13](https://github.com/vegito-app/docker/compare/v0.0.12...v0.0.13) (2026-11-02)
 
 
