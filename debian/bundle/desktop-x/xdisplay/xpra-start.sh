@@ -23,6 +23,8 @@ trap kill_jobs EXIT
 
 display="${DISPLAY:?DISPLAY is required}"
 
+# 🎨 Start Xpra server
+
 unset XPRA_SERVER_SOCKET
 unset XPRA_SESSION_DIR
 

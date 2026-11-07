@@ -2,22 +2,11 @@
 
 set -euo pipefail
 
-export XPRA_SOCKET_DIR="$XDG_RUNTIME_DIR/xpra"
-export XPRA_SOCKET_DIRS="$XPRA_SOCKET_DIR"
-mkdir -p "$XPRA_SOCKET_DIR"
-
-# start a dbus session (required by pulseaudio/xpra)
-eval "$(dbus-launch --sh-syntax)"
-export DBUS_SESSION_BUS_ADDRESS
-export DBUS_SESSION_BUS_PID
-
-desktop-x-install.sh
-
 # 🐧 Setup Debian
 debian-entrypoint.sh echo "✅ Debian setup complete."
 
-if [ -f /usr/local/bin/desktop-x-entrypoint.sh ]; then
-    /usr/local/bin/desktop-x-entrypoint.sh echo "✅ X Desktop setup successful."
-fi
+desktop-x-install.sh
+
+echo "✅ Desktop X setup complete."
 
 exec "$@"

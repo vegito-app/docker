@@ -17,6 +17,10 @@ kill_jobs() {
 # 🚨 Register cleanup function to run on script exit
 trap kill_jobs EXIT
 
+# start a dbus session (required by pulseaudio/xpra)
+eval "$(dbus-launch --sh-syntax)"
+export DBUS_SESSION_BUS_ADDRESS
+export DBUS_SESSION_BUS_PID
 
 ENABLE_AUDIO="${ENABLE_AUDIO:-0}"
 if [ "$ENABLE_AUDIO" = "1" ]; then
@@ -42,6 +46,7 @@ if [ "$ENABLE_AUDIO" = "1" ]; then
     pactl info
 fi
 
+# 🖥️ Start the X server if enabled
 if [ ${VEGITO_DOCKER_DEBIAN_DESKTOP_X_CONTAINER_DISPLAY_START:-"true"} = "true" ]; then
     echo "✅ VEGITO_DOCKER_DEBIAN_DESKTOP_X_CONTAINER_DISPLAY_START is set to true"
     desktop-x-display-start.sh
