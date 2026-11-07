@@ -12,9 +12,6 @@ if [ "${PROJECT_CONTAINER_INSTALL:-true}" = true ]; then
     project-container-install.sh
 fi
 
-# 🐧 Setup Debian
-debian-entrypoint.sh echo "✅ Debian setup complete."
-
 if [ -f /usr/local/bin/desktop-x-entrypoint.sh ]; then
     /usr/local/bin/desktop-x-entrypoint.sh echo "✅ X Desktop setup successful."
 fi

@@ -35,6 +35,17 @@ RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-
     xvfb \
     xwayland 
 
+# File manager for Openbox desktop
+RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-lib,target=/var/lib/apt,sharing=locked \
+    apt-get -o Acquire::Retries=3 update && apt-get install -y --no-install-recommends \
+    thunar \
+    thunar-archive-plugin \
+    gvfs \
+    gvfs-backends \
+    xdg-user-dirs \
+    adwaita-icon-theme
+
 RUN --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=vegito-debian-${debian_version}-${TARGETPLATFORM}-apt-lib,target=/var/lib/apt,sharing=locked \
     curl -o /usr/share/keyrings/xpra.asc \

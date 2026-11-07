@@ -13,4 +13,11 @@ export DBUS_SESSION_BUS_PID
 
 desktop-x-install.sh
 
+# 🐧 Setup Debian
+debian-entrypoint.sh echo "✅ Debian setup complete."
+
+if [ -f /usr/local/bin/desktop-x-entrypoint.sh ]; then
+    /usr/local/bin/desktop-x-entrypoint.sh echo "✅ X Desktop setup successful."
+fi
+
 exec "$@"
