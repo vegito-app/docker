@@ -4,7 +4,7 @@ variable "VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST" {
 }
 
 variable "VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_HUB_IMAGE_BASE}/docker-dind-rootless:${VERSION}"
+  default = VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST
 }
 
 group "docker-dind-rootless-ci" {

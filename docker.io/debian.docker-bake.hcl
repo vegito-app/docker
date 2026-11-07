@@ -35,7 +35,7 @@ variable "VEGITO_DOCKER_HUB_DEBIAN_IMAGE_LATEST" {
 }
 
 variable "VEGITO_DOCKER_HUB_DEBIAN_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_HUB_IMAGE_BASE}/docker-debian:${VERSION}"
+  default = VEGITO_DOCKER_HUB_DEBIAN_IMAGE_LATEST
 }
 
 target "docker-debian-bookworm-latest-ci" {
@@ -69,7 +69,7 @@ variable "VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_LATEST" {
 }
 
 variable "VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_HUB_IMAGE_BASE}/docker-trixie-debian:${VERSION}"
+  default = VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_LATEST
 }
 
 group "docker-debian-trixie-ci" {

@@ -3,7 +3,7 @@ variable "VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST" {
 }
 
 variable "VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_HUB_IMAGE_BASE}/golang-debian:${VERSION}"
+  default = VEGITO_DOCKER_HUB_GOLANG_DEBIAN_IMAGE_LATEST
 }
 
 target "docker-golang-debian-base" {
@@ -51,7 +51,7 @@ variable "VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST" {
 }
 
 variable "VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_VERSION" {
-  default = "${VEGITO_DOCKER_HUB_IMAGE_BASE}/golang-debian-trixie:${VERSION}"
+  default = VEGITO_DOCKER_HUB_GOLANG_DEBIAN_TRIXIE_IMAGE_LATEST
 }
 
 target "docker-debian-trixie-golang-base" {
