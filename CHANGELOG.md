@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.16](https://github.com/vegito-app/docker/compare/v0.0.15...v0.0.16) (2026-11-07)
+
+
+### Bug Fixes
+
+* **docker:** mettre à jour les variables d'image pour utiliser les valeurs les plus récentes ([4ef1690](https://github.com/vegito-app/docker/commit/4ef16908dadb4475d367670b2c23a1a876354798))
+
 ### [0.0.15](https://github.com/vegito-app/docker/compare/v0.0.14...v0.0.15) (2026-11-07)
 
 
