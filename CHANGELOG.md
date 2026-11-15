@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.17](https://github.com/vegito-app/docker/compare/v0.0.16...v0.0.17) (2026-11-15)
+
+
+### Features
+
+* **docker:** ajouter des alias pour grep et git grep dans le script d'installation ([3ee5987](https://github.com/vegito-app/docker/commit/3ee598795c346f7584c8bd710c8a4586aace6184))
+* **docker:** ajouter des cibles et des variables pour l'image Debian Trixie ([da09ecc](https://github.com/vegito-app/docker/commit/da09ecc3b45c4459c908722a2cb392c0ed9ff36e))
+
+
+### Bug Fixes
+
+* **docker:** mettre à jour la version de Go à 1.27.4 ([e464478](https://github.com/vegito-app/docker/commit/e464478af8bd6d1b53363dbf907e049d70d0cd68))
+* **docker:** renommer les groupes et cibles pour utiliser le préfixe 'vegito-dockerhub' ([fd4e587](https://github.com/vegito-app/docker/commit/fd4e587a4cd0fd40ea8481bbcd3531cb680e947f))
+
 ### [0.0.16](https://github.com/vegito-app/docker/compare/v0.0.15...v0.0.16) (2026-11-07)
 
 
