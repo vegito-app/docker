@@ -7,38 +7,38 @@ variable "VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_VERSION" {
   default = VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST
 }
 
-group "docker-dind-rootless-ci" {
+group "vegito-dockerhub-dind-rootless-ci" {
   targets = [
-    "docker-dind-rootless-version-ci",
-    "docker-dind-rootless-latest-ci",
+    "vegito-dockerhub-dind-rootless-version-ci",
+    "vegito-dockerhub-dind-rootless-latest-ci",
   ]
 }
 
-target "docker-dind-rootless-base" {
+target "vegito-dockerhub-dind-rootless-base" {
   context    = VEGITO_DOCKER_IO_HUB_DIR
   dockerfile = "dind-rootless.Dockerfile"
 }
 
-target "docker-dind-rootless-version-ci" {
-  inherits = ["docker-dind-rootless-base"]
+target "vegito-dockerhub-dind-rootless-version-ci" {
+  inherits = ["vegito-dockerhub-dind-rootless-base"]
   tags = [
     VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_VERSION,
   ]
   platforms = platforms
 }
 
-target "docker-dind-rootless-latest-ci" {
+target "vegito-dockerhub-dind-rootless-latest-ci" {
   tags = [
     VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST,
   ]
-  inherits  = ["docker-dind-rootless-base"]
+  inherits  = ["vegito-dockerhub-dind-rootless-base"]
   platforms = platforms
 }
 
-target "docker-dind-rootless" {
+target "vegito-dockerhub-dind-rootless" {
   tags = [
     VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_VERSION,
     VEGITO_DOCKER_HUB_DIND_ROOTLESS_IMAGE_LATEST,
   ]
-  inherits = ["docker-dind-rootless-base"]
+  inherits = ["vegito-dockerhub-dind-rootless-base"]
 }

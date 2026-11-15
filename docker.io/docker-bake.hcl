@@ -14,24 +14,24 @@ variable "VEGITO_DOCKER_HUB_IMAGE_BASE" {
 # - Applications: the end products that we want to run and test
 group "dockerhub" {
   targets = [
-    "docker-debian",
-    "docker-golang-debian",
-    "docker-debian-trixie",
-    "docker-debian-trixie-golang",
-    "docker-dind-rootless",
-    "docker-golang-alpine",
-    "docker-rust-alpine",
+    "vegito-dockerhub-debian",
+    "vegito-dockerhub-golang-debian",
+    "vegito-dockerhub-debian-trixie",
+    "vegito-dockerhub-debian-trixie-golang",
+    "vegito-dockerhub-dind-rootless",
+    "vegito-dockerhub-golang-alpine",
+    "vegito-dockerhub-rust-alpine",
   ]
 }
 
 group "dockerhub-ci" {
   targets = [
-    "docker-debian-ci",
-    "docker-golang-debian-ci",
-    "docker-debian-trixie-ci",
-    "docker-debian-trixie-golang-ci",
-    "docker-dind-rootless-ci",
-    "docker-golang-alpine-ci",
-    "docker-rust-alpine-ci",
+    "vegito-dockerhub-debian-ci",
+    "vegito-dockerhub-golang-debian-ci",
+    "vegito-dockerhub-debian-trixie-ci",
+    "vegito-dockerhub-debian-trixie-golang-ci",
+    "vegito-dockerhub-dind-rootless-ci",
+    "vegito-dockerhub-golang-alpine-ci",
+    "vegito-dockerhub-rust-alpine-ci",
   ]
 }

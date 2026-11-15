@@ -6,39 +6,39 @@ variable "VEGITO_DOCKER_ALPINE_RUST_IMAGE_VERSION" {
   default = "${VEGITO_DOCKER_HUB_IMAGE_BASE}/rust-alpine:${VERSION}"
 }
 
-target "docker-rust-alpine-base" {
+target "vegito-dockerhub-rust-alpine-base" {
   context    = VEGITO_DOCKER_IO_HUB_DIR
   dockerfile = "rust-alpine.Dockerfile"
 }
 
-group "docker-rust-alpine-ci" {
+group "vegito-dockerhub-rust-alpine-ci" {
   targets = [
-    "docker-rust-alpine-version-ci",
-    "docker-rust-alpine-latest-ci",
+    "vegito-dockerhub-rust-alpine-version-ci",
+    "vegito-dockerhub-rust-alpine-latest-ci",
   ]
 }
 
-target "docker-rust-alpine-version-ci" {
+target "vegito-dockerhub-rust-alpine-version-ci" {
 
   tags = [
     VEGITO_DOCKER_ALPINE_RUST_IMAGE_VERSION,
   ]
-  inherits  = ["docker-rust-alpine-base"]
+  inherits  = ["vegito-dockerhub-rust-alpine-base"]
   platforms = platforms
 }
 
-target "docker-rust-alpine-latest-ci" {
+target "vegito-dockerhub-rust-alpine-latest-ci" {
   tags = [
     VEGITO_DOCKER_ALPINE_RUST_IMAGE_LATEST,
   ]
-  inherits  = ["docker-rust-alpine-base"]
+  inherits  = ["vegito-dockerhub-rust-alpine-base"]
   platforms = platforms
 }
 
-target "docker-rust-alpine" {
+target "vegito-dockerhub-rust-alpine" {
   tags = [
     VEGITO_DOCKER_ALPINE_RUST_IMAGE_VERSION,
     VEGITO_DOCKER_ALPINE_RUST_IMAGE_LATEST,
   ]
-  inherits = ["docker-rust-alpine-base"]
+  inherits = ["vegito-dockerhub-rust-alpine-base"]
 }

@@ -6,39 +6,39 @@ variable "VEGITO_DOCKER_ALPINE_GOLANG_IMAGE_VERSION" {
   default = "${VEGITO_DOCKER_HUB_IMAGE_BASE}/golang-alpine:${VERSION}"
 }
 
-target "docker-golang-alpine-base" {
+target "vegito-dockerhub-golang-alpine-base" {
   context    = VEGITO_DOCKER_IO_HUB_DIR
   dockerfile = "golang-alpine.Dockerfile"
 }
 
-group "docker-golang-alpine-ci" {
+group "vegito-dockerhub-golang-alpine-ci" {
   targets = [
-    "docker-golang-alpine-version-ci",
-    "docker-golang-alpine-latest-ci",
+    "vegito-dockerhub-golang-alpine-version-ci",
+    "vegito-dockerhub-golang-alpine-latest-ci",
   ]
 }
 
-target "docker-golang-alpine-version-ci" {
+target "vegito-dockerhub-golang-alpine-version-ci" {
 
   tags = [
     VEGITO_DOCKER_ALPINE_GOLANG_IMAGE_VERSION,
   ]
-  inherits  = ["docker-golang-alpine-base"]
+  inherits  = ["vegito-dockerhub-golang-alpine-base"]
   platforms = platforms
 }
 
-target "docker-golang-alpine-latest-ci" {
+target "vegito-dockerhub-golang-alpine-latest-ci" {
   tags = [
     VEGITO_DOCKER_ALPINE_GOLANG_IMAGE_LATEST,
   ]
-  inherits  = ["docker-golang-alpine-base"]
+  inherits  = ["vegito-dockerhub-golang-alpine-base"]
   platforms = platforms
 }
 
-target "docker-golang-alpine" {
+target "vegito-dockerhub-golang-alpine" {
   tags = [
     VEGITO_DOCKER_ALPINE_GOLANG_IMAGE_VERSION,
     VEGITO_DOCKER_ALPINE_GOLANG_IMAGE_LATEST,
   ]
-  inherits = ["docker-golang-alpine-base"]
+  inherits = ["vegito-dockerhub-golang-alpine-base"]
 }

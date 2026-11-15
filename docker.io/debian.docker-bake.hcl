@@ -1,27 +1,27 @@
-group "docker-debian-ci" {
+group "vegito-dockerhub-debian-ci" {
   targets = [
-    "docker-debian-bookworm-ci",
-    "docker-debian-trixie-ci",
+    "vegito-dockerhub-debian-bookworm-ci",
+    "vegito-dockerhub-debian-trixie-ci",
   ]
 }
 
-group "docker-debian" {
+group "vegito-dockerhub-debian" {
   targets = [
-    "docker-debian-bookworm",
-    "docker-debian-trixie",
-    "docker-debian-trixie-golang"
+    "vegito-dockerhub-debian-bookworm",
+    "vegito-dockerhub-debian-trixie",
+    "vegito-dockerhub-debian-trixie-golang"
   ]
 }
 
 # Bookworm targets
-group "docker-debian-bookworm-ci" {
+group "vegito-dockerhub-debian-bookworm-ci" {
   targets = [
-    "docker-debian-bookworm-version-ci",
-    "docker-debian-bookworm-latest-ci",
+    "vegito-dockerhub-debian-bookworm-version-ci",
+    "vegito-dockerhub-debian-bookworm-latest-ci",
   ]
 }
 
-target "docker-debian-bookworm-base" {
+target "vegito-dockerhub-debian-bookworm-base" {
   context    = VEGITO_DOCKER_IO_HUB_DIR
   dockerfile = "debian.Dockerfile"
   args = {
@@ -38,24 +38,24 @@ variable "VEGITO_DOCKER_HUB_DEBIAN_IMAGE_VERSION" {
   default = VEGITO_DOCKER_HUB_DEBIAN_IMAGE_LATEST
 }
 
-target "docker-debian-bookworm-latest-ci" {
-  inherits = ["docker-debian-bookworm-base"]
+target "vegito-dockerhub-debian-bookworm-latest-ci" {
+  inherits = ["vegito-dockerhub-debian-bookworm-base"]
   tags = [
     VEGITO_DOCKER_HUB_DEBIAN_IMAGE_LATEST
   ]
   platforms = platforms
 }
 
-target "docker-debian-bookworm-version-ci" {
-  inherits = ["docker-debian-bookworm-base"]
+target "vegito-dockerhub-debian-bookworm-version-ci" {
+  inherits = ["vegito-dockerhub-debian-bookworm-base"]
   tags = [
     VEGITO_DOCKER_HUB_DEBIAN_IMAGE_VERSION
   ]
   platforms = platforms
 }
 
-target "docker-debian-bookworm" {
-  inherits = ["docker-debian-bookworm-base"]
+target "vegito-dockerhub-debian-bookworm" {
+  inherits = ["vegito-dockerhub-debian-bookworm-base"]
   tags = [
     VEGITO_DOCKER_HUB_DEBIAN_IMAGE_VERSION,
     VEGITO_DOCKER_HUB_DEBIAN_IMAGE_LATEST,
@@ -72,14 +72,14 @@ variable "VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_VERSION" {
   default = VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_LATEST
 }
 
-group "docker-debian-trixie-ci" {
+group "vegito-dockerhub-debian-trixie-ci" {
   targets = [
-    "docker-debian-trixie-version-ci",
-    "docker-debian-trixie-latest-ci",
+    "vegito-dockerhub-debian-trixie-version-ci",
+    "vegito-dockerhub-debian-trixie-latest-ci",
   ]
 }
 
-target "docker-debian-trixie-base" {
+target "vegito-dockerhub-debian-trixie-base" {
   context    = VEGITO_DOCKER_IO_HUB_DIR
   dockerfile = "debian.Dockerfile"
   args = {
@@ -88,24 +88,24 @@ target "docker-debian-trixie-base" {
   }
 }
 
-target "docker-debian-trixie-latest-ci" {
-  inherits = ["docker-debian-trixie-base"]
+target "vegito-dockerhub-debian-trixie-latest-ci" {
+  inherits = ["vegito-dockerhub-debian-trixie-base"]
   tags = [
     VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_LATEST
   ]
   platforms = platforms
 }
 
-target "docker-debian-trixie-version-ci" {
-  inherits = ["docker-debian-trixie-base"]
+target "vegito-dockerhub-debian-trixie-version-ci" {
+  inherits = ["vegito-dockerhub-debian-trixie-base"]
   tags = [
     VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_VERSION
   ]
   platforms = platforms
 }
 
-target "docker-debian-trixie" {
-  inherits = ["docker-debian-trixie-base"]
+target "vegito-dockerhub-debian-trixie" {
+  inherits = ["vegito-dockerhub-debian-trixie-base"]
   tags = [
     VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_VERSION,
     VEGITO_DOCKER_HUB_TRIXIE_DEBIAN_IMAGE_LATEST,
