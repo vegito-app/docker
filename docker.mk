@@ -188,8 +188,10 @@ VEGITO_DOCKER_TRIXIE_DEBIAN_BUILDX_BAKE_TARGETS ?= \
 
 VEGITO_DOCKER_IO_HUB_BUILDX_BAKE_TARGETS ?= \
   debian \
+  debian-trixie \
   golang-alpine \
   golang-debian \
+  debian-trixie-golang \
   dind-rootless \
   rust-alpine
 
