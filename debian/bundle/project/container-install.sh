@@ -31,6 +31,8 @@ alias hh="docker run --rm -it --privileged -v /:/host --entrypoint bash --networ
 alias h="docker run --rm -it --privileged -v /:/host --entrypoint bash --network=host ${local_builder_image} -c 'sudo chroot /host htop'"
 alias b="docker run --rm -it --privileged -v /:/host --entrypoint bash --network=host ${local_builder_image} -c 'sudo chroot /host btop'"
 alias r='docker run --rm -it --privileged -v /:/host --entrypoint bash --network=host ${local_builder_image} -c "sudo chroot /host"'
+alias gr="grep -RnI --color=auto --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=vendor --exclude-dir=.containers --exclude-dir=build --exclude-dir=.dart_tool --exclude-dir=.terraform"
+alias ggr="git grep -RnI --color=auto --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=vendor --exclude-dir=.containers --exclude-dir=build --exclude-dir=.dart_tool --exclude-dir=.terraform"
 
 # Aliases to use docker and lazydocker with the docker daemon of the host system
 # These aliases forward the docker commands to the host's docker daemon via TCP.
