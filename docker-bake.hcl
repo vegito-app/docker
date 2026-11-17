@@ -140,14 +140,14 @@ group "runners-ci" {
 # Target group related to project github.com/vegito-app/local specific usage.
 group "vegito-local-ci" {
   targets = [
-    "vegito-dockerhub-rust-alpine",
-    "vegito-trixie-debian",
-    "vegito-trixie-debian-flutter-desktop-x",
-    "vegito-trixie-debian-desktop-x",
-    "vegito-trixie-debian-dockerd",
-    "vegito-trixie-debian-project-docker-terraform",
-    "vegito-trixie-debian-project-golang-docker",
-    "vegito-trixie-debian-robotframework",
+    "vegito-dockerhub-rust-alpine-ci",
+    "vegito-trixie-debian-ci",
+    "vegito-trixie-debian-desktop-x-ci",
+    "vegito-trixie-debian-dockerd-ci",
+    "vegito-trixie-debian-flutter-desktop-x-ci",
+    "vegito-trixie-debian-project-docker-terraform-ci",
+    "vegito-trixie-debian-project-golang-docker-ci",
+    "vegito-trixie-debian-robotframework-ci",
   ]
 }
 
