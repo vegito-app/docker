@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.19](https://github.com/vegito-app/docker/compare/v0.0.18...v0.0.19) (2026-11-17)
+
+
+### Features
+
+* **docker:** ajouter des cibles de libération pour l'intégration locale et organisationnelle ([b5dfd7a](https://github.com/vegito-app/docker/commit/b5dfd7ae8ce21767c069c26aa279964cb8936f5f))
+* **docker:** ajouter l'installation de tous les formats binaires dans la configuration de buildx ([ee58db4](https://github.com/vegito-app/docker/commit/ee58db47eb7a23a6d882b11c706a4c9916502fef))
+* **docker:** ajouter un groupe cible pour l'utilisation spécifique du projet vegito-app/local ([2fbd0dd](https://github.com/vegito-app/docker/commit/2fbd0dd384549d7f0e5aac63129e05502afb2201))
+
 ### [0.0.18](https://github.com/vegito-app/docker/compare/v0.0.17...v0.0.18) (2026-11-17)
 
 
