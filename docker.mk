@@ -299,10 +299,10 @@ else
 	    --platform linux/amd64 \
 	    $(VEGITO_DOCKER_BUILDX_CREATE_DRIVER_OPTS:%=--driver-opt "%"); \
 	}
+	@docker run --privileged --rm tonistiigi/binfmt --install all
 endif
 	@docker buildx inspect $(VEGITO_DOCKER_BUILDX_NAME) --bootstrap
 	@$(MAKE) vegito-docker-buildx-configure-dns
-	@docker run --privileged --rm tonistiigi/binfmt --install all
 .PHONY: vegito-docker-buildx-setup
 
 vegito-docker-buildx-rm:
