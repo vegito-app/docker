@@ -1,6 +1,8 @@
 # Targets in this file are helper releasing 
-# for github.com/vegito-app internal integration.
-
+# for github.com/vegito-app organization.
+# In this mode we use the Makefile to produce a sequencial build instead of relaying on
+# the Docker Buildx internal DAG. The DAG may be too heavy running on some workstations.
+# Useful for local development and testing or if the CI is too slow.
 VEGITO_APP_RELEASE_DEFAULT_TARGETS ?= \
   hub \
   trixie-debian \

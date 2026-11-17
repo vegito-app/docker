@@ -17,7 +17,8 @@ export GOOGLE_CLOUD_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_REGION)-docker.pkg.dev
 export GOOGLE_CLOUD_PROJECT_DOCKER_REGISTRY ?= $(GOOGLE_CLOUD_DOCKER_REGISTRY)/$(GOOGLE_CLOUD_PROJECT_ID)
 
 -include docker.mk
--include vegito.mk
+-include release/vegito.mk
+-include release/local.mk
 
 # Local/dev: build all images without pushing them.
 # Tags are generated for all configured registries.
