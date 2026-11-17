@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.18](https://github.com/vegito-app/docker/compare/v0.0.17...v0.0.18) (2026-11-17)
+
+
+### Features
+
+* **docker:** ajouter des fonctions grep et find personnalisées dans le script d'installation ([e1be5ca](https://github.com/vegito-app/docker/commit/e1be5ca79f7ebfdeec3cfab2119e93851f0b075f))
+
 ### [0.0.17](https://github.com/vegito-app/docker/compare/v0.0.16...v0.0.17) (2026-11-15)
 
 
