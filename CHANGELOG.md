@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.20](https://github.com/vegito-app/docker/compare/v0.0.19...v0.0.20) (2026-11-17)
+
+
+### Features
+
+* **docker:** ajouter la cible 'vegito-trixie-debian-flutter-desktop-x' aux cibles de libération ([4536946](https://github.com/vegito-app/docker/commit/4536946afbb894a494373865947640281ad65bcb))
+* **docker:** mettre à jour les cibles du groupe 'vegito-local-ci' pour inclure le suffixe '-ci' ([b946b0d](https://github.com/vegito-app/docker/commit/b946b0dbfd397866b5420078bd94ca473016c751))
+
 ### [0.0.19](https://github.com/vegito-app/docker/compare/v0.0.18...v0.0.19) (2026-11-17)
 
 
