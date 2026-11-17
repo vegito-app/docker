@@ -90,6 +90,67 @@ alias gd='git diff'
 alias gl='git log --oneline --graph --decorate'
 EOF
 
+cat <<'EOF' > ~/.bashrc.d/11-grep.sh
+gr() {
+        grep -RnI --color=auto \
+        --exclude-dir=.git \
+        --exclude-dir=node_modules \
+        --exclude-dir=vendor \
+        --exclude-dir=build \
+        --exclude-dir=.dart_tool \
+        --exclude-dir=.containers \
+        --exclude-dir=.terraform \
+        "$@"
+}
+EOF
+
+cat <<'EOF' > ~/.bashrc.d/12-find.sh
+# list all find files except some directories
+lf() {
+    find "${1:-.}" \
+        -type d \( \
+            -name .git -o \
+            -name node_modules -o \
+            -name vendor -o \
+            -name build -o \
+            -name .dart_tool -o \
+            -name .terraform -o \
+            -name .containers \
+        \) -prune -o \
+        -type f -print
+}
+
+# find files with specific name in all directories except some directories
+ff() {
+    find "${1:-.}" \
+        -type d \( \
+            -name .git -o \
+            -name node_modules -o \
+            -name vendor -o \
+            -name build -o \
+            -name .dart_tool -o \
+            -name .terraform -o \
+            -name .containers \
+        \) -prune -o \
+        -type f -name "${2:-*}" -print
+}
+
+# variant of ff that ignores case sensitivity
+ffi() {
+    find "${1:-.}" \
+        -type d \( \
+            -name .git -o \
+            -name node_modules -o \
+            -name vendor -o \
+            -name build -o \
+            -name .dart_tool -o \
+            -name .terraform -o \
+            -name .containers \
+        \) -prune -o \
+        -type f -iname "${2:-*}" -print
+}
+EOF
+
 # Local Container Cache
 container_cache=${CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/debian}
 mkdir -p $container_cache
