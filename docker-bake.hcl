@@ -142,6 +142,7 @@ group "vegito-local-ci" {
   targets = [
     "vegito-dockerhub-rust-alpine",
     "vegito-trixie-debian",
+    "vegito-trixie-debian-flutter-desktop-x",
     "vegito-trixie-debian-desktop-x",
     "vegito-trixie-debian-dockerd",
     "vegito-trixie-debian-project-docker-terraform",

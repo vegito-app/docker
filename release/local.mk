@@ -8,6 +8,7 @@ VEGITO_LOCAL_RELEASE_DEFAULT_TARGETS ?= \
   trixie-debian \
   trixie-debian-desktop-x \
   trixie-debian-dockerd \
+  trixie-debian-flutter-desktop-x \
   trixie-debian-project-docker-terraform \
   trixie-debian-project-golang-docker \
   trixie-debian-robotframework
