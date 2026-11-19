@@ -162,6 +162,7 @@ VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS ?= \
   debian-project-golang-docker-desktop-x \
   debian-project-obs-vscode-golang-ai-dockerd \
   debian-desktop-x-project-obs-vscode-golang-ai-dockerd \
+  debian-project-golang-docker-terraform \
   debian-vscode-golang-ai-dockerd \
   debian-golang-ai-dockerd \
   debian-ai-dockerd \
