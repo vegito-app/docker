@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.21](https://github.com/vegito-app/docker/compare/v0.0.20...v0.0.21) (2026-11-19)
+
+
+### Features
+
+* **docker:** ajouter la cible 'debian-project-golang-docker-terraform' aux cibles de construction ([8e0e5ae](https://github.com/vegito-app/docker/commit/8e0e5ae6174071d9fba31f0cb4ad2a20515e31b6))
+* **docker:** ajouter une nouvelle cible 'vegito-trixie-debian-project-golang-terraform-docker-ci' au groupe 'vegito-local-ci' ([ea25a04](https://github.com/vegito-app/docker/commit/ea25a0440e73fa515ddc10afc7b94aeab77d1eee))
+
+
+### Bug Fixes
+
+* **docker:** corriger le nom de la cible 'vegito-trixie-debian-project-golang-docker-terraform-ci' dans le groupe 'vegito-local-ci' ([7bed591](https://github.com/vegito-app/docker/commit/7bed59178225372e5c62be2fcb7d89d47ef2c0b4))
+
 ### [0.0.20](https://github.com/vegito-app/docker/compare/v0.0.19...v0.0.20) (2026-11-17)
 
 
