@@ -146,7 +146,7 @@ group "vegito-local-ci" {
     "vegito-trixie-debian-dockerd-ci",
     "vegito-trixie-debian-flutter-desktop-x-ci",
     "vegito-trixie-debian-project-docker-terraform-ci",
-    "vegito-trixie-debian-project-golang-docker-terraform-ci",
+    "vegito-trixie-debian-project-terraform-golang-docker-ci",
     "vegito-trixie-debian-project-golang-docker-ci",
     "vegito-trixie-debian-robotframework-ci",
   ]

@@ -141,6 +141,7 @@ VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS ?= \
   kubernetes \
   golang \
   obs \
+  terraform \
   vscode
 
 VEGITO_DOCKER_DEBIAN_VSCODE_BUILDX_BAKE_TARGETS ?= \
@@ -163,7 +164,7 @@ VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS ?= \
   debian-project-golang-docker-desktop-x \
   debian-project-obs-vscode-golang-ai-dockerd \
   debian-desktop-x-project-obs-vscode-golang-ai-dockerd \
-  debian-project-golang-docker-terraform \
+  debian-project-terraform-golang-docker \
   debian-vscode-golang-ai-dockerd \
   debian-golang-ai-dockerd \
   debian-ai-dockerd \
