@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.23](https://github.com/vegito-app/docker/compare/v0.0.22...v0.0.23) (2026-11-22)
+
+
+### Features
+
+* **docker:** ajouter un nouveau fichier pour la configuration de l'image Docker Terraform Golang ([d01cb1c](https://github.com/vegito-app/docker/commit/d01cb1c63d7e9d2b3bc3ddb3ade6fb1d018b90bd))
+
 ### [0.0.22](https://github.com/vegito-app/docker/compare/v0.0.21...v0.0.22) (2026-11-22)
 
 
