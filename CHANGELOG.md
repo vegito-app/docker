@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.24](https://github.com/vegito-app/docker/compare/v0.0.23...v0.0.24) (2026-11-22)
+
+
+### Bug Fixes
+
+* **docker:** corriger la variable VEGITO_DOCKER_BUILDXARM_ENABLE_BUILDER dans le fichier docker.mk ([371658f](https://github.com/vegito-app/docker/commit/371658fc17e54e141261d06c2fd438b074b6fa20))
+
 ### [0.0.23](https://github.com/vegito-app/docker/compare/v0.0.22...v0.0.23) (2026-11-22)
 
 
