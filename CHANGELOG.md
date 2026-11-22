@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.22](https://github.com/vegito-app/docker/compare/v0.0.21...v0.0.22) (2026-11-22)
+
+
+### Bug Fixes
+
+* **docker:** add fallback debian-entrypoint.sh execution if desktop-x ([517eb78](https://github.com/vegito-app/docker/commit/517eb78ec128907b9425872b081f0e0bcf538464))
+* **docker:** corriger le nom de la cible 'debian-terraform-golang-docker' dans les cibles de construction ([73595dd](https://github.com/vegito-app/docker/commit/73595ddedd9b64e3ec696187ba585e2cdaf92add))
+
 ### [0.0.21](https://github.com/vegito-app/docker/compare/v0.0.20...v0.0.21) (2026-11-19)
 
 
