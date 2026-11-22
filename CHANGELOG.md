@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.25](https://github.com/vegito-app/docker/compare/v0.0.24...v0.0.25) (2026-11-22)
+
+
+### Bug Fixes
+
+* **docker:** mettre à jour les cibles de contexte pour les versions Debian dans docker-bake.hcl ([dd26d1d](https://github.com/vegito-app/docker/commit/dd26d1da22ad60cda097d2111e0d7dc216f0b076))
+
 ### [0.0.24](https://github.com/vegito-app/docker/compare/v0.0.23...v0.0.24) (2026-11-22)
 
 
