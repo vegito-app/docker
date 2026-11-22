@@ -14,6 +14,8 @@ fi
 
 if [ -f /usr/local/bin/desktop-x-entrypoint.sh ]; then
     /usr/local/bin/desktop-x-entrypoint.sh echo "✅ X Desktop setup successful."
+else
+    /usr/local/bin/debian-entrypoint.sh echo "✅ Debian setup successful."
 fi
 
 # Run the command
