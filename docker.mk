@@ -156,6 +156,7 @@ VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS ?= \
   debian-desktop-x-vscode-golang-ai-dockerd \
   debian-golang-docker \
   debian-golang-dockerd \
+  debian-terraform-golang-docker \
   debian-obs-vscode-golang-ai-dockerd \
   debian-project-golang-desktop-x \
   debian-project-golang-docker \
@@ -182,8 +183,7 @@ VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS ?= \
   $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%-flutter-project) \
   $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_BASE_TARGETS:%=debian-%-project) \
   $(VEGITO_DOCKER_DEBIAN_BUNDLE_BUILDX_BAKE_TARGETS:%=debian-%) \
-  $(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS:%=debian-project-%) \
-
+  $(VEGITO_DOCKER_DEBIAN_BUNDLE_PROJECT_BUILDX_BAKE_TARGETS:%=debian-project-%)
 VEGITO_DOCKER_TRIXIE_DEBIAN_BUILDX_BAKE_TARGETS ?= \
   $(VEGITO_DOCKER_DEBIAN_BUILDX_BAKE_TARGETS:%=trixie-%)
 
