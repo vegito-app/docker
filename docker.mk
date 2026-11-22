@@ -250,10 +250,10 @@ vegito-docker-clean-all:
 	  vegito-docker-buildx-clean \
 	  vegito-docker-buildx-cache-clean
 .PHONY: vegito-docker-clean-all
+ 
+VEGITO_DOCKER_BUILDX_ARM_ENABLE_BUILDER ?= false
 
-VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER ?= false
-
-ifeq ($(VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER),true)
+ifeq ($(VEGITO_DOCKER_BUILDX_ARM_ENABLE_BUILDER),true)
 VEGITO_DOCKER_BUILDX_CREATE_DRIVER_OPTS += memory=20g
 endif
 
@@ -270,7 +270,7 @@ vegito-docker-buildx-configure-dns:
 
 vegito-docker-buildx-setup:
 	@echo "🔨  Creating buildx context $(VEGITO_DOCKER_BUILDX_NAME)"
-ifeq ($(VEGITO_DOCKER_BUILDX_ENABLE_ARM_BUILDER),true)
+ifeq ($(VEGITO_DOCKER_BUILDX_ARM_ENABLE_BUILDER),true)
 	docker buildx inspect $(VEGITO_DOCKER_BUILDX_NAME) >/dev/null 2>&1 || { \
 	  docker context use default && \
 	  docker buildx create \
