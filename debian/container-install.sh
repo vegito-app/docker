@@ -155,6 +155,35 @@ EOF
 container_cache=${CONTAINER_CACHE:-${LOCAL_DIR:-${PWD}}/.containers/debian}
 mkdir -p $container_cache
 
+# TMUX config persistence
+TMUX_CONFIG_PATH=${HOME}/.tmux.conf
+rm -f $TMUX_CONFIG_PATH
+
+container_cache_tmux_conf=${container_cache}/.tmux.conf
+ln -sfn $container_cache_tmux_conf $TMUX_CONFIG_PATH
+
+# Create a default tmux.conf if it doesn't exist
+[[ -f  "$container_cache_tmux_conf"  ]] || cat << EOF > $container_cache_tmux_conf
+# Utiliser les raccourcis Vim
+set -g mode-keys vi
+
+# Autoriser la synchronisation du presse-papiers
+set -g set-clipboard on
+
+# Autoriser les séquences terminal traversantes
+set -g allow-passthrough on
+
+# Sélection avec v
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+
+# Copier avec y
+bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+# Coller avec Ctrl+b puis ]
+bind-key ] paste-buffer
+EOF
+
+# Bash history persistence
 BASH_HISTORY_PATH=${HOME}/.bash_history
 rm -f $BASH_HISTORY_PATH
 ln -sfn ${container_cache}/.bash_history $BASH_HISTORY_PATH
@@ -162,8 +191,6 @@ ln -sfn ${container_cache}/.bash_history $BASH_HISTORY_PATH
 # Git config (optional but useful)
 GIT_CONFIG_GLOBAL=${HOME}/.gitconfig
 GIT_CONFIG_CACHE=${container_cache}/.gitconfig
-
-mkdir -p "${container_cache}"
 
 if [ -f "$GIT_CONFIG_GLOBAL" ] && [ ! -e "$GIT_CONFIG_CACHE" ]; then
     cp "$GIT_CONFIG_GLOBAL" "$GIT_CONFIG_CACHE"
