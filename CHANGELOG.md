@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.26](https://github.com/vegito-app/docker/compare/v0.0.25...v0.0.26) (2026-11-23)
+
+
+### Features
+
+* **tmux:** ajouter la persistance de la configuration TMUX et l'historique Bash ([9bf1d0d](https://github.com/vegito-app/docker/commit/9bf1d0df41e9d5d9b4304320eca2a5bb6eb84d49))
+
 ### [0.0.25](https://github.com/vegito-app/docker/compare/v0.0.24...v0.0.25) (2026-11-22)
 
 
