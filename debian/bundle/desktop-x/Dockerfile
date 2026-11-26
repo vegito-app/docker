@@ -198,7 +198,7 @@ ARG default_apk_path=/apk/app.apk
 ENV VEGITO_DOCKER_DEBIAN_DESKTOP_X_DEBUG_APK_PATH=${default_apk_path}
 
 # Enable AVD on start by default
-ENV VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE=swiftshader_indirect
+ENV VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE=swiftshader
 ENV VEGITO_CONTAINER_DISPLAY_START=true
 
 ENTRYPOINT ["tini", "--", "desktop-x-entrypoint.sh"]

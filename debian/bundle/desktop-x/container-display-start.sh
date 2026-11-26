@@ -19,18 +19,18 @@ echo "🧼 Cleaning stale Desktop-X runtime state... Done"
 
 if command -v nvidia-smi >/dev/null 2>&1 &&
     nvidia-smi >/dev/null 2>&1; then
-    if [ -z "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE:-}" ]; then
+    if [ -z "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE:-}" ]; then
         echo "✅ NVIDIA GPU acceleration detected -> using Wayland GPU mode"
-        export VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE="wayland"
+        export VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE="wayland"
     fi
 fi
 
-if [ -z "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE:-}" ]; then
-    export VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE="swiftshader_indirect"
+if [ -z "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE:-}" ]; then
+    export VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE="swiftshader"
     echo "ℹ️ No GPU acceleration detected -> using SwiftShader fallback"
 fi
 
-case "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE}" in
+case "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE}" in
     "host")
         echo "🖥️ Starting host Xorg display mode"
         source /usr/local/bin/desktop-x-nvidia-gl-env.sh 
@@ -43,13 +43,13 @@ case "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE}" in
         desktop-x-display-wayland.sh
         ;;
 
-    "swiftshader_indirect" | "guest")
+    "xvfb" | "guest")
         echo "🖥️ Starting SwiftShader software rendering mode"
         desktop-x-display-xvfb.sh
         ;;
 
     *)
-        echo "⚠️ Unknown VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE='${VEGITO_DOCKER_DEBIAN_DESKTOP_X_GPU_MODE}', falling back to SwiftShader"
+        echo "⚠️ Unknown VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE='${VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE}', falling back to SwiftShader"
         desktop-x-display-xvfb.sh
         ;;
 esac
