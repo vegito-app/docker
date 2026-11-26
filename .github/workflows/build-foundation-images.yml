@@ -143,6 +143,8 @@ jobs:
           echo "VEGITO_RELEASE_BUCKET=${{ steps.resolve_bucket.outputs.bucket }}/${{ inputs.release_bucket_prefix }}" >> $GITHUB_ENV
 
       - name: Configure Docker
+        env: 
+          VEGITO_DOCKER_BUILDX_ARM_BUILDER_ENDPOINT: ${{ vars.VEGITO_DOCKER_BUILDX_ARM_BUILDER_ENDPOINT }}
         run: |
           make docker-buildx-setup
 
