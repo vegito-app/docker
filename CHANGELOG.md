@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.27](https://github.com/vegito-app/docker/compare/v0.0.26...v0.0.27) (2026-11-26)
+
+
+### Bug Fixes
+
+* **docker:** ajouter la variable d'environnement VEGITO_DOCKER_BUILDX_ARM_BUILDER_ENDPOINT dans la configuration Docker ([1af5768](https://github.com/vegito-app/docker/commit/1af57686593ae8f3be962b6a879c2dce0688c428))
+* **docker:** renommer les variables de mode GPU en mode d'affichage dans Dockerfile et script de démarrage ([7032481](https://github.com/vegito-app/docker/commit/7032481a1c60053848ad9f2fa8634190b91885d9))
+
 ### [0.0.26](https://github.com/vegito-app/docker/compare/v0.0.25...v0.0.26) (2026-11-23)
 
 
