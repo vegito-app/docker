@@ -17,18 +17,19 @@ echo "🧼 Cleaning stale Desktop-X runtime state... Done"
 # GPU mode auto-detection
 # -------------------------------------------------------------------
 
-if command -v nvidia-smi >/dev/null 2>&1 &&
-    nvidia-smi >/dev/null 2>&1; then
-    if [ -z "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE:-}" ]; then
-        echo "✅ NVIDIA GPU acceleration detected -> using Wayland GPU mode"
-        export VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE="wayland"
+DISPLAY_MODE="${VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE:-auto}"
+
+if [ "$DISPLAY_MODE" = "auto" ]; then
+    if command -v nvidia-smi >/dev/null 2>&1 &&
+       nvidia-smi >/dev/null 2>&1; then
+        DISPLAY_MODE="wayland"
+    else
+        DISPLAY_MODE="xvfb"
     fi
 fi
 
-if [ -z "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE:-}" ]; then
-    export VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE="swiftshader"
-    echo "ℹ️ No GPU acceleration detected -> using SwiftShader fallback"
-fi
+export VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE="$DISPLAY_MODE"
+echo "🖥️ Display mode: $DISPLAY
 
 case "${VEGITO_DOCKER_DEBIAN_DESKTOP_X_DISPLAY_MODE}" in
     "host")
