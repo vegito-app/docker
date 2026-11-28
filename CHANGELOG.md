@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.28](https://github.com/vegito-app/docker/compare/v0.0.27...v0.0.28) (2026-11-28)
+
+
+### Bug Fixes
+
+* **docker:** mettre à jour le mode d'affichage par défaut et améliorer la détection automatique du GPU ([b725531](https://github.com/vegito-app/docker/commit/b725531c38c07b57979335cdd093ea09cbb9c8e3))
+
 ### [0.0.27](https://github.com/vegito-app/docker/compare/v0.0.26...v0.0.27) (2026-11-26)
 
 
